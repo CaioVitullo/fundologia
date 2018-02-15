@@ -110,6 +110,9 @@ nav{
 footer{
 	padding: 5% 0;
 	background: #39495d;
+	width: 100%;
+    left: 0px;
+    position: absolute;
 }
 /*footer*/
 

@@ -184,7 +184,7 @@
 								<tbody>
 									<tr ng-click="rowClick(row)" ng-class="{hoverRow:row.id==$parent.currentDetailRow}" ng-repeat="row in getMainList()" 
 										ng-mouseover="showRowDetail(row)">
-										<td class="cutText" ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notSet':row.info.isNotSet}" ng-bind="row.name">Alvin</td>
+										<td class="cutText" ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" ng-bind="row.name">Alvin</td>
 										<td class="hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
 										<td class="hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
 										<td class="show-column-largar-1200" ng-bind="row.figures[selectedPeriod].average"></td>
@@ -249,7 +249,8 @@
 					<my-histogram
 						chart-title="Corelação IBOV"
 						histogram="histogramCorrelIbov"
-						value="current_correlationIbov"
+						correlation="current_correlationIbov"
+						value="getFromCurrentFigure('correlationIbov')"
 						show-chart="true"
 						property="correlationIbov"
 						type="figure"

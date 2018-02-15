@@ -1,0 +1,1 @@
+[{"sigla":"UFMS","universidade":"UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL","unidade":"CAMPO GRANDE","curso":"ANÁLISE DE SISTEMAS","periodo":"Noturno","notaCorte":643.64,"data":"10/01/2014","vagas":70,"vagasDiruno":70,"vagasNoturno":0,"municipio":"Campo Grande","UF":"MS"}]

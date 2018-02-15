@@ -1,0 +1,1 @@
+[{"sigla":"UFSCAR","universidade":"UNIVERSIDADE FEDERAL DE SÃO CARLOS","unidade":"UNIDADE SEDE","curso":"EDUCAÇÃO ESPECIAL","periodo":"Integral (Mat/Vesp)","notaCorte":632.89,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"São Carlos","UF":"SP"}]

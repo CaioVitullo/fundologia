@@ -1,0 +1,1 @@
+[{"sigla":"UFRN","universidade":"UNIVERSIDADE FEDERAL DO RIO GRANDE DO NORTE","unidade":"CAMPUS CENTRAL","curso":"GESTÃO HOSPITALAR","periodo":"Integral (Vesp/Not)","notaCorte":628.45,"data":"10/01/2014","vagas":45,"vagasDiruno":45,"vagasNoturno":0,"municipio":"Natal","UF":"RN"}]

@@ -1,0 +1,1 @@
+[{"sigla":"UFMT","universidade":"UNIVERSIDADE FEDERAL DE MATO GROSSO","unidade":"CAMPUS UNIVERSITÁRIO  DE SINOP","curso":"CIÊNCIAS NATURAIS E MATEMÁTICA - QUÍMICA","periodo":"Noturno","notaCorte":570.78,"data":"10/01/2014","vagas":35,"vagasDiruno":35,"vagasNoturno":0,"municipio":"Sinop","UF":"MT"}]

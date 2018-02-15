@@ -1,0 +1,1 @@
+[{"sigla":"FURG","universidade":"UNIVERSIDADE FEDERAL DO RIO GRANDE","unidade":"CAMPUS CARREIROS - SEDE","curso":"ENGENHARIA CIVIL COSTEIRA E PORTUÁRIA","periodo":"Integral (Mat/Vesp)","notaCorte":717.93,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Rio Grande","UF":"RS"}]

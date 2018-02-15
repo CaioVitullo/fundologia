@@ -1,0 +1,1 @@
+[{"sigla":"UFC","universidade":"UNIVERSIDADE FEDERAL DO CEARÁ","unidade":"PICI","curso":"ABI - ENGENHARIA DE ENERGIAS E MEIO AMBIENTE","periodo":"Integral (Mat/Vesp)","notaCorte":727.4,"data":"10/01/2014","vagas":120,"vagasDiruno":120,"vagasNoturno":0,"municipio":"Fortaleza","UF":"CE","id":42}]

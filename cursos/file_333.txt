@@ -1,0 +1,1 @@
+[{"sigla":"UFRB","universidade":"UNIVERSIDADE FEDERAL DO RECÔNCAVO DA BAHIA","unidade":"CENTRO DE CIÊNCIAS DA SAÚDE","curso":"INTERDISCIPLINAR EM SAÚDE","periodo":"Integral (Mat/Vesp)","notaCorte":707.82,"data":"10/01/2014","vagas":100,"vagasDiruno":100,"vagasNoturno":0,"municipio":"Santo Antônio de Jesus","UF":"BA","id":3377}]

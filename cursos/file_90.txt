@@ -1,0 +1,1 @@
+[{"sigla":"                            UNIVERSIDADE \"","universidade":"UNIVERSIDADE FEDERAL DE ITAJUBÁ  UNIFEI","unidade":"CAMPUS ITAJUBÁ","curso":"CIÊNCIAS ATMOSFÉRICAS","periodo":"Integral (Mat/Vesp/Not)","notaCorte":659.73,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Itajubá","UF":"MG","id":925}]

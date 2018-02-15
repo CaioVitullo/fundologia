@@ -1,0 +1,1 @@
+[{"sigla":"UFS","universidade":"UNIVERSIDADE FEDERAL DE SERGIPE","unidade":"UNIDADE SEDE","curso":"COMUNICAÇÃO SOCIAL - AUDIOVISUAL","periodo":"Vespertino","notaCorte":636.22,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"São Cristóvão","UF":"SE","id":1481}]

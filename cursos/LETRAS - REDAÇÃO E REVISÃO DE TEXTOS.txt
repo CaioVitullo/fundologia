@@ -1,0 +1,1 @@
+[{"sigla":"UFPEL","universidade":"UNIVERSIDADE FEDERAL DE PELOTAS","unidade":"UNIDADE SEDE","curso":"LETRAS - REDAÇÃO E REVISÃO DE TEXTOS","periodo":"Noturno","notaCorte":632.18,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Pelotas","UF":"RS"}]

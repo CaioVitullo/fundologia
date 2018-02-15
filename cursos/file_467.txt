@@ -1,0 +1,1 @@
+[{"sigla":"UFF","universidade":"UNIVERSIDADE FEDERAL FLUMINENSE","unidade":"CAMPUS DO GRAGOATÁ","curso":"SOCIOLOGIA","periodo":"Vespertino","notaCorte":663.45,"data":"10/01/2014","vagas":56,"vagasDiruno":56,"vagasNoturno":0,"municipio":"Niterói","UF":"RJ","id":4886}]

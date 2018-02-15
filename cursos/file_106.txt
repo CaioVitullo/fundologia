@@ -1,0 +1,1 @@
+[{"sigla":"UNIFAP","universidade":"UNIVERSIDADE FEDERAL DO AMAPÁ","unidade":"UNIDADE SEDE","curso":"CIÊNCIAS DE COMPUTAÇÃO","periodo":"Noturno","notaCorte":659.68,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Macapá","UF":"AP","id":1257}]

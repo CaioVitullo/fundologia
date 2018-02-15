@@ -1,0 +1,1 @@
+[{"sigla":"UNEB","universidade":"UNIVERSIDADE DO ESTADO DA BAHIA","unidade":"CAMPUS - SALVADOR - CABULA","curso":"URBANISMO","periodo":"Integral (Mat/Vesp)","notaCorte":708.67,"data":"10/01/2014","vagas":11,"vagasDiruno":11,"vagasNoturno":0,"municipio":"Salvador","UF":"BA"}]

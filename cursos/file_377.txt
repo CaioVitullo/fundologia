@@ -1,0 +1,1 @@
+[{"sigla":"UFMT","universidade":"UNIVERSIDADE FEDERAL DE MATO GROSSO","unidade":"CAMPUS UNIVERSITÁRIO DE CUIABÁ","curso":"LETRAS PORTUGUÊS E ESPANHOL E RESPECTIVAS LITERATURAS","periodo":"Matutino","notaCorte":596.1,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Cuiabá","UF":"MT","id":3700}]

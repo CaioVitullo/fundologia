@@ -1,0 +1,1 @@
+[{"sigla":"UFG","universidade":"UNIVERSIDADE FEDERAL DE GOIÁS","unidade":"UNIDADE SEDE _ CÂMPUS SAMAMBAIA","curso":"LETRAS - ESTUDOS LITERÁRIOS","periodo":"Vespertino","notaCorte":688.66,"data":"10/01/2014","vagas":5,"vagasDiruno":5,"vagasNoturno":0,"municipio":"Goiânia","UF":"GO","id":3449}]

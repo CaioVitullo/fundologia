@@ -1,0 +1,1 @@
+[{"sigla":"UFU","universidade":"UNIVERSIDADE FEDERAL DE UBERLÂNDIA","unidade":"CAMPUS SANTA MÔNICA/REITORIA","curso":"FÍSICA DE MATERIAIS","periodo":"Integral (Mat/Vesp/Not)","notaCorte":649.25,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Uberlândia","UF":"MG"}]

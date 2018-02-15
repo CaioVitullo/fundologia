@@ -1,0 +1,1 @@
+[{"sigla":"                            UNIVERSIDADE \"","universidade":"UNIVERSIDADE DA INTEGRAÇÃO INTERNACIONAL DA LUSOFONIA AFROBRASILEIRA","unidade":"CAMPUS DA LIBERDADE","curso":"ENGENHARIA DE ENERGIAS","periodo":"Integral (Mat/Vesp)","notaCorte":665.84,"data":"10/01/2014","vagas":20,"vagasDiruno":20,"vagasNoturno":0,"municipio":"Redenção","UF":"CE"}]

@@ -1,0 +1,1 @@
+[{"sigla":"UFPR","universidade":"UNIVERSIDADE FEDERAL DO PARANÁ","unidade":"CAMPUS I - CENTRO CURITIBA","curso":"LUTERIA","periodo":"Matutino","notaCorte":688.08,"data":"10/01/2014","vagas":6,"vagasDiruno":6,"vagasNoturno":0,"municipio":"Curitiba","UF":"PR","id":3721}]

@@ -1,0 +1,23 @@
+<div>
+    <div class="divider"></div>
+    <h5 class="filterTitle">
+        {{chartTitle}}: 
+    </h5>
+    <label class="labelTitle">
+        {{value|rounded:2}}{{sufix}}
+        <i ng-show="showChart=='true'" ng-click="$parent.openChart(chartTitle, property)" class="smallIcon material-icons tiny tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{tooltip}}">insert_chart</i>
+    </label>
+    <ul ng-if="correlation != null" class="pgrUl" ng-class="{'pgrPos':correlation >= 0, 'pgrNeg':correlation<0}">
+        <li ng-repeat="i in [0,1,2,3]" style="width:{{$parent.$parent.$parent.getWidth($parent.correlation, i)}}%;"></li>
+    </ul>
+    <ul class="histUl">
+        <li 
+            ng-repeat="item in histogram"
+            ng-click="$parent.$parent.histClick(histogram,item, property, type)"
+            class="waves-effect waves-orange tooltipped" data-position="bottom" data-delay="50" data-tooltip="Valores entre {{item.low}}{{sufix}} - {{item.high}}{{sufix}}<p>{{item.count}} ocorrência{{item.count!=1?'s':''}}({{item.perc}}%)</p><p>clique para filtrar</p> "
+            ng-class="{filter:item.isFiltering,blink_me:item.isFiltering, active:$index==currentrow}"
+            style="height:{{item.height}}%;">
+            
+        </li>
+    </ul>
+</div>

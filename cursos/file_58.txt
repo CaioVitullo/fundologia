@@ -1,0 +1,1 @@
+[{"sigla":"UNIVASF","universidade":"FUNDAÇÃO UNIVERSIDADE FEDERAL DO VALE DO SÃO FRANCISCO","unidade":"CAMPUS SERRA DA CAPIVARA","curso":"ARQUEOLOGIA E PRESERVAÇÃO PATRIMONIAL","periodo":"Integral (Mat/Vesp)","notaCorte":622.28,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"São Raimundo Nonato","UF":"PI","id":596}]

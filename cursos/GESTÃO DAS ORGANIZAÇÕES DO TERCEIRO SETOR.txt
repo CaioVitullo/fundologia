@@ -1,0 +1,1 @@
+[{"sigla":"UEMG","universidade":"UNIVERSIDADE DO ESTADO DE MINAS GERAIS","unidade":"FACULDADE DE POLÍTICAS PÚBLICAS TANCREDO NEVES","curso":"GESTÃO DAS ORGANIZAÇÕES DO TERCEIRO SETOR","periodo":"Noturno","notaCorte":696.95,"data":"10/01/2014","vagas":10,"vagasDiruno":10,"vagasNoturno":0,"municipio":"Belo Horizonte","UF":"MG"}]

@@ -1,0 +1,1 @@
+[{"sigla":"UFT","universidade":"FUNDAÇÃO UNIVERSIDADE FEDERAL DO TOCANTINS","unidade":"CAMPUS UNIVERSITÁRIO DE ARAGUAÍNA","curso":"GESTÃO DE COOPERATIVAS","periodo":"Matutino","notaCorte":608.96,"data":"10/01/2014","vagas":4,"vagasDiruno":4,"vagasNoturno":0,"municipio":"Araguaína","UF":"TO","id":3157}]

@@ -1,0 +1,1 @@
+[{"sigla":"UFCSPA","universidade":"FUNDAÇÃO UNIVERSIDADE FEDERAL DE CIÊNCIAS DA SAÚDE DE PORTO ALEGRE","unidade":"CAMPUS CENTRAL","curso":"GESTÃO EM SAÚDE","periodo":"Noturno","notaCorte":675.22,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"Porto Alegre","UF":"RS"}]

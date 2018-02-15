@@ -1,0 +1,1 @@
+[{"sigla":"UFV","universidade":"UNIVERSIDADE FEDERAL DE VIÇOSA","unidade":"UNIVERSIDADE FEDERAL DE VIÇOSA","curso":"CIÊNCIA E TECNOLOGIA DE LATICÍNIOS","periodo":"Integral (Mat/Vesp)","notaCorte":641.94,"data":"10/01/2014","vagas":24,"vagasDiruno":24,"vagasNoturno":0,"municipio":"Viçosa","UF":"MG"}]

@@ -1,0 +1,1 @@
+[{"sigla":"UTFPR","universidade":"UNIVERSIDADE TECNOLÓGICA FEDERAL DO PARANÁ","unidade":"CAMPUS  PONTA GROSSA","curso":"FABRICAÇÃO MECÂNICA","periodo":"Noturno","notaCorte":647.6,"data":"10/01/2014","vagas":20,"vagasDiruno":20,"vagasNoturno":0,"municipio":"Ponta Grossa","UF":"PR"}]

@@ -1,0 +1,1 @@
+[{"sigla":"UEZO","universidade":"CENTRO UNIVERSITÁRIO ESTADUAL DA ZONA OESTE","unidade":"CAMPUS  - RIO DE JANEIRO - CAMPO GRANDE","curso":"PROCESSOS METALÚRGICOS","periodo":"Noturno","notaCorte":641.96,"data":"10/01/2014","vagas":38,"vagasDiruno":19,"vagasNoturno":19,"municipio":"Rio de Janeiro","UF":"RJ","id":4379}]

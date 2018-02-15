@@ -1,0 +1,1 @@
+[{"sigla":"UNEB","universidade":"UNIVERSIDADE DO ESTADO DA BAHIA","unidade":"CAMPUS - SALVADOR - CABULA","curso":"TURISMO E HOTELARIA","periodo":"Vespertino","notaCorte":667.69,"data":"10/01/2014","vagas":6,"vagasDiruno":6,"vagasNoturno":0,"municipio":"Salvador","UF":"BA"}]

@@ -1,0 +1,1 @@
+[{"sigla":"UNIOESTE","universidade":"UNIVERSIDADE ESTADUAL DO OESTE DO PARANÁ","unidade":"CAMPUS DE CASCAVEL","curso":"LETRAS - ITALIANO","periodo":"Matutino","notaCorte":648.77,"data":"10/01/2014","vagas":8,"vagasDiruno":8,"vagasNoturno":0,"municipio":"Cascavel","UF":"PR","id":3496}]

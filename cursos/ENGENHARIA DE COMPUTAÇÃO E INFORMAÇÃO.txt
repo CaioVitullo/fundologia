@@ -1,0 +1,1 @@
+[{"sigla":"UFRJ","universidade":"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO","unidade":"CIDADE UNIVERSITÁRIA","curso":"ENGENHARIA DE COMPUTAÇÃO E INFORMAÇÃO","periodo":"Integral (Mat/Vesp)","notaCorte":780.21,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Rio de Janeiro","UF":"RJ"}]

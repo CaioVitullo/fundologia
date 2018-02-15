@@ -1,0 +1,1 @@
+[{"sigla":"UFRRJ","universidade":"UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO","unidade":"UNIDADE SEDE","curso":"CIÊNCIAS BIOLÓGICAS - LICENCIATURA OU BACHARELADO","periodo":"Integral (Mat/Vesp)","notaCorte":713.82,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Seropédica","UF":"RJ"}]

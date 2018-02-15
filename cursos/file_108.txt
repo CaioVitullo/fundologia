@@ -1,0 +1,1 @@
+[{"sigla":"UFPI","universidade":"UNIVERSIDADE FEDERAL DO PIAUÍ","unidade":"CAMPUS MINISTRO PETRÔNIO PORTELLA - UNIDADE SEDE","curso":"CIÊNCIAS DOS MATERIAIS","periodo":"Integral (Mat/Vesp/Not)","notaCorte":600.6,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Teresina","UF":"PI","id":1259}]

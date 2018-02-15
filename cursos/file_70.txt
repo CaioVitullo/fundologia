@@ -1,0 +1,1 @@
+[{"sigla":"UFRJ","universidade":"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO","unidade":"PRAIA VERMELHA","curso":"BIBLIOTECONOMIA E GESTÃO DE UNIDADES DE INFORMAÇÃO","periodo":"Vespertino","notaCorte":680.47,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"Rio de Janeiro","UF":"RJ","id":717}]

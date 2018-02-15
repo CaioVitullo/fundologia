@@ -1,0 +1,1 @@
+[{"sigla":"UFC","universidade":"UNIVERSIDADE FEDERAL DO CEARÁ","unidade":"BENFICA","curso":"LETRAS - PORTUGUÊS E ITALIANO","periodo":"Integral (Mat/Vesp)","notaCorte":638.5,"data":"10/01/2014","vagas":20,"vagasDiruno":10,"vagasNoturno":10,"municipio":"Fortaleza","UF":"CE","id":3658}]

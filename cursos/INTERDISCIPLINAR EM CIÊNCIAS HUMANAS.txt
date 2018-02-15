@@ -1,0 +1,1 @@
+[{"sigla":"UFJF","universidade":"UNIVERSIDADE FEDERAL DE JUIZ DE FORA","unidade":"UNIVERSIDADE FEDERAL DE JUIZ DE FORA - CAMPUS SEDE","curso":"INTERDISCIPLINAR EM CIÊNCIAS HUMANAS","periodo":"Integral (Mat/Vesp)","notaCorte":653.28,"data":"10/01/2014","vagas":87,"vagasDiruno":87,"vagasNoturno":0,"municipio":"Juiz de Fora","UF":"MG"}]

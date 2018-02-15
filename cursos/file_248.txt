@@ -1,0 +1,1 @@
+[{"sigla":"UFPA","universidade":"UNIVERSIDADE FEDERAL DO PARÁ","unidade":"CAMPUS UNIVERSITARIO DE ABAETETUBA","curso":"ENGENHARIA INDUSTRIAL","periodo":"Integral (Mat/Vesp)","notaCorte":744.24,"data":"10/01/2014","vagas":8,"vagasDiruno":8,"vagasNoturno":0,"municipio":"Abaetetuba","UF":"PA","id":2476}]

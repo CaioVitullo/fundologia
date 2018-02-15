@@ -1,0 +1,1 @@
+[{"sigla":"UFF","universidade":"UNIVERSIDADE FEDERAL FLUMINENSE","unidade":"CAMPUS DO GRAGOATÁ","curso":"LETRAS - LATIM","periodo":"Integral (Mat/Vesp/Not)","notaCorte":660.69,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Niterói","UF":"RJ"}]

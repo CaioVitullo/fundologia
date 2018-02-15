@@ -1,0 +1,1 @@
+[{"sigla":"UFG","universidade":"UNIVERSIDADE FEDERAL DE GOIÁS","unidade":"UNIDADE SEDE _ CÂMPUS SAMAMBAIA","curso":"CIÊNCIAS SOCIAIS - POLÍTICAS PÚBLICAS","periodo":"Noturno","notaCorte":651.54,"data":"10/01/2014","vagas":27,"vagasDiruno":27,"vagasNoturno":0,"municipio":"Goiânia","UF":"GO","id":1420}]

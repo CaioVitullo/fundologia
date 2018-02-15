@@ -1,0 +1,1 @@
+[{"sigla":"UFPR","universidade":"UNIVERSIDADE FEDERAL DO PARANÁ","unidade":"CAMPUS I - CENTRO CURITIBA","curso":"HISTÓRIA - MEMÓRIA E IMAGEM","periodo":"Noturno","notaCorte":707.0,"data":"10/01/2014","vagas":8,"vagasDiruno":8,"vagasNoturno":0,"municipio":"Curitiba","UF":"PR"}]

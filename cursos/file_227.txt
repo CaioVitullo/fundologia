@@ -1,0 +1,1 @@
+[{"sigla":"                            UNIVERSIDADE \"","universidade":"UNIVERSIDADE FEDERAL DE ITAJUBÁ  UNIFEI","unidade":"POLO UAB - ITABIRA","curso":"ENGENHARIA DE SAÚDE E SEGURANÇA","periodo":"Integral (Mat/Vesp/Not)","notaCorte":650.92,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Itabira","UF":"MG","id":2323}]

@@ -1,0 +1,1 @@
+[{"sigla":"UFPR","universidade":"UNIVERSIDADE FEDERAL DO PARANÁ","unidade":"CAMPUS III - CENTRO POLITÉCNICO","curso":"INFORMÁTICA BIOMÉDICA","periodo":"Integral (Vesp/Not)","notaCorte":702.74,"data":"10/01/2014","vagas":6,"vagasDiruno":6,"vagasNoturno":0,"municipio":"Curitiba","UF":"PR","id":3352}]

@@ -1,0 +1,1 @@
+[{"sigla":"UNIFAL-MG","universidade":"UNIVERSIDADE FEDERAL DE ALFENAS","unidade":"UNIVERSIDADE FEDERAL DE ALFENAS - CAMPUS VARGINHA","curso":"INTERDISCIPLINAR EM CIÊNCIA E ECONOMIA","periodo":"Integral (Mat/Vesp)","notaCorte":641.37,"data":"10/01/2014","vagas":150,"vagasDiruno":150,"vagasNoturno":0,"municipio":"Varginha","UF":"MG","id":3359}]

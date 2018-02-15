@@ -1,0 +1,1 @@
+[{"sigla":"UFRB","universidade":"UNIVERSIDADE FEDERAL DO RECÔNCAVO DA BAHIA","unidade":"CENTRO DE CIÊNCIAS E TECNOLOGIA EM ENERGIA E SUSTE","curso":"INTERDISCIPLINAR EM ENERGIA E SUSTENTABILIDADE","periodo":"Matutino","notaCorte":635.24,"data":"10/01/2014","vagas":90,"vagasDiruno":90,"vagasNoturno":0,"municipio":"Feira de Santana","UF":"BA"}]

@@ -1,0 +1,1 @@
+[{"sigla":"UFAM","universidade":"UNIVERSIDADE FEDERAL DO AMAZONAS","unidade":"UNIDADE SEDE","curso":"ENGENHARIA ELÉTRICA - ELETRÔNICA","periodo":"Integral (Mat/Vesp)","notaCorte":698.56,"data":"10/01/2014","vagas":10,"vagasDiruno":10,"vagasNoturno":0,"municipio":"Manaus","UF":"AM"}]

@@ -1,0 +1,1 @@
+[{"sigla":"FURG","universidade":"UNIVERSIDADE FEDERAL DO RIO GRANDE","unidade":"CAMPUS CARREIROS - SEDE","curso":"ENGENHARIA DE AUTOMAÇÃO","periodo":"Integral (Mat/Vesp)","notaCorte":675.16,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"Rio Grande","UF":"RS","id":2121}]

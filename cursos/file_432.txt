@@ -1,0 +1,1 @@
+[{"sigla":"                            FUNDAÇÃO UN\"","universidade":"FUNDAÇÃO UNIVERSIDADE FEDERAL DO PAMPA  UNIPAMPA","unidade":"CAMPUS JAGUARÃO","curso":"PRODUÇÃO E POLÍTICA CULTURAL","periodo":"Integral (Mat/Vesp/Not)","notaCorte":579.5,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Jaguarão","UF":"RS","id":4399}]

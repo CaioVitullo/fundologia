@@ -1,0 +1,1 @@
+[{"sigla":"UEZO","universidade":"CENTRO UNIVERSITÁRIO ESTADUAL DA ZONA OESTE","unidade":"CAMPUS  - RIO DE JANEIRO - CAMPO GRANDE","curso":"PRODUÇÃO DE FÁRMACOS","periodo":"Integral (Mat/Vesp)","notaCorte":626.4,"data":"10/01/2014","vagas":38,"vagasDiruno":19,"vagasNoturno":19,"municipio":"Rio de Janeiro","UF":"RJ"}]

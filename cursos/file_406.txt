@@ -1,0 +1,1 @@
+[{"sigla":"UFPEL","universidade":"UNIVERSIDADE FEDERAL DE PELOTAS","unidade":"UNIDADES DISPERSAS","curso":"MÚSICA - PIANO","periodo":"Vespertino","notaCorte":675.4,"data":"10/01/2014","vagas":7,"vagasDiruno":7,"vagasNoturno":0,"municipio":"Pelotas","UF":"RS","id":4085}]

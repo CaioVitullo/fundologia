@@ -1,0 +1,1 @@
+[{"sigla":"UNB","universidade":"UNIVERSIDADE DE BRASÍLIA","unidade":"CAMPUS UNIVERSITÁRIO DARCY RIBEIRO","curso":"LETRAS - TRADUÇÃO FRANCÊS","periodo":"Integral (Mat/Vesp)","notaCorte":668.82,"data":"10/01/2014","vagas":9,"vagasDiruno":9,"vagasNoturno":0,"municipio":"Brasília","UF":"DF","id":3696}]

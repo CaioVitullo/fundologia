@@ -1,0 +1,1 @@
+[{"sigla":"UFF","universidade":"UNIVERSIDADE FEDERAL FLUMINENSE","unidade":"ESCOLA MUNICIPAL PREFEITO FRANCISCO PEREIRA ROCHA","curso":"POLÍTICAS PÚBLICAS","periodo":"Noturno","notaCorte":654.2,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"Angra dos Reis","UF":"RJ"}]

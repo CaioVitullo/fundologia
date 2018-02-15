@@ -1,0 +1,1 @@
+[{"sigla":"UFMT","universidade":"UNIVERSIDADE FEDERAL DE MATO GROSSO","unidade":"CAMPUS UNIVERSITÁRIO DE CUIABÁ","curso":"LETRAS PORTUGUÊS E INGLÊS","periodo":"Noturno","notaCorte":620.16,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Cuiabá","UF":"MT"}]

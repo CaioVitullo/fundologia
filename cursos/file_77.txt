@@ -1,0 +1,1 @@
+[{"sigla":"UFF","universidade":"UNIVERSIDADE FEDERAL FLUMINENSE","unidade":"CAMPUS DA PRAIA VERMELHA","curso":"CIÊNCIA AMBIENTAL","periodo":"Integral (Mat/Vesp/Not)","notaCorte":695.24,"data":"10/01/2014","vagas":48,"vagasDiruno":48,"vagasNoturno":0,"municipio":"Niterói","UF":"RJ","id":772}]

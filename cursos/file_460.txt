@@ -1,0 +1,1 @@
+[{"sigla":"UFF","universidade":"UNIVERSIDADE FEDERAL FLUMINENSE","unidade":"FACULDADE DE DIREITO","curso":"SEGURANÇA PÚBLICA","periodo":"Noturno","notaCorte":652.28,"data":"10/01/2014","vagas":60,"vagasDiruno":60,"vagasNoturno":0,"municipio":"Niterói","UF":"RJ","id":4724}]

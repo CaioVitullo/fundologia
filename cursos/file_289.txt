@@ -1,0 +1,1 @@
+[{"sigla":"UFPEL","universidade":"UNIVERSIDADE FEDERAL DE PELOTAS","unidade":"UNIDADES DISPERSAS","curso":"GEOPROCESSAMENTO","periodo":"Integral (Vesp/Not)","notaCorte":605.34,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Pelotas","UF":"RS","id":3085}]

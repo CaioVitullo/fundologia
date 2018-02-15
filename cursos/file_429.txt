@@ -1,0 +1,1 @@
+[{"sigla":"UFPR","universidade":"UNIVERSIDADE FEDERAL DO PARANÁ","unidade":"CAMPUS III - CENTRO POLITÉCNICO","curso":"PRODUÇÃO CÊNICA","periodo":"Noturno","notaCorte":676.14,"data":"10/01/2014","vagas":9,"vagasDiruno":9,"vagasNoturno":0,"municipio":"Curitiba","UF":"PR","id":4389}]

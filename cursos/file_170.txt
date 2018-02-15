@@ -1,0 +1,1 @@
+[{"sigla":"UFMS","universidade":"UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL","unidade":"CAMPO GRANDE","curso":"ELETROTÉCNICA INDUSTRIAL","periodo":"Noturno","notaCorte":610.18,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Campo Grande","UF":"MS","id":1794}]

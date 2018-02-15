@@ -1,0 +1,1 @@
+[{"sigla":"CEFET/MG","universidade":"CENTRO FEDERAL DE EDUCAÇÃO TECNOLÓGICA DE MINAS GERAIS","unidade":"CAMPUS IV - UNED ARAXÁ","curso":"ENGENHARIA DE AUTOMAÇÃO INDUSTRIAL","periodo":"Noturno","notaCorte":690.97,"data":"10/01/2014","vagas":8,"vagasDiruno":8,"vagasNoturno":0,"municipio":"Araxá","UF":"MG"}]

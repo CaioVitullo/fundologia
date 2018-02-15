@@ -1,0 +1,1 @@
+[{"sigla":"UTFPR","universidade":"UNIVERSIDADE TECNOLÓGICA FEDERAL DO PARANÁ","unidade":"CURITIBA","curso":"PROCESSOS AMBIENTAIS","periodo":"Noturno","notaCorte":663.93,"data":"10/01/2014","vagas":24,"vagasDiruno":24,"vagasNoturno":0,"municipio":"Curitiba","UF":"PR","id":4369}]

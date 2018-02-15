@@ -1,0 +1,1 @@
+[{"sigla":"UERGS","universidade":"UNIVERSIDADE ESTADUAL DO RIO GRANDE DO SUL","unidade":"UNIDADE DE CACHOEIRA DO SUL","curso":"ADMINISTRAÇÃO RURAL E AGROINDUSTRIAL","periodo":"Noturno","notaCorte":605.28,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"Cachoeira do Sul","UF":"RS","id":314}]

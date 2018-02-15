@@ -1,0 +1,1 @@
+[{"sigla":"UERGS","universidade":"UNIVERSIDADE ESTADUAL DO RIO GRANDE DO SUL","unidade":"UNIDADE DE PORTO ALEGRE","curso":"ADMINISTRAÇÃO EM SISTEMAS E SERVIÇOS DE SAÚDE","periodo":"Integral (Mat/Vesp)","notaCorte":659.38,"data":"10/01/2014","vagas":40,"vagasDiruno":0,"vagasNoturno":40,"municipio":"Porto Alegre","UF":"RS","id":304}]

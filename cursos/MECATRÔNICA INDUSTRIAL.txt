@@ -1,0 +1,1 @@
+[{"sigla":"UTFPR","universidade":"UNIVERSIDADE TECNOLÓGICA FEDERAL DO PARANÁ","unidade":"CURITIBA","curso":"MECATRÔNICA INDUSTRIAL","periodo":"Noturno","notaCorte":715.94,"data":"10/01/2014","vagas":22,"vagasDiruno":22,"vagasNoturno":0,"municipio":"Curitiba","UF":"PR"}]

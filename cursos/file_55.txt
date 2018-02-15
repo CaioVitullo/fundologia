@@ -1,0 +1,1 @@
+[{"sigla":"UFMG","universidade":"UNIVERSIDADE FEDERAL DE MINAS GERAIS","unidade":"CAMPUS PAMPULHA","curso":"AQUACULTURA","periodo":"Matutino","notaCorte":668.36,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Belo Horizonte","UF":"MG","id":587}]

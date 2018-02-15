@@ -1,0 +1,1 @@
+[{"sigla":"UFMS","universidade":"UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL","unidade":"CAMPUS DE NOVA ANDRADINA","curso":"GESTÃO FINANCEIRA","periodo":"Noturno","notaCorte":577.76,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Nova Andradina","UF":"MS","id":3192}]

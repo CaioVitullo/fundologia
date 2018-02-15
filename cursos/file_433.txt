@@ -1,0 +1,1 @@
+[{"sigla":"UFPA","universidade":"UNIVERSIDADE FEDERAL DO PARÁ","unidade":"CIDADE UNIVERSITARIA JOSÉ DA SILVEIRA NETTO","curso":"PRODUÇÃO MULTIMÍDIA","periodo":"Noturno","notaCorte":774.47,"data":"10/01/2014","vagas":5,"vagasDiruno":5,"vagasNoturno":0,"municipio":"Belém","UF":"PA","id":4400}]

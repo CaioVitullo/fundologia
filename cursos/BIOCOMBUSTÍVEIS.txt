@@ -1,0 +1,1 @@
+[{"sigla":"UFPR","universidade":"UNIVERSIDADE FEDERAL DO PARANÁ","unidade":"CAMPUS V - PALOTINA","curso":"BIOCOMBUSTÍVEIS","periodo":"Noturno","notaCorte":621.72,"data":"10/01/2014","vagas":16,"vagasDiruno":8,"vagasNoturno":8,"municipio":"Palotina","UF":"PR"}]

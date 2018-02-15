@@ -1,0 +1,1 @@
+[{"sigla":"UFMS","universidade":"UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL","unidade":"CÂMPUS DE AQUIDAUANA","curso":"LETRAS - PORTUGUÊS E LITERATURA","periodo":"Noturno","notaCorte":561.15,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Aquidauana","UF":"MS"}]

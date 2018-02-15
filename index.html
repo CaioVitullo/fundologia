@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" ng-app="mainApp">
+<head>
+	
+	<title>Compara fundos</title>
+	<meta charset="utf-8">
+
+	
+	<meta name="description" content="Compare fundos de investimento. Analise estatistica das rentabilidades">
+  	<meta name="keywords" content="fundos, compare fundos, fundo, investimento, fundos de investimento, rentabilidade, rentabilidade fundos, melhor investimento, onde investir, qual melhor investimento, onde devo investir, dinheiro, bovespa, ibovespa, compare rentabilidade, CDI">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/range.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
+	
+    <!-- Favicons -->
+    <link rel="icon" href="img/favicon-16.png" sizes="16x16">
+    <link rel="icon" href="img/favicon-24.png" sizes="24x24">
+	<link rel="icon" href="img/favicon-32.png" sizes="32x32">
+	<link rel="icon" href="img/favicon-72.png" sizes="72x72">
+	<link rel="icon" href="img/favicon-96.png" sizes="96x96">
+	<link rel="icon" href="img/favicon-114.png" sizes="114x114">
+	<link rel="icon" href="img/favicon-128.png" sizes="128x128">
+	<link rel="icon" href="img/favicon-144.png" sizes="144x144">
+	<link rel="icon" href="img/favicon-160.png" sizes="256x160">
+    <!-- Favicons -->
+	
+</head>
+<body>
+
+
+<div ng-controller="ctrl" class="mainContent">
+	<div class="navbar-fixed" ng-init="loadCtrl()">
+		<nav class="nav-extended">
+		 <div class="nav-wrapper container">
+		  
+		  <a  data-activates="mobile-demo" class="button-collapse"><i class="material-icons"  >menu</i></a>
+		  <ul id="nav-mobile" class="right hide-on-med-and-down">
+			<li><a href="#sobre">O que é?</a></li>
+			<li><a href="#comofunciona">Como funciona</a></li>
+		  </ul>
+		  <ul class="side-nav" id="mobile-demo">
+			<li><a href="#sobre">O que é?</a></li>
+			<li><a href="#comofunciona">Como funciona</a></li>
+			<li class="show-on-smaller-992"><a>Filtro</a></li>
+			<li class="show-on-smaller-992"><a>Detalhes</a></li>
+		  </ul>
+		 </div>
+		</nav>
+	</div>
+	<div class="navbar-fixed hide-on-med-and-down" ng-if="false">
+		<nav class="nav-extended sub-menu">
+			<div class="nav-wrapper container">
+				<ul id="nav-mobile" class="right">
+					<li><a class="btn btn-laranja" href="#cadastro">Inscreva-se</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<div class="row">
+		<div class="col xl2 l2  hide-on-med-and-down">
+			<div class="section fixed">
+				
+					<h5 class="filterTitle">Período </h5>
+					<div class="tsHeight" >
+							<p ng-repeat="filterItem in filters.Periodo.equals({visible:true}) track by filterItem.id" >
+								<input class="with-gap" type="radio" name="filterPeriodo" ng-class="{'filled-in':filterItem.checked}" id="filterPeriodo_{{filterItem.id}}" ng-value="filterItem.id" ng-model="$parent.selectedPeriod"  />
+								<label for="filterPeriodo_{{filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+							</p>
+							<p class="pUpper">
+								<a class="linkSeeMore" ng-click="showAllFilterPeriodoOn = toggleFilter(showAllFilterPeriodoOn, filters.Periodo)" ng-class="{seeMore:showAllFilterPeriodoOn, seeLess:!showAllFilterPeriodoOn}"></a>
+								
+							</p>
+					</div>
+				
+				<div class="divider"></div>
+				<h5 class="filterTitle">Tipo</h5>
+				<div class="tsHeight" ng-class="{tsOpened:showAllFilterTypeOn}">
+						<p ng-repeat="filterItem in filters.Tipo.equals({visible:true})" >
+								<input  type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterTipo_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
+								<label for="filterTipo_{{filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+							</p>
+							<p class="pUpper">
+								<a class="linkSeeMore" ng-click="showAllFilterTypeOn = toggleFilter(showAllFilterTypeOn, filters.Tipo)" ng-class="{seeMore:showAllFilterTypeOn, seeLess:!showAllFilterTypeOn}"></a>
+								
+							</p>
+				</div>
+				
+
+				<div class="divider"></div>
+
+				<h5 class="filterTitle">
+					Aplicação inicial
+					<i ng-click="openChart('Aplicação inicial', 'initialValue')" class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="veja mais informaçoes sobre Aplicação inicial.">insert_chart</i>
+				</h5>
+				<p class="checkList" ng-repeat="filterItem in filters.InitialValue.equals({visible:true})" >
+						<input type="checkbox" ng-click="$parent.changeInitialValue(filterItem)"  ng-class="{'filled-in':filterItem.checked}" id="filterInitValue_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
+						<label for="filterInitValue_{{filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+				</p>
+				<p class="pUpper">
+						<a class="linkSeeMore" ng-click="showAllFilterInitValueOn = toggleFilter(showAllFilterInitValueOn, filters.InitialValue)" ng-class="{seeMore:showAllFilterInitValueOn, seeLess:!showAllFilterInitValueOn}"></a>
+						
+				</p>
+
+				<div class="divider"></div>
+
+				<h5 class="filterTitle">
+					Resgate em atê: 
+					<i ng-click="openChart('Resgate', 'withdrawDays')" class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="veja mais informaçoes sobre Taxa de adm.">insert_chart</i>
+				</h5>
+				<p>{{withdrawDays}} dia{{withdrawDays!=1?'s':''}} <em ng-show="withdrawDays==100"> ou mais</em></p>
+				<p class="range-field">
+					<input type="range" ng-model="withdrawDays"  min="0" max="100" />
+				</p>
+				<!-- <p class="checkList" ng-repeat="filterItem in filters.resgate.equals({visible:true})" >
+						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterResgate_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
+						<label for="filterResgate_{{filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+				</p> 
+				<p class="pUpper">
+						<a class="linkSeeMore" ng-click="showAllFilterResgateOn = toggleFilter(showAllFilterResgateOn, filters.resgate)" ng-class="{seeMore:showAllFilterResgateOn, seeLess:!showAllFilterResgateOn}"></a>
+						
+				</p>-->
+
+				<div class="divider"></div>
+
+				<h5 class="filterTitle">
+					Taxa de Adm atê: 
+					<i ng-click="openChart('Taxa Administrativa', 'admTax')" class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="veja mais informaçoes sobre Taxa de adm.">insert_chart</i>
+				</h5>
+				<p>{{admTx}}% <em ng-show="admTx==4"> ou mais</em></p>
+				<p class="range-field">
+					<input type="range" ng-model="admTx"  min="0" max="4" step="0.1" />
+				</p>
+
+				<div class="divider"></div>
+
+				<h5 class="filterTitle">
+					Patrimônio
+					<i ng-click="openChart('Patrimônio', 'volume')" class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="veja mais informaçoes sobre Patrimônio.">insert_chart</i>
+				</h5>
+				<p class="checkList" ng-repeat="filterItem in filters.volume.equals({visible:true})" >
+						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterVolume_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
+						<label for="filterVolume_{{filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+				</p>
+				<p class="pUpper">
+						<a class="linkSeeMore" ng-click="showAllFilterVolumeOn = toggleFilter(showAllFilterVolumeOn, filters.volume)" ng-class="{seeMore:showAllFilterVolumeOn, seeLess:!showAllFilterVolumeOn}"></a>
+						
+				</p>
+				
+				
+				
+					
+			</div>
+			
+		</div>
+		<div class="col xl8 l8 m12 s12">
+			<section class="row" id="tables">
+				<div >
+					<div class="col s12 head-form">
+						<h5 class="titulo">Compare e pequise os melhores fundos de investimento.</h5>
+						
+					</div>
+					<div class="col s12">
+						<div class="row">
+							<div class="input-field col m12 s12 l12">
+							<table id="mainTable" class="highlight ">
+								<thead>
+									<tr>
+										<th>Fundo</th>
+										<th class="hide-on-small-and-down tooltipped" data-position="top" data-delay="100" data-tooltip="Quantidade de mêses (em porcentagem) que o fundo teve resultado positivo">Mêses positivo</th>
+										<th class=" hide-on-small-and-down tooltipped" data-position="top" data-delay="100" data-tooltip="Soma dos ganhos nos mêses positivos dividivo pela soma das perdas nos mêses negativos." >Rel. Ganho/Perda</th>
+										<th class="show-column-largar-1200">Média</th>
+										<th class="hide-on-small-and-down">Desvio Padrão</th>
+										<th class="show-column-largar-1300">Correlação Ibov</th>
+										<th class="hide-on-smaller-400">Tx Adm</th>
+										<th>Rentabilidade período</th>
+										
+									</tr>
+								</thead>
+		
+								<tbody>
+									<tr ng-click="rowClick(row)" ng-class="{hoverRow:row.id==$parent.currentDetailRow}" ng-repeat="row in getMainList()" 
+										ng-mouseover="showRowDetail(row)">
+										<td class="cutText" ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notSet':row.info.isNotSet}" ng-bind="row.name">Alvin</td>
+										<td class="hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
+										<td class="hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
+										<td class="show-when-largar-1200" ng-bind="row.figures[selectedPeriod].average"></td>
+										<td class="hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].stdDev"></td>
+										<td class="show-column-largar-1300" ng-bind="row.figures[selectedPeriod].correlationIbov"></td>
+										<td class="hide-on-smaller-400" ng-bind="row.info.admTax| percentage:2"></td>
+										<td ng-bind="row.figures[selectedPeriod].performance|percentage:2"></td>
+									</tr>
+									
+								</tbody>
+								<tfoot>
+									<tr><td col="3">
+										<a>see all</a>
+									</td></tr>
+								</tfoot>
+								</table>
+							</div>
+						</div>
+						
+					</form>
+				</div>
+			</section>	
+			
+		</div>
+		<div class="col xl2 l2 hide-on-med-and-down" id="rightMenu">
+				<div class="section fixed">
+					
+					<h5 class="filterTitle">Performance:</h5>
+					<div id="curve_chart" style="min-height:200px;" ></div>
+					
+					
+					<my-histogram
+						chart-title="Rendimento"
+						histogram="histogramPerformance"
+						value="getFromCurrentFigure('performance')"
+						property="performance"
+						show-chart="false"
+						type="figure"
+						sufix="%"
+						currentrow="currentRowHistPerformance"></my-histogram>
+
+
+					<my-histogram
+						chart-title="Média Rendimento"
+						histogram="histogramAvg"
+						value="getFromCurrentFigure('average')"
+						show-chart="true"
+						property="average"
+						type="figure"
+						sufix="%"
+						currentrow="currentRowHistAvg"></my-histogram>
+
+					<my-histogram
+						chart-title="Desvio padrão"
+						histogram="histogramStDev"
+						value="getFromCurrentFigure('stdDev')"
+						show-chart="true"
+						property="stdDev"
+						type="figure"
+						currentrow="currentRowHistStDev"></my-histogram>
+
+					<my-histogram
+						chart-title="Corelação IBOV"
+						histogram="histogramCorrelIbov"
+						value="current_correlationIbov"
+						show-chart="true"
+						property="correlationIbov"
+						type="figure"
+						currentrow="currentRowHistCorrelIbov"></my-histogram>
+						
+					
+					<my-histogram
+						chart-title="Correlação S&P500"
+						histogram="histogramCorrelSP500"
+						correlation="current_correlationSP500"
+						value="getFromCurrentFigure('correlationSP500')"
+						show-chart="true"
+						property="correlationSP500"
+						type="figure"
+						currentrow="currentRowHistCorrelSP500"></my-histogram>
+						
+					<my-histogram
+						chart-title="Correlação CDI"
+						value="current_correlationCDI/100.0"
+						show-chart="false"
+						correlation="current_correlationCDI"
+						histogram="histogramCorrelCDI"
+						property="correlationCDI"
+						type="figure"
+						currentrow="currentRowHistCorrelCDI"></my-histogram>
+					
+					<my-histogram
+						histogram="histogramPosNegRate"
+						chart-title="Mêses positivos"
+						show-chart="true"
+						value="getFromCurrentFigure('posNegCountRate')"
+						property="posNegCountRate"
+						type="figure"
+						sufix="%"
+						tooltip="Quantidade de mêses (em porcentagem) que o fundo teve resultado positivo.clique e confira!"
+						currentrow="currentRowHistPosNegMonth"></my-histogram>
+
+				
+					<my-histogram
+						chart-title="Rel. Ganho/Perda"
+						show-chart="true"
+						value="getFromCurrentFigure('posNegAvgRate')"
+						tooltip="Soma dos ganhos nos mêses positivos dividivo pela soma das perdas nos mêses negativos.clique e confira!"
+						histogram="histogramPosNegAvgRate"
+						property="posNegAvgRate"
+						type="figure"
+						currentrow="currentRowHistPosNegAvgMonth"></my-histogram>
+				
+					<my-histogram
+						chart-title="Taxa Administrativa"
+						show-chart="true"
+						value="getFromCurrentRow('admTax')"
+						histogram="histogramTxAdm"
+						property="admTax"
+						type="info"
+						sufix="%"
+						currentrow="currentRowTxAdm"></my-histogram>
+
+
+				</div>
+			
+		</div>
+	</div>
+
+
+	
+	<footer class="row">
+		<div class="container">
+	
+		</div>
+	</footer>
+	
+	<div id="modal1" class="modal" >
+		<div class="modal-content">
+		  <h4>{{currentCharTitle}} <em ng-show="selectedPeriod <= 2">nos </em><em ng-bind="filters.Periodo.first({id:selectedPeriod}).Title"></em></h4>
+		  <div id="chart_txdm_scatter" style="width:100%;"></div>
+		</div>
+		
+	</div>
+	
+
+</div>
+<div id="preloading">
+	
+	<div class="row">
+		<div class="s12 m12 l12 xl12 center">
+				<div class="preloader-wrapper big active">
+						<div class="spinner-layer spinner-blue">
+						  <div class="circle-clipper left">
+							<div class="circle"></div>
+						  </div><div class="gap-patch">
+							<div class="circle"></div>
+						  </div><div class="circle-clipper right">
+							<div class="circle"></div>
+						  </div>
+						</div>
+				  
+						<div class="spinner-layer spinner-red">
+						  <div class="circle-clipper left">
+							<div class="circle"></div>
+						  </div><div class="gap-patch">
+							<div class="circle"></div>
+						  </div><div class="circle-clipper right">
+							<div class="circle"></div>
+						  </div>
+						</div>
+				  
+						<div class="spinner-layer spinner-yellow">
+						  <div class="circle-clipper left">
+							<div class="circle"></div>
+						  </div><div class="gap-patch">
+							<div class="circle"></div>
+						  </div><div class="circle-clipper right">
+							<div class="circle"></div>
+						  </div>
+						</div>
+				  
+						<div class="spinner-layer spinner-green">
+						  <div class="circle-clipper left">
+							<div class="circle"></div>
+						  </div><div class="gap-patch">
+							<div class="circle"></div>
+						  </div><div class="circle-clipper right">
+							<div class="circle"></div>
+						  </div>
+						</div>
+					  </div>
+		</div>
+	</div>
+	
+</div>
+<!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+	<script src="js/materialize.js"></script>
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="util.js"  charset="utf-8" ></script>
+	<script src="js/dataManager.js"  charset="utf-8" ></script>
+	<script src="js/histogram.js"  charset="utf-8" ></script>
+	<script src="main.js"  charset="utf-8" ></script>
+	<script src="js/init.js"></script>
+	
+	
+</body>
+</html>

@@ -2843,13 +2843,13 @@ ul.staggered-list li {
 }
 .show-column-largar-1200 {display: none;}
 @media only screen and (min-width: 1200px) {
-  .show-when-largar-1200 {
+  .show-column-largar-1200 {
     display: table-cell!important;
   }
 }
 .show-column-largar-1300 {display: none;}
 @media only screen and (min-width: 1200px) {
-  .show-when-largar-1300 {
+  .show-column-largar-1300 {
     display: table-cell!important;
   }
 }

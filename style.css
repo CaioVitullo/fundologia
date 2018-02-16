@@ -359,6 +359,12 @@ footer{
 	font-size: 1.14rem;
 	margin: 0.62rem 0 0.556rem 0;
 }
+.filterHeader{
+	
+    text-align: right;
+	font-size: 1.33rem;
+	color: #333;
+}
 .labelTitle{
 	font-size: 1rem;
 }

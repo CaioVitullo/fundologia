@@ -123,6 +123,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	me.userHasSelectedRow=false;
 	
 	me.hasShowedToastForCompare=false;
+	me.fundsToCompare = [];
 	me.rowClick = function(row){
 		me.userHasSelectedRow = !me.userHasSelectedRow;
 		me.currentDetailRow = row.uniqueID;
@@ -130,8 +131,19 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			me.hasShowedToastForCompare=true;
 			me.toast('Selecione outro fundo para compará-los separadamente!') 
 		}
+		if(me.fundsToCompare.any({uniqueID:row.uniqueID})){
+			me.fundsToCompare.remove({uniqueID:row.uniqueID});
+		}else{
+			me.fundsToCompare.push(row);
+		}
 	};
-	
+	me.compareFundItemClick = function(index){
+		if(me.fundsToCompare.length > 0){
+			var id = me.fundsToCompare[index].uniqueID;
+			me.fundsToCompare.remove({uniqueID:id});
+		}
+		
+	}
 	me.drawLineChart = function(row){
 			
 		
@@ -246,7 +258,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 					$('.tooltipped').tooltip({delay: 50, html:true});
 				}
 			}
-		}, 200);
+		}, 120);
 		
 	};
 	
@@ -334,7 +346,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 					me.toastOk('Duplo click para visualizar a lista completa!<a onclick="toastCallback()"> Entendi!</a>')
 				}
 			}
-		},2000);
+		},1500);
 	}
 	me.chartData = {}
 	me.getGenericData = function(propery){

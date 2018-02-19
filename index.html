@@ -160,12 +160,11 @@
 			<section class="row" id="tables">
 				<div >
 					<div class="col s12 head-form">
-						<h5 class="titulo">Compare e pequise os melhores fundos de investimento.</h5>
 						<div class="row">
 							<div class="input-field col s12 m12 l12 xl12">
 								<i class="material-icons prefix">search</i>
 								<input id="icon_prefix" type="text" ng-model="searchTxt" class="validate">
-								<label for="icon_prefix">Busque pelo nome do fundo</label>
+								<label for="icon_prefix">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>
 							</div>
 						</div>
 						
@@ -176,7 +175,7 @@
 							<table id="mainTable" class="highlight ">
 								<thead>
 									<tr>
-										<th class="hide-on-smaller-400 tooltipped"  data-position="top" data-delay="100" data-tooltip="<span class=tr><p>Ranking dos fundos feito mês a mês.</p><p>Para cada mês lista-se os fundos de forma decrescente pela rentabilidade</p><p>O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, o segundo 2 ....</p><p>No final soma-se a nota de todos os mêses para cada fundo</p><p>Em resumo, quando menor a soma, melhor o fundo</p></span>">
+										<th class="hide-on-smaller-400 tooltipped"  data-position="top" data-delay="100" data-tooltip="<span class=tr><p>Ranking dos fundos feito mês a mês.</p><p>Para cada mês lista-se os fundos de forma decrescente pela rentabilidade</p><p>O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, o segundo 2 ....</p><p>No final soma-se a nota de todos os mêses para cada fundo</p><p>Em resumo, quanto menor a soma, melhor o fundo</p></span>">
 											Rank 
 											<i class="tiny material-icons" >info_outline</i> 
 										</th>
@@ -386,27 +385,47 @@
 
 	<div id="modaltable" class="modal" >
 		<div class="modal-content">
-				<div class="row "ng-repeat="y in groupedRankList">
-					<table id="tableRank">
-						<caption>20{{y.year}}</caption>
-						<thead>
-							<tr>
-								<th ng-repeat="item in y.data" ng-bind="item.label"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td ng-repeat="item in y.data track by $index" >{{item.rank}}<sup>ᵒ</sup></td>
-							</tr>
-							<tr>
-								<td ng-repeat="item in y.data track by $index" ng-bind="item.value|percentage:2"></td>
-							<tr>
-						</tbody>
-					</table>
+			<h5 ng-bind="currentRow.name"></h5>
+			<div class="row">
+				<div class="col m6 l6 xl6 lblResume">
+					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Mêses positivos: </span><em ng-bind="currentRow.figures[selectedPeriod].positiveCount"></em> (<em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Mêses negativos: </span><em ng-bind="currentRow.figures[selectedPeriod].negativeCount"></em> (<em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
+					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="currentRow.figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="currentRow.figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
 				</div>
+				<div class="col m6 l6 xl6"></div>
+			</div>
+			<div class="row "ng-repeat="y in groupedRankList">
+				<table id="tableRank">
+					<caption>20{{y.year}}</caption>
+					<thead>
+						<tr>
+							<th ng-repeat="item in y.data" ng-bind="item.label"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td ng-repeat="item in y.data track by $index" >{{item.rank}}<sup>ᵒ</sup></td>
+						</tr>
+						<tr>
+							<td ng-repeat="item in y.data track by $index" ng-bind="item.value|percentage:2" ng-class="{highlightPos:(showMesesPositivos && item.value>=0),highlightNeg:(showMesesNegativos && item.value<0)}"></td>
+						<tr>
+					</tbody>
+				</table>
+			</div>
 		</div>	
 	</div>
 	
+	<div class="floating" ng-show="fundsToCompare.length > 0">
+		<div class="selectedFund" ng-click="compareFundItemClick(0)">
+			<label ng-bind="fundsToCompare[0].name" ng-click="compareFundItemClick(0)"></label>
+		</div>
+		<div class="selectedFund">
+			<label ng-show="fundsToCompare.length <= 1">Selecione outro fundo para compará-los</label>
+			<label ng-show="fundsToCompare.length > 1" ng-click="compareFundItemClick(1)" ng-bind="fundsToCompare[1].name">Selecione outro fundo</label>
+		</div>
+		<div ></div>
+	</div>
 
 </div>
 <div id="preloading">

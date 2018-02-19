@@ -499,7 +499,14 @@ footer{
 .modal h4{
 	font-size: 1.58rem;
 }
-
+.modal table caption{
+	color: slategray;
+    font-size: 1.34rem;
+    margin: 0.62rem 0 0.556rem 0;
+}
+.modal table thed tr{
+	background-color: #efefef;
+}
 .blink_me {
 	animation: blinker 3s linear infinite;
   }
@@ -525,3 +532,58 @@ footer{
 	font-weight: 400;
 	
   }
+
+  .tr{
+	  text-align: left;
+  }
+  #tableRank thead{border: none;}
+  #tableRank td{padding: 10px 3px;}
+  #tableRank { color: #9e9e9e;font-size: 1rem;}
+
+
+ 
+  /*
+	  SCROLL HORIZONTAL
+*/
+
+::-webkit-scrollbar{width:2px;height:2px;}
+::-webkit-scrollbar-button{width:2px;height:2px;}
+
+.horizontal-scroll-wrapper{
+  
+  display:block;
+  width:80px;
+  max-height:180px;
+  margin:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  transform:rotate(-90deg) translateY(-80px);
+  transform-origin:right top;
+  margin-bottom: -103px;
+}
+.horizontal-scroll-wrapper > div{
+  display:block;
+  padding:3px;
+  background:#f1f1f1;
+  text-align: center;
+  color: #9e9e9e;
+  transform:rotate(90deg);
+  transform-origin: right top;
+}
+
+.squares{
+  padding:60px 0 0 0;
+}
+
+.squares > div{
+  width:60px;
+  height:80px;
+  margin:-12px 12px;
+  font-size: 1rem;
+}
+.squares div:first-of-type{
+	margin:0px 12px!important;
+}
+.invisible{
+	visibility: hidden;
+}

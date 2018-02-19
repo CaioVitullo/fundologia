@@ -21,7 +21,7 @@ function histogramManager(me){
     
     me.histClick = function(hist,item, property, type){
         if(me.canShowFeature('toast_filtroPorHistograma'))
-            me.toastOk('Boa!! Você ativou o filtro por histograma. Para desfazer basta clicar na mesma barra novamente.<a onclick="toastCallback(\'toast_filtroPorHistograma\')">Entendi!</a>');
+            me.toastOk('Boa!! Você ativou o filtro por histograma. Para desfazer basta clicar na mesma barra novamente.<a onclick="toastCallback()">Entendi!</a>');
         if(compareIfSafe(item, 'isFiltering', true)){
 			item.isFiltering=false;
 			delete me.histogramItemFilter[property];

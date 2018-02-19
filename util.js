@@ -373,11 +373,13 @@ Array.prototype.objWithMax = function (prop) {
     k[prop] = max;
     return this.first(k);
 };
-Array.prototype.take = function (itemsTobeTaken, first) {
-    first = (first == undefined || first == null) ? 0 : first;
-    if(this.length <= itemsTobeTaken)
-        return this;
-    return this.slice(first, itemsTobeTaken);
+Array.prototype.take = function (itemsTobeTaken) {
+    var n = Math.min(itemsTobeTaken, this.length);
+    var m=[];
+    for(var i=0;i<n;i++){
+        m[i]=this[i];
+    }
+    return m;
 }
 Array.prototype.skip = function (length) {
     var a = [];

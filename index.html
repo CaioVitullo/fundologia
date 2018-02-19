@@ -61,7 +61,7 @@
 		</nav>
 	</div>
 	<div class="row">
-		<div class="col xl2 l2  hide-on-med-and-down">
+		<div class="col xl2 l2  hide-on-med-and-down heighAlign">
 			<div class="section fixed">
 				
 					<h5 class="filterTitle">Período </h5>
@@ -156,11 +156,18 @@
 			</div>
 			
 		</div>
-		<div class="col xl8 l8 m12 s12">
+		<div class="col xl8 l8 m12 s12 heighAlign">
 			<section class="row" id="tables">
 				<div >
 					<div class="col s12 head-form">
 						<h5 class="titulo">Compare e pequise os melhores fundos de investimento.</h5>
+						<div class="row">
+							<div class="input-field col s12 m12 l12 xl12">
+								<i class="material-icons prefix">search</i>
+								<input id="icon_prefix" type="text" ng-model="searchTxt" class="validate">
+								<label for="icon_prefix">Busque pelo nome do fundo</label>
+							</div>
+						</div>
 						
 					</div>
 					<div class="col s12">
@@ -169,8 +176,15 @@
 							<table id="mainTable" class="highlight ">
 								<thead>
 									<tr>
+										<th class="hide-on-smaller-400 tooltipped"  data-position="top" data-delay="100" data-tooltip="<span class=tr><p>Ranking dos fundos feito mês a mês.</p><p>Para cada mês lista-se os fundos de forma decrescente pela rentabilidade</p><p>O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, o segundo 2 ....</p><p>No final soma-se a nota de todos os mêses para cada fundo</p><p>Em resumo, quando menor a soma, melhor o fundo</p></span>">
+											Rank 
+											<i class="tiny material-icons" >info_outline</i> 
+										</th>
 										<th>Fundo</th>
-										<th class="hide-on-small-and-down tooltipped" data-position="top" data-delay="100" data-tooltip="Quantidade de mêses (em porcentagem) que o fundo teve resultado positivo">Mêses positivo</th>
+										<th class="hide-on-small-and-down tooltipped" data-position="top" data-delay="100" data-tooltip="Quantidade de mêses (em porcentagem) que o fundo teve resultado positivo">
+											Mêses positivo
+											<i class="tiny material-icons">info_outline</i>
+										</th>
 										<th class=" hide-on-small-and-down tooltipped" data-position="top" data-delay="100" data-tooltip="Soma dos ganhos nos mêses positivos dividivo pela soma das perdas nos mêses negativos." >Rel. Ganho/Perda</th>
 										<th class="show-column-largar-1200">Média</th>
 										<th class="hide-on-small-and-down">Desvio Padrão</th>
@@ -182,9 +196,10 @@
 								</thead>
 		
 								<tbody>
-									<tr ng-click="rowClick(row)" ng-class="{hoverRow:row.id==$parent.currentDetailRow}" ng-repeat="row in getMainList()" 
+									<tr ng-click="rowClick(row)" ng-class="{hoverRow:row.uniqueID==$parent.currentDetailRow}" ng-repeat="row in getMainList()" 
 										ng-mouseover="showRowDetail(row)">
-										<td class="cutText" ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" ng-bind="row.name">Alvin</td>
+										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank">Rank</td>
+										<td class="cutText"  ng-bind="row.name">Alvin</td>
 										<td class="hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
 										<td class="hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
 										<td class="show-column-largar-1200" ng-bind="row.figures[selectedPeriod].average"></td>
@@ -209,13 +224,28 @@
 			</section>	
 			
 		</div>
-		<div class="col xl2 l2 hide-on-med-and-down" id="rightMenu">
+		<div class="col xl2 l2 hide-on-med-and-down heighAlign" id="rightMenu">
 				<div class="section fixed">
 					
 					
+					<h5 class="filterTitle ">Rentabilidade acumulada:</h5>
 					<div id="curve_chart" style="min-height:200px;" ></div>
+					<div class="divider"></div>
 					
-					<h5 class="filterHeader">Comparado aos demais</h5>
+					<h5 class="filterTitle ">Rank mês a mês:</h5>
+					<div id="ranking_chart" style="min-height:200px;" ></div>
+					<div class="divider"></div>
+					
+					<div  ng-class="{invisible:currentRow.values==null}">
+						<div class="horizontal-scroll-wrapper squares" id="rankHorizontal" ng-mouseover="valueHover()" >
+							<div ng-dblclick="openRankDialog()" ng-repeat="m in periodName.take(filters.Periodo[selectedPeriod].len) track by $index">
+								{{m}}<br/> {{currentRow.rank[$index]}}<sup>ᵒ</sup><br/>{{currentRow.values[$index]|percentage:2}}
+							</div>
+						</div>
+					</div>
+
+
+					
 					<my-histogram
 						chart-title="Rendimento"
 						histogram="histogramPerformance"
@@ -316,10 +346,34 @@
 	</div>
 
 
-	
+	<div class="row">
+		<div class="container">
+				<div id="disqus_thread"></div>
+				<script>
+				
+				/**
+				*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+				*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+				/*
+				var disqus_config = function () {
+				this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+				this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+				};
+				*/
+				(function() { // DON'T EDIT BELOW THIS LINE
+				var d = document, s = d.createElement('script');
+				s.src = 'https://fundologia.disqus.com/embed.js';
+				s.setAttribute('data-timestamp', +new Date());
+				(d.head || d.body).appendChild(s);
+				})();
+				</script>
+				<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+											
+		</div>
+	</div>
 	<footer class="row">
 		<div class="container">
-	
+			
 		</div>
 	</footer>
 	
@@ -327,8 +381,30 @@
 		<div class="modal-content">
 		  <h4>{{currentCharTitle}} <em ng-show="selectedPeriod <= 2">nos </em><em ng-bind="filters.Periodo.first({id:selectedPeriod}).Title"></em></h4>
 		  <div id="chart_txdm_scatter" style="width:100%;"></div>
-		</div>
-		
+		</div>	
+	</div>
+
+	<div id="modaltable" class="modal" >
+		<div class="modal-content">
+				<div class="row "ng-repeat="y in groupedRankList">
+					<table id="tableRank">
+						<caption>20{{y.year}}</caption>
+						<thead>
+							<tr>
+								<th ng-repeat="item in y.data" ng-bind="item.label"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td ng-repeat="item in y.data track by $index" >{{item.rank}}<sup>ᵒ</sup></td>
+							</tr>
+							<tr>
+								<td ng-repeat="item in y.data track by $index" ng-bind="item.value|percentage:2"></td>
+							<tr>
+						</tbody>
+					</table>
+				</div>
+		</div>	
 	</div>
 	
 
@@ -385,15 +461,15 @@
 <!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+	
 	<script src="js/materialize.js"></script>
-
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="util.js"  charset="utf-8" ></script>
 	<script src="js/dataManager.js"  charset="utf-8" ></script>
 	<script src="js/histogram.js"  charset="utf-8" ></script>
 	<script src="main.js"  charset="utf-8" ></script>
 	<script src="js/init.js"></script>
-	
+	<script id="dsq-count-scr" src="//fundologia.disqus.com/count.js" async></script>
 	
 </body>
 </html>

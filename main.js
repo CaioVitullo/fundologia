@@ -1,12 +1,13 @@
 
 var mainApp = angular.module('mainApp', []);
 
-mainApp.controller('ctrl', function ($http, $scope) {
+mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	var me = $scope;
 	dataManager($http, me);
 	histogramManager(me);
 	classUtil(me);
 
+	me.searchTxt = "";
 	me.showAllFilterTypeOn= true;
 	me.showAllFilterInitValueOn=true;
 	me.showAllFilterResgateOn = true;
@@ -50,13 +51,14 @@ mainApp.controller('ctrl', function ($http, $scope) {
 						(me.admTx == 4 || item.info.admTax <= me.admTx) &&
 						(me.histogramItemFilter==null || me.verifyHistogramFilter(item) ) &&
 						item.info.VolumeFilter.hasAnyTrueOnSameIndex(filterStatus.volume) && 
+						(me.searchTxt == "" || item.name.toLowerCase().indexOf(me.searchTxt.toLowerCase()) >= 0 ) &&
 						item.info.InitialValueFilter.hasAnyTrueOnSameIndex(filterStatus.Initialvalue)){
 							list.push(item);
 						}
 				}
 				if(list.length > 0)
 					list = list.sort(function(a,b){
-						return b.figures[me.selectedPeriod].performance - a.figures[me.selectedPeriod].performance;
+						return a.figures[me.selectedPeriod].rank - b.figures[me.selectedPeriod].rank;
 					});
 				list = list.take(30);
 				me.lastHash = currentHash;
@@ -99,6 +101,7 @@ mainApp.controller('ctrl', function ($http, $scope) {
 			Tipo:me.filters.Tipo.selectToArray('checked'),
 			resgate:[me.withdrawDays],
 			admTx:[me.admTx],
+			search:[me.searchTxt],
 			volume:me.filters.volume.selectToArray('checked'),
 			Initialvalue:me.filters.InitialValue.selectToArray('checked'),
 			histFilter:me.histogramHash()
@@ -111,7 +114,8 @@ mainApp.controller('ctrl', function ($http, $scope) {
 			me.filters.InitialValue.allSetTo({checked:true}) &&
 			me.withdrawDays == 100 &&
 			me.admTx == 4 &&
-			me.histogramItemFilter == null
+			me.histogramItemFilter == null && 
+			me.searchTxt == ""
 
 			//me.filters.resgate.allSetTo({checked:true}) &&
 
@@ -121,7 +125,7 @@ mainApp.controller('ctrl', function ($http, $scope) {
 	me.hasShowedToastForCompare=false;
 	me.rowClick = function(row){
 		me.userHasSelectedRow = !me.userHasSelectedRow;
-		me.currentDetailRow = row.id;
+		me.currentDetailRow = row.uniqueID;
 		if(me.userHasSelectedRow && me.hasShowedToastForCompare == false){
 			me.hasShowedToastForCompare=true;
 			me.toast('Selecione outro fundo para compará-los separadamente!') 
@@ -167,6 +171,45 @@ mainApp.controller('ctrl', function ($http, $scope) {
 			chart.draw(data, options);
 			
 	};
+	me.drawRankChart = function(row){
+			
+		
+		if(isSafeToUse(google, 'visualization.arrayToDataTable') == false || 
+			isSafeToUse(google, 'visualization.LineChart') == false)
+			return
+			
+			var values = row.rank.take(24);
+			var d = [['Mês', 'Rank']];
+			for(var i=0;i<values.length;i++){
+				d.push([i,values[i]])
+			}
+			var data = google.visualization.arrayToDataTable(d);
+			
+			
+			
+			var options = {
+			  //title: 'Performance',
+			  curveType: 'function',
+			  legend: { position: 'none' },
+			  width:$('#rightMenu').width(),
+			  vAxis:{
+				  maxValue:300,
+				  minValue:0,
+				  gridlines: { color: '#e0e0e0', count: 6} ,
+				  textStyle:{color:'#9e9e9e'},//fontName:'"Roboto", sans-serif'
+				  baselineColor:'#e0e0e0'
+				},
+				hAxis:{
+					gridlines:{count:0, color: '#e0e0e0'},
+					baselineColor:'#e0e0e0'
+				}
+			};
+	
+			var chart = new google.visualization.LineChart(document.getElementById('ranking_chart'));
+	
+			chart.draw(data, options);
+			
+	};
 	me.getFromFigure = function(row,prop){
 		if(row != null && row.figures != null && row.figures[me.selectedPeriod] != null)
 			return row.figures[me.selectedPeriod][prop];
@@ -180,21 +223,31 @@ mainApp.controller('ctrl', function ($http, $scope) {
 	me.getFromCurrentFigure = function(prop){
 		return me.getFromFigure(me.currentRow, prop);
 	}
+	me.currentFigure=null;
 	me.currentDetailRow = 0;
 	me.currentRow=null;
 	me.showRowDetail = function(row){
-		if(me.currentDetailRow != row.id && me.userHasSelectedRow==false){
-			me.currentRow = row;
-			me.currentDetailRow = row.id
-			me.drawLineChart(row);
-			//me.showHistogramPosNegMonths(row);
-			me.loadHistograms(row);
-			me.currentRowPosNegCountRate = me.getFromFigure(row, 'posNegCountRate');
-			me.current_correlationIbov = me.getFromFigure(row, 'correlationIbov')*100;
-			me.current_correlationCDI = me.getFromFigure(row, 'correlationCDI')*100;
-			me.current_correlationSP500 = me.getFromCurrentFigure('correlationSP500')*100;
-			$('.tooltipped').tooltip({delay: 50, html:true});
-		}
+		me._hoverId = row.uniqueID;
+		$timeout(function(){
+			if(me._hoverId == row.uniqueID){
+				if(me.currentDetailRow != row.uniqueID && me.userHasSelectedRow==false){
+					console.log('over:', row);
+					me.currentRow = row;
+					me.currentDetailRow = row.uniqueID
+					me.currentFigure= row.figures[me.selectedPeriod];
+					me.drawLineChart(row);
+					me.drawRankChart(row);
+					//me.showHistogramPosNegMonths(row);
+					me.loadHistograms(row);
+					me.currentRowPosNegCountRate = me.getFromFigure(row, 'posNegCountRate');
+					me.current_correlationIbov = me.getFromFigure(row, 'correlationIbov')*100;
+					me.current_correlationCDI = me.getFromFigure(row, 'correlationCDI')*100;
+					me.current_correlationSP500 = me.getFromCurrentFigure('correlationSP500')*100;
+					$('.tooltipped').tooltip({delay: 50, html:true});
+				}
+			}
+		}, 200);
+		
 	};
 	
 	
@@ -274,6 +327,15 @@ mainApp.controller('ctrl', function ($http, $scope) {
 		$('#' + name).modal('close');
 	}
 	
+	me.valueHover = function(){
+		$timeout(function(){
+			if($('#rankHorizontal').is(':hover')){
+				if(me.canShowFeature('doubleClickRankScroll')){
+					me.toastOk('Duplo click para visualizar a lista completa!<a onclick="toastCallback()"> Entendi!</a>')
+				}
+			}
+		},2000);
+	}
 	me.chartData = {}
 	me.getGenericData = function(propery){
 		if(me.chartData.hasOwnProperty(propery)){
@@ -387,13 +449,52 @@ mainApp.controller('ctrl', function ($http, $scope) {
 			  var chart = new google.visualization.BubbleChart(document.getElementById('chart_txdm_scatter'));
 			  chart.draw(data, options);
 	}
-	
-
+	me.groupedRankList = [];
+	me.openRankDialog = function(){
+		
+		me.groupedRankList = [];
+		var month = 1;
+		var year = 18;
+		var list = [];
+		for(var i = 0;i<36;i++){
+			list.push({
+				label:me.getMonthName(month, year),
+				rank:me.currentRow.rank[i],
+				value:me.currentRow.values[i] });
+			month -=1;
+			if(month == 0){
+				me.groupedRankList.push({year:year, data:list});
+				month = 12;
+				year-=1;
+				list = [];
+			}
+		}
+		$('#modaltable').modal('open');
+	}
+	me.getPeriodNames = function(){
+		var month = 1;
+		var year = 18;
+		var list = [];
+		for(var i = 0;i<36;i++){
+			list.push(me.getMonthName(month, year));
+			month -=1;
+			if(month == 0){
+				month = 12;
+				year-=1;
+			}
+		}
+		return list;
+	};
+	me._monthNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+	me.getMonthName = function(monthIndex, year){
+		return me._monthNames[monthIndex-1] + '/' + year
+	}
+	me.periodName = me.getPeriodNames();
 	me.filters = {
 		Periodo : [
-			{id:0, Title:'Últimos 12 mêses', visible:true, default:true},
-			{id:1, Title:'Últimos 24 mêses', visible:true, default:true},
-			{id:2, Title:'Últimos 36 mêses', visible:true, default:true},
+			{id:0,len:12, Title:'Últimos 12 mêses', visible:true, default:true},
+			{id:1,len:24, Title:'Últimos 24 mêses', visible:true, default:true},
+			{id:2,len:36, Title:'Últimos 36 mêses', visible:true, default:true},
 			{id:3, Title:'2017', visible:false, default:false},
 			{id:4, Title:'2016', visible:false, default:false}
 		],
@@ -477,4 +578,5 @@ google.charts.load('current', {'packages':['corechart', 'scatter']});
 $(document).ready(function(){
 	$('.tooltipped').tooltip({delay: 50});
 	$('.modal').modal();
+	
 });

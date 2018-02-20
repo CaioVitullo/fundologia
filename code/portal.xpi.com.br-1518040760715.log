@@ -1,0 +1,1 @@
+﻿$('.TD_col1 a').each(function(index,item){console.log(item.text.trim() + ";;" + item.href + "\n")});

@@ -67,26 +67,24 @@
 					<h5 class="filterTitle">Período </h5>
 					<div class="tsHeight" >
 							<p ng-repeat="filterItem in filters.Periodo.equals({visible:true}) track by filterItem.id" >
-								<input class="with-gap" type="radio" name="filterPeriodo" ng-class="{'filled-in':filterItem.checked}" id="filterPeriodo_{{filterItem.id}}" ng-value="filterItem.id" ng-model="$parent.selectedPeriod"  />
-								<label for="filterPeriodo_{{filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+								<input class="with-gap" type="radio" name="filterPeriodo" ng-class="{'filled-in':filterItem.checked}" id="filterPeriodo_{{::filterItem.id}}" ng-value="filterItem.id" ng-change="$parent.changePeriodo()" ng-model="$parent.selectedPeriod"  />
+								<label for="filterPeriodo_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
 							</p>
 							<p class="pUpper">
 								<a class="linkSeeMore" ng-click="showAllFilterPeriodoOn = toggleFilter(showAllFilterPeriodoOn, filters.Periodo)" ng-class="{seeMore:showAllFilterPeriodoOn, seeLess:!showAllFilterPeriodoOn}"></a>
-								
 							</p>
 					</div>
 				
 				<div class="divider"></div>
 				<h5 class="filterTitle">Tipo</h5>
 				<div class="tsHeight" ng-class="{tsOpened:showAllFilterTypeOn}">
-						<p ng-repeat="filterItem in filters.Tipo.equals({visible:true})" >
-								<input  type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterTipo_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
-								<label for="filterTipo_{{filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
-							</p>
-							<p class="pUpper">
-								<a class="linkSeeMore" ng-click="showAllFilterTypeOn = toggleFilter(showAllFilterTypeOn, filters.Tipo)" ng-class="{seeMore:showAllFilterTypeOn, seeLess:!showAllFilterTypeOn}"></a>
-								
-							</p>
+					<p ng-repeat="filterItem in filters.Tipo.equals({visible:true})" >
+						<input  type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterTipo_{{::filterItem.id}}" ng-model="filterItem.checked" ng-click="$parent.checkFilterTopShow(filters.Tipo,showAllFilterTypeOn)" ng-checked="filterItem.checked" />
+						<label for="filterTipo_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+					</p>
+					<p class="pUpper">
+						<a class="linkSeeMore" ng-click="showAllFilterTypeOn = toggleFilter(showAllFilterTypeOn, filters.Tipo)" ng-class="{seeMore:showAllFilterTypeOn, seeLess:!showAllFilterTypeOn}"></a>
+					</p>
 				</div>
 				
 
@@ -97,8 +95,8 @@
 					<i ng-click="openChart('Aplicação inicial', 'initialValue')" class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="veja mais informaçoes sobre Aplicação inicial.">insert_chart</i>
 				</h5>
 				<p class="checkList" ng-repeat="filterItem in filters.InitialValue.equals({visible:true})" >
-						<input type="checkbox" ng-click="$parent.changeInitialValue(filterItem)"  ng-class="{'filled-in':filterItem.checked}" id="filterInitValue_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
-						<label for="filterInitValue_{{filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+						<input type="checkbox" ng-click="$parent.changeInitialValue(filterItem)"  ng-class="{'filled-in':filterItem.checked}"  id="filterInitValue_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
+						<label for="filterInitValue_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
 				</p>
 				<p class="pUpper">
 						<a class="linkSeeMore" ng-click="showAllFilterInitValueOn = toggleFilter(showAllFilterInitValueOn, filters.InitialValue)" ng-class="{seeMore:showAllFilterInitValueOn, seeLess:!showAllFilterInitValueOn}"></a>
@@ -115,14 +113,7 @@
 				<p class="range-field">
 					<input type="range" ng-model="withdrawDays"  min="0" max="100" />
 				</p>
-				<!-- <p class="checkList" ng-repeat="filterItem in filters.resgate.equals({visible:true})" >
-						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterResgate_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
-						<label for="filterResgate_{{filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
-				</p> 
-				<p class="pUpper">
-						<a class="linkSeeMore" ng-click="showAllFilterResgateOn = toggleFilter(showAllFilterResgateOn, filters.resgate)" ng-class="{seeMore:showAllFilterResgateOn, seeLess:!showAllFilterResgateOn}"></a>
-						
-				</p>-->
+				
 
 				<div class="divider"></div>
 
@@ -138,12 +129,12 @@
 				<div class="divider"></div>
 
 				<h5 class="filterTitle">
-					Patrimônio
+					Patrimônio atê:
 					<i ng-click="openChart('Patrimônio', 'volume')" class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="veja mais informaçoes sobre Patrimônio.">insert_chart</i>
 				</h5>
 				<p class="checkList" ng-repeat="filterItem in filters.volume.equals({visible:true})" >
-						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterVolume_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
-						<label for="filterVolume_{{filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterVolume_{{::filterItem.id}}" ng-click="checkFilterTopShow(filters.volume,showAllFilterVolumeOn)" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
+						<label for="filterVolume_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
 				</p>
 				<p class="pUpper">
 						<a class="linkSeeMore" ng-click="showAllFilterVolumeOn = toggleFilter(showAllFilterVolumeOn, filters.volume)" ng-class="{seeMore:showAllFilterVolumeOn, seeLess:!showAllFilterVolumeOn}"></a>
@@ -175,16 +166,16 @@
 							<table id="mainTable" class="highlight ">
 								<thead>
 									<tr>
-										<th class="hide-on-smaller-400 tooltipped"  data-position="top" data-delay="100" data-tooltip="<span class=tr><p>Ranking dos fundos feito mês a mês.</p><p>Para cada mês lista-se os fundos de forma decrescente pela rentabilidade</p><p>O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, o segundo 2 ....</p><p>No final soma-se a nota de todos os mêses para cada fundo</p><p>Em resumo, quanto menor a soma, melhor o fundo</p></span>">
+										<th class="hide-on-smaller-400 tooltipped"  >
 											Rank 
-											<i class="tiny material-icons" >info_outline</i> 
+											<i class="tiny material-icons" data-position="top" data-delay="50" data-tooltip="<span class=tr><p>Ranking dos fundos feito mês a mês.</p><p>Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade</p><p>O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, e assim sucessivamente</p><p>No final, soma-se a nota de todos os meses para cada fundo</p><p>Ou seja, quanto menor a soma, melhor o fundo</p></span>" >info_outline</i> 
 										</th>
 										<th>Fundo</th>
-										<th class="hide-on-small-and-down tooltipped" data-position="top" data-delay="100" data-tooltip="Quantidade de mêses (em porcentagem) que o fundo teve resultado positivo">
-											Mêses positivo
-											<i class="tiny material-icons">info_outline</i>
+										<th class="hide-on-small-and-down " data-position="top" data-delay="50" data-tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo">
+											Meses positivo
+											<i class="tiny material-icons tooltipped">info_outline</i>
 										</th>
-										<th class=" hide-on-small-and-down tooltipped" data-position="top" data-delay="100" data-tooltip="Soma dos ganhos nos mêses positivos dividivo pela soma das perdas nos mêses negativos." >Rel. Ganho/Perda</th>
+										<th class=" hide-on-small-and-down tooltipped" data-position="top" data-delay="50" data-tooltip="Soma dos ganhos nos meses positivos dividivo pela soma das perdas nos meses negativos." >Rel. Ganho/ Perda</th>
 										<th class="show-column-largar-1200">Média</th>
 										<th class="hide-on-small-and-down">Desvio Padrão</th>
 										<th class="show-column-largar-1300">Correlação Ibov</th>
@@ -195,10 +186,17 @@
 								</thead>
 		
 								<tbody>
-									<tr ng-click="rowClick(row)" ng-class="{hoverRow:row.uniqueID==$parent.currentDetailRow}" ng-repeat="row in getMainList()" 
+									<tr class="tableRow"
+										ng-class="{hoverRow:row.uniqueID==$parent.currentDetailRow, fullsquare:row.selectedToCompare}" ng-repeat="row in getMainList()" 
 										ng-mouseover="showRowDetail(row)">
 										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank">Rank</td>
-										<td class="cutText"  ng-bind="row.name">Alvin</td>
+										<td class="cutText" >
+											{{row.name}}
+											<i class="tiny material-icons hidenIcon tooltipped" ng-click="openRankDialog()" data-position="top" data-delay="50" data-tooltip="Tabela de rentabilidade completa!" >info_outline</i> 
+											<i class="tiny material-icons tooltipped" ng-show="row.info.isClosed" data-position="top" data-delay="50" data-tooltip="Fundo fechado!">https</i>
+											<i class="tiny material-icons tooltipped" ng-show="row.info.restrict" data-position="top" data-delay="50" data-tooltip="Fundo destinado à investidores qualificados.">monetization_on</i>
+											<i class="small material-icons hidenIcon tooltipped" ng-click="rowClick(row)"  data-position="top" data-delay="10" data-tooltip="Comparar fundos!Clique para selecionar">compare_arrows</i>
+										</td>
 										<td class="hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
 										<td class="hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
 										<td class="show-column-largar-1200" ng-bind="row.figures[selectedPeriod].average"></td>
@@ -228,11 +226,11 @@
 					
 					
 					<h5 class="filterTitle ">Rentabilidade acumulada:</h5>
-					<div id="curve_chart" style="min-height:200px;" ></div>
+					<div id="curve_chart" style="min-height:120px;" ></div>
 					<div class="divider"></div>
 					
 					<h5 class="filterTitle ">Rank mês a mês:</h5>
-					<div id="ranking_chart" style="min-height:200px;" ></div>
+					<div id="ranking_chart" style="min-height:120px;" ></div>
 					<div class="divider"></div>
 					
 					<div  ng-class="{invisible:currentRow.values==null}">
@@ -255,34 +253,36 @@
 						sufix="%"
 						currentrow="currentRowHistPerformance"></my-histogram>
 
-
 					<my-histogram
-						chart-title="Média Rendimento"
-						histogram="histogramAvg"
-						value="getFromCurrentFigure('average')"
-						show-chart="true"
-						property="average"
-						type="figure"
-						sufix="%"
-						currentrow="currentRowHistAvg"></my-histogram>
-
-					<my-histogram
-						chart-title="Desvio padrão"
+						chart-title="Volatilidade"
 						histogram="histogramStDev"
 						value="getFromCurrentFigure('stdDev')"
 						show-chart="true"
 						property="stdDev"
 						type="figure"
+						tooltip="Quanto mais a rentabilidade de um fundo varia em um determinado período, maior o risco desse fundo.Mas, vale a pena correr esse risco?Clique e confira!"
 						currentrow="currentRowHistStDev"></my-histogram>
+					
+					<my-histogram
+						chart-title="Rel. Ganho/Perda"
+						show-chart="true"
+						value="getFromCurrentFigure('posNegAvgRate')"
+						tooltip="Soma dos ganhos nos meses positivos dividivo pela soma das perdas nos meses negativos. Clique e confira!"
+						histogram="histogramPosNegAvgRate"
+						property="posNegAvgRate"
+						type="figure"
+						currentrow="currentRowHistPosNegAvgMonth"></my-histogram>
+					
 
 					<my-histogram
-						chart-title="Corelação IBOV"
+						chart-title="Correlação IBOV"
 						histogram="histogramCorrelIbov"
 						correlation="current_correlationIbov"
 						value="getFromCurrentFigure('correlationIbov')"
 						show-chart="true"
 						property="correlationIbov"
 						type="figure"
+						tooltip="Quanto maior a correlação com o IBOV, maior influência o índice exerce sobre o fundo. A questão é, quanto maior a correlação, maior a rentabilidade? Clique e confira!"
 						currentrow="currentRowHistCorrelIbov"></my-histogram>
 						
 					
@@ -294,6 +294,7 @@
 						show-chart="true"
 						property="correlationSP500"
 						type="figure"
+						tooltip="Quanto maior a correlação com o S&P500, maior influência o índice exerce sobre o fundo. Essa correlação influencia proporciomalmente na rentabilidade? Clique e confira!"
 						currentrow="currentRowHistCorrelSP500"></my-histogram>
 						
 					<my-histogram
@@ -304,29 +305,19 @@
 						histogram="histogramCorrelCDI"
 						property="correlationCDI"
 						type="figure"
+						tooltip="Quanto maior a correlação com o CDI, maior influência o índice exerce sobre o fundo. Como se comportam os fundos com maior correlação? Clique e confira!"
 						currentrow="currentRowHistCorrelCDI"></my-histogram>
 					
 					<my-histogram
 						histogram="histogramPosNegRate"
-						chart-title="Mêses positivos"
+						chart-title="Meses positivos"
 						show-chart="true"
 						value="getFromCurrentFigure('posNegCountRate')"
 						property="posNegCountRate"
 						type="figure"
 						sufix="%"
-						tooltip="Quantidade de mêses (em porcentagem) que o fundo teve resultado positivo.clique e confira!"
+						tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo. Clique e confira!"
 						currentrow="currentRowHistPosNegMonth"></my-histogram>
-
-				
-					<my-histogram
-						chart-title="Rel. Ganho/Perda"
-						show-chart="true"
-						value="getFromCurrentFigure('posNegAvgRate')"
-						tooltip="Soma dos ganhos nos mêses positivos dividivo pela soma das perdas nos mêses negativos.clique e confira!"
-						histogram="histogramPosNegAvgRate"
-						property="posNegAvgRate"
-						type="figure"
-						currentrow="currentRowHistPosNegAvgMonth"></my-histogram>
 				
 					<my-histogram
 						chart-title="Taxa Administrativa"
@@ -336,8 +327,19 @@
 						property="admTax"
 						type="info"
 						sufix="%"
+						tooltip="Fundo que cobra mais taxa Administrativa rende mais? Este gráfico vai te ajudar a descobrir!"
 						currentrow="currentRowTxAdm"></my-histogram>
-
+					
+					<my-histogram
+						chart-title="Média Rendimento"
+						histogram="histogramAvg"
+						value="getFromCurrentFigure('average')"
+						show-chart="true"
+						property="average"
+						type="figure"
+						sufix="%"
+						tooltip="Rendimento médio no período"
+						currentrow="currentRowHistAvg"></my-histogram>
 
 				</div>
 			
@@ -378,7 +380,7 @@
 	
 	<div id="modal1" class="modal" >
 		<div class="modal-content">
-		  <h4>{{currentCharTitle}} <em ng-show="selectedPeriod <= 2">nos </em><em ng-bind="filters.Periodo.first({id:selectedPeriod}).Title"></em></h4>
+		  <h4>{{currentCharTitle}} <em ng-show="selectedPeriod <= 2">nos </em><em ng-bind="::filters.Periodo.first({id:selectedPeriod}).Title"></em></h4>
 		  <div id="chart_txdm_scatter" style="width:100%;"></div>
 		</div>	
 	</div>
@@ -388,10 +390,10 @@
 			<h5 ng-bind="currentRow.name"></h5>
 			<div class="row">
 				<div class="col m6 l6 xl6 lblResume">
-					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Mêses positivos: </span><em ng-bind="currentRow.figures[selectedPeriod].positiveCount"></em> (<em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Mêses negativos: </span><em ng-bind="currentRow.figures[selectedPeriod].negativeCount"></em> (<em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
-					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="currentRow.figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="currentRow.figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Meses positivos: </span><em ng-bind="::currentRow.figures[selectedPeriod].positiveCount"></em> (<em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Meses negativos: </span><em ng-bind="::currentRow.figures[selectedPeriod].negativeCount"></em> (<em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
+					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="::currentRow.figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="::currentRow.figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
 				</div>
 				<div class="col m6 l6 xl6"></div>
 			</div>
@@ -400,7 +402,7 @@
 					<caption>20{{y.year}}</caption>
 					<thead>
 						<tr>
-							<th ng-repeat="item in y.data" ng-bind="item.label"></th>
+							<th ng-repeat="item in y.data" ng-bind="::item.label"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -408,7 +410,7 @@
 							<td ng-repeat="item in y.data track by $index" >{{item.rank}}<sup>ᵒ</sup></td>
 						</tr>
 						<tr>
-							<td ng-repeat="item in y.data track by $index" ng-bind="item.value|percentage:2" ng-class="{highlightPos:(showMesesPositivos && item.value>=0),highlightNeg:(showMesesNegativos && item.value<0)}"></td>
+							<td ng-repeat="item in y.data track by $index" ng-bind="::item.value|percentage:2" ng-class="{highlightPos:(showMesesPositivos && item.value>=0),highlightNeg:(showMesesNegativos && item.value<0)}"></td>
 						<tr>
 					</tbody>
 				</table>
@@ -417,14 +419,14 @@
 	</div>
 	
 	<div class="floating" ng-show="fundsToCompare.length > 0">
-		<div class="selectedFund" ng-click="compareFundItemClick(0)">
-			<label ng-bind="fundsToCompare[0].name" ng-click="compareFundItemClick(0)"></label>
+		<div class="selectedFund" ng-class="{fullsquare:fundsToCompare.length >=1,emptysquare:fundsToCompare.length <=0 }" ng-click="compareFundItemClick(0)">
+			<label ng-bind="::fundsToCompare[0].name" ng-click="compareFundItemClick(0)"></label>
 		</div>
-		<div class="selectedFund">
-			<label ng-show="fundsToCompare.length <= 1">Selecione outro fundo para compará-los</label>
-			<label ng-show="fundsToCompare.length > 1" ng-click="compareFundItemClick(1)" ng-bind="fundsToCompare[1].name">Selecione outro fundo</label>
+		<div class="selectedFund" style="margin-left:5px;" ng-class="{fullsquare:fundsToCompare.length >=2,emptysquare:fundsToCompare.length <=1 }">
+			<label ng-show="fundsToCompare.length <= 1"></label>
+			<label ng-show="fundsToCompare.length > 1" ng-click="compareFundItemClick(1)" ng-bind="::fundsToCompare[1].name">Selecione outro fundo</label>
 		</div>
-		<div ></div>
+		<button ng-disabled="fundsToCompare.length <= 1" class="waves-effect waves-light btn">Comparar</button>
 	</div>
 
 </div>

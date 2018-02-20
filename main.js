@@ -24,6 +24,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		});
 		me.lastHash = me.filterHash(me.getFilterStatus());
 		me.loadHistograms(null);
+		$('.tooltipped').tooltip({delay: 50});
+		$('.modal').modal();
 	}; 
 	
 
@@ -52,6 +54,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 						(me.histogramItemFilter==null || me.verifyHistogramFilter(item) ) &&
 						item.info.VolumeFilter.hasAnyTrueOnSameIndex(filterStatus.volume) && 
 						(me.searchTxt == "" || item.name.toLowerCase().indexOf(me.searchTxt.toLowerCase()) >= 0 ) &&
+						(me.filters.InitialValue.first({filter:false}).checked == true || item.info.restrict==false) &&
 						item.info.InitialValueFilter.hasAnyTrueOnSameIndex(filterStatus.Initialvalue)){
 							list.push(item);
 						}
@@ -133,8 +136,10 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		}
 		if(me.fundsToCompare.any({uniqueID:row.uniqueID})){
 			me.fundsToCompare.remove({uniqueID:row.uniqueID});
-		}else{
+			row.selectedToCompare=false;
+		}else if(me.fundsToCompare.length <= 1){
 			me.fundsToCompare.push(row);
+			row.selectedToCompare = true;
 		}
 	};
 	me.compareFundItemClick = function(index){
@@ -143,6 +148,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			me.fundsToCompare.remove({uniqueID:id});
 		}
 		
+	};
+	me.changePeriodo = function(){
+		me.loadHistograms(null);
 	}
 	me.drawLineChart = function(row){
 			
@@ -161,6 +169,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			var MM=me.getMinMaxValues();
 			
 			var options = {
+			  
 			  //title: 'Performance',
 			  curveType: 'function',
 			  legend: { position: 'none' },
@@ -326,6 +335,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		return value;
 	}
 	me.changeInitialValue = function(item){
+		if(item.filter == false)
+			return
+
 		var index = me.filters.InitialValue.indexOf(item);
 		for(var i=index-1;i>=0;i--){
 			me.filters.InitialValue[i].checked=item.checked;
@@ -333,12 +345,20 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		for(var i=index+1;i<me.filters.InitialValue.length; i++){
 			me.filters.InitialValue[i].checked=!item.checked;
 		}
-		
+		me.checkFilterTopShow(me.filters.InitialValue,me.showAllFilterInitValueOn);
 	}
 	me.closeModalDialog = function(name){
 		$('#' + name).modal('close');
 	}
-	
+	me.checkFilterTopShow = function(filter, prop){
+
+		for(var i=0;i<filter.length;i++){
+			var item = filter[i];
+			if(item.default==true && item.checked == true)
+				return;
+		}
+		prop = me.toggleFilter(prop, filter);
+	}
 	me.valueHover = function(){
 		$timeout(function(){
 			if($('#rankHorizontal').is(':hover')){
@@ -520,18 +540,18 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			{id:6, Title:'Exterior', checked:true, visible:false, default:false},
 		],
 		InitialValue : [
-			{id:0, Title:'500', checked:true, visible:false, default:false},
-			{id:1, Title:'1k', checked:true, visible:true, default:true},
-			{id:2, Title:'3k', checked:true, visible:false, default:false},
-			{id:3, Title:'5k', checked:true, visible:true, default:true},
-			{id:4, Title:'10k', checked:true, visible:false, default:false},
-			{id:5, Title:'15k', checked:true, visible:false, default:false},
-			{id:6, Title:'20k', checked:true, visible:false, default:false},
-			{id:7, Title:'25k', checked:true, visible:true, default:true},
-			{id:8, Title:'30k', checked:true, visible:false, default:false},
-			{id:9, Title:'50k', checked:true, visible:false, default:false},
-			{id:10, Title:'200k', checked:true, visible:false, default:false},
-			{id:11, Title:'Qualificados(1M)', checked:true, visible:false, default:false}
+			{id:0, Title:'500', checked:true, visible:false, default:false, filter:true},
+			{id:1, Title:'1k', checked:true, visible:true, default:true, filter:true},
+			{id:2, Title:'3k', checked:true, visible:false, default:false, filter:true},
+			{id:3, Title:'5k', checked:true, visible:true, default:true, filter:true},
+			{id:4, Title:'10k', checked:true, visible:false, default:false, filter:true},
+			{id:5, Title:'15k', checked:true, visible:false, default:false, filter:true},
+			{id:6, Title:'20k', checked:true, visible:false, default:false, filter:true},
+			{id:7, Title:'25k', checked:true, visible:true, default:true, filter:true},
+			{id:8, Title:'30k', checked:true, visible:false, default:false, filter:true},
+			{id:9, Title:'50k', checked:true, visible:false, default:false, filter:true},
+			{id:10, Title:'200k', checked:true, visible:false, default:false, filter:true},
+			{id:11, Title:'Qualificados', checked:true, visible:false, default:false, filter:false}
 		],
 		resgate : [
 			{id:0, Title:'D+0', checked:true, visible:true, default:true},

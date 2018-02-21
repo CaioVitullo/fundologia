@@ -17,7 +17,10 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	me.defaultSelectedPeriod =me.selectedPeriod;
 	me.withdrawDays = 100;
 	me.admTx = 4;
+	me.mobileSelectedPage = 'main';
 	
+	me.searchFieldTxt = 'Pesquise e compare os melhores fundos de investimento para o seu perfil';
+
 	me.loadCtrl = function(){
 		me.getDefaultLists(function(){
 			$('#preloading').hide();
@@ -26,6 +29,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		me.loadHistograms(null);
 		$('.tooltipped').tooltip({delay: 50});
 		$('.modal').modal();
+		if($(window).width() < 800)
+			me.searchFieldTxt = 'Pesquise e compare fundos de investimento';
 	}; 
 	
 
@@ -441,7 +446,14 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 
         chart.draw(data, google.charts.Scatter.convertOptions(options));
 	}
+	me.mobSelectPage = function(page){
+		me.mobileSelectedPage = page;
+	};
 	
+	me.openSideMenu = function(){
+		
+
+	};
 	me.histData = {};//histogram_posNegCountRate
 	me.getAndSaveFile = function(name,after){
 		if(me.histData.hasOwnProperty(name)){

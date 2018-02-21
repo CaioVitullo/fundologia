@@ -37,16 +37,17 @@
 		<nav class="nav-extended">
 		 <div class="nav-wrapper container">
 		  
-		  <a  data-activates="mobile-demo" class="button-collapse"><i class="material-icons"  >menu</i></a>
+		  <a data-activates="slide-out" class="button-collapse"><i class="material-icons"  >menu</i></a>
 		  <ul id="nav-mobile" class="right hide-on-med-and-down">
 			<li><a href="#sobre">O que é?</a></li>
 			<li><a href="#comofunciona">Como funciona</a></li>
 		  </ul>
-		  <ul class="side-nav" id="mobile-demo">
-			<li><a href="#sobre">O que é?</a></li>
-			<li><a href="#comofunciona">Como funciona</a></li>
-			<li class="show-on-smaller-992"><a>Filtro</a></li>
-			<li class="show-on-smaller-992"><a>Detalhes</a></li>
+		  <ul class="side-nav" id="slide-out" >
+			<!-- <li><a href="#sobre">O que é?</a></li>
+			<li><a href="#comofunciona">Como funciona</a></li> -->
+			<li class="show-on-smaller-992"  ng-click="mobSelectPage('main')"><a>Lista</a></li>
+			<li class="show-on-smaller-992"  ng-click="mobSelectPage('filter')"><a>Filtro</a></li>
+			<li class="show-on-smaller-992" ng-click="mobSelectPage('histogram')"><a>Histogramas</a></li>
 		  </ul>
 		 </div>
 		</nav>
@@ -61,7 +62,7 @@
 		</nav>
 	</div>
 	<div class="row">
-		<div class="col xl2 l2  hide-on-med-and-down heighAlign">
+		<div class="col xl2 l2 s12 " ng-class="{'hide-on-med-and-down':mobileSelectedPage!='filter'}">
 			<div class="section fixed">
 				
 					<h5 class="filterTitle">Período </h5>
@@ -147,7 +148,7 @@
 			</div>
 			
 		</div>
-		<div class="col xl8 l8 m12 s12 heighAlign">
+		<div class="col xl8 l8 m12 s12 " ng-hide="mobileSelectedPage != 'main'">
 			<section class="row" id="tables">
 				<div >
 					<div class="col s12 head-form">
@@ -155,7 +156,7 @@
 							<div class="input-field col s12 m12 l12 xl12">
 								<i class="material-icons prefix">search</i>
 								<input id="icon_prefix" type="text" ng-model="searchTxt" class="validate">
-								<label for="icon_prefix">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>
+								<label for="icon_prefix" ng-bind="::searchFieldTxt">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>
 							</div>
 						</div>
 						
@@ -221,7 +222,7 @@
 			</section>	
 			
 		</div>
-		<div class="col xl2 l2 hide-on-med-and-down heighAlign" id="rightMenu">
+		<div class="col xl2 l2 s12 " ng-class="{'hide-on-med-and-down':mobileSelectedPage!='histogram'}" id="rightMenu">
 				<div class="section fixed">
 					
 					

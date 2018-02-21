@@ -237,7 +237,7 @@
 					<div id="ranking_chart" style="min-height:120px;" ></div>
 					<div class="divider"></div>
 					
-					<div  ng-class="{invisible:currentRow.values==null}">
+					<div  ng-class="{invisible:currentRow.values==null}" id="horizontalScollParent">
 						<div class="horizontal-scroll-wrapper squares" id="rankHorizontal" ng-mouseover="valueHover()" >
 							<div ng-dblclick="openRankDialog()" ng-repeat="m in periodName.take(filters.Periodo[selectedPeriod].len) track by $index">
 								{{m}}<br/> {{currentRow.rank[$index]}}<sup>ᵒ</sup><br/>{{currentRow.values[$index]|percentage:2}}

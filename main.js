@@ -31,6 +31,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		$('.modal').modal();
 		if($(window).width() < 800)
 			me.searchFieldTxt = 'Pesquise e compare fundos de investimento';
+		resizeHorizontalScroll();
 	}; 
 	
 
@@ -622,5 +623,14 @@ google.charts.load('current', {'packages':['corechart', 'scatter']});
 $(document).ready(function(){
 	$('.tooltipped').tooltip({delay: 50});
 	$('.modal').modal();
-	
+	resizeHorizontalScroll();
 });
+
+$(window).resize(function(){
+	resizeHorizontalScroll();
+});
+function resizeHorizontalScroll (){
+	ww = $('#horizontalScollParent').width()
+	$('#rankHorizontal').css('maxHeight', ww + 'px')
+	$('#rankHorizontal').css('marginBottom',-(ww-100) + 'px')
+}

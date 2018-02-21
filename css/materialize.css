@@ -3514,6 +3514,7 @@ nav ul a span.badge {
   margin-left: auto;
   left: auto;
   right: auto;
+  padding: 0px 0.2rem
 }
 
 .row .col.offset-s1 {

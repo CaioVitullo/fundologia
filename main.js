@@ -6,7 +6,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	dataManager($http, me);
 	histogramManager(me);
 	classUtil(me);
-
+	me.disqusOn = false;
 	me.searchTxt = "";
 	me.showAllFilterTypeOn= true;
 	me.showAllFilterInitValueOn=true;
@@ -450,9 +450,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		me.mobileSelectedPage = page;
 	};
 	
-	me.openSideMenu = function(){
-		
-
+	me.mobApplyFilter = function(){
+		$('.button-collapse').sideNav('hide');
+		me.mobSelectPage('main');
 	};
 	me.histData = {};//histogram_posNegCountRate
 	me.getAndSaveFile = function(name,after){

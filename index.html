@@ -142,8 +142,7 @@
 						
 				</p>
 				
-				
-				
+				<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='filter'" class="waves-effect waves-light btn-large w100">Aplicar filtros</a>
 					
 			</div>
 			
@@ -154,9 +153,13 @@
 					<div class="col s12 head-form">
 						<div class="row">
 							<div class="input-field col s12 m12 l12 xl12">
-								<i class="material-icons prefix">search</i>
-								<input id="icon_prefix" type="text" ng-model="searchTxt" class="validate">
-								<label for="icon_prefix" ng-bind="::searchFieldTxt">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>
+								<div class="search-wrapper card">
+									<input class="bbn" type="text" ng-model="searchTxt" id="icon_prefix">
+									<i class="iconInside material-icons">search</i>
+									<label for="icon_prefix" ng-bind="::searchFieldTxt">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>  
+								</div>
+								<!-- <input id="icon_prefix" type="text" ng-model="searchTxt" class="validate"><i class="material-icons ">search</i>
+								<label for="icon_prefix" ng-bind="::searchFieldTxt">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>  -->
 							</div>
 						</div>
 						
@@ -342,13 +345,14 @@
 						tooltip="Rendimento médio no período"
 						currentrow="currentRowHistAvg"></my-histogram>
 
+					<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='histogram'"  class="waves-effect waves-light btn-large w100">Voltar</a>
 				</div>
 			
 		</div>
 	</div>
 
 
-	<div class="row">
+	<div class="row"  ng-show="mobileSelectedPage =='main'" >
 		<div class="container">
 				<div id="disqus_thread"></div>
 				<script>
@@ -480,7 +484,7 @@
 	</div>
 	
 </div>
-<!--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> -->
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
 	

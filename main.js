@@ -24,13 +24,17 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	me.loadCtrl = function(){
 		me.getDefaultLists(function(){
 			$('#preloading').hide();
+		}, function(){
+			me.selectFirstRow();
 		});
 		me.lastHash = me.filterHash(me.getFilterStatus());
-		me.loadHistograms(null);
+		//me.loadHistograms(null);
 		$('.tooltipped').tooltip({delay: 50});
 		$('.modal').modal();
-		if($(window).width() < 800)
-			me.searchFieldTxt = 'Pesquise e compare fundos de investimento';
+		
+		me.width = $(window).width();
+			
+		
 		resizeHorizontalScroll();
 	}; 
 	
@@ -140,7 +144,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			me.hasShowedToastForCompare=true;
 			me.toast('Selecione outro fundo para compará-los separadamente!') 
 		}
-		if(me.fundsToCompare.any({uniqueID:row.uniqueID})){
+		if(row.selectedToCompare){
 			me.fundsToCompare.remove({uniqueID:row.uniqueID});
 			row.selectedToCompare=false;
 		}else if(me.fundsToCompare.length <= 1){
@@ -152,9 +156,28 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		if(me.fundsToCompare.length > 0){
 			var id = me.fundsToCompare[index].uniqueID;
 			me.fundsToCompare.remove({uniqueID:id});
+			var item = me.defaultLists[me.selectedPeriod].first({uniqueID:id});
+			if(item != null)
+				item.selectedToCompare = false;
+			
+			me.cleanRowSelection();
 		}
 		
 	};
+	me.cleanRowSelection = function(){
+		me.currentDetailRow = null;
+		me.userHasSelectedRow = false;
+	};
+	me.selectFirstRow = function(){
+		if(me.defaultLists != null && me.defaultLists[me.selectedPeriod] != null && me.defaultLists[me.selectedPeriod].length > 0)
+		var row = me.defaultLists[me.selectedPeriod][0];
+		if(row != null){
+			me.currentDetailRow = row.uniqueID;
+			me.userHasSelectedRow = false;
+			me.showRowDetail(row, true);
+		}
+		
+	}
 	me.changePeriodo = function(){
 		me.loadHistograms(null);
 	}
@@ -253,12 +276,11 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	me.currentFigure=null;
 	me.currentDetailRow = 0;
 	me.currentRow=null;
-	me.showRowDetail = function(row){
+	me.showRowDetail = function(row, first){
 		me._hoverId = row.uniqueID;
 		$timeout(function(){
-			if(me._hoverId == row.uniqueID){
-				if(me.currentDetailRow != row.uniqueID && me.userHasSelectedRow==false){
-					console.log('over:', row);
+			if(me._hoverId == row.uniqueID || first){
+				if((me.currentDetailRow != row.uniqueID && me.userHasSelectedRow==false)||first){
 					me.currentRow = row;
 					me.currentDetailRow = row.uniqueID
 					me.currentFigure= row.figures[me.selectedPeriod];
@@ -290,8 +312,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 
 		var max = 0;
 		var min=999;
-		for(var i=0;i<me.defaultLists[3].length;i++){
-			var items = me.defaultLists[3][i].figures[me.selectedPeriod];
+		for(var i=0;i<me.defaultLists[me.selectedPeriod].length;i++){
+			var items = me.defaultLists[me.selectedPeriod][i].figures[me.selectedPeriod];
 			if(items != null){
 				items = items.sequencePerformance;
 				var _max = items.max();
@@ -514,6 +536,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 				list = [];
 			}
 		}
+		$('.tooltipped').tooltip({delay: 50, html:true});
 		$('#modaltable').modal('open');
 	}
 	me.getPeriodNames = function(){
@@ -616,12 +639,24 @@ mainApp.directive('myHistogram', function(){
 		templateUrl:'templates/histogram.html'
 	};
 });
+mainApp.directive('rdHistogram', function(){
+	return {
+		restrict:'E',
+		scope:{
+			histogram:'=',
+			tooltip:"@",
+			sufix:'@'
+		},
+		replace:true,
+		templateUrl:'templates/readOnlyHistogram.html'
+	};
+});
 
 google.charts.load('current', {'packages':['corechart', 'scatter']});
 //google.charts.setOnLoadCallback(drawChart);
 
 $(document).ready(function(){
-	$('.tooltipped').tooltip({delay: 50});
+	$('.tooltipped').tooltip({delay: 50, html:true});
 	$('.modal').modal();
 	resizeHorizontalScroll();
 });

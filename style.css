@@ -436,13 +436,17 @@ footer{
     margin: 0.5rem 0 1rem 0;
     overflow: hidden;
 }
+.histUlBig{
+	height: 60px;;
+}
 .histUl li{
-	width: 10%;
+	width: 9%;
 	height: 60%;
 	display: inline-block;
 	background-color: silver;
 	vertical-align: baseline;
 	border-bottom: solid 1px silver;
+	margin-left: 1px;
 }
 .histUl li.active{
 	background-color: steelblue;
@@ -453,6 +457,19 @@ footer{
 .histUl li.filter{
 	background-color: orange;
 }
+.histInfo{
+}
+.histInfo.histInfoColor0{color: rgb(0,128,0);}
+.histInfo.histInfoColor1{color: rgb(54,149,7);}
+.histInfo.histInfoColor2{color: rgb(54,149,7);}
+.histInfo.histInfoColor3{color: rgb(119,170,15);}
+.histInfo.histInfoColor4{color: rgb(154,181,20);}
+.histInfo.histInfoColor5{color: rgb(192,192,26);}
+.histInfo.histInfoColor6{color: rgb(213,154,38);}
+.histInfo.histInfoColor7{color: rgb(223,134,45);}
+.histInfo.histInfoColor8{color: rgb(244,91,60);}
+.histInfo.histInfoColor9{color: rgb(255,68,68);}
+
 .pgrUl{
 	width: 100%;
 	height: 4px;
@@ -599,6 +616,9 @@ footer{
 	display: block;
 	font-size: 14px;
 }
+.lblResume label:nth-child(odd){
+	background-color: rgb(242, 242, 243)
+}
 .lblResume .spLabel{
 	width: 200px;
     display: inline-block;
@@ -653,16 +673,7 @@ footer{
     line-height: 26px;
     margin-top: 5px;
 }
-.tableRow:hover .hidenIcon{
-	visibility: visible;
-}
-.hidenIcon{
-	visibility: hidden;
-	z-index: 4;
-}
-.hoverRow .hidenIcon{
-	visibility: visible;
-}
+
 .w100{
 	width: 100%;
 }
@@ -681,5 +692,65 @@ footer{
 }
 .bbn{
 	border-bottom: none!important;
-	
 }
+
+.mainHeader{
+	font-size: 2rem;
+}
+.tableRow:hover .hidenIcon{
+	visibility: visible;
+}
+.hidenIcon{
+	visibility: hidden;
+	z-index: 4;
+}
+.hoverRow .hidenIcon{
+	visibility: visible;
+}
+.hoverRow .colorIcon{
+	color: black;
+}
+
+.colorIcon{
+	color: #c5c9ce;
+}
+.comparandoFundo .compareIcon{
+	color: steelblue;;
+	visibility: visible;
+}
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Safari */
+	   -khtml-user-select: none; /* Konqueror HTML */
+		 -moz-user-select: none; /* Firefox */
+		  -ms-user-select: none; /* Internet Explorer/Edge */
+			  user-select: none; /* Non-prefixed version, currently
+									supported by Chrome and Opera */
+  }
+
+  .rotate{
+	position:fixed;
+	max-height: 100%;
+	overflow: hidden;
+	top:0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
+	
+	margin: auto;
+	text-align:center;
+  }
+  .imgRotate{
+	  display: table-cell;
+	  vertical-align: middle;
+	
+  }
+
+  .tdNotFound{
+	text-align: center;
+    font-size: 17px;
+  }
+  .tdNotFound i{
+	  font-weight: bold;
+  }

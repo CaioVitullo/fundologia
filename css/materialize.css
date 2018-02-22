@@ -2795,6 +2795,7 @@ ul.staggered-list li {
 /*********************
   Media Query Classes
 **********************/
+.show-on-smaller-400{display: none;}
 @media only screen and (max-width: 400px) {
   .hide-on-smaller-400 {
     display: none !important;
@@ -2803,9 +2804,25 @@ ul.staggered-list li {
     display: block !important;
   }
 }
+
+
 @media only screen and (max-width: 600px) {
   .hide-on-small-only, .hide-on-small-and-down {
     display: none !important;
+  }
+  .row .col.s12 {
+    padding: 0px 0.2rem
+  }
+}
+@media only screen and (max-width:320px){
+  .rotate{
+    display: block;
+  }
+}
+
+@media only screen and (min-width:320px){
+  .rotate{
+    display: none;
   }
 }
 
@@ -2816,6 +2833,7 @@ ul.staggered-list li {
   .show-on-smaller-992{
     display: block !important;
   }
+  
 }
 
 @media only screen and (min-width: 601px) {
@@ -3514,7 +3532,7 @@ nav ul a span.badge {
   margin-left: auto;
   left: auto;
   right: auto;
-  padding: 0px 0.2rem
+  padding: 0px 0.75rem
 }
 
 .row .col.offset-s1 {

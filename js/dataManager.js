@@ -8,7 +8,7 @@ function dataManager($http, me){
 			ajaxConfig.params = {_t : new Date().getTime()};
 			$http(ajaxConfig).then(function (result, status) {
 				me.defaultLists[fileIndex]=result.data;
-                if(fileIndex==1 && typeof(after)=='function')
+                if(typeof(after)=='function')
                     after();
 			});
 		} catch (error) {
@@ -16,16 +16,27 @@ function dataManager($http, me){
 		}
 		 
     };
-    me.defaultFiles = ['last12', 'last24', 'last36','bigList', 'year2016', 'year2017'];
+    me.defaultFiles = [
+		{index:1, name:'last24'},
+		{index:2, name: 'last36'},
+		{index:3, name:'bigList'},
+		{index:0, name: 'last12'}];
+
 	me.defaultLists = [];
-	me.getDefaultLists = function(fn){
+	me.getDefaultLists = function(fn, afterBigList){
 		
 		for(i=0;i<me.defaultFiles.length;i++){
-			var file = me.defaultFiles[i];
-			if(file=='ever')
-				continue;
+			var file = me.defaultFiles[i].name;
+			var index = me.defaultFiles[i].index;
 			var url = 'resultadoFundo/' + file + '.txt';
-			me.getFile(url, i, fn);
+			if(me.defaultFiles[i].name =='bigList'){
+				me.getFile(url, index, afterBigList);
+			}else if(me.defaultFiles[i].name =='last24'){
+				me.getFile(url, index, fn);
+			}else{
+				me.getFile(url, index, null);
+			}
+			
 		}
 	};
 	me.getGenericFile = function(url, after){

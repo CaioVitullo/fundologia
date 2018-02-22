@@ -2814,17 +2814,17 @@ ul.staggered-list li {
     padding: 0px 0.2rem
   }
 }
-@media only screen and (max-width:321px){
+
+.rotate{
+  display: none;
+}
+@media only screen and (max-width: 321px) and (orientation: portrait){
   .rotate{
     display: block;
   }
 }
 
-@media only screen and (min-width:321px){
-  .rotate{
-    display: none;
-  }
-}
+
 
 @media only screen and (max-width: 992px) {
   .hide-on-med-and-down {

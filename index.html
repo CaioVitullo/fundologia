@@ -80,6 +80,17 @@
 					</div>
 				
 				<div class="divider"></div>
+				<h5 class="filterTitle">Captação:</h5>
+				<div class="switch">
+					<label>
+					Abertos
+					  <input type="checkbox" ng-model="filterShowAllFundsIncludeCloses" ng-checked="filterShowAllFundsIncludeCloses">
+					  <span class="lever"></span>
+					  Todos
+					</label>
+				  </div>
+
+				<div class="divider"></div>
 				<h5 class="filterTitle">Tipo</h5>
 				<div class="tsHeight" ng-class="{tsOpened:showAllFilterTypeOn}">
 					<p ng-repeat="filterItem in filters.Tipo.equals({visible:true})" >
@@ -96,7 +107,7 @@
 
 				<h5 class="filterTitle">
 					Aplicação inicial
-					<i ng-click="openChart('Aplicação inicial', 'initialValue')" class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="veja mais informaçoes sobre Aplicação inicial.">insert_chart</i>
+					<i ng-click="openChart('Aplicação inicial', 'initialValue')" class="material-icons small " title="veja mais informaçoes sobre Aplicação inicial.">insert_chart</i>
 				</h5>
 				<p class="checkList" ng-repeat="filterItem in filters.InitialValue.equals({visible:true})" >
 						<input type="checkbox" ng-click="$parent.changeInitialValue(filterItem)"  ng-class="{'filled-in':filterItem.checked}"  id="filterInitValue_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
@@ -111,7 +122,7 @@
 
 				<h5 class="filterTitle">
 					Resgate em atê: 
-					<i ng-click="openChart('Resgate', 'withdrawDays')" class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="veja mais informaçoes sobre Taxa de adm.">insert_chart</i>
+					<i ng-click="openChart('Resgate', 'withdrawDays')" class="material-icons small "  title="veja mais informaçoes sobre Taxa de adm.">insert_chart</i>
 				</h5>
 				<p>{{withdrawDays}} dia{{withdrawDays!=1?'s':''}} <em ng-show="withdrawDays==100"> ou mais</em></p>
 				<p class="range-field">
@@ -123,7 +134,7 @@
 
 				<h5 class="filterTitle">
 					Taxa de Adm atê: 
-					<i ng-click="openChart('Taxa Administrativa', 'admTax')" class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="veja mais informaçoes sobre Taxa de adm.">insert_chart</i>
+					<i ng-click="openChart('Taxa Administrativa', 'admTax')" class="material-icons small " title="veja mais informaçoes sobre Taxa de adm.">insert_chart</i>
 				</h5>
 				<p>{{admTx}}% <em ng-show="admTx==4"> ou mais</em></p>
 				<p class="range-field">
@@ -134,7 +145,7 @@
 
 				<h5 class="filterTitle">
 					Patrimônio atê:
-					<i ng-click="openChart('Patrimônio', 'volume')" class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="veja mais informaçoes sobre Patrimônio.">insert_chart</i>
+					<i ng-click="openChart('Patrimônio', 'volume')" class="material-icons small " title="veja mais informaçoes sobre Patrimônio.">insert_chart</i>
 				</h5>
 				<p class="checkList" ng-repeat="filterItem in filters.volume.equals({visible:true})" >
 						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterVolume_{{::filterItem.id}}" ng-click="checkFilterTopShow(filters.volume,showAllFilterVolumeOn)" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
@@ -174,16 +185,16 @@
 							<table id="mainTable" class="highlight" ng-class="{comparandoFundo:fundsToCompare.length==1}">
 								<thead>
 									<tr>
-										<th class="hide-on-smaller-400 tooltipped"  >
+										<th class="hide-on-smaller-400 "  >
 											Rank 
-											<i class="tiny material-icons" data-position="top" data-delay="10" data-tooltip="<span class=tr><p>Ranking dos fundos feito mês a mês.</p><p>Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade</p><p>O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, e assim sucessivamente</p><p>No final, soma-se a nota de todos os meses para cada fundo</p><p>Ou seja, quanto menor a soma, melhor o fundo</p></span>" >info_outline</i> 
+											<i class="tiny material-icons"  title="Ranking dos fundos feito mês a mês. &#013;&#010; Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade &#013;&#010; O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, o segundo 2 e assim sucessivamente... &#013;&#010; No final, soma-se a nota de todos os meses para cada fundo &#013;&#010; Ou seja, quanto menor a soma, melhor o fundo" >info_outline</i> 
 										</th>
 										<th>Fundo</th>
-										<th class="hide-on-small-and-down " data-position="top" data-delay="50" data-tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo">
+										<th class="hide-on-small-and-down "  title="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo">
 											Meses positivo
-											<i class="tiny material-icons tooltipped">info_outline</i>
+											<i class="tiny material-icons ">info_outline</i>
 										</th>
-										<th class=" hide-on-small-and-down tooltipped" data-position="top" data-delay="50" data-tooltip="Soma dos ganhos nos meses positivos dividivo pela soma das perdas nos meses negativos." >Rel. Ganho/ Perda</th>
+										<th class=" hide-on-small-and-down "  title="Soma dos ganhos nos meses positivos dividivo pela soma das perdas nos meses negativos." >Rel. Ganho/ Perda</th>
 										<th class="show-column-largar-1200">Média</th>
 										<th class="hide-on-small-and-down">Desvio Padrão</th>
 										<th class="show-column-largar-1300">Correlação Ibov</th>
@@ -200,10 +211,10 @@
 										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank">Rank</td>
 										<td class="cutText noselect" >
 											{{row.name}}
-											<i class="colorIcon tiny material-icons tooltipped" ng-show="row.info.restrict" data-position="top" data-delay="50" data-tooltip="Fundo destinado à investidores qualificados.">monetization_on</i>
-											<i class="colorIcon tiny material-icons hidenIcon tooltipped" ng-click="openRankDialog()" data-position="top" data-delay="50" data-tooltip="Tabela de rentabilidade completa!" >info_outline</i> 
-											<i class="colorIcon tiny material-icons tooltipped" ng-show="row.info.isClosed" data-position="top" data-delay="50" data-tooltip="Fundo fechado!">https</i>
-											<i class="colorIcon small material-icons hidenIcon compareIcon tooltipped" ng-click="rowClick(row)"  data-position="top" data-delay="10" data-tooltip="Comparare este fundos com outros!">compare_arrows</i>
+											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict"  title="Fundo destinado à investidores qualificados.">monetization_on</i>
+											<i class="colorIcon tiny material-icons hidenIcon " ng-click="openRankDialog()"  title="Tabela de rentabilidade completa!" >info_outline</i> 
+											<i class="colorIcon tiny material-icons " ng-show="row.info.isClosed"  title="Fundo fechado!">lock</i>
+											<i class="colorIcon small material-icons hidenIcon compareIcon " ng-click="rowClick(row)"   title="Comparare este fundos com outros!">compare_arrows</i>
 										</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
@@ -215,28 +226,18 @@
 									</tr>
 									
 								</tbody>
-								<tfoot>
-									<tr ng-show="lastResult.length > 20">
-										<td col="3">
-											<a>ver todos</a>
-										</td>
-									</tr>
-									<tr ng-show="lastResult.length == 0 && searchTxt.length > 0">
-										<td colspan="9" class="tdNotFound">
-											<p>Não encontrou o fundo que gostaria?</p>
-											<p>
-												<img src="img/shame.png"/>
-											</p>
-											<p>Use <i>#faltouEsseFundo</i> nos comentários abaixo que nos vamos atras dele para você! </p>
-										</td>
-									</tr>
-									<!-- <tr ng-show="lastResult.length == 0 && searchTxt.length == 0">
-											<td colspan="9"  class="tdNotFound">
-												<p>Nenhum fundo com essas características.</p>
-											</td>
-										</tr> -->
-								</tfoot>
 								</table>
+								<p ng-show="hasMoreLines==true">
+									<a>ver mais</a>
+								</p>
+								<div ng-show="noResult == true && searchTxt.length > 0" class="tdNotFound">
+									<p>Não encontrou o fundo que gostaria?</p>
+									<p>
+										<img src="img/shame.png"/>
+									</p>
+									<p>Use a hashtag <i>#faltouEsseFundo</i> nos comentários abaixo que nos vamos atras dele para você! </p>
+								</div>	
+								<p class="tdNotFound" ng-show="noResult == true && searchTxt.length == 0"></p>
 							</div>
 						</div>
 						
@@ -437,7 +438,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td ng-repeat="item in y.data track by $index" class="tooltipped" data-position="top" data-delay="10" data-tooltip="Posição no ranking" >{{item.rank}}<sup>ᵒ</sup></td>
+							<td ng-repeat="item in y.data track by $index" class=""  title="Posição no ranking" >{{item.rank}}<sup>ᵒ</sup></td>
 						</tr>
 						<tr>
 							<td class="{{$parent.histogram_info.class}}" ng-repeat="item in y.data track by $index" ng-bind="::item.value|percentage:2" 
@@ -460,7 +461,7 @@
 		</div>
 		<div class="selectedFund" style="margin-left:5px;" ng-class="{fullsquare:fundsToCompare.length >=2,emptysquare:fundsToCompare.length <=1 }">
 			<label ng-show="fundsToCompare.length <= 1">
-				<i class="medium material-icons tooltipped" data-position="top" data-delay="10" data-tooltip="Selecione outro fundo" >compare_arrows</i>
+				<i class="medium material-icons "  title="Selecione outro fundo" >compare_arrows</i>
 			</label>
 			<label ng-show="fundsToCompare.length > 1" ng-click="compareFundItemClick(1)" ng-bind="::fundsToCompare[1].name">Selecione outro fundo</label>
 		</div>

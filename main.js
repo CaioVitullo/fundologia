@@ -25,13 +25,14 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		me.getDefaultLists(function(){
 			$timeout(function(){
 				$('#preloading').hide();
+				//$('.tooltipped').tooltip({delay: 50});
 			},500);
 		}, function(){
 			me.selectFirstRow();
 		});
 		me.lastHash = me.filterHash(me.getFilterStatus());
 		//me.loadHistograms(null);
-		$('.tooltipped').tooltip({delay: 50});
+			
 		$('.modal').modal();
 		
 		me.width = $(window).width();
@@ -46,7 +47,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	};
 	me.lastResult = [];
 	me.lastHash = null;
-	
+	me.hasMoreLines = true;
+	me.noResult = false;
+	me.defaultListSize = 30;
 	me.getMainList = function(){
 		if(me.checkFilterList()){
 			return me.defaultLists[me.selectedPeriod];	
@@ -67,6 +70,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 						item.info.VolumeFilter.hasAnyTrueOnSameIndex(filterStatus.volume) && 
 						(me.searchTxt == "" || item.name.toLowerCase().indexOf(me.searchTxt.toLowerCase()) >= 0 ) &&
 						(me.filters.InitialValue.first({filter:false}).checked == true || item.info.restrict==false) &&
+						(me.filterShowAllFundsIncludeCloses == true || item.info.isClosed==false) &&
 						item.info.InitialValueFilter.hasAnyTrueOnSameIndex(filterStatus.Initialvalue)){
 							list.push(item);
 						}
@@ -75,7 +79,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 					list = list.sort(function(a,b){
 						return a.figures[me.selectedPeriod].rank - b.figures[me.selectedPeriod].rank;
 					});
-				list = list.take(30);
+				list = list.take(me.defaultListSize);
 				me.lastHash = currentHash;
 				me.lastResult = list;
 				return list;
@@ -119,7 +123,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			search:[me.searchTxt],
 			volume:me.filters.volume.selectToArray('checked'),
 			Initialvalue:me.filters.InitialValue.selectToArray('checked'),
-			histFilter:me.histogramHash()
+			histFilter:me.histogramHash(),
+			showEvenClosed:[me.filterShowAllFundsIncludeCloses ? 1 : 0]
 		};
 	};
 	
@@ -130,7 +135,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			me.withdrawDays == 100 &&
 			me.admTx == 4 &&
 			me.histogramItemFilter == null && 
-			me.searchTxt == ""
+			me.searchTxt == "" &&
+			me.filterShowAllFundsIncludeCloses==true
 
 			//me.filters.resgate.allSetTo({checked:true}) &&
 
@@ -294,7 +300,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 					me.current_correlationIbov = me.getFromFigure(row, 'correlationIbov')*100;
 					me.current_correlationCDI = me.getFromFigure(row, 'correlationCDI')*100;
 					me.current_correlationSP500 = me.getFromCurrentFigure('correlationSP500')*100;
-					$('.tooltipped').tooltip({delay: 50, html:true});
+					//$('.tooltipped').tooltip({delay: 50, html:true});
 				}
 			}
 		}, 120);
@@ -538,7 +544,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 				list = [];
 			}
 		}
-		$('.tooltipped').tooltip({delay: 50, html:true});
+		//$('.tooltipped').tooltip({delay: 50, html:true});
 		$('#modaltable').modal('open');
 	}
 	me.getPeriodNames = function(){
@@ -560,6 +566,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		return me._monthNames[monthIndex-1] + '/' + year
 	}
 	me.periodName = me.getPeriodNames();
+	me.filterShowAllFundsIncludeCloses = true;
 	me.filters = {
 		Periodo : [
 			{id:0,len:12, Title:'Últimos 12 mêses', visible:true, default:true},
@@ -658,7 +665,7 @@ google.charts.load('current', {'packages':['corechart', 'scatter']});
 //google.charts.setOnLoadCallback(drawChart);
 
 $(document).ready(function(){
-	$('.tooltipped').tooltip({delay: 50, html:true});
+	//$('.tooltipped').tooltip({delay: 50, html:true});
 	$('.modal').modal();
 	resizeHorizontalScroll();
 });

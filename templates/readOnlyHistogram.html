@@ -2,7 +2,7 @@
         <ul class="histUl histUlBig">
             <li 
                 ng-repeat="item in histogram"
-                class="waves-effect waves-orange tooltipped" data-position="bottom" data-delay="50" data-tooltip="Valores entre {{::item.low}}{{sufix}} e {{::item.high}}{{sufix}}<p>{{::item.count}} ocorrência{{item.count!=1?'s':''}}({{::item.perc}}%)</p> "
+                class="waves-effect waves-orange" title="Valores entre {{::item.low}}{{sufix}} e {{::item.high}}{{sufix}} &#013;&#010; {{::item.count}} ocorrência{{item.count!=1?'s':''}}({{::item.perc}}%) "
                 ng-mouseover="$parent.$parent.histHover(histogram,item)"
                 ng-click="$parent.$parent.histHover(histogram,item)"
                 style="height:{{item.height}}%;">

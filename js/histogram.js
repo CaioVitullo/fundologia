@@ -54,7 +54,7 @@ function histogramManager(me){
 		me.showGenereicHist(row, 'histogramStDev', 'stdDev','currentRowHistStDev' ,'histogram_stDev_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramAvg', 'average','currentRowHistAvg' ,'histogram_avg_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramTxAdm', 'admTax','currentRowTxAdm' ,'histogram_txAdm', function(row){return row.info.admTax;});
-		$('.tooltipped').tooltip({delay: 50});
+		//$('.tooltipped').tooltip({delay: 50});
 	}
     me.histogramHash = function(){
 		if(me.histogramItemFilter == null)

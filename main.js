@@ -669,3 +669,6 @@ function resizeHorizontalScroll (){
 	$('#rankHorizontal').css('maxHeight', ww + 'px')
 	$('#rankHorizontal').css('marginBottom',-(ww-100) + 'px')
 }
+function removeRotateGif(){
+	$('.rotate').remove();
+}

@@ -534,14 +534,18 @@ footer{
   }
 
   #preloading{
-	  position:absolute;
-	  top:0px;
-	  left: 0px;
-	  width: 100%;
-	  height: 100%;
-	  z-index: 9999;
-	  background-color: white;
-	  padding-top: 32%;
+	position: fixed;
+    max-height: 100%;
+    overflow: hidden;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    margin: auto;
+    text-align: center;
+    background: url(img/Z0e5O.gif) no-repeat center center;
+    background-color: rgba(255,255,255,1);
   }
 
   .toast a{
@@ -729,24 +733,20 @@ footer{
   }
 
   .rotate{
-	position:fixed;
-	max-height: 100%;
-	overflow: hidden;
-	top:0px;
-	left: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 999;
-	
-	margin: auto;
-	text-align:center;
+	position: fixed;
+    max-height: 100%;
+    overflow: hidden;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    margin: auto;
+    text-align: center;
+    background: url(img/mobile.gif) no-repeat center center;
+    background-color: rgba(255,255,255,.7);
   }
-  .imgRotate{
-	  display: table-cell;
-	  vertical-align: middle;
-	
-  }
-
+  
   .tdNotFound{
 	text-align: center;
     font-size: 17px;

@@ -30,13 +30,7 @@
 	
 </head>
 <body class="noselect">
-	<div class="rotate" onclick="removeRotateGif()">
-		<div class="row">
-				<div class="col s12">
-						<img class="center" src="img/mobile.gif">
-				</div>
-		</div>
-	</div>
+	<div class="rotate" onclick="removeRotateGif()"></div>
 
 <div ng-controller="ctrl" class="mainContent">
 	<div class="navbar-fixed" ng-init="loadCtrl()">
@@ -236,11 +230,11 @@
 											<p>Use <i>#faltouEsseFundo</i> nos comentários abaixo que nos vamos atras dele para você! </p>
 										</td>
 									</tr>
-									<tr ng-show="lastResult.length == 0 && searchTxt.length == 0">
+									<!-- <tr ng-show="lastResult.length == 0 && searchTxt.length == 0">
 											<td colspan="9"  class="tdNotFound">
 												<p>Nenhum fundo com essas características.</p>
 											</td>
-										</tr>
+										</tr> -->
 								</tfoot>
 								</table>
 							</div>
@@ -476,7 +470,7 @@
 </div>
 
 <div id="preloading">
-	<div class="row">
+	<!-- <div class="row">
 		<div class="s12 m12 l12 xl12 center">
 				<div class="preloader-wrapper big active">
 						<div class="spinner-layer spinner-blue">
@@ -520,7 +514,7 @@
 						</div>
 					  </div>
 		</div>
-	</div>
+	</div> -->
 	
 </div>
 

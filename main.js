@@ -23,7 +23,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 
 	me.loadCtrl = function(){
 		me.getDefaultLists(function(){
-			$('#preloading').hide();
+			$timeout(function(){
+				$('#preloading').hide();
+			},500);
 		}, function(){
 			me.selectFirstRow();
 		});

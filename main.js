@@ -25,9 +25,11 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		me.getDefaultLists(function(){
 			window.finishedLoading=true;
 			$timeout(function(){
-				//skipIntroduction();
-				//	//$('#preloading').hide();
-			//	//$('.tooltipped').tooltip({delay: 50});
+				if(me.canShowFeature('abertura')){
+					$('#linkBoraProSite').fadeIn();
+				}else{
+					skipIntroduction();
+				}
 			},500);
 		}, function(){
 			me.selectFirstRow();

@@ -25,7 +25,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		me.getDefaultLists(function(){
 			window.finishedLoading=true;
 			$timeout(function(){
-				skipIntroduction();
+				//skipIntroduction();
 				//	//$('#preloading').hide();
 			//	//$('.tooltipped').tooltip({delay: 50});
 			},500);

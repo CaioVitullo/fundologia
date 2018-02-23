@@ -14,7 +14,8 @@
         <li 
             ng-repeat="item in histogram"
             ng-click="$parent.$parent.histClick(histogram,item, property, type)"
-            class="waves-effect waves-orange " title="Valores entre {{::item.low}}{{sufix}} e {{::item.high}}{{sufix}} &#013;&#010; {{::item.count}} ocorrência{{item.count!=1?'s':''}}({{::item.perc}}%) &#013;&#010; clique para filtrar "
+            class="waves-effect waves-orange " 
+            title="Valores entre {{::item.low}}{{sufix}} e {{::item.high}}{{sufix}} &#013;&#010; {{::item.count}} ocorrência{{item.count!=1?'s':''}}({{::item.perc}}%) &#013;&#010; clique para filtrar "
             ng-class="{filter:item.isFiltering,blink_me:item.isFiltering, active:$index==currentrow}"
             style="height:{{item.height}}%;">
             

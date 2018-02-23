@@ -2842,7 +2842,7 @@ ul.staggered-list li {
   }
 }
 @media only screen and (max-width: 1600px) {
-  .modal {
+  .modal:not(.wideModal) {
     width:80% !important;
   }
 }
@@ -6736,6 +6736,7 @@ form p:last-child {
   -moz-user-select: none;
   -khtml-user-select: none;
   -ms-user-select: none;
+  margin-bottom: 9px;
 }
 
 .switch label {

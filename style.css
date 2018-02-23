@@ -525,6 +525,9 @@ footer{
 .modal table thed tr{
 	background-color: #efefef;
 }
+.wideModal{
+	width: 95%;
+}
 .blink_me {
 	animation: blinker 3s linear infinite;
   }
@@ -618,7 +621,7 @@ footer{
 
 .lblResume label{
 	display: block;
-	font-size: 14px;
+	font-size: 1rem;
 }
 .lblResume label:nth-child(odd){
 	background-color: rgb(242, 242, 243)
@@ -700,6 +703,7 @@ footer{
 
 .mainHeader{
 	font-size: 2rem;
+	font-family: 'Raleway', sans-serif;
 }
 .tableRow:hover .hidenIcon{
 	visibility: visible;
@@ -753,4 +757,13 @@ footer{
   }
   .tdNotFound i{
 	  font-weight: bold;
+  }
+
+
+  .tac{
+	  text-align: center;
+  }
+
+  .compareHighlight{
+	  color: steelblue;
   }

@@ -13,9 +13,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="css/range.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link rel="stylesheet" type="text/css" href="style.css">
 	
+    <link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:200,100,400" rel="stylesheet" type="text/css" />
     <!-- Favicons -->
     <link rel="icon" href="img/favicon-16.png" sizes="16x16">
     <link rel="icon" href="img/favicon-24.png" sizes="24x24">
@@ -26,6 +26,21 @@
 	<link rel="icon" href="img/favicon-128.png" sizes="128x128">
 	<link rel="icon" href="img/favicon-144.png" sizes="144x144">
 	<link rel="icon" href="img/favicon-160.png" sizes="256x160">
+	<style>
+		.txtRotateh1{
+		font-family: 'Raleway', sans-serif;
+		padding: 1em 2em;
+		font-size: 2rem;
+		background: #222;
+		color: #30ad1b;
+		font-weight: 200;
+		margin: 0.4em 0;
+		position: fixed;
+		bottom: 0px;
+		width: 100%;
+		margin-bottom: 31%;
+	  }
+	</style>
     <!-- Favicons -->
 	
 </head>
@@ -214,7 +229,7 @@
 											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict"  title="Fundo destinado à investidores qualificados.">monetization_on</i>
 											<i class="colorIcon tiny material-icons hidenIcon " ng-click="openRankDialog()"  title="Tabela de rentabilidade completa!" >info_outline</i> 
 											<i class="colorIcon tiny material-icons " ng-show="row.info.isClosed"  title="Fundo fechado!">lock</i>
-											<i class="colorIcon small material-icons hidenIcon compareIcon " ng-click="rowClick(row)"   title="Comparare este fundos com outros!">compare_arrows</i>
+											<i class="colorIcon small material-icons hidenIcon compareIcon " ng-click="rowClick(row, this)"   title="Comparare este fundos com outros!">compare_arrows</i>
 										</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
@@ -425,7 +440,7 @@
 						<rd-histogram
 							histogram="currentRow.figures[selectedPeriod].histogram.data"
 							sufix="%">
-						</my-histogram>
+						</rd-histogram>
 				</div>
 			</div>
 			<div class="row "ng-repeat="y in groupedRankList">
@@ -455,6 +470,52 @@
 		</div>	
 	</div>
 	
+	<div id="modalCompare" class="modal wideModal" >
+		<div class="modal-content">
+			<div class="row">
+				<div class="col s4 m4 l4 x4 lblResume">
+					<h5 class="tac" ng-bind="fundsToCompare[0].name"></h5>
+					<!-- <label><span class="spLabel">Classificação:</span> <em ng-bind="fundsToCompare[0].info.classification"></em></label>
+					<label><span class="spLabel">Cotização em:</span> <em ng-bind="fundsToCompare[0].info.cotizacaoTime"></em></label>
+					<label><span class="spLabel">Custódia:</span> <em ng-bind="fundsToCompare[0].info.custodia"></em></label>
+					<label><span class="spLabel">Gestor:</span> <em ng-bind="fundsToCompare[0].info.gestor"></em></label> -->
+					
+					<label ng-class={compareHighlight:compareLineHover==0} ng-mouseover="compareLineHover=0"><span class="spLabel">Meses positivos: </span><em ng-bind="fundsToCompare[0].figures[selectedPeriod].positiveCount"></em> (<em ng-bind="fundsToCompare[0].figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
+					<label ng-class={compareHighlight:compareLineHover==1} ng-mouseover="compareLineHover=1"><span class="spLabel">Meses negativos: </span><em ng-bind="fundsToCompare[0].figures[selectedPeriod].negativeCount"></em> (<em ng-bind="100 - fundsToCompare[0].figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
+					<label ng-class={compareHighlight:compareLineHover==2} ng-mouseover="compareLineHover=2"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
+					<label ng-class={compareHighlight:compareLineHover==3} ng-mouseover="compareLineHover=3"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
+					<label ng-class={compareHighlight:compareLineHover==4} ng-mouseover="compareLineHover=4"><span class="spLabel">Volatilidade:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].stdDev|percentage:2"></em></label>
+					<br/>
+					<rd-histogram
+						histogram="fundsToCompare[0].figures[selectedPeriod].fixedHistogram.data"
+						sufix="%">
+					</rd-histogram>
+				</div>
+				<div class="col s4 m4 l4 x4" id="chartCompareDiv">
+					<div id="chart_compare"></div>
+				</div>
+				<div class="col s4 m4 l4 x4 lblResume">
+					<h5 class="tac" ng-bind="fundsToCompare[1].name"></h5>
+					<!-- <label><span class="spLabel">Classificação:</span> <em ng-bind="fundsToCompare[1].info.classification"></em></label>
+					<label><span class="spLabel">Cotização em:</span> <em ng-bind="fundsToCompare[1].info.cotizacaoTime"></em></label>
+					<label><span class="spLabel">Custódia:</span> <em ng-bind="fundsToCompare[1].info.custodia"></em></label>
+					<label><span class="spLabel">Gestor:</span> <em ng-bind="fundsToCompare[1].info.gestor"></em></label> -->
+
+					<label ng-class={compareHighlight:compareLineHover==0} ng-mouseover="compareLineHover=0"><span class="spLabel">Meses positivos: </span><em ng-bind="fundsToCompare[1].figures[selectedPeriod].positiveCount"></em> (<em ng-bind="fundsToCompare[1].figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
+					<label ng-class={compareHighlight:compareLineHover==1} ng-mouseover="compareLineHover=1"><span class="spLabel">Meses negativos: </span><em ng-bind="fundsToCompare[1].figures[selectedPeriod].negativeCount"></em> (<em ng-bind="100 - fundsToCompare[1].figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
+					<label ng-class={compareHighlight:compareLineHover==2} ng-mouseover="compareLineHover=2"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
+					<label ng-class={compareHighlight:compareLineHover==3} ng-mouseover="compareLineHover=3"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
+					<label ng-class={compareHighlight:compareLineHover==4} ng-mouseover="compareLineHover=4"><span class="spLabel">Volatilidade:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].stdDev|percentage:2"></em></label>
+					<br/>
+					<rd-histogram
+						histogram="fundsToCompare[1].figures[selectedPeriod].fixedHistogram.data"
+						sufix="%">
+					</rd-histogram>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div class="floating" ng-show="fundsToCompare.length > 0">
 		<div class="selectedFund" ng-class="{fullsquare:fundsToCompare.length >=1,emptysquare:fundsToCompare.length <=0 }" ng-click="compareFundItemClick(0)">
 			<label ng-bind="::fundsToCompare[0].name" ></label>
@@ -465,12 +526,14 @@
 			</label>
 			<label ng-show="fundsToCompare.length > 1" ng-click="compareFundItemClick(1)" ng-bind="::fundsToCompare[1].name">Selecione outro fundo</label>
 		</div>
-		<button ng-disabled="fundsToCompare.length <= 1" class="waves-effect waves-light btn">Comparar</button>
+		<button ng-click="openCompareDialog()" ng-disabled="fundsToCompare.length <= 1" class="waves-effect waves-light btn">Comparar</button>
 	</div>
 
 </div>
 
-<div id="preloading">
+
+
+<div id="preloading" onclick="skipIntroduction()">
 	<!-- <div class="row">
 		<div class="s12 m12 l12 xl12 center">
 				<div class="preloader-wrapper big active">
@@ -516,7 +579,87 @@
 					  </div>
 		</div>
 	</div> -->
+<h1 class="txtRotateh1"> Nome: 
+  <span
+     class="txt-rotate"
+     data-period="800"
+     data-rotate='[ "investopédia", "investolando", "investlandia", "fundomania", "fundometria", "FUNDOLOGIA!"]'></span>
+</h1>
+<script>
 	
+var TxtRotate = function(el, toRotate, period) {
+  this.toRotate = toRotate;
+  this.el = el;
+  this.loopNum = 0;
+  this.period = parseInt(period, 10) || 300;
+  this.txt = '';
+  this.tick();
+  this.isDeleting = false;
+  this.stop = false;
+};
+function skipIntroduction(){
+	if(typeof(window.finishedLoading) != 'undefined' && window.finishedLoading == true){
+		window._rotate.stop = true;
+		$('#preloading').hide();
+	}
+		
+}
+TxtRotate.prototype.tick = function() {
+  var i = this.loopNum % this.toRotate.length;
+  var fullTxt = this.toRotate[i];
+
+  if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+  } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+  var that = this;
+  var delta = 150 - Math.random() * 100;
+
+  if (this.isDeleting) { delta /= 2; }
+
+  if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+  } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 200;
+  }
+	
+  if(this.stop == true || (i == this.toRotate.length-1 && this.txt.length==fullTxt.length)){
+	skipIntroduction();
+  }else{
+	setTimeout(function() {
+    	that.tick();
+  	}, delta);
+  }
+  
+};
+
+//window.onload = function() {
+	var fn = function(){
+		var elements = document.getElementsByClassName('txt-rotate');
+		for (var i=0; i<elements.length; i++) {
+			var toRotate = elements[i].getAttribute('data-rotate');
+			var period = elements[i].getAttribute('data-period');
+			if (toRotate) {
+				window._rotate =  new TxtRotate(elements[i], JSON.parse(toRotate), period);
+			}
+		}
+		// INJECT CSS
+		var css = document.createElement("style");
+		css.type = "text/css";
+		css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+		document.body.appendChild(css);
+	}
+	fn();
+  
+//};
+</script>
 </div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

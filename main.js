@@ -23,9 +23,11 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 
 	me.loadCtrl = function(){
 		me.getDefaultLists(function(){
+			window.finishedLoading=true;
 			$timeout(function(){
-				$('#preloading').hide();
-				//$('.tooltipped').tooltip({delay: 50});
+				skipIntroduction();
+				//	//$('#preloading').hide();
+			//	//$('.tooltipped').tooltip({delay: 50});
 			},500);
 		}, function(){
 			me.selectFirstRow();
@@ -145,7 +147,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	
 	me.hasShowedToastForCompare=false;
 	me.fundsToCompare = [];
-	me.rowClick = function(row){
+	me.rowClick = function(row, item){
 		me.userHasSelectedRow = !me.userHasSelectedRow;
 		me.currentDetailRow = row.uniqueID;
 		if(me.userHasSelectedRow && me.hasShowedToastForCompare == false){
@@ -498,32 +500,32 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			});
 		}
 	}
-	me.openBubbleChart = function(){
-		me.currentCharTitle =  ' vs Performance';
-		$('#modal1').modal('open');
+	
+	me.openCompareDialog = function(){
+		$('#modalCompare').modal('open');
 
-		var d = [['ID', 'Mêses Positivos', 'Relação ganho/perda', 'Classificação', 'Rentabilidade']];
-			for(var i=0;i<me.defaultLists[3].length;i++){
-				var item = me.defaultLists[3][i]
-				var fig = item.figures[me.selectedPeriod];
-				if(fig != null){
-					
-					d.push([
-						item.name,
-						fig.posNegCountRate,
-						fig.posNegAvgRate,
-						item.info.isAcao ? 'Ação': item.info.isMultimercado ? 'Multimercado' : 'Renda Fixa',
-						fig.performance
-					])
-				}		
-			}
-			var data = google.visualization.arrayToDataTable(d);
-			
-			  var options = me.gerDefaultChartOptions();
-		
-			  var chart = new google.visualization.BubbleChart(document.getElementById('chart_txdm_scatter'));
-			  chart.draw(data, options);
-	}
+		var d = [['Mês', me.fundsToCompare[0].name, me.fundsToCompare[1].name]];
+		for(var i =0;i<me.fundsToCompare[0].figures[me.selectedPeriod].sequencePerformance.length;i++){
+			d.push([i,
+					me.fundsToCompare[0].figures[me.selectedPeriod].sequencePerformance[i],
+					me.fundsToCompare[1].figures[me.selectedPeriod].sequencePerformance[i]
+				]);
+		}
+		var data = google.visualization.arrayToDataTable(d);
+  
+		  var options = {
+			width:$('#chartCompareDiv').width()*0.95,
+			height:$('#chartCompareDiv').prev('div').height(),
+			curveType: 'function',
+			legend: { position: 'bottom' }
+		  };
+  
+		  var chart = new google.visualization.LineChart(document.getElementById('chart_compare'));
+  
+		  chart.draw(data, options);
+		  
+		 
+	};
 	me.groupedRankList = [];
 	me.openRankDialog = function(){
 		

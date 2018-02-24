@@ -406,15 +406,15 @@ footer{
 .cambial{
 	border-left: solid 3px rgb(1, 105, 1);
 }
-.multiMercado{
-	border-left: solid 3px #ECA403;
-}
-.rendaFixa{
-	border-left: solid 3px #63A74A;
-}
-.acao{
-	border-left: solid 3px #E94D20;
-}
+.multiMercado{border-left: solid 3px #ECA403;}
+.isMultimercado{color: #ECA403;}
+
+.isRendaFixa{color: #63A74A;}
+.rendaFixa{border-left: solid 3px #63A74A;}
+
+.acao{border-left: solid 3px #E94D20;}
+.isAcao{color: #E94D20;}
+
 .notset{
 	border-left: solid 3px silver;
 }
@@ -767,3 +767,59 @@ footer{
   .compareHighlight{
 	  color: steelblue;
   }
+  .noPadding{
+	  padding: 0px!important;
+  }
+.zcParent{min-height: 50px;}
+.zcParent label{font-weight: bold;}
+.ac  .zcm4{ color: #c0c0c0; }
+.ac  .zcm3{ color: #caabab; }
+.ac  .zcm2{ color: #d59595;}
+.ac  .zcm1{ color: #da8b8b; }
+.ac  .zc0{ color: #e57575; }
+.ac  .zc1{ color: #ea6b6b; }
+.ac  .zc2{ color: #ef6060; }
+.ac  .zc3{ color: #f45555;}
+.ac  .zc4{ color: #ff4040 }
+
+.mm  .zcm4{ color: #c0c0c0; }
+.mm  .zcm3{ color: #caaca9; }
+.mm  .zcm2{ color: #d59d8e;}
+.mm  .zcm1{ color: #da987f; }
+.mm  .zc0{ color: #e5925f; }
+.mm  .zc1{ color: #ef933c; }
+.mm  .zc2{ color: #f49729; }
+.mm  .zc3{ color: #fa9d15;}
+.mm  .zc4{ color: #ffa500; }
+
+.rf  .zcm4{ color: #c0c0c0; }
+.rf  .zcm3{ color: #b1bcac; }
+.rf  .zcm2{ color: #a1b899;}
+.rf  .zcm1{ color: #99b68f; }
+.rf  .zc0{ color: #8ab17b; }
+.rf  .zc1{ color: #7aad68; }
+.rf  .zc2{ color: #72ab5e; }
+.rf  .zc3{ color: #6ba954;}
+.rf  .zc4{ color: #63a74a; }
+
+.sliderTitle{
+	margin-bottom: 0px;
+}
+.sliderP{
+	margin-top: 0px;
+	margin-bottom: 7px;
+}
+.sliderColor{
+	color:#26a69a;
+}
+
+.currentName{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-weight: bold;
+	font-size: 20px;
+}
+.histFooteLabel{
+	display: block;
+	margin-bottom: 5px;
+}

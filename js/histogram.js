@@ -54,6 +54,7 @@ function histogramManager(me){
 		me.showGenereicHist(row, 'histogramStDev', 'stdDev','currentRowHistStDev' ,'histogram_stDev_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramAvg', 'average','currentRowHistAvg' ,'histogram_avg_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramTxAdm', 'admTax','currentRowTxAdm' ,'histogram_txAdm', function(row){return row.info.admTax;});
+		
 		//$('.tooltipped').tooltip({delay: 50});
 	}
     me.histogramHash = function(){
@@ -68,7 +69,9 @@ function histogramManager(me){
     me.histogramItemFilter = null;
     me.showGenereicHist = function(row, histArray, propery,indexProperty, file, fn){
 		me.getAndSaveFile(file, function(result){
-			me[histArray] = result.data;
+			me[histArray] = result;
+			me['show_' + histArray] = true;
+				me.showEssaPorra = true;
 			if(row != null && row.figures[me.selectedPeriod] != null){
 				for(var i = 0;i<result.data.length;i++){
 					if(isBetween(typeof(fn)=='function' ? fn(row) :row.figures[me.selectedPeriod][propery], result.data[i].low, result.data[i].high)){
@@ -77,6 +80,7 @@ function histogramManager(me){
 					}
 				} 
 			}
+			 
 		});
 	}
 	me.showHistogramPosNegMonths = function(row){

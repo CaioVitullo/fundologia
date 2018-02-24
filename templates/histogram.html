@@ -1,18 +1,18 @@
-<div>
+<div class="{{classificationType}}">
     <div class="divider"></div>
     <h5 class="filterTitle">
         {{chartTitle}}: 
     </h5>
-    <label class="labelTitle">
+    <label class="labelTitle {{extraTxtClass}}">
         {{value|rounded:2}}{{sufix}}
-        <i ng-show="showChart=='true'" ng-click="$parent.openChart(chartTitle, property)" class="smallIcon material-icons tiny " title="{{tooltip}}">insert_chart</i>
+        
     </label>
     <ul ng-if="correlation != null" class="pgrUl" ng-class="{'pgrPos':correlation >= 0, 'pgrNeg':correlation<0}">
         <li ng-repeat="i in [0,1,2,3]" style="width:{{$parent.$parent.$parent.getWidth($parent.correlation, i)}}%;"></li>
     </ul>
-    <ul class="histUl">
+    <ul class="histUl" ng-if="histogram.professonalMode == true">
         <li 
-            ng-repeat="item in histogram"
+            ng-repeat="item in histogram.data"
             ng-click="$parent.$parent.histClick(histogram,item, property, type)"
             class="waves-effect waves-orange " 
             title="Valores entre {{::item.low}}{{sufix}} e {{::item.high}}{{sufix}} &#013;&#010; {{::item.count}} ocorrência{{item.count!=1?'s':''}}({{::item.perc}}%) &#013;&#010; clique para filtrar "
@@ -21,4 +21,25 @@
             
         </li>
     </ul>
+    <div ng-if="histogram.professonalMode == false" class="zcParent">
+        <label ng-class="{zcm4:reversecolor=='', zc4:reversecolor=='s'}" ng-show="calc_zscore() <= -4">Extremamente abaixo da média <em  ng-bind="extraTxt"></em></label>
+        <label ng-class="{zcm3:reversecolor=='', zc3:reversecolor=='s'}" ng-show="calc_zscore() == -3">Muito abaixo da média <em  ng-bind="extraTxt"></em></label>
+        <label ng-class="{zcm2:reversecolor=='', zc2:reversecolor=='s'}" ng-show="calc_zscore() == -2">Abaixo da média <em  ng-bind="extraTxt"></em></label>
+        <label ng-class="{zcm1:reversecolor=='', zc1:reversecolor=='s'}" ng-show="calc_zscore() == -1">Levemente abaixo da média <em  ng-bind="extraTxt"></em></label>
+        <label class="zc0" ng-show="calc_zscore() == 0">Na média <em  ng-bind="extraTxt"></em></label>
+        <label ng-class="{zc1:reversecolor=='', zcm1:reversecolor=='s'}" ng-show="calc_zscore() == 1">Levemente acima da média <em  ng-bind="extraTxt"></em></label>
+        <label ng-class="{zc2:reversecolor=='', zcm2:reversecolor=='s'}" ng-show="calc_zscore() == 2">Acima da média <em  ng-bind="extraTxt"></em></label>
+        <label ng-class="{zc3:reversecolor=='', zcm3:reversecolor=='s'}" ng-show="calc_zscore() == 3">Muito acima da média <em  ng-bind="extraTxt"></em></label>
+        <label ng-class="{zc4:reversecolor=='', zcm4:reversecolor=='s'}" ng-show="calc_zscore() >= 4">Extremamente acima da média <em  ng-bind="extraTxt"></em> </label>
+    </div>
+    <label class="histFooteLabel" ng-show="histogram.professonalMode==false" ng-click="histogram.professonalMode = true">
+            <i class="material-icons tiny">expand_less</i>Ver distribuição        
+    </label>
+    <label class="histFooteLabel" ng-show="histogram.professonalMode==true" ng-click="histogram.professonalMode = false">
+            <i class="material-icons tiny">expand_more</i>Ocultar distribuição        
+    </label>
+    
+    <label  class="histFooteLabel" ng-click="$parent.openChart(chartTitle, property, tooltip)" ng-show="showChart=='true'" title="{{tooltip}}">
+        <i class="material-icons tiny " >insert_chart</i> Gráfico  {{chartTitle}} vs Rendimento.
+    </label>
 </div>

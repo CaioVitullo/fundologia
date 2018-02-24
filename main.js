@@ -19,6 +19,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	me.admTx = 4;
 	me.mobileSelectedPage = 'main';
 	
+	
 	me.searchFieldTxt = 'Pesquise e compare os melhores fundos de investimento para o seu perfil';
 
 	me.loadCtrl = function(){
@@ -73,8 +74,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 						(me.histogramItemFilter==null || me.verifyHistogramFilter(item) ) &&
 						item.info.VolumeFilter.hasAnyTrueOnSameIndex(filterStatus.volume) && 
 						(me.searchTxt == "" || item.name.toLowerCase().indexOf(me.searchTxt.toLowerCase()) >= 0 ) &&
-						(me.filters.InitialValue.first({filter:false}).checked == true || item.info.restrict==false) &&
-						(me.filterShowAllFundsIncludeCloses == true || item.info.isClosed==false) &&
+						(me.filterHideClosed == false || item.info.isClosed == false) &&
+						(me.filterHideRestrict == false || item.info.restrict) &&
 						item.info.InitialValueFilter.hasAnyTrueOnSameIndex(filterStatus.Initialvalue)){
 							list.push(item);
 						}
@@ -128,7 +129,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			volume:me.filters.volume.selectToArray('checked'),
 			Initialvalue:me.filters.InitialValue.selectToArray('checked'),
 			histFilter:me.histogramHash(),
-			showEvenClosed:[me.filterShowAllFundsIncludeCloses ? 1 : 0]
+			showEvenClosed:[me.filterHideClosed ? 1 : 0],
+			showEvenRestrict:[me.filterHideRestrict ? 1 : 0]
 		};
 	};
 	
@@ -140,7 +142,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			me.admTx == 4 &&
 			me.histogramItemFilter == null && 
 			me.searchTxt == "" &&
-			me.filterShowAllFundsIncludeCloses==true
+			me.filterHideClosed==false &&
+			me.filterHideRestrict == false
 
 			//me.filters.resgate.allSetTo({checked:true}) &&
 
@@ -242,8 +245,10 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			
 			var values = row.rank.take(24);
 			var d = [['Mês', 'Rank']];
+			var add=0;
 			for(var i=0;i<values.length;i++){
-				d.push([i,values[i]])
+				add += values[i];
+				d.push([i,add])
 			}
 			var data = google.visualization.arrayToDataTable(d);
 			
@@ -255,7 +260,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			  legend: { position: 'none' },
 			  width:$('#rightMenu').width(),
 			  vAxis:{
-				  maxValue:300,
+				  maxValue:3000,
 				  minValue:0,
 				  gridlines: { color: '#e0e0e0', count: 6} ,
 				  textStyle:{color:'#9e9e9e'},//fontName:'"Roboto", sans-serif'
@@ -282,6 +287,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			return me.currentRow.info[prop];
 		return 0;
 	}
+	
 	me.getFromCurrentFigure = function(prop){
 		return me.getFromFigure(me.currentRow, prop);
 	}
@@ -375,17 +381,19 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		return value;
 	}
 	me.changeInitialValue = function(item){
-		if(item.filter == false)
+		if(item.filter == false || item.checked==true)
 			return
 
 		var index = me.filters.InitialValue.indexOf(item);
 		for(var i=index-1;i>=0;i--){
-			me.filters.InitialValue[i].checked=item.checked;
-		}
-		for(var i=index+1;i<me.filters.InitialValue.length; i++){
 			me.filters.InitialValue[i].checked=!item.checked;
 		}
-		me.checkFilterTopShow(me.filters.InitialValue,me.showAllFilterInitValueOn);
+		for(var i=index+1;i<me.filters.InitialValue.length; i++){
+			me.filters.InitialValue[i].checked=item.checked;
+		}
+		
+		me.toggleFilter(true, me.filters.InitialValue);
+		//me.checkFilterTopShow(me.filters.InitialValue,me.showAllFilterInitValueOn);
 	}
 	me.closeModalDialog = function(name){
 		$('#' + name).modal('close');
@@ -460,8 +468,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			//bubble: {textStyle: {fontSize: 11}}
 		  };
 	}
-	me.openChart = function(name, propery){
+	me.openChart = function(name, propery, text){
 		me.currentCharTitle = name + ' vs Performance';
+		me.currentChartText = text.replace('Clique e confira!', '');
 		$('#modal1').modal('open');
 
 		var data = new google.visualization.DataTable();
@@ -570,7 +579,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		return me._monthNames[monthIndex-1] + '/' + year
 	}
 	me.periodName = me.getPeriodNames();
-	me.filterShowAllFundsIncludeCloses = true;
+	me.filterHideClosed = false;
+	me.filterHideRestrict = false;
 	me.filters = {
 		Periodo : [
 			{id:0,len:12, Title:'Últimos 12 mêses', visible:true, default:true},
@@ -599,8 +609,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			{id:7, Title:'25k', checked:true, visible:true, default:true, filter:true},
 			{id:8, Title:'30k', checked:true, visible:false, default:false, filter:true},
 			{id:9, Title:'50k', checked:true, visible:false, default:false, filter:true},
-			{id:10, Title:'200k', checked:true, visible:false, default:false, filter:true},
-			{id:11, Title:'Qualificados', checked:true, visible:false, default:false, filter:false}
+			{id:10, Title:'200k', checked:true, visible:false, default:false, filter:true}
+			//{id:11, Title:'Qualificados', checked:true, visible:false, default:false, filter:false}
 		],
 		resgate : [
 			{id:0, Title:'D+0', checked:true, visible:true, default:true},
@@ -639,6 +649,7 @@ mainApp.directive('myHistogram', function(){
 		scope:{
 			histogram:'=',
 			value:'=',
+			classification:'=',
 			showChart:'@',
 			chartTitle:'@',
 			property:'@',
@@ -646,10 +657,44 @@ mainApp.directive('myHistogram', function(){
 			currentrow:'=',
 			tooltip:"@",
 			correlation:'=',
-			sufix:'@'
+			sufix:'@',
+			reversecolor:'@'
+			
+			
 		},
 		replace:true,
-		templateUrl:'templates/histogram.html'
+		templateUrl:'templates/histogram.html',
+		controller:function($scope){
+			if(typeof($scope.reversecolor)=='undefined')
+				$scope.reversecolor= '';
+
+			$scope.extraTxt ='';
+			$scope.classificationType='';
+			$scope.calc_zscore = function(){
+				if($scope.classification==0){
+					$scope.extraTxt= 'dos fundos de Renda Fixa';
+					$scope.classificationType='rf';
+				}else if($scope.classification==1){
+					$scope.extraTxt=  'dos fundos Multimercados';
+					$scope.classificationType='mm';
+				}else if($scope.classification==2){
+					$scope.extraTxt=  'dos fundos de Ação';
+					$scope.classificationType='ac';
+				}
+					
+				var v= Math.floor(($scope.value - $scope.histogram.avg[$scope.classification])/$scope.histogram.stDev[$scope.classification]);
+				if(v<0){
+					$scope.extraTxtClass = 'zcm' + Math.min(4, Math.abs(v));
+				}else{
+					$scope.extraTxtClass = 'zc' + Math.min(4, v);
+				}
+				
+				return v;
+
+			};
+			
+			
+		}
 	};
 });
 mainApp.directive('rdHistogram', function(){
@@ -658,6 +703,7 @@ mainApp.directive('rdHistogram', function(){
 		scope:{
 			histogram:'=',
 			tooltip:"@",
+			classification:'=',
 			sufix:'@'
 		},
 		replace:true,

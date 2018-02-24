@@ -101,18 +101,27 @@
 					</div>
 				
 				<div class="divider"></div>
-				<h5 class="filterTitle">Captação:</h5>
+				<h5 class="filterTitle">Status:</h5>
 				<div class="switch">
 					<label>
-					Abertos
-					  <input type="checkbox" ng-model="filterShowAllFundsIncludeCloses" ng-checked="filterShowAllFundsIncludeCloses">
+					  <input type="checkbox" ng-model="filterHideClosed" ng-checked="filterHideClosed">
 					  <span class="lever"></span>
-					  Todos
+					  <em title="Mostrar apenas os fundos que estão liberados para aplicação." >Abertos apenas</em>
 					</label>
-				  </div>
+				</div>
+				<div class="switch">
+					<label>
+					  <input type="checkbox" ng-model="filterHideRestrict" ng-checked="filterHideRestrict">
+					  <span class="lever"></span>
+					  <em title="Mostrar apenas aqueles fundos que não são destinados à investidores qualificados">Sem restrição</em>
+					</label>
+				</div>
+
+				
+				
 
 				<div class="divider"></div>
-				<h5 class="filterTitle">Tipo</h5>
+				<h5 class="filterTitle">Classificação</h5>
 				<div class="tsHeight" ng-class="{tsOpened:showAllFilterTypeOn}">
 					<p ng-repeat="filterItem in filters.Tipo.equals({visible:true})" >
 						<input  type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterTipo_{{::filterItem.id}}" ng-model="filterItem.checked" ng-click="$parent.checkFilterTopShow(filters.Tipo,showAllFilterTypeOn)" ng-checked="filterItem.checked" />
@@ -128,54 +137,64 @@
 
 				<h5 class="filterTitle">
 					Aplicação inicial
-					<i ng-click="openChart('Aplicação inicial', 'initialValue')" class="material-icons small " title="veja mais informaçoes sobre Aplicação inicial.">insert_chart</i>
 				</h5>
 				<p class="checkList" ng-repeat="filterItem in filters.InitialValue.equals({visible:true})" >
 						<input type="checkbox" ng-click="$parent.changeInitialValue(filterItem)"  ng-class="{'filled-in':filterItem.checked}"  id="filterInitValue_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
 						<label for="filterInitValue_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
 				</p>
 				<p class="pUpper">
-						<a class="linkSeeMore" ng-click="showAllFilterInitValueOn = toggleFilter(showAllFilterInitValueOn, filters.InitialValue)" ng-class="{seeMore:showAllFilterInitValueOn, seeLess:!showAllFilterInitValueOn}"></a>
-						
+					<a class="linkSeeMore" ng-click="showAllFilterInitValueOn = toggleFilter(showAllFilterInitValueOn, filters.InitialValue)" ng-class="{seeMore:showAllFilterInitValueOn, seeLess:!showAllFilterInitValueOn}"></a>	
 				</p>
+				<label title="veja mais informaçoes sobre Aplicação inicial." ng-click="openChart('Aplicação inicial', 'initialValue')">
+					<i  class="material-icons tiny " >insert_chart</i>
+					Gráfico Aplic. Inicial vs Rentabilidade
+				</label>
 
 				<div class="divider"></div>
 
 				<h5 class="filterTitle">
 					Resgate em atê: 
-					<i ng-click="openChart('Resgate', 'withdrawDays')" class="material-icons small "  title="veja mais informaçoes sobre Taxa de adm.">insert_chart</i>
 				</h5>
-				<p>{{withdrawDays}} dia{{withdrawDays!=1?'s':''}} <em ng-show="withdrawDays==100"> ou mais</em></p>
-				<p class="range-field">
+				<p class="sliderTitle sliderColor"><em ng-show="withdrawDays<100">em atê </em>{{withdrawDays}} dia{{withdrawDays!=1?'s':''}} <em ng-show="withdrawDays==100"> ou mais</em></p>
+				<p class="range-field sliderP">
 					<input type="range" ng-model="withdrawDays"  min="0" max="100" />
 				</p>
+				<label title="veja mais informaçoes sobre Taxa de adm." ng-click="openChart('Resgate', 'withdrawDays')">
+					<i  class="material-icons tiny">insert_chart</i> 
+					Gráfico Resgate vs Rentabilidade
+				</label>
 				
 
 				<div class="divider"></div>
 
 				<h5 class="filterTitle">
 					Taxa de Adm atê: 
-					<i ng-click="openChart('Taxa Administrativa', 'admTax')" class="material-icons small " title="veja mais informaçoes sobre Taxa de adm.">insert_chart</i>
 				</h5>
-				<p>{{admTx}}% <em ng-show="admTx==4"> ou mais</em></p>
-				<p class="range-field">
+				<p class="sliderTitle sliderColor"><em ng-show="admTx<4">atê </em> {{admTx}}% <em ng-show="admTx==4"> ou mais</em></p>
+				<p class="range-field sliderP">
 					<input type="range" ng-model="admTx"  min="0" max="4" step="0.1" />
 				</p>
+				<label title="veja mais informaçoes sobre Taxa de adm." ng-click="openChart('Taxa Administrativa', 'admTax')">
+					<i class="material-icons tiny " >insert_chart</i>
+					Gráfico Taxa adm vs Rentabilidade
+				</label>
 
 				<div class="divider"></div>
 
 				<h5 class="filterTitle">
 					Patrimônio atê:
-					<i ng-click="openChart('Patrimônio', 'volume')" class="material-icons small " title="veja mais informaçoes sobre Patrimônio.">insert_chart</i>
 				</h5>
 				<p class="checkList" ng-repeat="filterItem in filters.volume.equals({visible:true})" >
 						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterVolume_{{::filterItem.id}}" ng-click="checkFilterTopShow(filters.volume,showAllFilterVolumeOn)" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
 						<label for="filterVolume_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
 				</p>
 				<p class="pUpper">
-						<a class="linkSeeMore" ng-click="showAllFilterVolumeOn = toggleFilter(showAllFilterVolumeOn, filters.volume)" ng-class="{seeMore:showAllFilterVolumeOn, seeLess:!showAllFilterVolumeOn}"></a>
-						
+					<a class="linkSeeMore" ng-click="showAllFilterVolumeOn = toggleFilter(showAllFilterVolumeOn, filters.volume)" ng-class="{seeMore:showAllFilterVolumeOn, seeLess:!showAllFilterVolumeOn}"></a>	
 				</p>
+				<label title="veja mais informaçoes sobre Patrimônio." ng-click="openChart('Patrimônio', 'volume')">
+					<i class="material-icons small " >insert_chart</i>
+					Gráfico Patrimônio vs Rentabilidade
+				</label>
 				
 				<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='filter'" class="waves-effect waves-light btn-large w100">Aplicar filtros</a>
 					
@@ -200,9 +219,9 @@
 						</div>
 						
 					</div>
-					<div class="col s12">
+					<div class="col s12 noPadding">
 						<div class="row">
-							<div class="input-field col m12 s12 l12">
+							<div class="input-field col m12 s12 l12 noPadding">
 							<table id="mainTable" class="highlight" ng-class="{comparandoFundo:fundsToCompare.length==1}">
 								<thead>
 									<tr>
@@ -270,7 +289,9 @@
 		<div class="col xl2 l2 s12 " ng-class="{'hide-on-med-and-down':mobileSelectedPage!='histogram'}" id="rightMenu">
 				<div class="section fixed">
 					
-					
+					<label title="{{currentRow.name}}" class="currentName">{{currentRow.name}}</label>
+
+
 					<h5 class="filterTitle ">Rentabilidade acumulada:</h5>
 					<div id="curve_chart" style="min-height:120px;" ></div>
 					<div class="divider"></div>
@@ -288,21 +309,34 @@
 					</div>
 
 
+				
+					<label>Veja este fundo comparado aos outros fundos 
+						<em class="isRendaFixa" ng-show="currentRow.info.classificationType==0">de Renda Fixa</em>	
+						<em class="isMultimercado" ng-show="currentRow.info.classificationType==1">Multimercado</em>	
+						<em class="isAcao" ng-show="currentRow.info.classificationType==2">de Ação</em>
+						:
+					</label>
 					
+
 					<my-histogram
+						ng-if="show_histogramPerformance == true"
 						chart-title="Rendimento"
 						histogram="histogramPerformance"
 						value="getFromCurrentFigure('performance')"
+						zscore = "getZScore('performance', histogramPerformance)"
+						classification="getFromCurrentRow('classificationType')"
 						property="performance"
 						show-chart="false"
 						type="figure"
 						sufix="%"
 						currentrow="currentRowHistPerformance"></my-histogram>
-
+			
 					<my-histogram
+						ng-if="show_histogramStDev == true"
 						chart-title="Volatilidade"
 						histogram="histogramStDev"
 						value="getFromCurrentFigure('stdDev')"
+						classification="getFromCurrentRow('classificationType')"
 						show-chart="true"
 						property="stdDev"
 						type="figure"
@@ -310,9 +344,11 @@
 						currentrow="currentRowHistStDev"></my-histogram>
 					
 					<my-histogram
+						ng-if="show_histogramPosNegAvgRate == true"
 						chart-title="Rel. Ganho/Perda"
 						show-chart="true"
 						value="getFromCurrentFigure('posNegAvgRate')"
+						classification="getFromCurrentRow('classificationType')"
 						tooltip="Soma dos ganhos nos meses positivos dividivo pela soma das perdas nos meses negativos. Clique e confira!"
 						histogram="histogramPosNegAvgRate"
 						property="posNegAvgRate"
@@ -321,10 +357,12 @@
 					
 
 					<my-histogram
+						ng-if="show_histogramCorrelIbov == true"
 						chart-title="Correlação IBOV"
 						histogram="histogramCorrelIbov"
 						correlation="current_correlationIbov"
 						value="getFromCurrentFigure('correlationIbov')"
+						classification="getFromCurrentRow('classificationType')"
 						show-chart="true"
 						property="correlationIbov"
 						type="figure"
@@ -333,10 +371,12 @@
 						
 					
 					<my-histogram
+						ng-if="show_histogramCorrelSP500 == true"
 						chart-title="Correlação S&P500"
 						histogram="histogramCorrelSP500"
 						correlation="current_correlationSP500"
 						value="getFromCurrentFigure('correlationSP500')"
+						classification="getFromCurrentRow('classificationType')"
 						show-chart="true"
 						property="correlationSP500"
 						type="figure"
@@ -344,8 +384,10 @@
 						currentrow="currentRowHistCorrelSP500"></my-histogram>
 						
 					<my-histogram
+						ng-if="show_histogramCorrelCDI == true"
 						chart-title="Correlação CDI"
 						value="current_correlationCDI/100.0"
+						classification="getFromCurrentRow('classificationType')"
 						show-chart="false"
 						correlation="current_correlationCDI"
 						histogram="histogramCorrelCDI"
@@ -355,31 +397,37 @@
 						currentrow="currentRowHistCorrelCDI"></my-histogram>
 					
 					<my-histogram
+						ng-if="show_histogramPosNegRate == true"
 						histogram="histogramPosNegRate"
 						chart-title="Meses positivos"
 						show-chart="true"
 						value="getFromCurrentFigure('posNegCountRate')"
+						classification="getFromCurrentRow('classificationType')"
 						property="posNegCountRate"
 						type="figure"
 						sufix="%"
 						tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo. Clique e confira!"
 						currentrow="currentRowHistPosNegMonth"></my-histogram>
 				
-					<my-histogram
+					<!-- <my-histogram
+						ng-if="show_histogramTxAdm == true"
 						chart-title="Taxa Administrativa"
 						show-chart="true"
 						value="getFromCurrentRow('admTax')"
+						classification="getFromCurrentRow('classificationType')"
 						histogram="histogramTxAdm"
 						property="admTax"
 						type="info"
 						sufix="%"
 						tooltip="Fundo que cobra mais taxa Administrativa rende mais? Este gráfico vai te ajudar a descobrir!"
-						currentrow="currentRowTxAdm"></my-histogram>
+						currentrow="currentRowTxAdm"></my-histogram> -->
 					
 					<my-histogram
+						ng-if="show_histogramAvg == true"
 						chart-title="Média Rendimento"
 						histogram="histogramAvg"
 						value="getFromCurrentFigure('average')"
+						classification="getFromCurrentRow('classificationType')"
 						show-chart="true"
 						property="average"
 						type="figure"
@@ -429,6 +477,7 @@
 		<div class="modal-content">
 		  <h4>{{currentCharTitle}} <em ng-show="selectedPeriod <= 2">nos </em><em ng-bind="::filters.Periodo.first({id:selectedPeriod}).Title"></em></h4>
 		  <div id="chart_txdm_scatter" style="width:100%;"></div>
+		  <p class="chartFooter" ng-bind="currentChartText"></p>
 		</div>	
 	</div>
 

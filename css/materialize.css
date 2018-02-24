@@ -2612,6 +2612,8 @@ a {
   height: 1px;
   overflow: hidden;
   background-color: #e0e0e0;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 
 blockquote {
@@ -6987,7 +6989,7 @@ input[type=range] {
   border: none;
   outline: none;
   width: 100%;
-  margin: 15px 0;
+  margin: 5px 0;
   padding: 0;
 }
 

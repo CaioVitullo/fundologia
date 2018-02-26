@@ -7,20 +7,10 @@
         {{value|rounded:2}}{{sufix}}
         
     </label>
-    <ul ng-if="correlation != null" class="pgrUl" ng-class="{'pgrPos':correlation >= 0, 'pgrNeg':correlation<0}">
-        <li ng-repeat="i in [0,1,2,3]" style="width:{{$parent.$parent.$parent.getWidth($parent.correlation, i)}}%;"></li>
+    <ul  class="pgrUl" ng-class="{'pgrPos':_zscore >= 0, 'pgrNeg':_zscore<0}">
+        <li ng-repeat="i in [0,1,2,3]" style="width:{{$parent.getWidth(i)}}%;"></li>
     </ul>
-    <ul class="histUl" ng-if="histogram.professonalMode == true">
-        <li 
-            ng-repeat="item in histogram.data"
-            ng-click="$parent.$parent.histClick(histogram,item, property, type)"
-            class="waves-effect waves-orange " 
-            title="Valores entre {{::item.low}}{{sufix}} e {{::item.high}}{{sufix}} &#013;&#010; {{::item.count}} ocorrência{{item.count!=1?'s':''}}({{::item.perc}}%) &#013;&#010; clique para filtrar "
-            ng-class="{filter:item.isFiltering,blink_me:item.isFiltering, active:$index==currentrow}"
-            style="height:{{item.height}}%;">
-            
-        </li>
-    </ul>
+    
     <div ng-if="histogram.professonalMode == false" class="zcParent">
         <label ng-class="{zcm4:reversecolor=='', zc4:reversecolor=='s'}" ng-show="calc_zscore() <= -4">Extremamente abaixo da média <em  ng-bind="extraTxt"></em></label>
         <label ng-class="{zcm3:reversecolor=='', zc3:reversecolor=='s'}" ng-show="calc_zscore() == -3">Muito abaixo da média <em  ng-bind="extraTxt"></em></label>
@@ -33,13 +23,25 @@
         <label ng-class="{zc4:reversecolor=='', zcm4:reversecolor=='s'}" ng-show="calc_zscore() >= 4">Extremamente acima da média <em  ng-bind="extraTxt"></em> </label>
     </div>
     <label class="histFooteLabel" ng-show="histogram.professonalMode==false" ng-click="histogram.professonalMode = true">
-            <i class="material-icons tiny">expand_less</i>Ver distribuição        
-    </label>
-    <label class="histFooteLabel" ng-show="histogram.professonalMode==true" ng-click="histogram.professonalMode = false">
-            <i class="material-icons tiny">expand_more</i>Ocultar distribuição        
+            <i class="material-icons tiny">equalizer</i>Ver distribuição        
     </label>
     
+    <ul class="histUl" ng-if="histogram.professonalMode == true">
+         <li 
+                ng-repeat="item in histogram.data"
+                ng-click="$parent.$parent.histClick(histogram,item, property, type)"
+                class="waves-effect waves-orange " 
+                title="Valores entre {{::item.low}}{{sufix}} e {{::item.high}}{{sufix}} &#013;&#010; {{::item.count}} ocorrência{{item.count!=1?'s':''}}({{::item.perc}}%) &#013;&#010; clique para filtrar "
+                ng-class="{filter:item.isFiltering,blink_me:item.isFiltering, active:$index==currentrow}"
+                style="height:{{item.height}}%;">
+                
+        </li>
+    </ul>
+        <label class="histFooteLabel" ng-show="histogram.professonalMode==true" ng-click="histogram.professonalMode = false">
+                <i class="material-icons tiny">expand_more</i>Ocultar distribuição        
+        </label>
+    
     <label  class="histFooteLabel" ng-click="$parent.openChart(chartTitle, property, tooltip)" ng-show="showChart=='true'" title="{{tooltip}}">
-        <i class="material-icons tiny " >insert_chart</i> Gráfico  {{chartTitle}} vs Rendimento.
+        <i class="material-icons tiny " >timeline</i> Gráfico  {{chartTitle}} vs Rendimento.
     </label>
 </div>

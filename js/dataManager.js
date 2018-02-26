@@ -103,5 +103,16 @@ function dataManager($http, me){
             return true;
         }
         return false;
-    }
+	};
+	me.textDialogHtml = '';
+	me.titleDialogHtml = '';
+	me.showCustomDialog = function(title, html){
+		me.textDialogHtml = html;
+		me.titleDialogHtml = title;
+		$('#modalCustomText').modal('open');
+	};
+	me.showRankDialog = function(){
+		var html = '<p>Ranking dos fundos feito mês a mês. </p><p> Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade </p><p> O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, o segundo 2 e assim sucessivamente... </p><p> No final, soma-se a nota de todos os meses para cada fundo </p><p> Ou seja, quanto menor a soma, melhor o fundo</p>';
+		me.showCustomDialog('Ranking:',html);
+	}
 }

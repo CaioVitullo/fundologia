@@ -227,7 +227,7 @@
 									<tr>
 										<th class="hide-on-smaller-400 "  >
 											Rank 
-											<i class="tiny material-icons"  title="Ranking dos fundos feito mês a mês. &#013;&#010; Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade &#013;&#010; O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, o segundo 2 e assim sucessivamente... &#013;&#010; No final, soma-se a nota de todos os meses para cada fundo &#013;&#010; Ou seja, quanto menor a soma, melhor o fundo" >info_outline</i> 
+											<i class="tiny material-icons"  title="Quer entender melhor nosso ranking? Clique aqui." ng-click="showRankDialog()" >info_outline</i> 
 										</th>
 										<th>Fundo</th>
 										<th class="hide-on-small-and-down "  title="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo">
@@ -286,7 +286,7 @@
 			</section>	
 			
 		</div>
-		<div class="col xl2 l2 s12 " ng-class="{'hide-on-med-and-down':mobileSelectedPage!='histogram'}" id="rightMenu">
+		<div class="col xl2 l2 s12 rightColor" ng-class="{'hide-on-med-and-down':mobileSelectedPage!='histogram'}" id="rightMenu">
 				<div class="section fixed">
 					
 					<label title="{{currentRow.name}}" class="currentName">{{currentRow.name}}</label>
@@ -298,6 +298,9 @@
 					
 					<h5 class="filterTitle ">Rank mês a mês:</h5>
 					<div id="ranking_chart" style="min-height:120px;" ></div>
+					<label class="histFooteLabel mt5" ng-click="showRankDialog()">
+						<i class="tiny material-icons"  >info_outline</i> Entenda nosso ranking.
+					</label>
 					<div class="divider"></div>
 					
 					<div  ng-class="{invisible:currentRow.values==null}" id="horizontalScollParent">
@@ -307,8 +310,8 @@
 							</div>
 						</div>
 					</div>
-
-
+					
+					
 				
 					<label>Veja este fundo comparado aos outros fundos 
 						<em class="isRendaFixa" ng-show="currentRow.info.classificationType==0">de Renda Fixa</em>	
@@ -524,7 +527,14 @@
 			</div>
 		</div>	
 	</div>
-	
+	<div id="modalCustomText" class="modal " >
+		<div class="modal-content">
+			<h5 ng-bind="titleDialogHtml"></h5>
+			<div class="row" ng-bind-html="textDialogHtml|trusted">
+
+			</div>
+		</div>
+	</div>
 	<div id="modalCompare" class="modal wideModal" >
 		<div class="modal-content">
 			<div class="row">
@@ -589,51 +599,7 @@
 
 
 <div id="preloading" onclick="skipIntroduction()">
-	<!-- <div class="row">
-		<div class="s12 m12 l12 xl12 center">
-				<div class="preloader-wrapper big active">
-						<div class="spinner-layer spinner-blue">
-						  <div class="circle-clipper left">
-							<div class="circle"></div>
-						  </div><div class="gap-patch">
-							<div class="circle"></div>
-						  </div><div class="circle-clipper right">
-							<div class="circle"></div>
-						  </div>
-						</div>
-				  
-						<div class="spinner-layer spinner-red">
-						  <div class="circle-clipper left">
-							<div class="circle"></div>
-						  </div><div class="gap-patch">
-							<div class="circle"></div>
-						  </div><div class="circle-clipper right">
-							<div class="circle"></div>
-						  </div>
-						</div>
-				  
-						<div class="spinner-layer spinner-yellow">
-						  <div class="circle-clipper left">
-							<div class="circle"></div>
-						  </div><div class="gap-patch">
-							<div class="circle"></div>
-						  </div><div class="circle-clipper right">
-							<div class="circle"></div>
-						  </div>
-						</div>
-				  
-						<div class="spinner-layer spinner-green">
-						  <div class="circle-clipper left">
-							<div class="circle"></div>
-						  </div><div class="gap-patch">
-							<div class="circle"></div>
-						  </div><div class="circle-clipper right">
-							<div class="circle"></div>
-						  </div>
-						</div>
-					  </div>
-		</div>
-	</div> -->
+	
 <h1 class="txtRotateh1"> Nome: 
   <span
      class="txt-rotate"

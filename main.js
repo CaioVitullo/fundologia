@@ -345,31 +345,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		return {max:max, min:min};
 		
 	}
-	me.getWidth = function(value,col){
-		if(value <0){
-			switch(col){
-				case 0:
-					return (100-Math.abs(value))/2;
-				case 1:
-					return Math.abs(value)/2;
-				case 2:
-					return 25;
-				case 3:
-					return 25;
-			}
-		}else{
-			switch(col){
-				case 0:
-					return 25;
-				case 1:
-					return 25;
-				case 2:
-					return Math.abs(value)/2;
-				case  3:
-					return (100 - Math.abs(value))/2;
-			}
-		}
-	}
+	
 	me.toggleFilter = function(value, filter){
 
 		if(value){
@@ -642,7 +618,11 @@ mainApp.filter('rounded', ['$filter', function($filter) {
         return $filter('number')(input, decimals);
     };
 }]);
-
+mainApp.filter('trusted', ['$sce', function ($sce) {
+    return function (text) {
+        return $sce.trustAsHtml(text);
+    };
+}]);
 mainApp.directive('myHistogram', function(){
 	return {
 		restrict:'E',
@@ -670,6 +650,7 @@ mainApp.directive('myHistogram', function(){
 
 			$scope.extraTxt ='';
 			$scope.classificationType='';
+			$scope._zscore=0;
 			$scope.calc_zscore = function(){
 				if($scope.classification==0){
 					$scope.extraTxt= 'dos fundos de Renda Fixa';
@@ -682,16 +663,45 @@ mainApp.directive('myHistogram', function(){
 					$scope.classificationType='ac';
 				}
 					
-				var v= Math.floor(($scope.value - $scope.histogram.avg[$scope.classification])/$scope.histogram.stDev[$scope.classification]);
+				var m = ($scope.value - $scope.histogram.avg[$scope.classification])/$scope.histogram.stDev[$scope.classification];
+				var v= Math.floor(m);
 				if(v<0){
 					$scope.extraTxtClass = 'zcm' + Math.min(4, Math.abs(v));
+					$scope._zscore =-Math.min(100, Math.abs(100*m/4.0));
 				}else{
 					$scope.extraTxtClass = 'zc' + Math.min(4, v);
+					$scope._zscore = Math.min(100, 100*m/4.0);
 				}
 				
 				return v;
 
 			};
+
+			$scope.getWidth = function(col){
+				if($scope._zscore <0){
+					switch(col){
+						case 0:
+							return (100-Math.abs($scope._zscore))/2;
+						case 1:
+							return Math.abs($scope._zscore)/2;
+						case 2:
+							return 25;
+						case 3:
+							return 25;
+					}
+				}else{
+					switch(col){
+						case 0:
+							return 25;
+						case 1:
+							return 25;
+						case 2:
+							return Math.abs($scope._zscore)/2;
+						case  3:
+							return (100 - Math.abs($scope._zscore))/2;
+					}
+				}
+			}
 			
 			
 		}

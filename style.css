@@ -487,10 +487,10 @@ footer{
 }
 
 .pgrNeg li:nth-child(1){
-	background-color: #ecacac;
+	background-color: #84afd6;
 }
 .pgrNeg li:nth-child(2){
-	background-color: #a62626;
+	background-color: #2333a5;
 }
 .pgrNeg li:nth-child(3),
 .pgrNeg li:nth-child(4){
@@ -502,10 +502,10 @@ footer{
 	background-color: #e8e6e6;
 }
 .pgrPos li:nth-child(3){
-	background-color: #26a69a;
+	background-color: #2333a5;
 }
 .pgrPos li:nth-child(4){
-	background-color: #acece6;
+	background-color: #84afd6;
 }
 
 
@@ -594,7 +594,7 @@ footer{
 .horizontal-scroll-wrapper > div{
   display:block;
   padding:3px;
-  background:#f1f1f1;
+  background:#ffffff;
   text-align: center;
   color: #9e9e9e;
   transform:rotate(90deg);
@@ -770,37 +770,37 @@ footer{
   .noPadding{
 	  padding: 0px!important;
   }
-.zcParent{min-height: 50px;}
+.zcParent{min-height: 50px;line-height: 50px;}
 .zcParent label{font-weight: bold;}
-.ac  .zcm4{ color: #c0c0c0; }
-.ac  .zcm3{ color: #caabab; }
-.ac  .zcm2{ color: #d59595;}
-.ac  .zcm1{ color: #da8b8b; }
-.ac  .zc0{ color: #e57575; }
-.ac  .zc1{ color: #ea6b6b; }
-.ac  .zc2{ color: #ef6060; }
-.ac  .zc3{ color: #f45555;}
-.ac  .zc4{ color: #ff4040 }
+.ac  .zcm4{ color: #1d18a3; }
+.ac  .zcm3{ color: #2333a5; }
+.ac  .zcm2{ color: #2e4dba;}
+.ac  .zcm1{ color: #3969ba; }
+.ac  .zc0{ color: #548cbf; }
+.ac  .zc1{ color: #3969ba; }
+.ac  .zc2{ color: #2e4dba; }
+.ac  .zc3{ color: #2333a5;}
+.ac  .zc4{ color: #1d18a3 }
 
-.mm  .zcm4{ color: #c0c0c0; }
-.mm  .zcm3{ color: #caaca9; }
-.mm  .zcm2{ color: #d59d8e;}
-.mm  .zcm1{ color: #da987f; }
-.mm  .zc0{ color: #e5925f; }
-.mm  .zc1{ color: #ef933c; }
-.mm  .zc2{ color: #f49729; }
-.mm  .zc3{ color: #fa9d15;}
-.mm  .zc4{ color: #ffa500; }
+.mm  .zcm4{ color: #1d18a3; }
+.mm  .zcm3{ color: #2333a5; }
+.mm  .zcm2{ color: #2e4dba;}
+.mm  .zcm1{ color: #3969ba; }
+.mm  .zc0{ color: #548cbf; }
+.mm  .zc1{ color: #3969ba; }
+.mm  .zc2{ color: #2e4dba; }
+.mm  .zc3{ color: #2333a5;}
+.mm  .zc4{ color: #1d18a3 }
 
-.rf  .zcm4{ color: #c0c0c0; }
-.rf  .zcm3{ color: #b1bcac; }
-.rf  .zcm2{ color: #a1b899;}
-.rf  .zcm1{ color: #99b68f; }
-.rf  .zc0{ color: #8ab17b; }
-.rf  .zc1{ color: #7aad68; }
-.rf  .zc2{ color: #72ab5e; }
-.rf  .zc3{ color: #6ba954;}
-.rf  .zc4{ color: #63a74a; }
+.rf  .zcm4{ color: #1d18a3; }
+.rf  .zcm3{ color: #2333a5; }
+.rf  .zcm2{ color: #2e4dba;}
+.rf  .zcm1{ color: #3969ba; }
+.rf  .zc0{ color: #548cbf; }
+.rf  .zc1{ color: #3969ba; }
+.rf  .zc2{ color: #2e4dba; }
+.rf  .zc3{ color: #2333a5;}
+.rf  .zc4{ color: #1d18a3 }
 
 .sliderTitle{
 	margin-bottom: 0px;
@@ -818,8 +818,31 @@ footer{
 	white-space: nowrap;
 	font-weight: bold;
 	font-size: 20px;
+	color: #3969ba;
 }
 .histFooteLabel{
 	display: block;
 	margin-bottom: 5px;
+}
+
+tr.tableRow.ng-scope.hoverRow:after {
+    background-color: #f2f2f2;
+    right: -20px;
+}
+tr.tableRow.ng-scope:after {
+    content: " ";
+    background: transparent;
+    width: 25px;
+    height: 60px;
+    transition: all .2s ease;
+    display: block;
+    position: absolute;
+    right: 0;
+}
+.rightColor{
+	background-color: #f2f2f2;
+}
+
+.mt5{
+	margin-top: 5px;
 }

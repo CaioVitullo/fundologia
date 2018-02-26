@@ -7,7 +7,7 @@
         {{value|rounded:2}}{{sufix}}
         
     </label>
-    <ul  class="pgrUl" ng-class="{'pgrPos':_zscore >= 0, 'pgrNeg':_zscore<0}">
+    <ul  class="histslider pgrUl" ng-class="{'pgrPos':_zscore >= 0, 'pgrNeg':_zscore<0}">
         <li ng-repeat="i in [0,1,2,3]" style="width:{{$parent.getWidth(i)}}%;"></li>
     </ul>
     

@@ -71,23 +71,24 @@
 			<li><a href="#comofunciona">Como funciona</a></li> -->
 			<li class="show-on-smaller-992"  ng-click="mobSelectPage('main')"><a>Lista</a></li>
 			<li class="show-on-smaller-992"  ng-click="mobSelectPage('filter')"><a>Filtro</a></li>
-			<li class="show-on-smaller-992" ng-click="mobSelectPage('histogram')"><a>Histogramas</a></li>
+			<li class="show-on-smaller-992" ng-click="mobSelectPage('histogram')"><a>Comparativo</a></li>
 		  </ul>
 		 </div>
 		</nav>
 	</div>
-	<div class="navbar-fixed hide-on-med-and-down" ng-if="false">
+	<div class="navbar-fixed hide-on-med-and-down " style="display:none;" >
 		<nav class="nav-extended sub-menu">
 			<div class="nav-wrapper container">
-				<ul id="nav-mobile" class="right">
-					<li><a class="btn btn-laranja" href="#cadastro">Inscreva-se</a></li>
-				</ul>
+			
 			</div>
 		</nav>
 	</div>
 	<div class="row">
+		
+	</div>
+	<div class="row">
 		<div class="col xl2 l2 s12 " ng-class="{'hide-on-med-and-down':mobileSelectedPage!='filter'}">
-			<div class="section fixed">
+			<div class="section fixed ">
 				
 					<h5 class="filterTitle">Período </h5>
 					<div class="tsHeight" >
@@ -145,7 +146,7 @@
 				<p class="pUpper">
 					<a class="linkSeeMore" ng-click="showAllFilterInitValueOn = toggleFilter(showAllFilterInitValueOn, filters.InitialValue)" ng-class="{seeMore:showAllFilterInitValueOn, seeLess:!showAllFilterInitValueOn}"></a>	
 				</p>
-				<label title="veja mais informaçoes sobre Aplicação inicial." ng-click="openChart('Aplicação inicial', 'initialValue')">
+				<label title="veja mais informaçoes sobre Aplicação inicial." ng-click="openChart('Aplicação inicial', 'initialValue', 'Será que um fundo de investimento que tem uma aplicação inicial maior tambêm terá um retorno maior?')">
 					<i  class="material-icons tiny " >insert_chart</i>
 					Gráfico Aplic. Inicial vs Rentabilidade
 				</label>
@@ -159,7 +160,7 @@
 				<p class="range-field sliderP">
 					<input type="range" ng-model="withdrawDays"  min="0" max="100" />
 				</p>
-				<label title="veja mais informaçoes sobre Taxa de adm." ng-click="openChart('Resgate', 'withdrawDays')">
+				<label title="veja mais informaçoes sobre Resgate." ng-click="openChart('Resgate', 'withdrawDays', '')">
 					<i  class="material-icons tiny">insert_chart</i> 
 					Gráfico Resgate vs Rentabilidade
 				</label>
@@ -174,7 +175,7 @@
 				<p class="range-field sliderP">
 					<input type="range" ng-model="admTx"  min="0" max="4" step="0.1" />
 				</p>
-				<label title="veja mais informaçoes sobre Taxa de adm." ng-click="openChart('Taxa Administrativa', 'admTax')">
+				<label title="veja mais informaçoes sobre Taxa de adm." ng-click="openChart('Taxa Administrativa', 'admTax', '')">
 					<i class="material-icons tiny " >insert_chart</i>
 					Gráfico Taxa adm vs Rentabilidade
 				</label>
@@ -191,7 +192,7 @@
 				<p class="pUpper">
 					<a class="linkSeeMore" ng-click="showAllFilterVolumeOn = toggleFilter(showAllFilterVolumeOn, filters.volume)" ng-class="{seeMore:showAllFilterVolumeOn, seeLess:!showAllFilterVolumeOn}"></a>	
 				</p>
-				<label title="veja mais informaçoes sobre Patrimônio." ng-click="openChart('Patrimônio', 'volume')">
+				<label title="veja mais informaçoes sobre Patrimônio." ng-click="openChart('Patrimônio', 'volume', 'Fundo que cobra mais taxa Administrativa rende mais?')">
 					<i class="material-icons small " >insert_chart</i>
 					Gráfico Patrimônio vs Rentabilidade
 				</label>
@@ -204,20 +205,18 @@
 		<div class="col xl8 l8 m12 s12 " ng-hide="mobileSelectedPage != 'main'">
 			<section class="row" id="tables">
 				<div >
-					<div class="col s12 head-form">
-						<div class="row">
-							<div class="input-field col s12 m12 l12 xl12">
-								<div class="search-wrapper card">
-									<input class="bbn" type="text" ng-model="searchTxt" id="icon_prefix">
-									<i class="iconInside material-icons">search</i>
-									<label for="icon_prefix" class="hide-on-smaller-400" >Pesquise e compare os melhores fundos de investimento para o seu perfil</label>  
-									<label for="icon_prefix" class="show-on-smaller-400" >Pesquise fundos de investimento</label>  
-								</div>
-								<!-- <input id="icon_prefix" type="text" ng-model="searchTxt" class="validate"><i class="material-icons ">search</i>
-								<label for="icon_prefix" ng-bind="::searchFieldTxt">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>  -->
+					<div class="col s12  head-form ">
+						<div class="input-field ">
+							<div class="search-wrapper card">
+								<input class="bbn" type="text" ng-model="searchTxt" id="icon_prefix">
+								<i class="iconInside material-icons">search</i>
+								<label for="icon_prefix" class="hide-on-smaller-400" style="left:10px;" >Pesquise e compare os melhores fundos de investimento para o seu perfil</label>  
+								<label for="icon_prefix" class="show-on-smaller-400" >Pesquise fundos de investimento</label>  
 							</div>
+							<!-- <input id="icon_prefix" type="text" ng-model="searchTxt" class="validate"><i class="material-icons ">search</i>
+							<label for="icon_prefix" ng-bind="::searchFieldTxt">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>  -->
 						</div>
-						
+					
 					</div>
 					<div class="col s12 noPadding">
 						<div class="row">
@@ -226,21 +225,21 @@
 							<table id="mainTable" class="highlight" ng-class="{comparandoFundo:fundsToCompare.length==1}">
 								<thead >
 									<tr>
-										<th class="hide-on-smaller-400 "  >
+										<th ng-click="setCurrentSort(0)" class="hide-on-smaller-400 " ng-class="{currentSortCol:currentSortCol==0}" >
 											Rank 
 											<i class="tiny material-icons"  title="Quer entender melhor nosso ranking? Clique aqui." ng-click="showRankDialog()" >info_outline</i> 
 										</th>
-										<th>Fundo</th>
-										<th class="hide-on-small-and-down "  title="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo">
+										<th ng-click="setCurrentSort(1)" ng-class="{currentSortCol:currentSortCol==1}">Fundo</th>
+										<th ng-click="setCurrentSort(2)" ng-class="{currentSortCol:currentSortCol==2}" class="hide-on-small-and-down "  title="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo">
 											Meses positivo
 											<i class="tiny material-icons ">info_outline</i>
 										</th>
-										<th class=" hide-on-small-and-down "  title="Soma dos ganhos nos meses positivos dividivo pela soma das perdas nos meses negativos." >Rel. Ganho/ Perda</th>
-										<th class="show-column-largar-1200">Média</th>
-										<th class="hide-on-small-and-down">Desvio Padrão</th>
-										<th class="show-column-largar-1300">Correlação Ibov</th>
-										<th class="hide-on-smaller-400">Tx Adm</th>
-										<th>Rentabilidade período</th>
+										<th ng-click="setCurrentSort(3)" ng-class="{currentSortCol:currentSortCol==3}" class=" hide-on-small-and-down "  title="Soma dos ganhos nos meses positivos dividivo pela soma das perdas nos meses negativos." >Rel. Ganho/ Perda</th>
+										<th ng-click="setCurrentSort(4)" ng-class="{currentSortCol:currentSortCol==4}" class="show-column-largar-1200">Média</th>
+										<th ng-click="setCurrentSort(5)" ng-class="{currentSortCol:currentSortCol==5}" class="hide-on-small-and-down">Desvio Padrão</th>
+										<th ng-click="setCurrentSort(6)" ng-class="{currentSortCol:currentSortCol==6}" class="show-column-largar-1300">Correlação Ibov</th>
+										<th ng-click="setCurrentSort(7)" ng-class="{currentSortCol:currentSortCol==7}" class="hide-on-smaller-400">Tx Adm</th>
+										<th ng-click="setCurrentSort(8)" ng-class="{currentSortCol:currentSortCol==8}">Rentabilidade período</th>
 										
 									</tr>
 								</thead>
@@ -251,7 +250,7 @@
 										ng-mouseover="showRowDetail(row)">
 										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank">Rank</td>
 										<td class="cutText noselect" >
-											{{row.name}}
+											<span title="{{row.name}}" class="fundName">{{row.name}}</span>
 											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict"  title="Fundo destinado à investidores qualificados.">monetization_on</i>
 											<i class="colorIcon tiny material-icons hidenIcon " ng-click="openRankDialog()"  title="Tabela de rentabilidade completa!" >info_outline</i> 
 											<i class="colorIcon tiny material-icons " ng-show="row.info.isClosed"  title="Fundo fechado!">lock</i>
@@ -281,17 +280,65 @@
 								<p class="tdNotFound" ng-show="noResult == true && searchTxt.length == 0"></p>
 							</div>
 						</div>
-						
-					</form>
+						<div class="row"  ng-show="mobileSelectedPage =='main'" >
+							<div class="">
+									<div id="disqus_thread"></div>
+									<script>
+									
+									/**
+									*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+									*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+									/*
+									var disqus_config = function () {
+									this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+									this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+									};
+									*/
+									(function() { // DON'T EDIT BELOW THIS LINE
+									var d = document, s = d.createElement('script');
+									s.src = 'https://fundologia.disqus.com/embed.js';
+									s.setAttribute('data-timestamp', +new Date());
+									(d.head || d.body).appendChild(s);
+									})();
+									</script>
+									<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+																
+							</div>
+						</div>
+					
 				</div>
 			</section>	
 			
 		</div>
-		<div class="col xl2 l2 s12 rightColor" ng-class="{'hide-on-med-and-down':mobileSelectedPage!='histogram'}" id="rightMenu">
-				<div class="section fixed">
+		<div class="col xl2 l2 s12 rightColor fixedColumn r0" ng-class="{'hide-on-med-and-down':mobileSelectedPage!='histogram'}" id="rightMenu">
+				<div class="section fixed ">
 					
 					<label title="{{currentRow.name}}" class="currentName">{{currentRow.name}}</label>
+					<div class="divider"></div>
 
+					<h5 class="filterTitle ">
+						Aplicação inicial: 
+					</h5>
+					<label class="labelTitle" ng-bind="currentRow.info.initialValue|currency:'R$'"></label>
+					<h5 class="filterTitle ">
+						Taxa Adm: 
+					</h5>
+					<label class="labelTitle" ng-bind="currentRow.info.admTax|percentage"></label>
+					<h5 class="filterTitle ">
+						Cotização: 
+					</h5>
+					<label class="labelTitle" ng-bind="currentRow.info.cotizacaoTime"></label>
+					
+					<div class="divider"></div>
+					<h5 class="filterTitle " ng-bind="filters.Periodo[selectedPeriod].Title"></h5>
+					<div  ng-class="{invisible:currentRow.values==null}" id="horizontalScollParent">
+						<div class="horizontal-scroll-wrapper squares" id="rankHorizontal" ng-mouseover="valueHover()" >
+							<div ng-dblclick="openRankDialog()" ng-repeat="m in periodName.take(filters.Periodo[selectedPeriod].len) track by $index">
+								{{m}}<br/> {{currentRow.rank[$index]}}<sup>ᵒ</sup><br/>{{currentRow.values[$index]|percentage:2}}
+							</div>
+						</div>
+					</div>
+					<div class="divider"></div>
 
 					<h5 class="filterTitle ">Rentabilidade acumulada:</h5>
 					<div id="curve_chart" style="min-height:120px;" ></div>
@@ -302,23 +349,15 @@
 					<label class="histFooteLabel mt5" ng-click="showRankDialog()">
 						<i class="tiny material-icons"  >info_outline</i> Entenda nosso ranking.
 					</label>
-					<div class="divider"></div>
 					
-					<div  ng-class="{invisible:currentRow.values==null}" id="horizontalScollParent">
-						<div class="horizontal-scroll-wrapper squares" id="rankHorizontal" ng-mouseover="valueHover()" >
-							<div ng-dblclick="openRankDialog()" ng-repeat="m in periodName.take(filters.Periodo[selectedPeriod].len) track by $index">
-								{{m}}<br/> {{currentRow.rank[$index]}}<sup>ᵒ</sup><br/>{{currentRow.values[$index]|percentage:2}}
-							</div>
-						</div>
-					</div>
 					
 					
 				
 					<label>Veja este fundo comparado aos outros fundos 
-						<em class="isRendaFixa" ng-show="currentRow.info.classificationType==0">de Renda Fixa</em>	
-						<em class="isMultimercado" ng-show="currentRow.info.classificationType==1">Multimercado</em>	
-						<em class="isAcao" ng-show="currentRow.info.classificationType==2">de Ação</em>
-						:
+						<em class="isRendaFixa" ng-show="currentRow.info.classificationType==0">de Renda Fixa </em>	
+						<em class="isMultimercado" ng-show="currentRow.info.classificationType==1">Multimercado </em>	
+						<em class="isAcao" ng-show="currentRow.info.classificationType==2">de Ação </em>
+						nos <em ng-bind="filters.Periodo[selectedPeriod].Title.toLowerCase()"></em>:
 					</label>
 					
 
@@ -441,36 +480,11 @@
 
 					<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='histogram'"  class="waves-effect waves-light btn-large w100">Voltar</a>
 				</div>
-			
 		</div>
 	</div>
 
 
-	<div class="row"  ng-show="mobileSelectedPage =='main'" >
-		<div class="container">
-				<div id="disqus_thread"></div>
-				<script>
-				
-				/**
-				*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-				*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-				/*
-				var disqus_config = function () {
-				this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-				this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-				};
-				*/
-				(function() { // DON'T EDIT BELOW THIS LINE
-				var d = document, s = d.createElement('script');
-				s.src = 'https://fundologia.disqus.com/embed.js';
-				s.setAttribute('data-timestamp', +new Date());
-				(d.head || d.body).appendChild(s);
-				})();
-				</script>
-				<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-											
-		</div>
-	</div>
+	
 	<footer class="row">
 		<div class="container">
 			<label ng-bind="width"></label>
@@ -534,6 +548,51 @@
 			<div class="row" ng-bind-html="textDialogHtml|trusted">
 
 			</div>
+		</div>
+	</div>
+	<div id="modalRankingDialog" class="modal" >
+		<div class="modal-content">
+			<h5>Ranking</h5>
+			<div class="row">
+				<div class="content">
+					<section>
+						<p>Ranking dos fundos feito mês a mês. </p>
+						<p> Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade </p>
+						<p> O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, o segundo 2 e assim sucessivamente... </p>
+						<p> No final, soma-se a nota de todos os meses para cada fundo </p>
+						<p> Ou seja, quanto menor a soma, melhor o fundo</p>
+
+						<h5>Confira os primeiros 10 lugares no ranking dos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</h5>
+					</section>
+					<section >
+						
+						<table id="rankTable" class="centered">
+							<thead>
+								<th></th>
+								<th class="thNoPadding">
+									<i class="material-icons tinySmall" ng-class="{iconOn:showPrevtRankTableColumns, iconOff:showPrevtRankTableColumns==false}"  ng-click="prevRankTableColumns()" >chevron_left</i>
+								</th>
+								<th class="thWidth" ng-repeat="c in ranktableColumns" >{{c+1}}<sup>ᵒ</sup>lugar</th>
+								<th class="thNoPadding">
+									<i class="material-icons tinySmall" ng-class="{iconOn:showNextRankTableColumns, iconOff:showNextRankTableColumns==false}" ng-click="nextRankTableColumns()" >chevron_right</i>
+								</th>
+							</thead>
+							<tbody>
+								<tr ng-repeat="h in rankingFullList.take(12)">
+									<td ng-bind="_monthNames[h.month-1] + '/' + h.year"></td>
+									<td></td>
+									<td ng-repeat="c in ranktableColumns" ng-class="{highlightCell:$parent.$parent.rankingTableCell==h.list[c].uniqueID}" ng-mouseover="$parent.$parent.rankingTableCell=h.list[c].uniqueID">
+										<label ng-bind="h.list[c].name"></label>
+										<label class="fwb" ng-bind="h.list[c].performance|percentage"></label>
+									</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<div id="modalCompare" class="modal wideModal" >

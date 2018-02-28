@@ -80,13 +80,38 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 							list.push(item);
 						}
 				}
-				if(list.length > 0)
-					list = list.sort(function(a,b){
-						return a.figures[me.selectedPeriod].rank - b.figures[me.selectedPeriod].rank;
-					});
-				list = list.take(me.defaultListSize);
-				me.lastHash = currentHash;
-				me.lastResult = list;
+				if(list.length > 0){
+					if(me.currentSortCol == 1 || me.currentSortCol==7){
+						if(me.sortReverse){
+							list = list.sort(function(a,b){
+								return a.info[me.sortColumns[me.currentSortCol]] - b.info[me.sortColumns[me.currentSortCol]];
+							});
+						}else{
+							list = list.sort(function(a,b){
+								return b.info[me.sortColumns[me.currentSortCol]] - a.info[me.sortColumns[me.currentSortCol]];
+							});
+						}
+						
+					}else{
+						if(me.sortReverse){
+							list = list.sort(function(a,b){
+								return a.figures[me.selectedPeriod][me.sortColumns[me.currentSortCol]] - b.figures[me.selectedPeriod][me.sortColumns[me.currentSortCol]];
+							});
+						}else{
+							list = list.sort(function(a,b){
+								return b.figures[me.selectedPeriod][me.sortColumns[me.currentSortCol]] - a.figures[me.selectedPeriod][me.sortColumns[me.currentSortCol]];
+							});
+						}
+						
+					}
+					
+
+					list = list.take(me.defaultListSize);
+					me.lastHash = currentHash;
+					me.lastResult = list;
+				}
+					
+				
 				return list;
 			}else{
 				return me.lastResult;
@@ -130,7 +155,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			Initialvalue:me.filters.InitialValue.selectToArray('checked'),
 			histFilter:me.histogramHash(),
 			showEvenClosed:[me.filterHideClosed ? 1 : 0],
-			showEvenRestrict:[me.filterHideRestrict ? 1 : 0]
+			showEvenRestrict:[me.filterHideRestrict ? 1 : 0],
+			sort:[me.currentSortCol],
+			sortReverse:[me.sortReverse?1:0]
 		};
 	};
 	
@@ -143,7 +170,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			me.histogramItemFilter == null && 
 			me.searchTxt == "" &&
 			me.filterHideClosed==false &&
-			me.filterHideRestrict == false
+			me.filterHideRestrict == false &&
+			me.currentSortCol==0;
+			me.sortReverse==false;
 
 			//me.filters.resgate.allSetTo({checked:true}) &&
 
@@ -165,6 +194,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		}else if(me.fundsToCompare.length <= 1){
 			me.fundsToCompare.push(row);
 			row.selectedToCompare = true;
+			if(me.fundsToCompare.length==2)
+				$('.toast').fadeOut();
 		}
 	};
 	me.compareFundItemClick = function(index){
@@ -204,7 +235,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			return
 			
 			var values = row.figures[me.selectedPeriod].sequencePerformance;
-			var d = [['Mês', 'Performance']];
+			var d = [['Mês', 'Rentabilidade(%)']];
 			for(var i=0;i<values.length;i++){
 				d.push([i,values[i]])
 			}
@@ -406,14 +437,13 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 				if(fig != null){
 					
 					d.push([
-						
-						
 						item.info.hasOwnProperty(propery) ? item.info[propery] : fig[propery],
 						item.info.isAcao ? fig.performance : null,
+						item.name ,
 						item.info.isMultimercado ? fig.performance : null,
+						item.name ,
 						item.info.isRendaFixa ? fig.performance : null,
 						item.name 
-						
 					])
 				}		
 			}
@@ -437,34 +467,40 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			},
 			colors: ['#E94D20', '#ECA403', '#63A74A'],
 			hAxis: {title: title},
-			vAxis: {title: 'Performance'},
+			vAxis: {title: 'Rentabilidade(%) acumulada no período'},
 			legend: 'none',
-			aggregationTarget:'none'
-			//tooltip:{ textStyle: {color: 'black'}, showColorCode: true}
+			//aggregationTarget:'none',
+			
+			tooltip:{ textStyle: {color: 'black'}, showColorCode: true}
 			//bubble: {textStyle: {fontSize: 11}}
 		  };
 	}
 	me.openChart = function(name, propery, text){
-		me.currentCharTitle = name + ' vs Performance';
-		me.currentChartText = text.replace('Clique e confira!', '');
+		me.currentCharTitle = name + ' vs Rentabilidade';
+		if(text != null)
+			me.currentChartText = text.replace('Clique e confira!', '');
 		$('#modal1').modal('open');
 
 		var data = new google.visualization.DataTable();
 		
-		data.addColumn('number', name);
+		data.addColumn({type:'number',label: name});
 		data.addColumn('number', 'Ação');
+		data.addColumn({'type': 'string', 'role': 'tooltip'});
 		data.addColumn('number', 'Multimercado');
+		data.addColumn({'type': 'string', 'role': 'tooltip'});
 		data.addColumn('number', 'Renda Fixa');
-		data.addColumn({'type': 'string', 'role': 'annotation', p:{role:'annotation'}});
+		data.addColumn({'type': 'string', 'role': 'tooltip'});
 		
 		
 		data.addRows(me.getGenericData(propery));
 
         var options = me.gerDefaultChartOptions(name);
+		
+		//var chart = new google.charts.Scatter(document.getElementById('chart_txdm_scatter'));
+		var chart = new google.visualization.ScatterChart(document.getElementById('chart_txdm_scatter'));
 
-        var chart = new google.charts.Scatter(document.getElementById('chart_txdm_scatter'));
-
-        chart.draw(data, google.charts.Scatter.convertOptions(options));
+		//chart.draw(data, google.charts.Scatter.convertOptions(options));
+		chart.draw(data, options);
 	}
 	me.mobSelectPage = function(page){
 		me.mobileSelectedPage = page;
@@ -472,6 +508,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	
 	me.mobApplyFilter = function(){
 		$('.button-collapse').sideNav('hide');
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 		me.mobSelectPage('main');
 	};
 	me.histData = {};//histogram_posNegCountRate
@@ -489,6 +526,14 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	}
 	
 	me.openCompareDialog = function(){
+		$('.toast').fadeOut();
+		$('#modalCompare').modal({complete:function(){
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			me.compareFundItemClick(0);
+			me.compareFundItemClick(0);
+			if (!me.$$phase)
+            	me.$apply();
+		}});
 		$('#modalCompare').modal('open');
 
 		var d = [['Mês', me.fundsToCompare[0].name, me.fundsToCompare[1].name]];
@@ -520,13 +565,14 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		var month = 1;
 		var year = 18;
 		var list = [];
-		for(var i = 0;i<36;i++){
+		var len = me.filters.Periodo[me.selectedPeriod].len;
+		for(var i = 0;i<len;i++){
 			list.push({
 				label:me.getMonthName(month, year),
 				rank:me.currentRow.rank[i],
 				value:me.currentRow.values[i] });
 			month -=1;
-			if(month == 0){
+			if(month == 0 || i ==len-1){
 				me.groupedRankList.push({year:year, data:list});
 				month = 12;
 				year-=1;

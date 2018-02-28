@@ -111,8 +111,74 @@ function dataManager($http, me){
 		me.titleDialogHtml = title;
 		$('#modalCustomText').modal('open');
 	};
+	me.rankingFullList = null
 	me.showRankDialog = function(){
-		var html = '<p>Ranking dos fundos feito mês a mês. </p><p> Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade </p><p> O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, o segundo 2 e assim sucessivamente... </p><p> No final, soma-se a nota de todos os meses para cada fundo </p><p> Ou seja, quanto menor a soma, melhor o fundo</p>';
-		me.showCustomDialog('Ranking:',html);
+		if(me.rankingFullList ==null){
+			me.rankDataIsLoading = true;
+			me.getGenericFile('resultadoFundo/rankingByMonth.txt', function(result){
+				me.rankDataIsLoading = false;
+				me.rankingFullList  = result;
+			});
+		}
+		
+		
+		$('#modalRankingDialog').modal('open');
 	}
+	me.currentSortCol = 0;
+	me.sortReverse = false;
+	me.setCurrentSort = function(i){
+		if(me.currentSortCol == i){
+			me.sortReverse = !me.sortReverse;
+		}else{
+			me.currentSortCol = i;
+		}
+	};
+	me.ranktableColumns=[0,1,2,3,4,5,6,7,8,9];
+	me.showNextRankTableColumns = true;
+	me.showPrevtRankTableColumns = false;
+	me.nextRankTableColumns = function(){
+		var min = me.ranktableColumns.min();
+		var max = me.ranktableColumns.max();
+		min += 1;
+		max += 1;
+		
+		me.showPrevtRankTableColumns = min>0;	
+		me.showNextRankTableColumns = max < 20;
+
+		if(max==20){
+			return;
+		}
+
+		me.ranktableColumns=[];
+		for(var i=min;i<=max;i++){
+			me.ranktableColumns.push(i);
+		}
+	};
+	me.prevRankTableColumns = function(){
+		var min = me.ranktableColumns.min();
+		var max = me.ranktableColumns.max();
+		
+		min -= 1;
+		max -= 1;
+		me.showPrevtRankTableColumns = min>0;	
+		me.showNextRankTableColumns = max < 20;
+		if(min==-1){
+			return;
+		}
+		me.ranktableColumns=[];
+		for(var i=min;i<=max;i++){
+			me.ranktableColumns.push(i);
+		}
+	};
+	me.sortColumns = [
+		'rank',
+		'name',	//1
+		'posNegCountRate', //2
+		'posNegAvgRate',	//3
+		'average',			//4
+		'stdDev',			//5
+		'correlationIbov',	//6
+		'admTax',			//7
+		'performance'		//8
+	];
 }

@@ -1,27 +1,29 @@
 <div class="{{classificationType}}">
     <div class="divider"></div>
-    <h5 class="filterTitle">
+    <h5 class="filterTitle {{extraTxtClass}}">
         {{chartTitle}}: 
+        <span class="fr">{{value|rounded:2}}{{sufix}}</span>
     </h5>
-    <label class="labelTitle {{extraTxtClass}}">
-        {{value|rounded:2}}{{sufix}}
-        
-    </label>
+    
+    
+    
+    <div  class="zcParent">
+        <label title="{{extraTxt}}" ng-class="{zcm4:reversecolor=='', zc4:reversecolor=='s'}" ng-show="calc_zscore() <= -4">Extremamente abaixo da média </label>
+        <label title="{{extraTxt}}" ng-class="{zcm3:reversecolor=='', zc3:reversecolor=='s'}" ng-show="calc_zscore() == -3">Muito abaixo da média </label>
+        <label title="{{extraTxt}}" ng-class="{zcm2:reversecolor=='', zc2:reversecolor=='s'}" ng-show="calc_zscore() == -2">Abaixo da média </label>
+        <label title="{{extraTxt}}" ng-class="{zcm1:reversecolor=='', zc1:reversecolor=='s'}" ng-show="calc_zscore() == -1">Levemente abaixo da média </label>
+        <label title="{{extraTxt}}" class="zc0" ng-show="calc_zscore() == 0">Na média </label>
+        <label title="{{extraTxt}}" ng-class="{zc1:reversecolor=='', zcm1:reversecolor=='s'}" ng-show="calc_zscore() == 1">Levemente acima da média </label>
+        <label title="{{extraTxt}}" ng-class="{zc2:reversecolor=='', zcm2:reversecolor=='s'}" ng-show="calc_zscore() == 2">Acima da média </label>
+        <label title="{{extraTxt}}" ng-class="{zc3:reversecolor=='', zcm3:reversecolor=='s'}" ng-show="calc_zscore() == 3">Muito acima da média </label>
+        <label title="{{extraTxt}}" ng-class="{zc4:reversecolor=='', zcm4:reversecolor=='s'}" ng-show="calc_zscore() >= 4">Extremamente acima da média  </label>
+    </div>
+
     <ul  class="histslider pgrUl" ng-class="{'pgrPos':_zscore >= 0, 'pgrNeg':_zscore<0}">
         <li ng-repeat="i in [0,1,2,3]" style="width:{{$parent.getWidth(i)}}%;"></li>
     </ul>
-    
-    <div ng-if="histogram.professonalMode == false" class="zcParent">
-        <label ng-class="{zcm4:reversecolor=='', zc4:reversecolor=='s'}" ng-show="calc_zscore() <= -4">Extremamente abaixo da média <em  ng-bind="extraTxt"></em></label>
-        <label ng-class="{zcm3:reversecolor=='', zc3:reversecolor=='s'}" ng-show="calc_zscore() == -3">Muito abaixo da média <em  ng-bind="extraTxt"></em></label>
-        <label ng-class="{zcm2:reversecolor=='', zc2:reversecolor=='s'}" ng-show="calc_zscore() == -2">Abaixo da média <em  ng-bind="extraTxt"></em></label>
-        <label ng-class="{zcm1:reversecolor=='', zc1:reversecolor=='s'}" ng-show="calc_zscore() == -1">Levemente abaixo da média <em  ng-bind="extraTxt"></em></label>
-        <label class="zc0" ng-show="calc_zscore() == 0">Na média <em  ng-bind="extraTxt"></em></label>
-        <label ng-class="{zc1:reversecolor=='', zcm1:reversecolor=='s'}" ng-show="calc_zscore() == 1">Levemente acima da média <em  ng-bind="extraTxt"></em></label>
-        <label ng-class="{zc2:reversecolor=='', zcm2:reversecolor=='s'}" ng-show="calc_zscore() == 2">Acima da média <em  ng-bind="extraTxt"></em></label>
-        <label ng-class="{zc3:reversecolor=='', zcm3:reversecolor=='s'}" ng-show="calc_zscore() == 3">Muito acima da média <em  ng-bind="extraTxt"></em></label>
-        <label ng-class="{zc4:reversecolor=='', zcm4:reversecolor=='s'}" ng-show="calc_zscore() >= 4">Extremamente acima da média <em  ng-bind="extraTxt"></em> </label>
-    </div>
+
+
     <label class="histFooteLabel" ng-show="histogram.professonalMode==false" ng-click="histogram.professonalMode = true">
             <i class="material-icons tiny">equalizer</i>Ver distribuição        
     </label>

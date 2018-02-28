@@ -2611,9 +2611,9 @@ a {
 .divider {
   height: 1px;
   overflow: hidden;
-  background-color: #e0e0e0;
-  margin-top: 7px;
-  margin-bottom: 7px;
+  background-color: #bdbdbd;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 blockquote {

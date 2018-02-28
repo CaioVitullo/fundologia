@@ -210,8 +210,7 @@
 							<div class="search-wrapper card">
 								<input class="bbn" type="text" ng-model="searchTxt" id="icon_prefix">
 								<i class="iconInside material-icons">search</i>
-								<label for="icon_prefix" class="hide-on-smaller-400" style="left:10px;" >Pesquise e compare os melhores fundos de investimento para o seu perfil</label>  
-								<label for="icon_prefix" class="show-on-smaller-400" >Pesquise fundos de investimento</label>  
+								<label for="icon_prefix" style="left:10px;" >Pesquise e compare fundos de investimento</label>  
 							</div>
 							<!-- <input id="icon_prefix" type="text" ng-model="searchTxt" class="validate"><i class="material-icons ">search</i>
 							<label for="icon_prefix" ng-bind="::searchFieldTxt">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>  -->
@@ -229,7 +228,7 @@
 											Rank 
 											<i class="tiny material-icons"  title="Quer entender melhor nosso ranking? Clique aqui." ng-click="showRankDialog()" >info_outline</i> 
 										</th>
-										<th ng-click="setCurrentSort(1)" ng-class="{currentSortCol:currentSortCol==1}">Fundo</th>
+										<th  ng-class="{currentSortCol:currentSortCol==1}">Fundo</th>
 										<th ng-click="setCurrentSort(2)" ng-class="{currentSortCol:currentSortCol==2}" class="hide-on-small-and-down "  title="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo">
 											Meses positivo
 											<i class="tiny material-icons ">info_outline</i>
@@ -268,7 +267,7 @@
 								</tbody>
 								</table>
 								<p ng-show="hasMoreLines==true">
-									<a>ver mais</a>
+									<a class="pointer" ng-click="showMore()">ver mais</a>
 								</p>
 								<div ng-show="noResult == true && searchTxt.length > 0" class="tdNotFound">
 									<p>Não encontrou o fundo que gostaria?</p>
@@ -276,6 +275,7 @@
 										<img src="img/shame.png"/>
 									</p>
 									<p>Use a hashtag <i>#faltouEsseFundo</i> nos comentários abaixo que nos vamos atras dele para você! </p>
+									<p><i>Obs: So incluímos fundos com no mínimo 12 meses.</i></p>
 								</div>	
 								<p class="tdNotFound" ng-show="noResult == true && searchTxt.length == 0"></p>
 							</div>
@@ -314,20 +314,20 @@
 				<div class="section fixed ">
 					
 					<label title="{{currentRow.name}}" class="currentName">{{currentRow.name}}</label>
-					<div class="divider"></div>
+					
 
 					<h5 class="filterTitle ">
 						Aplicação inicial: 
 					</h5>
-					<label class="labelTitle" ng-bind="currentRow.info.initialValue|currency:'R$'"></label>
+					<label class="labelTitle minH" ng-bind="currentRow.info.initialValue|currency:'R$'"></label>
 					<h5 class="filterTitle ">
 						Taxa Adm: 
 					</h5>
-					<label class="labelTitle" ng-bind="currentRow.info.admTax|percentage"></label>
+					<label class="labelTitle minH" ng-bind="currentRow.info.admTax|percentage"></label>
 					<h5 class="filterTitle ">
 						Cotização: 
 					</h5>
-					<label class="labelTitle" ng-bind="currentRow.info.cotizacaoTime"></label>
+					<label class="labelTitle minH" ng-bind="currentRow.info.cotizacaoTime"></label>
 					
 					<div class="divider"></div>
 					<h5 class="filterTitle " ng-bind="filters.Periodo[selectedPeriod].Title"></h5>
@@ -340,17 +340,6 @@
 					</div>
 					<div class="divider"></div>
 
-					<h5 class="filterTitle ">Rentabilidade acumulada:</h5>
-					<div id="curve_chart" style="min-height:120px;" ></div>
-					<div class="divider"></div>
-					
-					<h5 class="filterTitle ">Rank mês a mês:</h5>
-					<div id="ranking_chart" style="min-height:120px;" ></div>
-					<label class="histFooteLabel mt5" ng-click="showRankDialog()">
-						<i class="tiny material-icons"  >info_outline</i> Entenda nosso ranking.
-					</label>
-					
-					
 					
 				
 					<label>Veja este fundo comparado aos outros fundos 
@@ -477,6 +466,22 @@
 						sufix="%"
 						tooltip="Rendimento médio no período"
 						currentrow="currentRowHistAvg"></my-histogram>
+
+					<div class="divider"></div>
+					
+					<h5 class="filterTitle ">Rentabilidade acumulada:</h5>
+					<div id="curve_chart" style="min-height:120px;" ></div>
+					
+					<div class="divider"></div>
+					
+					<h5 class="filterTitle ">Rank mês a mês:</h5>
+					<div id="ranking_chart" style="min-height:120px;" ></div>
+					<label class="histFooteLabel mt5" ng-click="showRankDialog()">
+						<i class="tiny material-icons"  >info_outline</i> Entenda nosso ranking.
+					</label>
+					
+					
+					
 
 					<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='histogram'"  class="waves-effect waves-light btn-large w100">Voltar</a>
 				</div>

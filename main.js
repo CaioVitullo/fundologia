@@ -64,9 +64,10 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			if(me.lastHash != null && me.lastHash.hasSameValuesAs(currentHash) == false){
 				var fullList = me.defaultLists[3];
 				var list = [];
+				var count = 0;
 				for(var i = 0, len = fullList.length;i<len;i++ ){
 					var item = fullList[i];
-					if(
+					if( 
 						item.figures[me.selectedPeriod] != null &&
 						item.info.TypeFilter.hasAnyTrueOnSameIndex(filterStatus.Tipo) &&
 						(me.withdrawDays == 100 || item.info.withdrawDays <= me.withdrawDays )&&
@@ -77,7 +78,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 						(me.filterHideClosed == false || item.info.isClosed == false) &&
 						(me.filterHideRestrict == false || item.info.restrict) &&
 						item.info.InitialValueFilter.hasAnyTrueOnSameIndex(filterStatus.Initialvalue)){
-							list.push(item);
+							if(count < me.defaultListSize)
+								list.push(item);
+							count++;
 						}
 				}
 				if(list.length > 0){
@@ -105,8 +108,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 						
 					}
 					
-
-					list = list.take(me.defaultListSize);
+					me.hasMoreLines = count > list.length;
+					//list = list.take(me.defaultListSize);
 					me.lastHash = currentHash;
 					me.lastResult = list;
 				}
@@ -157,7 +160,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			showEvenClosed:[me.filterHideClosed ? 1 : 0],
 			showEvenRestrict:[me.filterHideRestrict ? 1 : 0],
 			sort:[me.currentSortCol],
-			sortReverse:[me.sortReverse?1:0]
+			sortReverse:[me.sortReverse?1:0],
+			size:[me.defaultListSize]
 		};
 	};
 	
@@ -172,13 +176,15 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			me.filterHideClosed==false &&
 			me.filterHideRestrict == false &&
 			me.currentSortCol==0;
-			me.sortReverse==false;
-
+			me.sortReverse==false &&
+			me.defaultListSize == 30;
 			//me.filters.resgate.allSetTo({checked:true}) &&
 
 	}
 	me.userHasSelectedRow=false;
-	
+	me.showMore = function(){
+		me.defaultListSize += 20;
+	};
 	me.hasShowedToastForCompare=false;
 	me.fundsToCompare = [];
 	me.rowClick = function(row, item){
@@ -424,13 +430,18 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		},1500);
 	}
 	me.chartData = {}
-	me.getGenericData = function(propery){
+	me.getGenericData = function(propery, name){
 		if(me.chartData.hasOwnProperty(propery)){
 			if(me.chartData[propery].hasOwnProperty(me.selectedPeriod))
 				return me.chartData[propery][me.selectedPeriod];
 		}
 		
 			var d= [];
+			var fn = function(item, fig){
+				html= '<h5 style="width:300px;font-size:1.3rem;">' + item.name + '</h5><p>' + name + ': ' + (item.info.hasOwnProperty(propery) ? item.info[propery] : fig[propery]) + '</p>';
+				html += '<p>Rendimento: ' + fig.performance + '% acumulado nos ' + me.filters.Periodo[me.selectedPeriod].Title.toLowerCase();
+				return html;
+			}
 			for(var i=0;i<me.defaultLists[3].length;i++){
 				var item = me.defaultLists[3][i]
 				var fig = item.figures[me.selectedPeriod];
@@ -439,11 +450,11 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 					d.push([
 						item.info.hasOwnProperty(propery) ? item.info[propery] : fig[propery],
 						item.info.isAcao ? fig.performance : null,
-						item.name ,
+						fn(item, fig) ,
 						item.info.isMultimercado ? fig.performance : null,
-						item.name ,
+						fn(item, fig) ,
 						item.info.isRendaFixa ? fig.performance : null,
-						item.name 
+						fn(item, fig)
 					])
 				}		
 			}
@@ -471,7 +482,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			legend: 'none',
 			//aggregationTarget:'none',
 			
-			tooltip:{ textStyle: {color: 'black'}, showColorCode: true}
+			tooltip:{isHtml: true}//{isHtml:true, textStyle: {color: 'black'}, showColorCode: true}
 			//bubble: {textStyle: {fontSize: 11}}
 		  };
 	}
@@ -485,14 +496,14 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		
 		data.addColumn({type:'number',label: name});
 		data.addColumn('number', 'Ação');
-		data.addColumn({'type': 'string', 'role': 'tooltip'});
+		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
 		data.addColumn('number', 'Multimercado');
-		data.addColumn({'type': 'string', 'role': 'tooltip'});
+		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
 		data.addColumn('number', 'Renda Fixa');
-		data.addColumn({'type': 'string', 'role': 'tooltip'});
+		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
 		
 		
-		data.addRows(me.getGenericData(propery));
+		data.addRows(me.getGenericData(propery, name));
 
         var options = me.gerDefaultChartOptions(name);
 		

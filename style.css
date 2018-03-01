@@ -834,17 +834,19 @@ footer{
 
 tr.tableRow.ng-scope.hoverRow:after {
     background-color: #f2f2f2;
-    right: -20px;
+	width: 17%;
+	
 }
 tr.tableRow.ng-scope:after {
     content: " ";
     background: transparent;
-    width: 25px;
+	width: 0px;
     height: 60px;
     transition: all .2s ease;
     display: block;
     position: absolute;
-    right: 0;
+	left: 99%;
+	
 }
 .rightColor{
 	background-color: #f2f2f2;

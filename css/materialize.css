@@ -2881,6 +2881,8 @@ ul.staggered-list li {
     display: table-cell!important;
   }
 }
+
+
 @media only screen and (min-width: 993px) {
   .show-on-large {
     display: block !important;

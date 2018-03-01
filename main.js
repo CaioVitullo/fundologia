@@ -233,7 +233,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	me.changePeriodo = function(){
 		me.loadHistograms(null);
 	}
-	me.drawLineChart = function(row){
+	me.drawLineChart = function(row, recalcWidth){
 			
 		
 		if(isSafeToUse(google, 'visualization.arrayToDataTable') == false || 
@@ -267,13 +267,15 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 					baselineColor:'#e0e0e0'
 				}
 			};
+			if(recalcWidth == true)
+				options.width = $('#rightmenu').width();
 	
 			var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 	
 			chart.draw(data, options);
 			
 	};
-	me.drawRankChart = function(row){
+	me.drawRankChart = function(row, resizeWidth){
 			
 		
 		if(isSafeToUse(google, 'visualization.arrayToDataTable') == false || 
@@ -308,7 +310,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 					baselineColor:'#e0e0e0'
 				}
 			};
-	
+			if(resizeWidth==true)
+				options.width = $('#rightmenu').width();
+				
 			var chart = new google.visualization.LineChart(document.getElementById('ranking_chart'));
 	
 			chart.draw(data, options);
@@ -515,7 +519,12 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	}
 	me.mobSelectPage = function(page){
 		if(page=='histogram')
-			$timeout(resizeHorizontalScroll,50);
+			$timeout(function(){
+				me.drawLineChart(me.currentRow, true);
+				me.drawRankChart(me.currentRow, true);
+				resizeHorizontalScroll();
+
+			} ,50);
 			
 
 		me.mobileSelectedPage = page;

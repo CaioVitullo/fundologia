@@ -2819,6 +2819,10 @@ ul.staggered-list li {
     width: 200px!important;
     max-width: 200px!important;
   }
+  .tr.tableRow.ng-scope:after{
+    content: "";
+    display: none;
+  }
 }
 
 .rotate{

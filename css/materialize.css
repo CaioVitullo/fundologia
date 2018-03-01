@@ -2815,6 +2815,10 @@ ul.staggered-list li {
   .row .col.s12 {
     padding: 0px 0.2rem
   }
+  .fundName{
+    width: 200px!important;
+    max-width: 200px!important;
+  }
 }
 
 .rotate{

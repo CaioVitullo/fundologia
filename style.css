@@ -106,15 +106,15 @@ nav{
 .btn-marrom:hover, .btn-marrom:active, .btn-marrom:focus{
 	background: #3b331e;
 }
-/*footer*/
+
 footer{
 	padding: 5% 0;
 	background: #39495d;
 	width: 100%;
     left: 0px;
-    position: absolute;
+    position: inherit;
 }
-/*footer*/
+
 
 /*MQ*/
 @media (max-width: 768px){

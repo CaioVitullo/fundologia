@@ -247,7 +247,7 @@
 									<tr class="tableRow"
 										ng-class="{hoverRow:row.uniqueID==$parent.currentDetailRow, fullsquare:row.selectedToCompare}" ng-repeat="row in getMainList()" 
 										ng-mouseover="showRowDetail(row)">
-										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank">Rank</td>
+										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank+1">Rank</td>
 										<td class="cutText noselect" >
 											<span title="{{row.name}}" class="fundName">{{row.name}}</span>
 											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict"  title="Fundo destinado à investidores qualificados.">monetization_on</i>

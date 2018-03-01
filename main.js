@@ -514,6 +514,10 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		chart.draw(data, options);
 	}
 	me.mobSelectPage = function(page){
+		if(page=='histogram')
+			$timeout(resizeHorizontalScroll,50);
+			
+
 		me.mobileSelectedPage = page;
 	};
 	

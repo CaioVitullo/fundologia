@@ -943,3 +943,6 @@ i.tinySmall{
 .fr{
 	float: right;
 }
+.psmall{
+	font-size: 0.75rem;
+}

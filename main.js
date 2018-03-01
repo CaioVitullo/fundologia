@@ -18,7 +18,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	me.withdrawDays = 100;
 	me.admTx = 4;
 	me.mobileSelectedPage = 'main';
-	
+	me.isMobile = $('#mobileMenu').is(':visible');
 	
 	me.searchFieldTxt = 'Pesquise e compare os melhores fundos de investimento para o seu perfil';
 
@@ -184,6 +184,14 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	me.userHasSelectedRow=false;
 	me.showMore = function(){
 		me.defaultListSize += 20;
+	};
+	me.selectRow = function(row){
+		if(me.isMobile == true){
+			me.currentDetailRow = row.uniqueID;
+			me.currentrow = row;
+			me.showRowDetail(row, true);
+			me.mobSelectPage('histogram');
+		}
 	};
 	me.hasShowedToastForCompare=false;
 	me.fundsToCompare = [];

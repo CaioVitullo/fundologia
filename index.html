@@ -58,7 +58,7 @@
 		<nav class="nav-extended">
 		 <div class="nav-wrapper container">
 		  
-		  <a data-activates="slide-out" class="button-collapse"><i class="material-icons"  >menu</i></a>
+		  <a data-activates="slide-out" id="mobileMenu" class="button-collapse"><i class="material-icons"  >menu</i></a>
 		  <label class="mainHeader">fundologia.</label> 
 		  <span>o fim do achismo!</span>
 		  <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -154,9 +154,9 @@
 				<div class="divider"></div>
 
 				<h5 class="filterTitle">
-					Resgate em atê: 
+					Resgate em até: 
 				</h5>
-				<p class="sliderTitle sliderColor"><em ng-show="withdrawDays<100">em atê </em>{{withdrawDays}} dia{{withdrawDays!=1?'s':''}} <em ng-show="withdrawDays==100"> ou mais</em></p>
+				<p class="sliderTitle sliderColor"><em ng-show="withdrawDays<100">em até </em>{{withdrawDays}} dia{{withdrawDays!=1?'s':''}} <em ng-show="withdrawDays==100"> ou mais</em></p>
 				<p class="range-field sliderP">
 					<input type="range" ng-model="withdrawDays"  min="0" max="100" />
 				</p>
@@ -169,9 +169,9 @@
 				<div class="divider"></div>
 
 				<h5 class="filterTitle">
-					Taxa de Adm atê: 
+					Taxa de Adm até: 
 				</h5>
-				<p class="sliderTitle sliderColor"><em ng-show="admTx<4">atê </em> {{admTx}}% <em ng-show="admTx==4"> ou mais</em></p>
+				<p class="sliderTitle sliderColor"><em ng-show="admTx<4">até </em> {{admTx}}% <em ng-show="admTx==4"> ou mais</em></p>
 				<p class="range-field sliderP">
 					<input type="range" ng-model="admTx"  min="0" max="4" step="0.1" />
 				</p>
@@ -183,7 +183,7 @@
 				<div class="divider"></div>
 
 				<h5 class="filterTitle">
-					Patrimônio atê:
+					Patrimônio até:
 				</h5>
 				<p class="checkList" ng-repeat="filterItem in filters.volume.equals({visible:true})" >
 						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterVolume_{{::filterItem.id}}" ng-click="checkFilterTopShow(filters.volume,showAllFilterVolumeOn)" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
@@ -245,7 +245,9 @@
 		
 								<tbody>
 									<tr class="tableRow"
-										ng-class="{hoverRow:row.uniqueID==$parent.currentDetailRow, fullsquare:row.selectedToCompare}" ng-repeat="row in getMainList()" 
+										ng-class="{hoverRow:row.uniqueID==$parent.currentDetailRow, fullsquare:row.selectedToCompare}" 
+										ng-repeat="row in getMainList()" 
+										ng-click="selectRow(row)"
 										ng-mouseover="showRowDetail(row)">
 										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank+1">Rank</td>
 										<td class="cutText noselect" >
@@ -281,6 +283,7 @@
 							</div>
 						</div>
 						<div class="row"  ng-show="mobileSelectedPage =='main'" >
+							<p class="psmall">Os comentários são de responsabilidade exclusiva de seus autores e não representam a opinião deste site</p>
 							<div class="">
 									<div id="disqus_thread"></div>
 									<script>

@@ -1,1 +1,0 @@
-[{"sigla":"UNEMAT","universidade":"UNIVERSIDADE DO ESTADO DE MATO GROSSO","unidade":"CAMPUS UNIVERSITÁRIO DO VALE DO RIO BUGRES","curso":"ENGENHARIA DE PRODUÇÃO AGROINDUSTRIAL","periodo":"Integral (Mat/Vesp/Not)","notaCorte":615.85,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"Barra do Bugres","UF":"MT"}]

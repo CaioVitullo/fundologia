@@ -1,1 +1,0 @@
-[{"sigla":"UFMT","universidade":"UNIVERSIDADE FEDERAL DE MATO GROSSO","unidade":"CAMPUS UNIVERSITÁRIO DE RONDONÓPOLIS","curso":"LETRAS - LÍNGUA E LITERATURAS DE LÍNGUA INGLESA","periodo":"Vespertino","notaCorte":600.12,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Rondonópolis","UF":"MT","id":3509}]

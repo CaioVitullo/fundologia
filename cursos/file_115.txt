@@ -1,1 +1,0 @@
-[{"sigla":"UFMA","universidade":"UNIVERSIDADE FEDERAL DO MARANHÃO","unidade":"CAMPUS DO BACANGA","curso":"CIÊNCIAS IMOBILIÁRIAS","periodo":"Noturno","notaCorte":631.08,"data":"10/01/2014","vagas":52,"vagasDiruno":52,"vagasNoturno":0,"municipio":"São Luís","UF":"MA","id":1345}]

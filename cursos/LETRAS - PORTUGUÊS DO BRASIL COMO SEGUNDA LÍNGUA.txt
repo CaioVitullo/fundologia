@@ -1,1 +1,0 @@
-[{"sigla":"UNB","universidade":"UNIVERSIDADE DE BRASÍLIA","unidade":"CAMPUS UNIVERSITÁRIO DARCY RIBEIRO","curso":"LETRAS - PORTUGUÊS DO BRASIL COMO SEGUNDA LÍNGUA","periodo":"Integral (Mat/Vesp)","notaCorte":646.82,"data":"10/01/2014","vagas":15,"vagasDiruno":15,"vagasNoturno":0,"municipio":"Brasília","UF":"DF"}]

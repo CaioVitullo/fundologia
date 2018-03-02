@@ -1,1 +1,0 @@
-[{"sigla":"UFRJ","universidade":"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO","unidade":"CIDADE UNIVERSITÁRIA","curso":"CIÊNCIAS BIOLÓGICAS: MODALIDADE MÉDICA","periodo":"Integral (Mat/Vesp)","notaCorte":753.66,"data":"10/01/2014","vagas":42,"vagasDiruno":42,"vagasNoturno":0,"municipio":"Rio de Janeiro","UF":"RJ","id":1144}]

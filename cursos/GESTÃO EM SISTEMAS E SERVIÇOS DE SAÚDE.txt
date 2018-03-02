@@ -1,1 +1,0 @@
-[{"sigla":"UFRN","universidade":"UNIVERSIDADE FEDERAL DO RIO GRANDE DO NORTE","unidade":"CAMPUS CENTRAL","curso":"GESTÃO EM SISTEMAS E SERVIÇOS DE SAÚDE","periodo":"Noturno","notaCorte":628.03,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Natal","UF":"RN"}]

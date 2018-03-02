@@ -1,1 +1,0 @@
-[{"sigla":"UFRB","universidade":"UNIVERSIDADE FEDERAL DO RECÔNCAVO DA BAHIA","unidade":"CENTRO DE FORMAÇÃO DE PROFESSORES","curso":"LETRAS - LIBRAS/LÍNGUA ESTRANGEIRA","periodo":"Noturno","notaCorte":580.8,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"Amargosa","UF":"BA","id":3506}]

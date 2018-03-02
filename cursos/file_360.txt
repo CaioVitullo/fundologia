@@ -1,1 +1,0 @@
-[{"sigla":"UFPR","universidade":"UNIVERSIDADE FEDERAL DO PARANÁ","unidade":"CAMPUS I - CENTRO CURITIBA","curso":"LETRAS - POLONÊS","periodo":"Noturno","notaCorte":685.8,"data":"10/01/2014","vagas":2,"vagasDiruno":2,"vagasNoturno":0,"municipio":"Curitiba","UF":"PR","id":3578}]

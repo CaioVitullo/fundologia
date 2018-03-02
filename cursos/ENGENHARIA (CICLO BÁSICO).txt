@@ -1,1 +1,0 @@
-[{"sigla":"UFRJ","universidade":"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO","unidade":"CIDADE UNIVERSITÁRIA","curso":"ENGENHARIA (CICLO BÁSICO)","periodo":"Integral (Mat/Vesp)","notaCorte":769.71,"data":"10/01/2014","vagas":100,"vagasDiruno":100,"vagasNoturno":0,"municipio":"Rio de Janeiro","UF":"RJ"}]

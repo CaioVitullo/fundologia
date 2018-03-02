@@ -1,1 +1,0 @@
-[{"sigla":"UFBA","universidade":"UNIVERSIDADE FEDERAL DA BAHIA","unidade":"UNIDADES DA RUA BARÃO DE JEREMOABO","curso":"LETRAS VERNÁCULAS","periodo":"Noturno","notaCorte":650.13,"data":"10/01/2014","vagas":36,"vagasDiruno":36,"vagasNoturno":0,"municipio":"Salvador","UF":"BA"}]

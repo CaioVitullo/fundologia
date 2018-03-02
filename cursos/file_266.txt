@@ -1,1 +1,0 @@
-[{"sigla":"UFBA","universidade":"UNIVERSIDADE FEDERAL DA BAHIA","unidade":"UNIDADES DE SÃO LÁZARO","curso":"ESTUDO DE GÊNERO E DIVERSIDADE","periodo":"Noturno","notaCorte":626.35,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"Salvador","UF":"BA","id":2643}]

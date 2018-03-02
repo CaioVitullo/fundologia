@@ -1,1 +1,0 @@
-[{"sigla":"UFRJ","universidade":"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO","unidade":"CIDADE UNIVERSITÁRIA","curso":"CIÊNCIAS BIOLÓGICAS: BIOFÍSICA","periodo":"Integral (Mat/Vesp)","notaCorte":731.47,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Rio de Janeiro","UF":"RJ","id":1141}]

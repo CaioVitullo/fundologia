@@ -1,1 +1,0 @@
-[{"sigla":"UFRJ","universidade":"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO","unidade":"CAMPUS UFRJ - MACAÉ","curso":"ENGENHARIA","periodo":"Integral (Mat/Vesp)","notaCorte":714.45,"data":"10/01/2014","vagas":120,"vagasDiruno":120,"vagasNoturno":0,"municipio":"Macaé","UF":"RJ","id":1868}]

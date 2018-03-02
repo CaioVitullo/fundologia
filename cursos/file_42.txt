@@ -1,1 +1,0 @@
-[{"sigla":"UFPB","universidade":"UNIVERSIDADE FEDERAL DA PARAÍBA","unidade":"UNIDADE SEDE","curso":"ABI - TURISMO","periodo":"Noturno","notaCorte":604.1,"data":"10/01/2014","vagas":70,"vagasDiruno":35,"vagasNoturno":35,"municipio":"João Pessoa","UF":"PB","id":149}]

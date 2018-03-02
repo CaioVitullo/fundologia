@@ -1,1 +1,0 @@
-[{"sigla":"                            UNIVERSIDADE \"","universidade":"UNIVERSIDADE DA INTEGRAÇÃO INTERNACIONAL DA LUSOFONIA AFROBRASILEIRA","unidade":"CAMPUS DA LIBERDADE","curso":"CIÊNCIAS DA NATUREZA E MATEMÁTICA","periodo":"Integral (Mat/Vesp)","notaCorte":621.35,"data":"10/01/2014","vagas":18,"vagasDiruno":18,"vagasNoturno":0,"municipio":"Redenção","UF":"CE","id":1253}]

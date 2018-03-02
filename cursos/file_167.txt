@@ -1,1 +1,0 @@
-[{"sigla":"UFU","universidade":"UNIVERSIDADE FEDERAL DE UBERLÂNDIA","unidade":"CAMPUS EDUCAÇÃO FÍSICA","curso":"EDUCAÇÃO FÍSICA - LICENCIATURA OU BACHARELADO","periodo":"Integral (Mat/Vesp/Not)","notaCorte":650.17,"data":"10/01/2014","vagas":20,"vagasDiruno":20,"vagasNoturno":0,"municipio":"Uberlândia","UF":"MG","id":1790}]

@@ -1,1 +1,0 @@
-[{"sigla":"UFF","universidade":"UNIVERSIDADE FEDERAL FLUMINENSE","unidade":"INSTITUTO DE ARTES E COMUNICAÇÃO SOCIAL","curso":"ESTUDOS DE MÍDIA","periodo":"Integral (Mat/Vesp/Not)","notaCorte":718.93,"data":"10/01/2014","vagas":31,"vagasDiruno":31,"vagasNoturno":0,"municipio":"Niterói","UF":"RJ"}]

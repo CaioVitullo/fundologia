@@ -1,1 +1,0 @@
-[{"sigla":"UFPA","universidade":"UNIVERSIDADE FEDERAL DO PARÁ","unidade":"CIDADE UNIVERSITARIA JOSÉ DA SILVEIRA NETTO","curso":"ENGENHARIA NAVAL","periodo":"Matutino","notaCorte":869.15,"data":"10/01/2014","vagas":4,"vagasDiruno":4,"vagasNoturno":0,"municipio":"Belém","UF":"PA","id":2567}]

@@ -1,1 +1,0 @@
-[{"sigla":"UNB","universidade":"UNIVERSIDADE DE BRASÍLIA","unidade":"CAMPUS UNIVERSITÁRIO DARCY RIBEIRO","curso":"GESTÃO DE POLÍTICAS PÚBLICAS","periodo":"Noturno","notaCorte":696.52,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Brasília","UF":"DF","id":3158}]

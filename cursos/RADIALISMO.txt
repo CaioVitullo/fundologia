@@ -1,1 +1,0 @@
-[{"sigla":"UFPB","universidade":"UNIVERSIDADE FEDERAL DA PARAÍBA","unidade":"UNIDADE SEDE","curso":"RADIALISMO","periodo":"Matutino","notaCorte":608.46,"data":"10/01/2014","vagas":60,"vagasDiruno":30,"vagasNoturno":30,"municipio":"João Pessoa","UF":"PB"}]

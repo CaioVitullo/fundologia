@@ -1,1 +1,0 @@
-[{"sigla":"UFPA","universidade":"UNIVERSIDADE FEDERAL DO PARÁ","unidade":"CIDADE UNIVERSITARIA JOSÉ DA SILVEIRA NETTO","curso":"LETRAS - LÍNGUA PORTUGUESA E LIBRAS","periodo":"Integral (Mat/Vesp)","notaCorte":762.76,"data":"10/01/2014","vagas":5,"vagasDiruno":0,"vagasNoturno":5,"municipio":"Belém","UF":"PA","id":3559}]

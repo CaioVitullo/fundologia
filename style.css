@@ -731,7 +731,9 @@ footer{
 .hoverRow .colorIcon{
 	color: black;
 }
-
+.hoverRow .fundName {
+	color: #3969ba;
+}
 .colorIcon{
 	color: #c5c9ce;
 }

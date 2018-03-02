@@ -1,1 +1,0 @@
-[{"sigla":"UFPEL","universidade":"UNIVERSIDADE FEDERAL DE PELOTAS","unidade":"UNIDADES DISPERSAS","curso":"MÚSICA POPULAR","periodo":"Integral (Vesp/Not)","notaCorte":644.04,"data":"10/01/2014","vagas":20,"vagasDiruno":20,"vagasNoturno":0,"municipio":"Pelotas","UF":"RS","id":4088}]

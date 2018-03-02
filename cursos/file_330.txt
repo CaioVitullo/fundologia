@@ -1,1 +1,0 @@
-[{"sigla":"UFFS","universidade":"UNIVERSIDADE FEDERAL DA FRONTEIRA SUL","unidade":"CAMPUS LARANJEIRAS DO SUL","curso":"INTERDISCIPLINAR EM EDUCAÇÃO NO CAMPO","periodo":"Integral (Mat/Vesp)","notaCorte":595.08,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Laranjeiras do Sul","UF":"PR","id":3374}]

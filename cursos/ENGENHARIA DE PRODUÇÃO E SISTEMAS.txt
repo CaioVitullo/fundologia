@@ -1,1 +1,0 @@
-[{"sigla":"UDESC","universidade":"FUNDAÇÃO UNIVERSIDADE DO ESTADO DE SANTA CATARINA","unidade":"JOINVILLE - CAMPUS UNIVERSITÁRIO PROFESSOR AVELINO","curso":"ENGENHARIA DE PRODUÇÃO E SISTEMAS","periodo":"Noturno","notaCorte":704.84,"data":"10/01/2014","vagas":10,"vagasDiruno":10,"vagasNoturno":0,"municipio":"Joinville","UF":"SC"}]

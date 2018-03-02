@@ -1,1 +1,0 @@
-[{"sigla":"                            UNIVERSIDADE F\"","universidade":"UNIVERSIDADE FEDERAL DA INTEGRAÇÃO LATINOAMERICANA","unidade":"POLO NA SEDE","curso":"ANTROPOLOGIA - DIVERSIDADE CULTURAL LATINO-AMERICANA","periodo":"Vespertino","notaCorte":638.8,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Foz do Iguaçu","UF":"PR"}]

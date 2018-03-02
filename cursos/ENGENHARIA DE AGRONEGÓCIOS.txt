@@ -1,1 +1,0 @@
-[{"sigla":"UFF","universidade":"UNIVERSIDADE FEDERAL FLUMINENSE","unidade":"CAMPUS DE VOLTA REDONDA","curso":"ENGENHARIA DE AGRONEGÓCIOS","periodo":"Integral (Mat/Vesp/Not)","notaCorte":670.72,"data":"10/01/2014","vagas":44,"vagasDiruno":44,"vagasNoturno":0,"municipio":"Volta Redonda","UF":"RJ"}]

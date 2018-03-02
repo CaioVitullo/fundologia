@@ -1,1 +1,0 @@
-[{"sigla":"UFMG","universidade":"UNIVERSIDADE FEDERAL DE MINAS GERAIS","unidade":"CAMPUS PAMPULHA","curso":"ENGENHARIA AEROESPACIAL","periodo":"Matutino","notaCorte":787.62,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Belo Horizonte","UF":"MG","id":1869}]

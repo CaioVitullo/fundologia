@@ -1,1 +1,0 @@
-[{"sigla":"UDESC","universidade":"FUNDAÇÃO UNIVERSIDADE DO ESTADO DE SANTA CATARINA","unidade":"FLORIANÓPOLIS","curso":"DESIGN - INDUSTRIAL","periodo":"Matutino","notaCorte":716.6,"data":"10/01/2014","vagas":5,"vagasDiruno":5,"vagasNoturno":0,"municipio":"Florianópolis","UF":"SC"}]

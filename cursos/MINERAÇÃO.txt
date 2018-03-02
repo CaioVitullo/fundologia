@@ -1,1 +1,0 @@
-[{"sigla":"                            FUNDAÇÃO UN\"","universidade":"FUNDAÇÃO UNIVERSIDADE FEDERAL DO PAMPA  UNIPAMPA","unidade":"CAMPUS CAÇAPAVA DO SUL","curso":"MINERAÇÃO","periodo":"Noturno","notaCorte":604.44,"data":"10/01/2014","vagas":40,"vagasDiruno":40,"vagasNoturno":0,"municipio":"Caçapava do Sul","UF":"RS"}]

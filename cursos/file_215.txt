@@ -1,1 +1,0 @@
-[{"sigla":"UNIFESSPA","universidade":"UNIVERSIDADE FEDERAL DO SUL E SUDESTE DO PARÁ","unidade":"MARABÁ","curso":"ENGENHARIA DE MINAS E MEIO AMBIENTE","periodo":"Integral (Mat/Vesp/Not)","notaCorte":711.98,"data":"10/01/2014","vagas":6,"vagasDiruno":0,"vagasNoturno":6,"municipio":"Marabá","UF":"PA","id":2233}]

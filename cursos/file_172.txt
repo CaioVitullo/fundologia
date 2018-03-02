@@ -1,1 +1,0 @@
-[{"sigla":"UFU","universidade":"UNIVERSIDADE FEDERAL DE UBERLÂNDIA","unidade":"CAMPUS UMUARAMA","curso":"ENFERMAGEM - LICENCIATURA OU BACHARELADO","periodo":"Integral (Mat/Vesp/Not)","notaCorte":681.93,"data":"10/01/2014","vagas":20,"vagasDiruno":20,"vagasNoturno":0,"municipio":"Uberlândia","UF":"MG","id":1865}]

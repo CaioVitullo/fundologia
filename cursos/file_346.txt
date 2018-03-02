@@ -1,1 +1,0 @@
-[{"sigla":"UFPB","universidade":"UNIVERSIDADE FEDERAL DA PARAÍBA","unidade":"UNIDADE SEDE","curso":"LETRAS - LETRAS CLÁSSICAS (GREGO E LATIM)","periodo":"Noturno","notaCorte":592.6,"data":"10/01/2014","vagas":60,"vagasDiruno":30,"vagasNoturno":30,"municipio":"João Pessoa","UF":"PB","id":3501}]

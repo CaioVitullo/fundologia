@@ -1,1 +1,0 @@
-[{"sigla":"FURG","universidade":"UNIVERSIDADE FEDERAL DO RIO GRANDE","unidade":"CAMPUS SANTA VITÓRIA DO PALMAR","curso":"TURISMO BINACIONAL","periodo":"Noturno","notaCorte":625.33,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Santa Vitória do Palmar","UF":"RS"}]

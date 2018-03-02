@@ -1,1 +1,0 @@
-[{"sigla":"                            UNIVERSIDADE F\"","universidade":"UNIVERSIDADE FEDERAL DA INTEGRAÇÃO LATINOAMERICANA","unidade":"POLO NA SEDE","curso":"DESENVOLVIMENTO RURAL E SEGURANÇA ALIMENTAR","periodo":"Vespertino","notaCorte":585.5,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Foz do Iguaçu","UF":"PR","id":1546}]

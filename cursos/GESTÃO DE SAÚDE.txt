@@ -1,1 +1,0 @@
-[{"sigla":"UNB","universidade":"UNIVERSIDADE DE BRASÍLIA","unidade":"CAMPUS UNB CEILÂNDIA","curso":"GESTÃO DE SAÚDE","periodo":"Integral (Mat/Vesp)","notaCorte":740.1,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Brasília","UF":"DF"}]

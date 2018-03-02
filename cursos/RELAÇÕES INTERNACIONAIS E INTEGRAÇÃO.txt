@@ -1,1 +1,0 @@
-[{"sigla":"                            UNIVERSIDADE F\"","universidade":"UNIVERSIDADE FEDERAL DA INTEGRAÇÃO LATINOAMERICANA","unidade":"POLO NA SEDE","curso":"RELAÇÕES INTERNACIONAIS E INTEGRAÇÃO","periodo":"Vespertino","notaCorte":704.36,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Foz do Iguaçu","UF":"PR"}]

@@ -1,1 +1,0 @@
-[{"sigla":"UFSCAR","universidade":"UNIVERSIDADE FEDERAL DE SÃO CARLOS","unidade":"UNIDADE SEDE","curso":"IMAGEM E SOM","periodo":"Noturno","notaCorte":746.03,"data":"10/01/2014","vagas":44,"vagasDiruno":44,"vagasNoturno":0,"municipio":"São Carlos","UF":"SP","id":3347}]

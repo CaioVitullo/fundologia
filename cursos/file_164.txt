@@ -1,1 +1,0 @@
-[{"sigla":"UFRRJ","universidade":"UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO","unidade":"UNIDADE SEDE","curso":"ECONOMIA DOMÉSTICA - LICENCIATURA OU BACHARELADO","periodo":"Integral (Mat/Vesp)","notaCorte":643.27,"data":"10/01/2014","vagas":20,"vagasDiruno":20,"vagasNoturno":0,"municipio":"Seropédica","UF":"RJ","id":1694}]

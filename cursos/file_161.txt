@@ -1,1 +1,0 @@
-[{"sigla":"UFG","universidade":"UNIVERSIDADE FEDERAL DE GOIÁS","unidade":"UNIDADE SEDE _ CÂMPUS SAMAMBAIA","curso":"ECOLOGIA E ANÁLISE AMBIENTAL","periodo":"Integral (Mat/Vesp)","notaCorte":636.48,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Goiânia","UF":"GO","id":1687}]

@@ -1,1 +1,0 @@
-[{"sigla":"UEMS","universidade":"UNIVERSIDADE ESTADUAL DE MATO GROSSO DO SUL","unidade":"UNIDADE UNIVERSITÁRIA DE CAMPO GRANDE","curso":"ARTES CÊNICAS E DANÇA","periodo":"Noturno","notaCorte":636.95,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Campo Grande","UF":"MS","id":645}]

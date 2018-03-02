@@ -1,1 +1,0 @@
-[{"sigla":"UFBA","universidade":"UNIVERSIDADE FEDERAL DA BAHIA","unidade":"UNIDADES DA RUA BARÃO DE JEREMOABO","curso":"ABI - LÍNGUA ESTRANGEIRA","periodo":"Noturno","notaCorte":624.91,"data":"10/01/2014","vagas":72,"vagasDiruno":36,"vagasNoturno":36,"municipio":"Salvador","UF":"BA"}]

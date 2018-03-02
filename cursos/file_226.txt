@@ -1,1 +1,0 @@
-[{"sigla":"UNB","universidade":"UNIVERSIDADE DE BRASÍLIA","unidade":"CAMPUS UNIVERSITÁRIO DARCY RIBEIRO","curso":"ENGENHARIA DE REDES DE COMUNICAÇÕES","periodo":"Integral (Mat/Vesp)","notaCorte":733.71,"data":"10/01/2014","vagas":20,"vagasDiruno":20,"vagasNoturno":0,"municipio":"Brasília","UF":"DF","id":2321}]

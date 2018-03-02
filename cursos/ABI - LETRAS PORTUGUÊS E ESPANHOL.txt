@@ -1,1 +1,0 @@
-[{"sigla":"UFPR","universidade":"UNIVERSIDADE FEDERAL DO PARANÁ","unidade":"CAMPUS I - CENTRO CURITIBA","curso":"ABI - LETRAS PORTUGUÊS E ESPANHOL","periodo":"Matutino","notaCorte":703.68,"data":"10/01/2014","vagas":5,"vagasDiruno":5,"vagasNoturno":0,"municipio":"Curitiba","UF":"PR"}]

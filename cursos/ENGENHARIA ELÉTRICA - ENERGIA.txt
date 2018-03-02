@@ -1,1 +1,0 @@
-[{"sigla":"UFJF","universidade":"UNIVERSIDADE FEDERAL DE JUIZ DE FORA","unidade":"UNIVERSIDADE FEDERAL DE JUIZ DE FORA - CAMPUS SEDE","curso":"ENGENHARIA ELÉTRICA - ENERGIA","periodo":"Noturno","notaCorte":725.04,"data":"10/01/2014","vagas":29,"vagasDiruno":29,"vagasNoturno":0,"municipio":"Juiz de Fora","UF":"MG"}]

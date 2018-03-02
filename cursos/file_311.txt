@@ -1,1 +1,0 @@
-[{"sigla":"UFRJ","universidade":"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO","unidade":"CIDADE UNIVERSITÁRIA","curso":"GESTÃO PÚBLICA PARA O DESENVOLVIMENTO ECONÔMICO E SOCIAL","periodo":"Integral (Vesp/Not)","notaCorte":710.7,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Rio de Janeiro","UF":"RJ","id":3214}]

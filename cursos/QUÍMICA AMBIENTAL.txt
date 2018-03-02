@@ -1,1 +1,0 @@
-[{"sigla":"UFT","universidade":"FUNDAÇÃO UNIVERSIDADE FEDERAL DO TOCANTINS","unidade":"CAMPUS DE GURUPI","curso":"QUÍMICA AMBIENTAL","periodo":"Integral (Mat/Vesp/Not)","notaCorte":632.58,"data":"10/01/2014","vagas":5,"vagasDiruno":5,"vagasNoturno":0,"municipio":"Gurupi","UF":"TO"}]

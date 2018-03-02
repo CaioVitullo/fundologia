@@ -1,1 +1,0 @@
-[{"sigla":"UFF","universidade":"UNIVERSIDADE FEDERAL FLUMINENSE","unidade":"CAMPUS DA PRAIA VERMELHA","curso":"DESENHO INDUSTRIAL","periodo":"Integral (Mat/Vesp/Not)","notaCorte":714.86,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Niterói","UF":"RJ"}]

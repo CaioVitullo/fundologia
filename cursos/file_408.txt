@@ -1,1 +1,0 @@
-[{"sigla":"UFPEL","universidade":"UNIVERSIDADE FEDERAL DE PELOTAS","unidade":"UNIDADES DISPERSAS","curso":"MÚSICA - VIOLINO","periodo":"Matutino","notaCorte":655.78,"data":"10/01/2014","vagas":7,"vagasDiruno":7,"vagasNoturno":0,"municipio":"Pelotas","UF":"RS","id":4087}]

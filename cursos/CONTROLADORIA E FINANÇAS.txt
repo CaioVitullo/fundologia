@@ -1,1 +1,0 @@
-[{"sigla":"UFMG","universidade":"UNIVERSIDADE FEDERAL DE MINAS GERAIS","unidade":"CAMPUS PAMPULHA","curso":"CONTROLADORIA E FINANÇAS","periodo":"Matutino","notaCorte":699.98,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Belo Horizonte","UF":"MG"}]

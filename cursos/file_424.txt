@@ -1,1 +1,0 @@
-[{"sigla":"UFRR","universidade":"UNIVERSIDADE FEDERAL DE RORAIMA","unidade":"CAMPUS PARICARANA","curso":"PORTUGUÊS - LITERATURAS","periodo":"Integral (Vesp)","notaCorte":590.24,"data":"10/01/2014","vagas":15,"vagasDiruno":15,"vagasNoturno":0,"municipio":"Boa Vista","UF":"RR","id":4368}]

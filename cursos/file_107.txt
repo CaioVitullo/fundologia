@@ -1,1 +1,0 @@
-[{"sigla":"UFMG","universidade":"UNIVERSIDADE FEDERAL DE MINAS GERAIS","unidade":"FACULDADE DE DIREITO","curso":"CIÊNCIAS DO ESTADO","periodo":"Vespertino","notaCorte":706.12,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Belo Horizonte","UF":"MG","id":1258}]

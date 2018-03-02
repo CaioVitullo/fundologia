@@ -1,1 +1,0 @@
-[{"sigla":"UFGD","universidade":"FUNDAÇÃO UNIVERSIDADE FEDERAL DA GRANDE DOURADOS","unidade":"UFGD - UNIDADE II","curso":"ABI - ARTES CÊNICAS","periodo":"Noturno","notaCorte":636.22,"data":"10/01/2014","vagas":30,"vagasDiruno":30,"vagasNoturno":0,"municipio":"Dourados","UF":"MS"}]

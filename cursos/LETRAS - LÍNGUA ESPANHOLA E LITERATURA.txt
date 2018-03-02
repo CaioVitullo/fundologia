@@ -1,1 +1,0 @@
-[{"sigla":"UNEB","universidade":"UNIVERSIDADE DO ESTADO DA BAHIA","unidade":"SANTO ANTÔNIO DE JESUS - CAMPUS V DEPARTAMENTO DE ","curso":"LETRAS - LÍNGUA ESPANHOLA E LITERATURA","periodo":"Noturno","notaCorte":635.83,"data":"10/01/2014","vagas":6,"vagasDiruno":6,"vagasNoturno":0,"municipio":"Santo Antônio de Jesus","UF":"BA"}]

@@ -1,1 +1,0 @@
-[{"sigla":"UFPEL","universidade":"UNIVERSIDADE FEDERAL DE PELOTAS","unidade":"UNIDADE SEDE","curso":"LETRAS - TRADUÇÃO INGLÊS - PORTUGUÊS","periodo":"Integral (Vesp/Not)","notaCorte":675.06,"data":"10/01/2014","vagas":10,"vagasDiruno":10,"vagasNoturno":0,"municipio":"Pelotas","UF":"RS","id":3698}]

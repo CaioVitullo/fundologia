@@ -1,1 +1,0 @@
-[{"sigla":"UFPB","universidade":"UNIVERSIDADE FEDERAL DA PARAÍBA","unidade":"UNIDADE SEDE","curso":"FARMÁCIA - FARMACÊUTICO","periodo":"Integral (Mat/Vesp)","notaCorte":659.96,"data":"10/01/2014","vagas":100,"vagasDiruno":50,"vagasNoturno":50,"municipio":"João Pessoa","UF":"PB","id":2693}]

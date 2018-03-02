@@ -1,1 +1,0 @@
-[{"sigla":"UFRJ","universidade":"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO","unidade":"CIDADE UNIVERSITÁRIA","curso":"DEFESA E GESTÃO ESTRATÉGICA INTERNACIONAL","periodo":"Noturno","notaCorte":729.47,"data":"10/01/2014","vagas":60,"vagasDiruno":60,"vagasNoturno":0,"municipio":"Rio de Janeiro","UF":"RJ"}]

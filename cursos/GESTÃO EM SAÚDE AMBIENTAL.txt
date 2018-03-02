@@ -1,1 +1,0 @@
-[{"sigla":"UFU","universidade":"UNIVERSIDADE FEDERAL DE UBERLÂNDIA","unidade":"CAMPUS SANTA MÔNICA/REITORIA","curso":"GESTÃO EM SAÚDE AMBIENTAL","periodo":"Vespertino","notaCorte":649.3,"data":"10/01/2014","vagas":15,"vagasDiruno":15,"vagasNoturno":0,"municipio":"Uberlândia","UF":"MG"}]

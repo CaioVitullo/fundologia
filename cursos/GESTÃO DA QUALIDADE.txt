@@ -1,1 +1,0 @@
-[{"sigla":"UFPR","universidade":"UNIVERSIDADE FEDERAL DO PARANÁ","unidade":"CAMPUS III - CENTRO POLITÉCNICO","curso":"GESTÃO DA QUALIDADE","periodo":"Noturno","notaCorte":668.78,"data":"10/01/2014","vagas":9,"vagasDiruno":9,"vagasNoturno":0,"municipio":"Curitiba","UF":"PR"}]

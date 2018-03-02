@@ -1,1 +1,0 @@
-[{"sigla":"                            UNIVERSIDADE F\"","universidade":"UNIVERSIDADE FEDERAL DA INTEGRAÇÃO LATINOAMERICANA","unidade":"POLO NA SEDE","curso":"LETRAS - ARTES E MEDIAÇÃO CULTURAL","periodo":"Matutino","notaCorte":636.88,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Foz do Iguaçu","UF":"PR","id":3421}]

@@ -1,1 +1,0 @@
-[{"sigla":"UFU","universidade":"UNIVERSIDADE FEDERAL DE UBERLÂNDIA","unidade":"CAMPUS SANTA MÔNICA/REITORIA","curso":"LETRAS - LÍNGUA PORTUGUESA COM DOMÍNIO DE LIBRAS","periodo":"Matutino","notaCorte":623.78,"data":"10/01/2014","vagas":22,"vagasDiruno":22,"vagasNoturno":0,"municipio":"Uberlândia","UF":"MG","id":3558}]

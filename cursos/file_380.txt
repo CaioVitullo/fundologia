@@ -1,1 +1,0 @@
-[{"sigla":"UNB","universidade":"UNIVERSIDADE DE BRASÍLIA","unidade":"CAMPUS UNIVERSITÁRIO DARCY RIBEIRO","curso":"LETRAS TRADUÇÃO ESPANHOL","periodo":"Noturno","notaCorte":659.65,"data":"10/01/2014","vagas":15,"vagasDiruno":15,"vagasNoturno":0,"municipio":"Brasília","UF":"DF","id":3703}]

@@ -1,1 +1,0 @@
-[{"sigla":"UDESC","universidade":"FUNDAÇÃO UNIVERSIDADE DO ESTADO DE SANTA CATARINA","unidade":"CENTRO DE EDUCAÇÃO DO PLANALTO NORTE CEPLAN","curso":"ENGENHARIA DE PRODUCAO - HABILITACAO MECANICA","periodo":"Integral (Vesp/Not)","notaCorte":677.54,"data":"10/01/2014","vagas":9,"vagasDiruno":9,"vagasNoturno":0,"municipio":"São Bento do Sul","UF":"SC","id":2312}]

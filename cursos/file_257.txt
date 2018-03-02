@@ -1,1 +1,0 @@
-[{"sigla":"UFRJ","universidade":"UNIVERSIDADE FEDERAL DO RIO DE JANEIRO","unidade":"CIDADE UNIVERSITÁRIA","curso":"ENGENHARIA NAVAL E OCEÂNICA","periodo":"Integral (Mat/Vesp)","notaCorte":783.17,"data":"10/01/2014","vagas":35,"vagasDiruno":35,"vagasNoturno":0,"municipio":"Rio de Janeiro","UF":"RJ","id":2568}]

@@ -1,1 +1,0 @@
-[{"sigla":"UFVJM","universidade":"UNIVERSIDADE FEDERAL DOS VALES DO JEQUITINHONHA E MUCURI","unidade":"CAMPUS PRESIDENTE JUSCELINO KUBITSCHEK DE OLIVEIRA","curso":"INTERDISCIPLINAR EM HUMANIDADES","periodo":"Noturno","notaCorte":615.72,"data":"10/01/2014","vagas":100,"vagasDiruno":100,"vagasNoturno":0,"municipio":"Diamantina","UF":"MG","id":3376}]

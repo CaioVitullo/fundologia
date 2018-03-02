@@ -1,1 +1,0 @@
-[{"sigla":"UFPB","universidade":"UNIVERSIDADE FEDERAL DA PARAÍBA","unidade":"CENTRO DE CIÊNCIAS APLICADAS E EDUCAÇÃO - CCAE - R","curso":"ABI - ANTROPOLOGIA","periodo":"Noturno","notaCorte":599.98,"data":"10/01/2014","vagas":50,"vagasDiruno":50,"vagasNoturno":0,"municipio":"Rio Tinto","UF":"PB","id":1}]

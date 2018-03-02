@@ -1,1 +1,0 @@
-[{"sigla":"UFAM","universidade":"UNIVERSIDADE FEDERAL DO AMAZONAS","unidade":"UNIDADE SEDE","curso":"ENGENHARIA DE PETRÓLEO E GÁS","periodo":"Integral (Vesp/Not)","notaCorte":698.83,"data":"10/01/2014","vagas":25,"vagasDiruno":25,"vagasNoturno":0,"municipio":"Manaus","UF":"AM","id":2259}]

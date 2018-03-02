@@ -1,1 +1,0 @@
-[{"sigla":"UFAL","universidade":"UNIVERSIDADE FEDERAL DE ALAGOAS","unidade":"CAMPUS A. C. SIMÕES","curso":"QUÍMICA TECNOLÓGICA E INDUSTRIAL","periodo":"Noturno","notaCorte":635.84,"data":"10/01/2014","vagas":40,"vagasDiruno":20,"vagasNoturno":20,"municipio":"Maceió","UF":"AL"}]

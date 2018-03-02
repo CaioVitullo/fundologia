@@ -1,1 +1,0 @@
-[{"sigla":"UFPEL","universidade":"UNIVERSIDADE FEDERAL DE PELOTAS","unidade":"UNIDADES DISPERSAS","curso":"MÚSICA - CIÊNCIAS MUSICAIS","periodo":"Matutino","notaCorte":663.04,"data":"10/01/2014","vagas":10,"vagasDiruno":10,"vagasNoturno":0,"municipio":"Pelotas","UF":"RS"}]

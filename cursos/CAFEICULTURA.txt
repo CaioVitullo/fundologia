@@ -1,1 +1,0 @@
-[{"sigla":"                            INSTITUTO FEDERAL DE EDUCAÇÃO","universidade":" CIÊNCIA E TECNOLOGIA DO SUL\"","unidade":"CAMPUS MACHADO","curso":"CAFEICULTURA","periodo":"Noturno","notaCorte":587.44,"data":"10/01/2014","vagas":28,"vagasDiruno":28,"vagasNoturno":0,"municipio":"Machado","UF":"MG"}]

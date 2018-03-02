@@ -426,7 +426,13 @@ footer{
 	font-size: 12px;
 	max-width: 60px;
 	text-align: left;
+	cursor: pointer;
     vertical-align: bottom;
+}
+.closeFixedIcon{
+	position: absolute;
+	right: -15px;
+	top: -15px;
 }
 .histUl{
 	width: 100%;
@@ -624,6 +630,8 @@ footer{
 .lblResume label{
 	display: block;
 	font-size: 1rem;
+	margin-bottom: 4px;
+	margin-bottom: 4px;
 }
 .lblResume label:nth-child(odd){
 	background-color: rgb(242, 242, 243)
@@ -631,6 +639,9 @@ footer{
 .lblResume .spLabel{
 	width: 200px;
     display: inline-block;
+}
+.lblResume em{
+	float: right;
 }
 .highlightPos{
 	color:green;

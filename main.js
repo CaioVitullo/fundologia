@@ -1,7 +1,7 @@
 
 var mainApp = angular.module('mainApp', []);
 
-mainApp.controller('ctrl', function ($http, $scope, $timeout) {
+mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	var me = $scope;
 	dataManager($http, me);
 	histogramManager(me);
@@ -41,8 +41,15 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 		$('.modal').modal();
 		
 		me.width = $(window).width();
-			
-		
+		me.frases = ['o fim do achistmo', 'pra quem gosta de resultado!', 'teste teste teste'];
+		me.currentFrasesID = 0;	
+		$interval(function(){
+			me.currentFrasesID++;
+			if(me.currentFrasesID==me.frases.length)
+				me.currentFrasesID = 0;
+			var frase = me.frases[me.currentFrasesID];
+			$('#subtitle').fadeOut('slow').text(frase).fadeIn('slow');
+		}, 10 * 1000, 3);
 		resizeHorizontalScroll();
 	}; 
 	
@@ -440,7 +447,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 				}
 			}
 		},1500);
-	}
+	};
+	
 	me.chartData = {}
 	me.getGenericData = function(propery, name){
 		if(me.chartData.hasOwnProperty(propery)){
@@ -556,7 +564,12 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 			});
 		}
 	}
-	
+	me.closeCompareDialog = function(){
+		$('.toast').fadeOut();
+		me.compareFundItemClick(0);
+		if(me.fundsToCompare.length > 0)
+			me.compareFundItemClick(0);
+	};
 	me.openCompareDialog = function(){
 		$('.toast').fadeOut();
 		$('#modalCompare').modal({complete:function(){
@@ -636,6 +649,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout) {
 	me.filterHideClosed = false;
 	me.filterHideRestrict = false;
 	me.filters = {
+		PeriodoTitle:function(){
+			return me.filters.Periodo[me.selectedPeriod].Title.toLowerCase();},
 		Periodo : [
 			{id:0,len:12, Title:'Últimos 12 mêses', visible:true, default:true},
 			{id:1,len:24, Title:'Últimos 24 mêses', visible:true, default:true},

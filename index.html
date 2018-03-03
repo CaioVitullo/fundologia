@@ -183,6 +183,20 @@
 				<div class="divider"></div>
 
 				<h5 class="filterTitle">
+					Volatilidade: 
+				</h5>
+				<p class="sliderTitle sliderColor"><em ng-show="volatilidade<maxVolatilidade">até </em> {{volatilidade}}% <em ng-show="volatilidade==maxVolatilidade"> ou mais</em></p>
+				<p class="range-field sliderP">
+					<input type="range" ng-model="volatilidade"  min="0" max="{{maxVolatilidade}}" step="0.5" />
+				</p>
+				<label title="Risco vs Retorno. Até quanto estou disposto a me arriscar?" ng-click="openChart('Volatilidade', 'volatilidadeAnual', 'Risco vs Retorno. Até quanto estou disposto a me arriscar?')">
+					<i class="material-icons tiny " >insert_chart</i>
+					Gráfico Taxa adm vs Rentabilidade
+				</label>
+
+				<div class="divider"></div>
+
+				<h5 class="filterTitle">
 					Patrimônio até:
 				</h5>
 				<p class="checkList" ng-repeat="filterItem in filters.volume.equals({visible:true})" >
@@ -220,7 +234,7 @@
 					<div class="col s12 noPadding">
 						<div class="row">
 							
-							<div class="input-field col m12 s12 l12 noPadding">
+							<div class="input-field col m12 s12 l12 noPadding minTableHeight">
 							<table id="mainTable" class="highlight" ng-class="{comparandoFundo:fundsToCompare.length==1}">
 								<thead >
 									<tr>
@@ -234,8 +248,8 @@
 										</th>
 										<th ng-click="setCurrentSort(3)" ng-class="{currentSortCol:currentSortCol==3}" class=" hide-on-small-and-down "  title="Soma dos ganhos nos meses positivos dividivo pela soma das perdas nos meses negativos.&#10;Clique para ordenar" >Rel. Ganho/ Perda</th>
 										<th ng-click="setCurrentSort(4)" ng-class="{currentSortCol:currentSortCol==4}" class="show-column-largar-1200" title="Média do rendimento nos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar ">Média</th>
-										<th ng-click="setCurrentSort(5)" ng-class="{currentSortCol:currentSortCol==5}" class="hide-on-small-and-down" title="Desvio padrão dos valores mensais nos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Volatilidade</th>
-										<th ng-click="setCurrentSort(6)" ng-class="{currentSortCol:currentSortCol==6}" class="show-column-largar-1300" title="Correlação ao índice Ibovespa nos {{filters.PeriodoTitle()}} &#10; Comparação feita com os valores mensais de ambos.&#10;Clique para ordenar.">Correlação Ibov</th>
+										<th ng-click="setCurrentSort(5)" ng-class="{currentSortCol:currentSortCol==5}" class="hide-on-small-and-down" title="Volatilidade anumal referente aos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Volatilidade</th>
+										<th ng-click="setCurrentSort(6)" ng-class="{currentSortCol:currentSortCol==6}" class="show-column-largar-1300" title="Índice Sharpe CDI {{filters.PeriodoTitle()}} &#10; Clique para ordenar.">Sharp CDI</th>
 										<th ng-click="setCurrentSort(7)" ng-class="{currentSortCol:currentSortCol==7}" class="hide-on-smaller-400" title="Taxa Administrativa.&#10;Clique para ordenar">Tx Adm</th>
 										<th ng-click="setCurrentSort(8)" ng-class="{currentSortCol:currentSortCol==8}" title="Rentabilidade acumulada nos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Rentabilidade período</th>
 										
@@ -248,7 +262,7 @@
 										ng-repeat="row in getMainList()" 
 										ng-click="selectRow(row)"
 										ng-mouseover="showRowDetail(row)">
-										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank+1">Rank</td>
+										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank">Rank</td>
 										<td class="cutText noselect" >
 											<span title="{{row.name}}" class="fundName">{{row.name}}</span>
 											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict"  title="Fundo destinado à investidores qualificados.">monetization_on</i>
@@ -259,8 +273,8 @@
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
 										<td class="noselect show-column-largar-1200" ng-bind="row.figures[selectedPeriod].average"></td>
-										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].stdDev"></td>
-										<td class="noselect show-column-largar-1300" ng-bind="row.figures[selectedPeriod].correlationIbov"></td>
+										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].volatilidadeAnual|percentage:2"></td>
+										<td class="noselect show-column-largar-1300" ng-bind="row.figures[selectedPeriod].sharpCDI"></td>
 										<td class="noselect hide-on-smaller-400" ng-bind="row.info.admTax| percentage:2"></td>
 										<td class="noselect" ng-bind="row.figures[selectedPeriod].performance|percentage:2"></td>
 									</tr>
@@ -369,11 +383,12 @@
 						ng-if="show_histogramStDev == true"
 						chart-title="Volatilidade"
 						histogram="histogramStDev"
-						value="getFromCurrentFigure('stdDev')"
+						value="getFromCurrentFigure('volatilidadeAnual')"
 						classification="getFromCurrentRow('classificationType')"
 						show-chart="true"
-						property="stdDev"
+						property="volatilidadeAnual"
 						type="figure"
+						sufix="%"
 						tooltip="Quanto mais a rentabilidade de um fundo varia em um determinado período, maior o risco desse fundo.Mas, vale a pena correr esse risco?Clique e confira!"
 						currentrow="currentRowHistStDev"></my-histogram>
 					
@@ -511,14 +526,18 @@
 			<h5 ng-bind="currentRow.name"></h5>
 			<div class="row">
 				<div class="col m6 l6 xl6 lblResume">
-					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Meses positivos: </span><em ng-bind="currentRow.figures[selectedPeriod].positiveCount"></em> (<em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Meses negativos: </span><em ng-bind="currentRow.figures[selectedPeriod].negativeCount"></em> (<em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em>)</label>
+					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Meses positivos: </span><em ng-bind="' (' + currentRow.figures[selectedPeriod].positiveCount + ')'"></em> <em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Meses negativos: </span><em ng-bind="' (' +currentRow.figures[selectedPeriod].negativeCount + ')'"></em> <em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
 					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="currentRow.figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
 					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="currentRow.figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Índice Sharp IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpIbov"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Índice Sharp CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpCDI"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Volatilidade anual:</span> <em ng-bind="currentRow.figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Desvio padrão mensal:</span> <em ng-bind="currentRow.figures[selectedPeriod].stdDev"></em></label>
 				</div>
 				<div class="col m6 l6 xl6">
 						<rd-histogram
-							histogram="currentRow.figures[selectedPeriod].histogram.data"
+							histogram="currentRow.figures[selectedPeriod].histogram"
 							sufix="%">
 						</rd-histogram>
 				</div>
@@ -533,7 +552,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td ng-repeat="item in y.data track by $index" class=""  title="Posição no ranking" >{{item.rank}}<sup>ᵒ</sup></td>
+							<td ng-repeat="item in y.data track by $index" class=""  title="Posição no ranking (pontos)" >{{item.rank}}<sup>ᵒ</sup>({{item.point}})</td>
 						</tr>
 						<tr>
 							<td class="{{$parent.histogram_info.class}}" ng-repeat="item in y.data track by $index" ng-bind="::item.value|percentage:2" 
@@ -621,7 +640,7 @@
 					<label ng-class={compareHighlight:compareLineHover==2} ng-mouseover="compareLineHover=2"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
 					<label ng-class={compareHighlight:compareLineHover==3} ng-mouseover="compareLineHover=3"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
 					<label ng-class={compareHighlight:compareLineHover==8} ng-mouseover="compareLineHover=8"><span class="spLabel">Média rendimento:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].average"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==4} ng-mouseover="compareLineHover=4"><span class="spLabel">Volatilidade:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].stdDev|percentage:2"></em></label>
+					<label ng-class={compareHighlight:compareLineHover==4} ng-mouseover="compareLineHover=4"><span class="spLabel">Volatilidade:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
 
 					<label ng-class={compareHighlight:compareLineHover==5} ng-mouseover="compareLineHover=5"><span class="spLabel">Correlação CDI:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationCDI"></em></label>
 					<label ng-class={compareHighlight:compareLineHover==6} ng-mouseover="compareLineHover=6"><span class="spLabel">Correlação IBOV:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationIbov"></em></label>
@@ -652,7 +671,7 @@
 					<label ng-class={compareHighlight:compareLineHover==2} ng-mouseover="compareLineHover=2"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
 					<label ng-class={compareHighlight:compareLineHover==3} ng-mouseover="compareLineHover=3"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
 					<label ng-class={compareHighlight:compareLineHover==8} ng-mouseover="compareLineHover=8"><span class="spLabel">Média rendimento:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].average"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==4} ng-mouseover="compareLineHover=4"><span class="spLabel">Volatilidade:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].stdDev|percentage:2"></em></label>
+					<label ng-class={compareHighlight:compareLineHover==4} ng-mouseover="compareLineHover=4"><span class="spLabel">Volatilidade:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
 
 					<label ng-class={compareHighlight:compareLineHover==5} ng-mouseover="compareLineHover=5"><span class="spLabel">Correlação CDI:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationCDI"></em></label>
 					<label ng-class={compareHighlight:compareLineHover==6} ng-mouseover="compareLineHover=6"><span class="spLabel">Correlação IBOV:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationIbov"></em></label>

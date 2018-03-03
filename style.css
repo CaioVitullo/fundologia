@@ -961,3 +961,7 @@ i.tinySmall{
 .psmall{
 	font-size: 0.75rem;
 }
+
+.row  .minTableHeight{
+	min-height: 70vh
+}

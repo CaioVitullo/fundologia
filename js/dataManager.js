@@ -176,8 +176,8 @@ function dataManager($http, me){
 		'posNegCountRate', //2
 		'posNegAvgRate',	//3
 		'average',			//4
-		'stdDev',			//5
-		'correlationIbov',	//6
+		'volatilidadeAnual',			//5
+		'sharpCDI',	//6
 		'admTax',			//7
 		'performance'		//8
 	];

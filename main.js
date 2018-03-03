@@ -17,6 +17,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.defaultSelectedPeriod =me.selectedPeriod;
 	me.withdrawDays = 100;
 	me.admTx = 4;
+	me.volatilidade=30;
+	me.maxVolatilidade=30;
 	me.mobileSelectedPage = 'main';
 	me.isMobile = $('#mobileMenu').is(':visible');
 	
@@ -79,14 +81,14 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 						item.info.TypeFilter.hasAnyTrueOnSameIndex(filterStatus.Tipo) &&
 						(me.withdrawDays == 100 || item.info.withdrawDays <= me.withdrawDays )&&
 						(me.admTx == 4 || item.info.admTax <= me.admTx) &&
+						(me.volatilidade==me.maxVolatilidade || item.figures[me.selectedPeriod].volatilidadeAnual <= me.volatilidade) &&
 						(me.histogramItemFilter==null || me.verifyHistogramFilter(item) ) &&
 						item.info.VolumeFilter.hasAnyTrueOnSameIndex(filterStatus.volume) && 
-						(me.searchTxt == "" || item.name.toLowerCase().indexOf(me.searchTxt.toLowerCase()) >= 0 ) &&
+						(me.searchTxt == "" || (item.name.toLowerCase().indexOf(me.searchTxt.toLowerCase()) >= 0 || item.nameNoAccent.indexOf(me.searchTxt.toLowerCase()) >= 0 ))  &&
 						(me.filterHideClosed == false || item.info.isClosed == false) &&
 						(me.filterHideRestrict == false || item.info.restrict) &&
 						item.info.InitialValueFilter.hasAnyTrueOnSameIndex(filterStatus.Initialvalue)){
-							if(count < me.defaultListSize)
-								list.push(item);
+							list.push(item);
 							count++;
 						}
 				}
@@ -116,7 +118,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 					}
 					
 					me.hasMoreLines = count > list.length;
-					//list = list.take(me.defaultListSize);
+					list = list.take(me.defaultListSize);
 					me.lastHash = currentHash;
 					me.lastResult = list;
 				}
@@ -168,7 +170,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			showEvenRestrict:[me.filterHideRestrict ? 1 : 0],
 			sort:[me.currentSortCol],
 			sortReverse:[me.sortReverse?1:0],
-			size:[me.defaultListSize]
+			size:[me.defaultListSize],
+			volatilidade:[me.volatilidade]
 		};
 	};
 	
@@ -182,9 +185,10 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.searchTxt == "" &&
 			me.filterHideClosed==false &&
 			me.filterHideRestrict == false &&
-			me.currentSortCol==0;
+			me.currentSortCol==0 &&
 			me.sortReverse==false &&
-			me.defaultListSize == 30;
+			me.defaultListSize == 30 &&
+			me.volatilidade == me.maxVolatilidade;
 			//me.filters.resgate.allSetTo({checked:true}) &&
 
 	}
@@ -615,6 +619,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			list.push({
 				label:me.getMonthName(month, year),
 				rank:me.currentRow.rank[i],
+				point:me.currentRow.points[i],
 				value:me.currentRow.values[i] });
 			month -=1;
 			if(month == 0 || i ==len-1){

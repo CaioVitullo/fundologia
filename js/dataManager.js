@@ -68,9 +68,7 @@ function dataManager($http, me){
 		}
 		return null;
 	};
-	me.openDialogBestInterval = function(){
-		
-	};
+	
 	me.getQuerystring = function (name, _url) {
         var url = _url != null ? _url : window.location.href;
         if (url.indexOf('?') >= 0) {
@@ -113,6 +111,40 @@ function dataManager($http, me){
 		me.titleDialogHtml = title;
 		$('#modalCustomText').modal('open');
 	};
+	me.showIntervalDialog = function(){
+		//chart_bestInterval
+		var d = [];
+		for(var i=0;i<me.currentRow.figures[me.selectedPeriod].intervalResumes.length;i++){
+			var item = me.currentRow.figures[me.selectedPeriod].intervalResumes[i];
+			var p = [];
+			p[0]=item.length;
+			p[1]=item.minPerformance;
+			p[2]=item.montlyAvg;
+			p[3]=item.montlyAvg;
+			p[4]=item.maxPerformance;
+			p[5]='Quem permaneceu ' + item.length + ' meses teve um rendimento mensal médio de ' + item.montlyAvg + '%.' + '<p>Ha!</p>'
+			d.push(p);
+		}
+		//var data = google.visualization.arrayToDataTable(d, true);
+		var data = new google.visualization.DataTable();
+		
+		data.addColumn({type:'number',label: 'Periodo'});
+		data.addColumn('number', 'mínimo');
+		data.addColumn('number', 'média');
+		data.addColumn('number', 'média');
+		data.addColumn('number', 'máximo');
+		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data.addRows(d);
+
+		  var options = {
+			legend:'none',tooltip:{isHtml: true}
+		  };
+	  
+		  var chart = new google.visualization.CandlestickChart(document.getElementById('chart_bestInterval'));
+	  
+		  chart.draw(data, options);
+		$('#modalInterval').modal('open');
+	}
 	me.rankingFullList = null
 	me.showRankDialog = function(){
 		if(me.rankingFullList ==null){

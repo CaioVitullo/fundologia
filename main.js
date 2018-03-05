@@ -8,6 +8,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	classUtil(me);
 	me.disqusOn = false;
 	me.searchTxt = "";
+	me.lastSearchTxt = "";
 	me.showAllFilterTypeOn= true;
 	me.showAllFilterInitValueOn=true;
 	me.showAllFilterResgateOn = true;
@@ -116,7 +117,10 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 						}
 						
 					}
-					
+					if(me.lastSearchTxt != me.searchTxt)
+						$timeout(function(){me.selectFirstRow();},50);
+						
+					me.lastSearchTxt = me.searchTxt;
 					me.hasMoreLines = count > list.length;
 					list = list.take(me.defaultListSize);
 					me.lastHash = currentHash;
@@ -230,6 +234,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			var item = me.defaultLists[me.selectedPeriod].first({uniqueID:id});
 			if(item != null)
 				item.selectedToCompare = false;
+			var item = me.lastResult.first({uniqueID:id});
+				if(item != null)
+					item.selectedToCompare = false;
 			
 			me.cleanRowSelection();
 		}
@@ -240,15 +247,27 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		me.userHasSelectedRow = false;
 	};
 	me.selectFirstRow = function(){
-		if(me.defaultLists != null && me.defaultLists[me.selectedPeriod] != null && me.defaultLists[me.selectedPeriod].length > 0)
-		var row = me.defaultLists[me.selectedPeriod][0];
-		if(row != null){
-			me.currentDetailRow = row.uniqueID;
-			me.userHasSelectedRow = false;
-			me.showRowDetail(row, true);
+		if(me.checkFilterList()){
+			if(me.defaultLists != null && me.defaultLists[me.selectedPeriod] != null && me.defaultLists[me.selectedPeriod].length > 0)
+			var row = me.defaultLists[me.selectedPeriod][0];
+			if(row != null){
+				me.currentDetailRow = row.uniqueID;
+				me.userHasSelectedRow = false;
+				me.showRowDetail(row, true);
+			}
+		}else{
+			if(me.lastResult != null && me.lastResult.length > 0){
+				var row = me.lastResult[0];
+				if(row != null){
+					me.currentDetailRow = row.uniqueID;
+					me.userHasSelectedRow = false;
+					me.showRowDetail(row, true);
+				}
+			}
 		}
 		
-	}
+		
+	};
 	me.changePeriodo = function(){
 		me.loadHistograms(null);
 	}

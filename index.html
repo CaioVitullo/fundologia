@@ -72,7 +72,7 @@
 			<li><a href="#comofunciona">Como funciona</a></li> -->
 			<li class="show-on-smaller-992"  ng-click="mobSelectPage('main')"><a>Lista</a></li>
 			<li class="show-on-smaller-992"  ng-click="mobSelectPage('filter')"><a>Filtro</a></li>
-			<li class="show-on-smaller-992" ng-click="mobSelectPage('histogram')"><a>Comparativo</a></li>
+			<li class="show-on-smaller-992" ng-click="mobSelectPage('histogram')"><a>Detalhe do fundo</a></li>
 		  </ul>
 		 </div>
 		</nav>
@@ -224,7 +224,8 @@
 						<div class="input-field ">
 							<div class="search-wrapper card">
 								<input class="bbn" type="text" ng-model="searchTxt" id="icon_prefix">
-								<i class="iconInside material-icons">search</i>
+								<i class="iconInside material-icons" ng-show="searchTxt.length==0">search</i>
+								<i class="iconInside material-icons" ng-show="searchTxt.length>0" title="limpar" ng-click="searchTxt=''">clear</i>
 								<label for="icon_prefix" style="left:10px;" >Pesquise e compare fundos de investimento</label>  
 							</div>
 							<!-- <input id="icon_prefix" type="text" ng-model="searchTxt" class="validate"><i class="material-icons ">search</i>
@@ -350,7 +351,7 @@
 					</h5>
 					<label class="labelTitle minH" title="Clique aqui para entender melhor">
 						{{getFromCurrentFigure('bestInterval')}} meses
-						<i class="tinySmall material-icons" ng-click="openDialogBestInterval()">launch</i>
+						<i class="tinySmall material-icons" ng-click="showIntervalDialog()">launch</i>
 					</label>
 					
 					<div class="divider"></div>
@@ -662,6 +663,24 @@
 
 		</div>
 	</div>
+	<div id="modalInterval" class="modal wideModal" >
+		<div class="modal-content">
+			<div class="row">
+				<p>Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</p>
+			</div>
+			<div class="row">
+				<div class="col s12 m12 l12 x12 lblResume">
+					<label ng-repeat="item in currentRow.figures[selectedPeriod].intervalResumes">
+						Quem permaneceu <strong>{{item.length}}</strong> meses no fundo, teve um rendimento mensal médio de <strong>{{item.montlyAvg}}%</strong>.Ficou acima do CDI {{item.aboveCdi|percentage:2}} das vezes e acima do IBOV {{item.aboveIbov|percentage:2}}. {{item.count}} análises feitas
+					</label>
+				</div>
+			</div>
+			<div class="row">
+				<div id="chart_bestInterval"></div>
+			</div>
+		</div>
+	</div>
+
 	<div id="modalCompare" class="modal wideModal" >
 		<div class="modal-content">
 			<div class="row">

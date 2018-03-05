@@ -427,7 +427,8 @@ footer{
 	max-width: 60px;
 	text-align: left;
 	cursor: pointer;
-    vertical-align: bottom;
+	vertical-align: bottom;
+	text-align: center;
 }
 .closeFixedIcon{
 	position: absolute;

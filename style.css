@@ -975,3 +975,6 @@ i.tinySmall{
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+.chartBlock{
+	float: left;
+}

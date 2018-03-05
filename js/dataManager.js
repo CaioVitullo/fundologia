@@ -114,6 +114,7 @@ function dataManager($http, me){
 	me.showIntervalDialog = function(){
 		//chart_bestInterval
 		var d = [];
+		var L = [['Permanencia', 'Mínimo', 'Médio', 'Máximo']];
 		for(var i=0;i<me.currentRow.figures[me.selectedPeriod].intervalResumes.length;i++){
 			var item = me.currentRow.figures[me.selectedPeriod].intervalResumes[i];
 			var p = [];
@@ -122,8 +123,9 @@ function dataManager($http, me){
 			p[2]=item.montlyAvg;
 			p[3]=item.montlyAvg;
 			p[4]=item.maxPerformance;
-			p[5]='Quem permaneceu ' + item.length + ' meses teve um rendimento mensal médio de ' + item.montlyAvg + '%.' + '<p>Ha!</p>'
+			p[5]='<p>Quem permaneceu ' + item.length + ' meses no fundo:</p><p>Teve um rendimento mensal médio de <strong>' + item.montlyAvg + '%</strong>.</p>' + '<p>O maior rendimento foi de: <strong>' + item.maxPerformance + '%</strong></p><p> E o menor de:<strong>' + item.minPerformance +'%</strong></p>' 
 			d.push(p);
+			L.push([item.length,item.minPerformance, item.montlyAvg, item.maxPerformance ]);
 		}
 		//var data = google.visualization.arrayToDataTable(d, true);
 		var data = new google.visualization.DataTable();
@@ -135,14 +137,28 @@ function dataManager($http, me){
 		data.addColumn('number', 'máximo');
 		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
 		data.addRows(d);
-
+		
+		var w =  $(window).width()*0.4;
 		  var options = {
-			legend:'none',tooltip:{isHtml: true}
+			legend:'none',tooltip:{isHtml: true},
+			width:w,
+			hAxis: {title: 'Permancencia no fundo'},
+			vAxis: {title: 'Rendimento médio mensalizado (%)'}
 		  };
 	  
 		  var chart = new google.visualization.CandlestickChart(document.getElementById('chart_bestInterval'));
-	  
 		  chart.draw(data, options);
+
+		  var lineChart = new google.visualization.LineChart(document.getElementById('chart_bestInterval_line'));
+          lineChart.draw(google.visualization.arrayToDataTable(L), {
+			
+			curveType: 'function',
+			legend: { position: 'right' },
+			width:w,
+			hAxis: {title: 'Permancencia no fundo'},
+			vAxis: {title: 'Rendimento médio mensalizado (%)'}
+		  });
+
 		$('#modalInterval').modal('open');
 	}
 	me.rankingFullList = null

@@ -5641,7 +5641,7 @@ button.btn-floating {
   right: 0;
   background-color: #fafafa;
   padding: 0;
-  max-height: 70%;
+  max-height: 85%;
   width: 55%;
   margin: auto;
   overflow-y: auto;
@@ -6797,7 +6797,9 @@ form p:last-child {
   top: -3px;
   transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease;
 }
-
+.blinkSwith  label .lever:after{
+  background-color:orange!important;
+}
 input[type=checkbox]:checked:not(:disabled) ~ .lever:active::after,
 input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::after {
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4), 0 0 0 15px rgba(38, 166, 154, 0.1);

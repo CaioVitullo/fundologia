@@ -86,7 +86,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 						item.info.VolumeFilter.hasAnyTrueOnSameIndex(filterStatus.volume) && 
 						(me.searchTxt == "" || (item.name.toLowerCase().indexOf(me.searchTxt.toLowerCase()) >= 0 || item.nameNoAccent.indexOf(me.searchTxt.toLowerCase()) >= 0 ))  &&
 						(me.filterHideClosed == false || item.info.isClosed == false) &&
-						(me.filterHideRestrict == false || item.info.restrict) &&
+						(me.filterHideRestrict == false || item.info.restrict==false) &&
 						item.info.InitialValueFilter.hasAnyTrueOnSameIndex(filterStatus.Initialvalue)){
 							list.push(item);
 							count++;
@@ -186,7 +186,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.filterHideClosed==false &&
 			me.filterHideRestrict == false &&
 			me.currentSortCol==0 &&
-			me.sortReverse==false &&
+			me.sortReverse==true &&
 			me.defaultListSize == 30 &&
 			me.volatilidade == me.maxVolatilidade;
 			//me.filters.resgate.allSetTo({checked:true}) &&
@@ -611,7 +611,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.openRankDialog = function(){
 		
 		me.groupedRankList = [];
-		var month = 1;
+		var month = 2;
 		var year = 18;
 		var list = [];
 		var len = me.filters.Periodo[me.selectedPeriod].len;
@@ -623,6 +623,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 				value:me.currentRow.values[i] });
 			month -=1;
 			if(month == 0 || i ==len-1){
+				while(list.length<12)
+					list.includeBefore({label:'', value:'', point:'', rank:''});
 				me.groupedRankList.push({year:year, data:list});
 				month = 12;
 				year-=1;
@@ -633,7 +635,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		$('#modaltable').modal('open');
 	}
 	me.getPeriodNames = function(){
-		var month = 1;
+		var month = 2;
 		var year = 18;
 		var list = [];
 		for(var i = 0;i<36;i++){
@@ -657,11 +659,11 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		PeriodoTitle:function(){
 			return me.filters.Periodo[me.selectedPeriod].Title.toLowerCase();},
 		Periodo : [
-			{id:0,len:12, Title:'Últimos 12 mêses', visible:true, default:true},
-			{id:1,len:24, Title:'Últimos 24 mêses', visible:true, default:true},
-			{id:2,len:36, Title:'Últimos 36 mêses', visible:true, default:true},
-			{id:3, Title:'2017', visible:false, default:false},
-			{id:4, Title:'2016', visible:false, default:false}
+			{id:0,len:12, Title:'Últimos 12 meses', visible:true, default:true},
+			{id:1,len:24, Title:'Últimos 24 meses', visible:true, default:true},
+			{id:2,len:36, Title:'Últimos 36 meses', visible:true, default:true}
+			//{id:3, Title:'2017', visible:false, default:false},
+			//{id:4, Title:'2016', visible:false, default:false}
 		],
 		Tipo : [
 			{id:0, Title:'Renda Fixa', checked:true, visible:true, default:true},
@@ -708,7 +710,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 
 mainApp.filter('percentage', ['$filter', function($filter) {
     return function(input, decimals) {
-        return $filter('number')(input, decimals)+'%';
+		if(input=='')
+			return'';
+		return $filter('number')(input, decimals)+'%';
     };
 }]);
 mainApp.filter('rounded', ['$filter', function($filter) {
@@ -736,7 +740,8 @@ mainApp.directive('myHistogram', function(){
 			tooltip:"@",
 			correlation:'=',
 			sufix:'@',
-			reversecolor:'@'
+			reversecolor:'@',
+			fn:'&'
 			
 			
 		},
@@ -801,7 +806,13 @@ mainApp.directive('myHistogram', function(){
 				}
 			}
 			
-			
+			$scope.histClick = function(histogram,item, property, type){
+				$scope.fn({
+					hist:histogram,
+					item:item,
+					property:property,
+					type:type});
+			}
 		}
 	};
 });

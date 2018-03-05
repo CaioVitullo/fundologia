@@ -61,6 +61,7 @@
 		  <a data-activates="slide-out" id="mobileMenu" class="button-collapse"><i class="material-icons"  >menu</i></a>
 		  <label class="mainHeader">fundologia.</label> 
 		  <span id="subtitle">o fim do achismo!</span>
+		  
 		  <ul id="nav-mobile" class="right hide-on-med-and-down">
 			  <li></li>
 			<!-- <li><a href="#sobre">O que é?</a></li>
@@ -103,14 +104,14 @@
 				
 				<div class="divider"></div>
 				<h5 class="filterTitle">Status:</h5>
-				<div class="switch">
+				<div class="switch" ng-class="{blinkSwith:blinkLock, blinkMe:blinkLock}">
 					<label>
 					  <input type="checkbox" ng-model="filterHideClosed" ng-checked="filterHideClosed">
 					  <span class="lever"></span>
-					  <em title="Mostrar apenas os fundos que estão liberados para aplicação." >Abertos apenas</em>
+					  <em  title="Mostrar apenas os fundos que estão liberados para aplicação." >Abertos apenas</em>
 					</label>
 				</div>
-				<div class="switch">
+				<div class="switch" ng-class="{blinkSwith:blinkRestricao, blinkMe:blinkRestricao}">
 					<label>
 					  <input type="checkbox" ng-model="filterHideRestrict" ng-checked="filterHideRestrict">
 					  <span class="lever"></span>
@@ -238,8 +239,8 @@
 							<table id="mainTable" class="highlight" ng-class="{comparandoFundo:fundsToCompare.length==1}">
 								<thead >
 									<tr>
-										<th ng-click="setCurrentSort(0)" class="hide-on-smaller-400 " ng-class="{currentSortCol:currentSortCol==0}" >
-											Rank 
+										<th  class="hide-on-smaller-400 " ng-class="{currentSortCol:currentSortCol==0}" >
+											<span ng-click="setCurrentSort(0)">Rank</span>
 											<i class="tiny material-icons"  title="Quer entender melhor nosso ranking? Clique aqui." ng-click="showRankDialog()" >info_outline</i> 
 										</th>
 										<th  ng-class="{currentSortCol:currentSortCol==1}" >Fundo</th>
@@ -247,8 +248,8 @@
 											Meses positivo
 										</th>
 										<th ng-click="setCurrentSort(3)" ng-class="{currentSortCol:currentSortCol==3}" class=" hide-on-small-and-down "  title="Soma dos ganhos nos meses positivos dividivo pela soma das perdas nos meses negativos.&#10;Clique para ordenar" >Rel. Ganho/ Perda</th>
-										<th ng-click="setCurrentSort(4)" ng-class="{currentSortCol:currentSortCol==4}" class="show-column-largar-1200" title="Média do rendimento nos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar ">Média</th>
-										<th ng-click="setCurrentSort(5)" ng-class="{currentSortCol:currentSortCol==5}" class="hide-on-small-and-down" title="Volatilidade anumal referente aos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Volatilidade</th>
+										<th ng-click="setCurrentSort(4)" ng-class="{currentSortCol:currentSortCol==4}" class="show-column-largar-1200" title="Quantidade de meses(em porcetagem) que o fundo teve rendimento superior ao CDI .&#10;Clique para ordenar ">Meses acima CDI</th>
+										<th ng-click="setCurrentSort(5)" ng-class="{currentSortCol:currentSortCol==5}" class="hide-on-small-and-down" title="Volatilidade anualizada referente aos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Volatilidade</th>
 										<th ng-click="setCurrentSort(6)" ng-class="{currentSortCol:currentSortCol==6}" class="show-column-largar-1300" title="Índice Sharpe CDI {{filters.PeriodoTitle()}} &#10; Clique para ordenar.">Sharp CDI</th>
 										<th ng-click="setCurrentSort(7)" ng-class="{currentSortCol:currentSortCol==7}" class="hide-on-smaller-400" title="Taxa Administrativa.&#10;Clique para ordenar">Tx Adm</th>
 										<th ng-click="setCurrentSort(8)" ng-class="{currentSortCol:currentSortCol==8}" title="Rentabilidade acumulada nos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Rentabilidade período</th>
@@ -264,15 +265,15 @@
 										ng-mouseover="showRowDetail(row)">
 										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank">Rank</td>
 										<td class="cutText noselect" >
-											<span title="{{row.name}}" class="fundName">{{row.name}}</span>
-											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict"  title="Fundo destinado à investidores qualificados.">monetization_on</i>
-											<i class="hide-on-small-and-down colorIcon tiny material-icons hidenIcon " ng-click="openRankDialog()"  title="Tabela de rentabilidade completa!" >info_outline</i> 
-											<i class="colorIcon tiny material-icons " ng-show="row.info.isClosed"  title="Fundo fechado!">lock</i>
+											<span title="{{row.name}}" class="fundName" ng-click="openRankDialog()"  title="Tabela de rentabilidade completa!">{{row.name}}</span>
+											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict" ng-mouseover="$parent.blinkRestricao=true" ng-mouseleave="$parent.blinkRestricao=false"  title="Fundo destinado à investidores qualificados.&#10;Ative o filtro 'Sem restrição' no menu lateral esquerdo para ver apenas os fundos que não são restritos apenas à investidores qualificados.">monetization_on</i>
+											<!-- <i class="hide-on-small-and-down colorIcon tiny material-icons hidenIcon "  >info_outline</i>  -->
+											<i class="colorIcon tiny material-icons " ng-mouseover="$parent.blinkLock = true" data-ng-mouseleave="$parent.blinkLock = false" ng-show="row.info.isClosed"  title="Fundo fechado.&#10;Ative o filtro 'Abertos apenas' no menu lateral esquerdo para ver apenas os fundos que estão disponíveis para aplicação.">lock</i>
 											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon compareIcon " ng-click="rowClick(row, this)"   title="Comparare este fundos com outros!">compare_arrows</i>
 										</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
-										<td class="noselect show-column-largar-1200" ng-bind="row.figures[selectedPeriod].average"></td>
+										<td class="noselect show-column-largar-1200" ng-bind="row.figures[selectedPeriod].monthAboveCDI|percentage:2"></td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].volatilidadeAnual|percentage:2"></td>
 										<td class="noselect show-column-largar-1300" ng-bind="row.figures[selectedPeriod].sharpCDI"></td>
 										<td class="noselect hide-on-smaller-400" ng-bind="row.info.admTax| percentage:2"></td>
@@ -344,6 +345,13 @@
 						Cotização: 
 					</h5>
 					<label class="labelTitle minH" ng-bind="currentRow.info.cotizacaoTime"></label>
+					<h5 class="filterTitle ">
+						Melhor intervalo: 
+					</h5>
+					<label class="labelTitle minH" title="Clique aqui para entender melhor">
+						{{getFromCurrentFigure('bestInterval')}} meses
+						<i class="tinySmall material-icons" ng-click="openDialogBestInterval()">launch</i>
+					</label>
 					
 					<div class="divider"></div>
 					<h5 class="filterTitle " ng-bind="filters.Periodo[selectedPeriod].Title"></h5>
@@ -369,6 +377,7 @@
 					<my-histogram
 						ng-if="show_histogramPerformance == true"
 						chart-title="Rendimento"
+						fn="histClick(hist,item, property, type)"
 						histogram="histogramPerformance"
 						value="getFromCurrentFigure('performance')"
 						zscore = "getZScore('performance', histogramPerformance)"
@@ -445,6 +454,34 @@
 						tooltip="Quanto maior a correlação com o CDI, maior influência o índice exerce sobre o fundo. Como se comportam os fundos com maior correlação? Clique e confira!"
 						currentrow="currentRowHistCorrelCDI"></my-histogram>
 					
+					
+					<my-histogram
+						ng-if="show_histogramAboveCDI == true"
+						histogram="histogramAboveCDI"
+						chart-title="Meses acima CDI"
+						show-chart="true"
+						value="getFromCurrentFigure('monthAboveCDI')"
+						classification="getFromCurrentRow('classificationType')"
+						property="monthAboveCDI"
+						type="figure"
+						sufix="%"
+						tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado superior ao CDI. Clique e confira!"
+						currentrow="currentRowAboveCDI"></my-histogram>
+
+					<my-histogram
+						ng-if="show_histogramAboveIBOV == true"
+						histogram="histogramAboveIBOV"
+						chart-title="Meses acima IBOV"
+						show-chart="true"
+						value="getFromCurrentFigure('monthsAboveIBOV')"
+						classification="getFromCurrentRow('classificationType')"
+						property="monthsAboveIBOV"
+						type="figure"
+						sufix="%"
+						tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado superior ao Ibovespa. Clique e confira!"
+						currentrow="currentRowAboveIBOV"></my-histogram>
+					
+
 					<my-histogram
 						ng-if="show_histogramPosNegRate == true"
 						histogram="histogramPosNegRate"
@@ -528,14 +565,17 @@
 				<div class="col m6 l6 xl6 lblResume">
 					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Meses positivos: </span><em ng-bind="' (' + currentRow.figures[selectedPeriod].positiveCount + ')'"></em> <em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
 					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Meses negativos: </span><em ng-bind="' (' +currentRow.figures[selectedPeriod].negativeCount + ')'"></em> <em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Meses acima do CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].monthAboveCDI|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Meses acima do IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].monthsAboveIBOV|percentage:2"></em></label>
 					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="currentRow.figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
 					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="currentRow.figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Índice Sharp IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpIbov"></em></label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Índice Sharp CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpCDI"></em></label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Volatilidade anual:</span> <em ng-bind="currentRow.figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Desvio padrão mensal:</span> <em ng-bind="currentRow.figures[selectedPeriod].stdDev"></em></label>
+					
 				</div>
-				<div class="col m6 l6 xl6">
+				<div class="col m6 l6 xl6 lblResume">
+						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Índice Sharp IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpIbov"></em></label>
+						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Índice Sharp CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpCDI"></em></label>
+						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Volatilidade anual:</span> <em ng-bind="currentRow.figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
+						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Desvio padrão mensal:</span> <em ng-bind="currentRow.figures[selectedPeriod].stdDev"></em></label>
 						<rd-histogram
 							histogram="currentRow.figures[selectedPeriod].histogram"
 							sufix="%">
@@ -547,12 +587,13 @@
 					<caption>20{{y.year}}</caption>
 					<thead>
 						<tr>
-							<th ng-repeat="item in y.data" ng-bind="::item.label"></th>
+							<th style="width:8%;" ng-repeat="item in y.data" ng-bind="::item.label"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td ng-repeat="item in y.data track by $index" class=""  title="Posição no ranking (pontos)" >{{item.rank}}<sup>ᵒ</sup>({{item.point}})</td>
+							<td ng-repeat="item in y.data track by $index" class=""  title="Posição no ranking (pontos)" ><span ng-show="item.value!=''">{{item.rank}}<sup>ᵒ</sup>({{item.point}})</span></td>
+							
 						</tr>
 						<tr>
 							<td class="{{$parent.histogram_info.class}}" ng-repeat="item in y.data track by $index" ng-bind="::item.value|percentage:2" 
@@ -645,7 +686,6 @@
 					<label ng-class={compareHighlight:compareLineHover==5} ng-mouseover="compareLineHover=5"><span class="spLabel">Correlação CDI:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationCDI"></em></label>
 					<label ng-class={compareHighlight:compareLineHover==6} ng-mouseover="compareLineHover=6"><span class="spLabel">Correlação IBOV:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationIbov"></em></label>
 					<label ng-class={compareHighlight:compareLineHover==7} ng-mouseover="compareLineHover=7"><span class="spLabel">Correlação SP&500:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationSP500"></em></label>
-					
 					<label ng-class={compareHighlight:compareLineHover==9} ng-mouseover="compareLineHover=9"><span class="spLabel">Investimento inicial:</span> <em ng-bind="fundsToCompare[0].info.initialValue|currency:'R$'"></em></label>
 					<label ng-class={compareHighlight:compareLineHover==10} ng-mouseover="compareLineHover=10"><span class="spLabel">Taxa de Administração:</span> <em ng-bind="fundsToCompare[0].info.admTax|percentage:2"></em></label>
 					<br/>

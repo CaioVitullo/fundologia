@@ -68,7 +68,9 @@ function dataManager($http, me){
 		}
 		return null;
 	};
-	
+	me.openDialogBestInterval = function(){
+		
+	};
 	me.getQuerystring = function (name, _url) {
         var url = _url != null ? _url : window.location.href;
         if (url.indexOf('?') >= 0) {
@@ -125,7 +127,7 @@ function dataManager($http, me){
 		$('#modalRankingDialog').modal('open');
 	}
 	me.currentSortCol = 0;
-	me.sortReverse = false;
+	me.sortReverse = true;
 	me.setCurrentSort = function(i){
 		if(me.currentSortCol == i){
 			me.sortReverse = !me.sortReverse;
@@ -170,12 +172,14 @@ function dataManager($http, me){
 			me.ranktableColumns.push(i);
 		}
 	};
+	me.blinkLock=false;
+	
 	me.sortColumns = [
 		'rank',
 		'name',	//1
 		'posNegCountRate', //2
 		'posNegAvgRate',	//3
-		'average',			//4
+		'monthAboveCDI',			//4
 		'volatilidadeAnual',			//5
 		'sharpCDI',	//6
 		'admTax',			//7

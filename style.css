@@ -535,12 +535,16 @@ footer{
 .wideModal{
 	width: 95%;
 }
-.blink_me {
+.blinkMe {
 	animation: blinker 3s linear infinite;
   }
-  
+  .cOrange{
+	  color: orange;
+	  
+	  margin-bottom: 0px;
+  }
   @keyframes blinker {  
-	50% { opacity: 0.3; }
+	50% {  opacity: 0.7;}
   }
 
   #preloading{
@@ -733,6 +737,7 @@ footer{
 }
 .hoverRow .fundName {
 	color: #3969ba;
+	cursor: pointer;
 }
 .colorIcon{
 	color: #c5c9ce;
@@ -964,4 +969,8 @@ i.tinySmall{
 
 .row  .minTableHeight{
 	min-height: 70vh
+}
+#subtitle{
+	text-overflow: ellipsis;
+	overflow: hidden;
 }

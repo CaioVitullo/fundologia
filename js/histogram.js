@@ -8,6 +8,8 @@ function histogramManager(me){
 	me.histogramPerformance=[];
 	me.histogramStDev=[];
 	me.histogramAvg=[];
+	me.histogramAboveCDI=[];
+	me.histogramAboveIBOV=[];
 	me.currentRowHistPosNegMonth = 0;
 	me.currentRowHistPosNegAvgMonth = 0;
 	me.currentRowHistCorrelIbov = 0;
@@ -17,8 +19,10 @@ function histogramManager(me){
 	me.currentRowHistPerformance=0;
 	me.currentRowHistStDev=0;
 	me.currentRowHistAvg=0;
-    me.currentRowTxAdm=0;
-    
+	me.currentRowTxAdm=0;
+	me.currentRowAboveCDI=0;
+	me.currentRowAboveIBOV=0;
+   
     me.histClick = function(hist,item, property, type){
         if(me.canShowFeature('toast_filtroPorHistograma'))
             me.toastOk('Boa!! Você ativou o filtro por histograma. Para desfazer basta clicar na mesma barra novamente.<a onclick="toastCallback()">Entendi!</a>');
@@ -28,7 +32,7 @@ function histogramManager(me){
 			if(Object.keys(me.histogramItemFilter).length == 0)
 				me.histogramItemFilter = null;
 		}else{
-			hist.set({isFiltering:false});
+			hist.data.set({isFiltering:false});
 			if(me.histogramItemFilter == null)
 				me.histogramItemFilter = {};
 			me.histogramItemFilter[property] = {name:property, low:item.low, high:item.high, type:type};
@@ -42,9 +46,11 @@ function histogramManager(me){
 		me.showMesesNegativos = false;
 		me.histogram_info.low = item.low;
 		me.histogram_info.high = item.high;
-		me.histogram_info.class='histInfoColor' + (9-histogram.indexOf(item));
+		me.histogram_info.class='histInfoColor' + (9-histogram.data.indexOf(item));
 	}
     me.loadHistograms = function(row){
+		me.showGenereicHist(row, 'histogramAboveCDI', 'monthAboveCDI','currentRowAboveCDI' ,'histogram_MonthsAboveCDI_'+ me.selectedPeriod);
+		me.showGenereicHist(row, 'histogramAboveIBOV', 'monthsAboveIBOV','currentRowAboveIBOV' ,'histogram_MonthsAboveIBOV_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramPosNegRate', 'posNegCountRate','currentRowHistPosNegMonth' ,'histogram_posNegCountRate_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramPosNegAvgRate', 'posNegAvgRate','currentRowHistPosNegAvgMonth' ,'histogram_posNegAverageRate_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramCorrelIbov', 'correlationIbov','currentRowHistCorrelIbov' ,'histogramCorrelationIbov_'+ me.selectedPeriod);

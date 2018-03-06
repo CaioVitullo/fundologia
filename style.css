@@ -374,9 +374,10 @@ footer{
 .material-icons{
 	vertical-align: middle;
 	cursor: pointer;
+	color: #4186c3;
 }
 .filterTitle .material-icons:hover{
-	color: black;
+	color: silver;
 }
 .tsHeight p{
 	
@@ -929,7 +930,9 @@ tr.tableRow.ng-scope:after {
 #modalRankingDialog section{
 	color: slategray;
 }
-
+.defaultColor{
+	color: #3969ba;
+} 
 .iconOff{
 	color: silver;
 }

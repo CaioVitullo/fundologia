@@ -111,6 +111,7 @@ function dataManager($http, me){
 		me.titleDialogHtml = title;
 		$('#modalCustomText').modal('open');
 	};
+	me.interval_hover=null;
 	me.showIntervalDialog = function(){
 		//chart_bestInterval
 		var d = [];
@@ -138,11 +139,12 @@ function dataManager($http, me){
 		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
 		data.addRows(d);
 		
-		var w =  $(window).width()*0.4;
+		var w =  $(window).width()*0.35;
+		console.log(w);
 		  var options = {
 			legend:'none',tooltip:{isHtml: true},
 			width:w,
-			hAxis: {title: 'Permancencia no fundo'},
+			hAxis: {title: 'Permanência no fundo(meses)'},
 			vAxis: {title: 'Rendimento médio mensalizado (%)'}
 		  };
 	  
@@ -155,10 +157,10 @@ function dataManager($http, me){
 			curveType: 'function',
 			legend: { position: 'right' },
 			width:w,
-			hAxis: {title: 'Permancencia no fundo'},
+			hAxis: {title: 'Permanência no fundo(meses)'},
 			vAxis: {title: 'Rendimento médio mensalizado (%)'}
 		  });
-
+		me.interval_hover = me.currentRow.figures[me.selectedPeriod].intervalResumes[0];
 		$('#modalInterval').modal('open');
 	}
 	me.rankingFullList = null

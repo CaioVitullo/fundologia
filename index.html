@@ -6,9 +6,18 @@
 	<meta charset="utf-8">
 
 	
-	<meta name="description" content="Compare fundos de investimento. Analise estatistica das rentabilidades">
+	<meta name="description" content="Pesquise e Compare fundos de investimento. Todas as informações que você precisa para escolher seu fundo de investimento num lugar so.">
   	<meta name="keywords" content="fundos, compare fundos, fundo, investimento, fundos de investimento, rentabilidade, rentabilidade fundos, melhor investimento, onde investir, qual melhor investimento, onde devo investir, dinheiro, bovespa, ibovespa, compare rentabilidade, CDI">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+
+	<meta property="og:title" content="Fundologia">
+	<meta property="og:description" content="Pesquise e Compare fundos de investimento. Todas as informações que você precisa para escolher seu fundo de investimento num lugar so.">
+	<meta property="og:image" content="https://caiovitullo.github.io/fundologia/img/img.jpg">
+	<meta property="og:url" content="https://caiovitullo.github.io/fundologia">
+	<meta property="og:type" content="article" />
+	<meta property="og:locale" content="pt_BR" />
+	<meta name="twitter:card" content="summary_large_image">	
+
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -663,16 +672,37 @@
 
 		</div>
 	</div>
-	<div id="modalInterval" class="modal wideModal" >
+	<div id="modalInterval" class="modal" >
 		<div class="modal-content">
-			<div class="row">
-				<p>Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</p>
-			</div>
+			
+			<label ng-show="interval_hover != null" class="defaultColor" style="font-size:0.9rem;">
+					Quem permaneceu <strong>{{interval_hover.length}}</strong> meses no fundo, teve um rendimento mensal médio de <strong>{{interval_hover.montlyAvg}}%</strong>.Ficou acima do CDI {{interval_hover.aboveCdi|percentage:2}} das vezes e acima do IBOV {{interval_hover.aboveIbov|percentage:2}}. {{interval_hover.count}} análises feitas
+			</label>
 			<div class="row">
 				<div class="col s12 m12 l12 x12 lblResume">
-					<label ng-repeat="item in currentRow.figures[selectedPeriod].intervalResumes">
-						Quem permaneceu <strong>{{item.length}}</strong> meses no fundo, teve um rendimento mensal médio de <strong>{{item.montlyAvg}}%</strong>.Ficou acima do CDI {{item.aboveCdi|percentage:2}} das vezes e acima do IBOV {{item.aboveIbov|percentage:2}}. {{item.count}} análises feitas
-					</label>
+					<table class="highlight">
+						<thead>
+							<tr>
+								<th>Permanência(meses)</th>
+								<th>Rendimento mensal médio</th>
+								<th>Ficou acima do CDI</th>
+								<th>Ficou acima do IBOV</th>
+								<th>Análises</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in currentRow.figures[selectedPeriod].intervalResumes" ng-mouseover="$parent.interval_hover=item">
+								<td ng-bind="item.length"></td>
+								<td ng-bind="item.montlyAvg"></td>
+								<td>{{item.aboveCdi|percentage:2}} das vezes</td>
+								<td>{{item.aboveIbov|percentage:2}} das vezes</td>
+								<td ng-bind="item.count"></td>
+							</tr>
+						</tbody>
+					</table>
+					
+					<label>Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</label>
+					
 				</div>
 			</div>
 			<div class="row">

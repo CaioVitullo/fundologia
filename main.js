@@ -46,13 +46,16 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		me.width = $(window).width();
 		me.frases = ['o fim do achistmo', 'pra quem gosta de resultado!', 'teste teste teste'];
 		me.currentFrasesID = 0;	
-		$interval(function(){
-			me.currentFrasesID++;
-			if(me.currentFrasesID==me.frases.length)
-				me.currentFrasesID = 0;
-			var frase = me.frases[me.currentFrasesID];
-			$('#subtitle').fadeOut('slow').text(frase).fadeIn('slow');
-		}, 10 * 1000, 3);
+		if(me.isMobile==false){
+			$interval(function(){
+				me.currentFrasesID++;
+				if(me.currentFrasesID==me.frases.length)
+					me.currentFrasesID = 0;
+				var frase = me.frases[me.currentFrasesID];
+				$('#subtitle').fadeOut('slow').text(frase).fadeIn('slow');
+			}, 10 * 1000, 3);
+		}
+		
 		resizeHorizontalScroll();
 	}; 
 	
@@ -627,8 +630,12 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		 
 	};
 	me.groupedRankList = [];
-	me.openRankDialog = function(){
-		
+	me.openRankDialog = function(row){
+		if(me.isMobile == true){
+			me.selectRow(row);
+			return;
+		}
+			
 		me.groupedRankList = [];
 		var month = 2;
 		var year = 18;

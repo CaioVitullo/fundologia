@@ -276,7 +276,7 @@
 										ng-mouseover="showRowDetail(row)">
 										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank">Rank</td>
 										<td class="cutText noselect" >
-											<span title="{{row.name}}" class="fundName" ng-click="openRankDialog()"  title="Tabela de rentabilidade completa!">{{row.name}}</span>
+											<span title="{{row.name}}" class="fundName" ng-click="openRankDialog(row)"  title="Tabela de rentabilidade completa!">{{row.name}}</span>
 											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict" ng-mouseover="$parent.blinkRestricao=true" ng-mouseleave="$parent.blinkRestricao=false"  title="Fundo destinado à investidores qualificados.&#10;Ative o filtro 'Sem restrição' no menu lateral esquerdo para ver apenas os fundos que não são restritos apenas à investidores qualificados.">monetization_on</i>
 											<!-- <i class="hide-on-small-and-down colorIcon tiny material-icons hidenIcon "  >info_outline</i>  -->
 											<i class="colorIcon tiny material-icons " ng-mouseover="$parent.blinkLock = true" data-ng-mouseleave="$parent.blinkLock = false" ng-show="row.info.isClosed"  title="Fundo fechado.&#10;Ative o filtro 'Abertos apenas' no menu lateral esquerdo para ver apenas os fundos que estão disponíveis para aplicação.">lock</i>

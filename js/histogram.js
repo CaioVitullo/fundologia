@@ -57,7 +57,7 @@ function histogramManager(me){
 		me.showGenereicHist(row, 'histogramCorrelCDI', 'correlationCDI','currentRowHistCorrelCDI' ,'histogramCorrelationCDI_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramCorrelSP500', 'correlationSP500','currentRowHistCorrelSP500' ,'histogramCorrelationSP500_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramPerformance', 'performance','currentRowHistPerformance' ,'histogram_Performance_'+ me.selectedPeriod);
-		me.showGenereicHist(row, 'histogramStDev', 'stdDev','currentRowHistStDev' ,'histogram_stDev_'+ me.selectedPeriod);
+		me.showGenereicHist(row, 'histogramStDev', 'volatilidadeAnual','currentRowHistStDev' ,'histogram_stDev_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramAvg', 'average','currentRowHistAvg' ,'histogram_avg_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramTxAdm', 'admTax','currentRowTxAdm' ,'histogram_txAdm', function(row){return row.info.admTax;});
 		

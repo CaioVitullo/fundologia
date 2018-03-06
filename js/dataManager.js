@@ -124,7 +124,7 @@ function dataManager($http, me){
 			p[2]=item.montlyAvg;
 			p[3]=item.montlyAvg;
 			p[4]=item.maxPerformance;
-			p[5]='<p>Quem permaneceu ' + item.length + ' meses no fundo:</p><p>Teve um rendimento mensal médio de <strong>' + item.montlyAvg + '%</strong>.</p>' + '<p>O maior rendimento foi de: <strong>' + item.maxPerformance + '%</strong></p><p> E o menor de:<strong>' + item.minPerformance +'%</strong></p>' 
+			p[5]='<p>Quem permaneceu ' + item.length + ' meses no fundo:</p><p>Teve um rendimento mensalizado médio de <strong>' + item.montlyAvg + '%</strong>.</p>' + '<p>O maior rendimento mensalizado foi de: <strong>' + item.maxPerformance + '%</strong></p><p> E o menor rendimento mensalizado foi de:<strong>' + item.minPerformance +'%</strong></p>' 
 			d.push(p);
 			L.push([item.length,item.minPerformance, item.montlyAvg, item.maxPerformance ]);
 		}

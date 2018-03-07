@@ -649,7 +649,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			width:$('#chartCompareDiv').width()*0.95,
 			height:$('#chartCompareDiv').prev('div').height(),
 			curveType: 'function',
-			legend: { position: 'bottom' }
+			legend: { position: 'top' },
+			hAxis: {title: me.filters.PeriodoTitle()},
+			vAxis: {title: 'Rentabilidade(%) acumulada no período'},
 		  };
   
 		  var chart = new google.visualization.LineChart(document.getElementById('chart_compare'));

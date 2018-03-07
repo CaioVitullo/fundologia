@@ -4,11 +4,15 @@
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115170636-1"></script>
 	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
+		if(window.location.href.indexOf('dev.') ==-1){
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
 
-		gtag('config', 'UA-115170636-1');
+			gtag('config', 'UA-115170636-1');
+		}else{
+			ga = function(p1, p2){console.log(p1, p2)};
+		}
 	</script>
 
 	<script>
@@ -283,7 +287,7 @@
 											<span ng-click="setCurrentSort(0)">Rank</span>
 											<i class="tiny material-icons"  title="Quer entender melhor nosso ranking? Clique aqui." ng-click="showRankDialog()" >info_outline</i> 
 										</th>
-										<th  ng-class="{currentSortCol:currentSortCol==1}" >Fundo</th>
+										<th style="text-align:left;"  ng-class="{currentSortCol:currentSortCol==1}" >Fundo</th>
 										<th ng-click="setCurrentSort(2)" ng-class="{currentSortCol:currentSortCol==2}" class="hide-on-small-and-down "  title="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo.&#10;Clique para ordenar">
 											Meses positivo
 										</th>
@@ -744,8 +748,13 @@
 				<p>Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</p>
 			</div>
 			<div class="row">
-				<div class="col s12 m12 l6 x6 xl6 lblResume">
-					<h5 class="tac" ng-bind="fundsToCompare[0].name"></h5>
+				<div class="col s12 m12 l8 x7 xl6 lblResume">
+					<label class="compareFundName">
+						<span class="spLabel">Fundos: </span>
+							<em ng-bind="fundsToCompare[0].name"></em>
+							<em ng-bind="fundsToCompare[1].name"></em>
+					</label>
+				
 					<!-- <label><span class="spLabel">Classificação:</span> <em ng-bind="fundsToCompare[0].info.classification"></em></label>
 					<label><span class="spLabel">Cotização em:</span> <em ng-bind="fundsToCompare[0].info.cotizacaoTime"></em></label>
 					<label><span class="spLabel">Custódia:</span> <em ng-bind="fundsToCompare[0].info.custodia"></em></label>
@@ -817,16 +826,20 @@
 							<em ng-bind="fundsToCompare[1].info.admTax|percentage:2"></em>
 						</label>
 					<br/>
-					<rd-histogram
-						histogram="fundsToCompare[0].figures[selectedPeriod].fixedHistogram"
-						sufix="%">
-					</rd-histogram>
-					<rd-histogram
-						histogram="fundsToCompare[1].figures[selectedPeriod].fixedHistogram"
-						sufix="%">
-					</rd-histogram>
+					<label>
+						<span class="spLabel">Histograma:</span>
+						<rd-histogram class="histLine" style="float:right;"
+							histogram="fundsToCompare[0].figures[selectedPeriod].fixedHistogram"
+							sufix="%">
+						</rd-histogram>
+						<rd-histogram class="histLine"
+							histogram="fundsToCompare[1].figures[selectedPeriod].fixedHistogram"
+							sufix="%">
+						</rd-histogram>
+					</label>
+					
 				</div>
-				<div class="col s12 m12 l6 x6 xl6" id="chartCompareDiv">
+				<div class="col s12 m12 l4 x5 xl6" id="chartCompareDiv">
 					<div id="chart_compare"></div>
 				</div>
 				

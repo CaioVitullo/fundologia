@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html  xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" ng-app="mainApp">
 <head>
-	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115170636-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-115170636-1');
+	</script>
+
 	<title>fundologia</title>
 	<meta charset="utf-8">
 
@@ -12,8 +21,8 @@
 
 	<meta property="og:title" content="Fundologia">
 	<meta property="og:description" content="Pesquise e Compare fundos de investimento. ">
-	<meta property="og:image" content="https://caiovitullo.github.io/fundologia/img/img.jpg">
-	<meta property="og:url" content="https://caiovitullo.github.io/fundologia/">
+	<meta property="og:image" content="https://www.fundologia.com.br/img/img.jpg">
+	<meta property="og:url" content="http://www.fundologia.com.br">
 	<meta property="og:type" content="article" />
 	<meta property="og:locale" content="pt_BR" />
 	<meta name="twitter:card" content="summary_large_image">	
@@ -107,9 +116,9 @@
 								<input class="with-gap" type="radio" name="filterPeriodo" ng-class="{'filled-in':filterItem.checked}" id="filterPeriodo_{{::filterItem.id}}" ng-value="filterItem.id" ng-change="$parent.changePeriodo()" ng-model="$parent.selectedPeriod"  />
 								<label for="filterPeriodo_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
 							</p>
-							<p class="pUpper">
+							<!-- <p class="pUpper">
 								<a class="linkSeeMore" ng-click="showAllFilterPeriodoOn = toggleFilter(showAllFilterPeriodoOn, filters.Periodo)" ng-class="{seeMore:showAllFilterPeriodoOn, seeLess:!showAllFilterPeriodoOn}"></a>
-							</p>
+							</p> -->
 					</div>
 				
 				<div class="divider"></div>
@@ -136,7 +145,7 @@
 				<h5 class="filterTitle">Classificação</h5>
 				<div class="tsHeight" ng-class="{tsOpened:showAllFilterTypeOn}">
 					<p ng-repeat="filterItem in filters.Tipo.equals({visible:true})" >
-						<input  type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterTipo_{{::filterItem.id}}" ng-model="filterItem.checked" ng-click="$parent.checkFilterTopShow(filters.Tipo,showAllFilterTypeOn)" ng-checked="filterItem.checked" />
+						<input  type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterTipo_{{::filterItem.id}}" ng-model="filterItem.checked" ng-click="$parent.checkFilterTopShow(filters.Tipo,showAllFilterTypeOn, 'Classificacao')" ng-checked="filterItem.checked" />
 						<label for="filterTipo_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
 					</p>
 					<p class="pUpper">
@@ -211,7 +220,7 @@
 					Patrimônio até:
 				</h5>
 				<p class="checkList" ng-repeat="filterItem in filters.volume.equals({visible:true})" >
-						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterVolume_{{::filterItem.id}}" ng-click="checkFilterTopShow(filters.volume,showAllFilterVolumeOn)" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
+						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterVolume_{{::filterItem.id}}" ng-click="checkFilterTopShow(filters.volume,showAllFilterVolumeOn, 'Volume')" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
 						<label for="filterVolume_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
 				</p>
 				<p class="pUpper">
@@ -555,11 +564,7 @@
 
 
 	
-	<footer class="row">
-		<div class="container">
-			<label ng-bind="width"></label>
-		</div>
-	</footer>
+	
 	
 	<div id="modal1" class="modal" >
 		<div class="modal-content">
@@ -719,63 +724,92 @@
 				<p>Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</p>
 			</div>
 			<div class="row">
-				<div class="col s4 m4 l4 x4 lblResume">
+				<div class="col s12 m12 l6 x6 xl6 lblResume">
 					<h5 class="tac" ng-bind="fundsToCompare[0].name"></h5>
 					<!-- <label><span class="spLabel">Classificação:</span> <em ng-bind="fundsToCompare[0].info.classification"></em></label>
 					<label><span class="spLabel">Cotização em:</span> <em ng-bind="fundsToCompare[0].info.cotizacaoTime"></em></label>
 					<label><span class="spLabel">Custódia:</span> <em ng-bind="fundsToCompare[0].info.custodia"></em></label>
 					<label><span class="spLabel">Gestor:</span> <em ng-bind="fundsToCompare[0].info.gestor"></em></label> -->
-					<label ng-class={compareHighlight:compareLineHover==-1} ng-mouseover="compareLineHover=-1"><span class="spLabel">Rentabilidade no período: </span><em ng-bind="fundsToCompare[0].figures[selectedPeriod].performance|percentage:2"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==-2} ng-mouseover="compareLineHover=-2"><span class="spLabel">Soma de pontos no ranking: </span><em ng-bind="fundsToCompare[0].figures[selectedPeriod].totalRank"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==0} ng-mouseover="compareLineHover=0"><span class="spLabel">Meses positivos: </span><em ng-bind="' (' + fundsToCompare[0].figures[selectedPeriod].positiveCount + ')'"></em> <em ng-bind=" fundsToCompare[0].figures[selectedPeriod].posNegCountRate|percentage:2"  ></em>  </label>
-					<label ng-class={compareHighlight:compareLineHover==1} ng-mouseover="compareLineHover=1"><span class="spLabel">Meses negativos: </span><em ng-bind="' (' + fundsToCompare[0].figures[selectedPeriod].negativeCount + ')'"></em>  <em ng-bind="100 - fundsToCompare[0].figures[selectedPeriod].posNegCountRate|percentage:2"></em>  </label>
-					<label ng-class={compareHighlight:compareLineHover==2} ng-mouseover="compareLineHover=2"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==3} ng-mouseover="compareLineHover=3"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==8} ng-mouseover="compareLineHover=8"><span class="spLabel">Média rendimento:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].average"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==4} ng-mouseover="compareLineHover=4"><span class="spLabel">Volatilidade:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
+					<label ng-class={compareHighlight:compareLineHover==-1} ng-mouseover="compareLineHover=-1">
+						<span class="spLabel">Rentabilidade no período: </span>
+							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].performance|percentage:2"></em>
+							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].performance|percentage:2"></em>
+					</label>
+					<label ng-class={compareHighlight:compareLineHover==-2} ng-mouseover="compareLineHover=-2">
+						<span class="spLabel">Soma de pontos no ranking: </span>
+							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].totalRank"></em>
+							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].totalRank"></em>
+					</label>
+					<label ng-class={compareHighlight:compareLineHover==0} ng-mouseover="compareLineHover=0">
+						<span class="spLabel">Meses positivos: </span>
+						<em ng-bind=" fundsToCompare[0].figures[selectedPeriod].posNegCountRate|percentage:2"  ></em>
+						<em ng-bind=" fundsToCompare[1].figures[selectedPeriod].posNegCountRate|percentage:2"  ></em>
+					  </label>
+					<label ng-class={compareHighlight:compareLineHover==1} ng-mouseover="compareLineHover=1">
+						<span class="spLabel">Meses negativos: </span>
+						 <em ng-bind="100 - fundsToCompare[0].figures[selectedPeriod].posNegCountRate|percentage:2"></em>
+						 <em ng-bind="100 - fundsToCompare[1].figures[selectedPeriod].posNegCountRate|percentage:2"></em>
+					</label>
+					<label ng-class={compareHighlight:compareLineHover==2} ng-mouseover="compareLineHover=2">
+						<span class="spLabel">Média rentabilidade positiva:</span> 
+							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].positiveAvg|percentage:2"></em>
+						 	<em ng-bind="fundsToCompare[1].figures[selectedPeriod].positiveAvg|percentage:2"></em>
+					</label>
+					<label ng-class={compareHighlight:compareLineHover==3} ng-mouseover="compareLineHover=3">
+						<span class="spLabel">Média rentabilidade negativa:</span>
+						 <em ng-bind="fundsToCompare[0].figures[selectedPeriod].negativeAvg|percentage:2"></em>
+						 <em ng-bind="fundsToCompare[1].figures[selectedPeriod].negativeAvg|percentage:2"></em>
+					</label>
+					<label ng-class={compareHighlight:compareLineHover==8} ng-mouseover="compareLineHover=8">
+						<span class="spLabel">Média rendimento:</span> 
+							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].average"></em>
+							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].average"></em>
+					</label>
+					<label ng-class={compareHighlight:compareLineHover==4} ng-mouseover="compareLineHover=4">
+						<span class="spLabel">Volatilidade:</span> 
+							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].volatilidadeAnual|percentage:2"></em>
+							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].volatilidadeAnual|percentage:2"></em>
+					</label>
 
-					<label ng-class={compareHighlight:compareLineHover==5} ng-mouseover="compareLineHover=5"><span class="spLabel">Correlação CDI:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationCDI"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==6} ng-mouseover="compareLineHover=6"><span class="spLabel">Correlação IBOV:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationIbov"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==7} ng-mouseover="compareLineHover=7"><span class="spLabel">Correlação SP&500:</span> <em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationSP500"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==9} ng-mouseover="compareLineHover=9"><span class="spLabel">Investimento inicial:</span> <em ng-bind="fundsToCompare[0].info.initialValue|currency:'R$'"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==10} ng-mouseover="compareLineHover=10"><span class="spLabel">Taxa de Administração:</span> <em ng-bind="fundsToCompare[0].info.admTax|percentage:2"></em></label>
+					<label ng-class={compareHighlight:compareLineHover==5} ng-mouseover="compareLineHover=5">
+						<span class="spLabel">Correlação CDI:</span> 
+							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationCDI"></em>
+							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationCDI"></em>
+					</label>
+					<label ng-class={compareHighlight:compareLineHover==6} ng-mouseover="compareLineHover=6">
+						<span class="spLabel">Correlação IBOV:</span> 
+							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationIbov"></em>
+							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationIbov"></em>
+					</label>
+					<label ng-class={compareHighlight:compareLineHover==7} ng-mouseover="compareLineHover=7">
+							<span class="spLabel">Correlação SP&500:</span> 
+								<em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationSP500"></em>
+								<em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationSP500"></em>
+							</label>
+					<label ng-class={compareHighlight:compareLineHover==9} ng-mouseover="compareLineHover=9">
+						<span class="spLabel">Investimento inicial:</span> 
+							<em ng-bind="fundsToCompare[0].info.initialValue|currency:'R$'"></em>
+							<em ng-bind="fundsToCompare[1].info.initialValue|currency:'R$'"></em>
+						</label>
+					<label ng-class={compareHighlight:compareLineHover==10} ng-mouseover="compareLineHover=10">
+						<span class="spLabel">Taxa de Administração:</span> 
+							<em ng-bind="fundsToCompare[0].info.admTax|percentage:2"></em>
+							<em ng-bind="fundsToCompare[1].info.admTax|percentage:2"></em>
+						</label>
 					<br/>
 					<rd-histogram
-						histogram="fundsToCompare[0].figures[selectedPeriod].fixedHistogram.data"
+						histogram="fundsToCompare[0].figures[selectedPeriod].fixedHistogram"
+						sufix="%">
+					</rd-histogram>
+					<rd-histogram
+						histogram="fundsToCompare[1].figures[selectedPeriod].fixedHistogram"
 						sufix="%">
 					</rd-histogram>
 				</div>
-				<div class="col s4 m4 l4 x4" id="chartCompareDiv">
+				<div class="col s12 m12 l6 x6 xl6" id="chartCompareDiv">
 					<div id="chart_compare"></div>
 				</div>
-				<div class="col s4 m4 l4 x4 lblResume">
-					<h5 class="tac" ng-bind="fundsToCompare[1].name"></h5>
-					<!-- <label><span class="spLabel">Classificação:</span> <em ng-bind="fundsToCompare[1].info.classification"></em></label>
-					<label><span class="spLabel">Cotização em:</span> <em ng-bind="fundsToCompare[1].info.cotizacaoTime"></em></label>
-					<label><span class="spLabel">Custódia:</span> <em ng-bind="fundsToCompare[1].info.custodia"></em></label>
-					<label><span class="spLabel">Gestor:</span> <em ng-bind="fundsToCompare[1].info.gestor"></em></label> -->
-
-					<label ng-class={compareHighlight:compareLineHover==-1} ng-mouseover="compareLineHover=-1"><span class="spLabel">Rentabilidade no período: </span><em ng-bind="fundsToCompare[1].figures[selectedPeriod].performance|percentage:2"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==-2} ng-mouseover="compareLineHover=-2"><span class="spLabel">Soma de pontos no ranking: </span><em ng-bind="fundsToCompare[1].figures[selectedPeriod].totalRank"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==0} ng-mouseover="compareLineHover=0"><span class="spLabel">Meses positivos: </span><em ng-bind="' (' + fundsToCompare[1].figures[selectedPeriod].positiveCount + ')'"></em> <em ng-bind=" fundsToCompare[1].figures[selectedPeriod].posNegCountRate|percentage:2"  ></em>  </label>
-					<label ng-class={compareHighlight:compareLineHover==1} ng-mouseover="compareLineHover=1"><span class="spLabel">Meses negativos: </span><em ng-bind="' (' + fundsToCompare[1].figures[selectedPeriod].negativeCount + ')'"></em>  <em ng-bind="100 - fundsToCompare[1].figures[selectedPeriod].posNegCountRate|percentage:2"></em>  </label>
-					<label ng-class={compareHighlight:compareLineHover==2} ng-mouseover="compareLineHover=2"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==3} ng-mouseover="compareLineHover=3"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==8} ng-mouseover="compareLineHover=8"><span class="spLabel">Média rendimento:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].average"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==4} ng-mouseover="compareLineHover=4"><span class="spLabel">Volatilidade:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
-
-					<label ng-class={compareHighlight:compareLineHover==5} ng-mouseover="compareLineHover=5"><span class="spLabel">Correlação CDI:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationCDI"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==6} ng-mouseover="compareLineHover=6"><span class="spLabel">Correlação IBOV:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationIbov"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==7} ng-mouseover="compareLineHover=7"><span class="spLabel">Correlação SP&500:</span> <em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationSP500"></em></label>
-
-					<label ng-class={compareHighlight:compareLineHover==9} ng-mouseover="compareLineHover=9"><span class="spLabel">Investimento inicial:</span> <em ng-bind="fundsToCompare[1].info.initialValue|currency:'R$'"></em></label>
-					<label ng-class={compareHighlight:compareLineHover==10} ng-mouseover="compareLineHover=10"><span class="spLabel">Taxa de Administração:</span> <em ng-bind="fundsToCompare[1].info.admTax|percentage:2"></em></label>
-					<br/>
-					<rd-histogram
-						histogram="fundsToCompare[1].figures[selectedPeriod].fixedHistogram.data"
-						sufix="%">
-					</rd-histogram>
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -795,7 +829,17 @@
 	</div>
 
 </div>
+<footer class="row">
+	<div class="container">
+		<p>
+				O Fundologia tem como objetivo auxiliar na pesquisa de fundos de investimento. O ranking, assim como todo o conteudo do site, NÃO são recomendação de compra e/ou investimento. A decisão é responsabilidade do investidor. 
 
+		</p>
+		<p>
+				A rentabilidade passada não representa garantia de resultados futuros. As informações deste site foram obtidas a partir de fontes disponíveis publicamente. O Fundologia não garante sua atualização, exatidão , precisão, integridade ou veracidade, tampouco se responsabiliza pela publicação acidental de dados incorretos.
+		</p>
+	</div>
+</footer>
 
 
 <div id="preloading" onclick="skipIntroduction()">

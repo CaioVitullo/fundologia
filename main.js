@@ -44,7 +44,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		$('.modal').modal();
 		
 		me.width = $(window).width();
-		me.frases = ['o fim do achistmo', 'pra quem gosta de resultado!', 'teste teste teste'];
+		me.frases = ['o fim do achismo', 'pra quem gosta de resultado!', 'teste teste teste'];
 		me.currentFrasesID = 0;	
 		if(me.isMobile==false){
 			$interval(function(){
@@ -272,6 +272,11 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		
 	};
 	me.changePeriodo = function(){
+		ga('send', {
+			hitType: 'event',
+			eventCategory: 'Periodo',
+			eventAction: 'filter'
+		  });
 		me.loadHistograms(null);
 	}
 	me.drawLineChart = function(row, recalcWidth){
@@ -439,6 +444,13 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		return value;
 	}
 	me.changeInitialValue = function(item){
+		ga('send', {
+			hitType: 'event',
+			eventCategory: 'Aplicacao Inicial',
+			eventAction: 'filter',
+			eventLabel: item.Title
+		  });
+
 		if(item.filter == false || item.checked==true)
 			return
 
@@ -456,7 +468,12 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.closeModalDialog = function(name){
 		$('#' + name).modal('close');
 	}
-	me.checkFilterTopShow = function(filter, prop){
+	me.checkFilterTopShow = function(filter, prop, name){
+		ga('send', {
+			hitType: 'event',
+			eventCategory: name,
+			eventAction: 'filter'
+		  });
 
 		for(var i=0;i<filter.length;i++){
 			var item = filter[i];
@@ -533,6 +550,12 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		  };
 	}
 	me.openChart = function(name, propery, text){
+		ga('send', {
+			hitType: 'event',
+			eventCategory: name,
+			eventAction: 'chart'
+		  });
+
 		me.currentCharTitle = name + ' vs Rentabilidade';
 		if(text != null)
 			me.currentChartText = text.replace('Clique e confira!', '');
@@ -597,6 +620,12 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.compareFundItemClick(0);
 	};
 	me.openCompareDialog = function(){
+		ga('send', {
+			hitType: 'event',
+			eventCategory: 'compare',
+			eventAction: 'open dialog'
+		  });
+
 		$('.toast').fadeOut();
 		$('#modalCompare').modal({complete:function(){
 			$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -631,6 +660,13 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	};
 	me.groupedRankList = [];
 	me.openRankDialog = function(row){
+		ga('send', {
+			hitType: 'event',
+			eventCategory: 'view detail',
+			eventAction: 'open dialog',
+			eventLabel: row.name
+		  });
+
 		if(me.isMobile == true){
 			me.selectRow(row);
 			return;

@@ -108,11 +108,12 @@ nav{
 }
 
 footer{
-	padding: 5% 0;
+	padding: 1% 0;
 	background: #39495d;
 	width: 100%;
     left: 0px;
-    position: inherit;
+	position: inherit;
+	max-height: 200px;
 }
 
 
@@ -649,6 +650,10 @@ footer{
 .lblResume em{
 	float: right;
 }
+.lblResume label em:nth-child(2) {
+    width: 200px;
+    text-align: center;
+}
 .highlightPos{
 	color:green;
 }
@@ -980,4 +985,7 @@ i.tinySmall{
 }
 .chartBlock{
 	float: left;
+}
+.encurtaFundo{
+	bottom: 200px;
 }

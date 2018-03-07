@@ -2843,6 +2843,9 @@ ul.staggered-list li {
   .show-on-smaller-992{
     display: block !important;
   }
+  footer{
+    max-height: none!important;
+  }
   
 }
 

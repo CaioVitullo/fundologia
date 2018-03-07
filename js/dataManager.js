@@ -113,6 +113,12 @@ function dataManager($http, me){
 	};
 	me.interval_hover=null;
 	me.showIntervalDialog = function(){
+		ga('send', {
+			hitType: 'event',
+			eventCategory: 'interval dialog',
+			eventAction: 'open dialog',
+			eventLabel: me.currentRow.name
+		  });
 		//chart_bestInterval
 		var d = [];
 		var L = [['Permanencia', 'Mínimo', 'Médio', 'Máximo']];
@@ -165,6 +171,12 @@ function dataManager($http, me){
 	}
 	me.rankingFullList = null
 	me.showRankDialog = function(){
+		ga('send', {
+			hitType: 'event',
+			eventCategory: 'rank dialog',
+			eventAction: 'open dialog'
+		  });
+		
 		if(me.rankingFullList ==null){
 			me.rankDataIsLoading = true;
 			me.getGenericFile('resultadoFundo/rankingByMonth.txt', function(result){

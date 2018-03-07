@@ -1,6 +1,15 @@
 (function($){
   $(function(){
-
+		encurta = false;
+		$(window).scroll(function(){
+			if (((window.innerHeight + window.scrollY) >= document.body.offsetHeight) && encurta==false) {
+				$('#rightMenu').addClass('encurtaFundo');
+				encurta = true;
+    	}else if(encurta==true){
+				$('#rightMenu').removeClass('encurtaFundo');
+				encurta=false;
+			}
+		})
     $('.button-collapse').sideNav(
 			{
 				menuWidth: 300, // Default is 300

@@ -671,7 +671,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.selectRow(row);
 			return;
 		}
-			
+		var first = true;
 		me.groupedRankList = [];
 		var month = 2;
 		var year = 18;
@@ -685,8 +685,18 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 				value:me.currentRow.values[i] });
 			month -=1;
 			if(month == 0 || i ==len-1){
-				while(list.length<12)
-					list.includeBefore({label:'', value:'', point:'', rank:''});
+				if(list.length<12){
+					while(list.length<12){
+						if(first){
+							list.includeBefore({label:'', value:'', point:'', rank:''});
+						}else{
+							list.push({label:'', value:'', point:'', rank:''});
+						}
+					}
+					first=false;
+				}
+				
+					
 				me.groupedRankList.push({year:year, data:list});
 				month = 12;
 				year-=1;

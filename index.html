@@ -11,6 +11,26 @@
 		gtag('config', 'UA-115170636-1');
 	</script>
 
+	<script>
+		if(window.location.href.indexOf('dev.') ==-1){
+			window['_fs_debug'] = false;
+			window['_fs_host'] = 'fullstory.com';
+			window['_fs_org'] = 'AWRMP';
+			window['_fs_namespace'] = 'FS';
+			(function(m,n,e,t,l,o,g,y){
+				if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;}
+				g=m[e]=function(a,b){g.q?g.q.push([a,b]):g._api(a,b);};g.q=[];
+				o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
+				y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
+				g.identify=function(i,v){g(l,{uid:i});if(v)g(l,v)};g.setUserVars=function(v){g(l,v)};
+				y="rec";g.shutdown=function(i,v){g(y,!1)};g.restart=function(i,v){g(y,!0)};
+				g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
+				g.clearUserCookie=function(){};
+			})(window,document,window['_fs_namespace'],'script','user');
+		}
+		
+	</script>
+
 	<title>fundologia</title>
 	<meta charset="utf-8">
 
@@ -270,7 +290,7 @@
 										<th ng-click="setCurrentSort(3)" ng-class="{currentSortCol:currentSortCol==3}" class=" hide-on-small-and-down "  title="Soma dos ganhos nos meses positivos dividivo pela soma das perdas nos meses negativos.&#10;Clique para ordenar" >Rel. Ganho/ Perda</th>
 										<th ng-click="setCurrentSort(4)" ng-class="{currentSortCol:currentSortCol==4}" class="show-column-largar-1200" title="Quantidade de meses(em porcetagem) que o fundo teve rendimento superior ao CDI .&#10;Clique para ordenar ">Meses acima CDI</th>
 										<th ng-click="setCurrentSort(5)" ng-class="{currentSortCol:currentSortCol==5}" class="hide-on-small-and-down" title="Volatilidade anualizada referente aos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Volatilidade</th>
-										<th ng-click="setCurrentSort(6)" ng-class="{currentSortCol:currentSortCol==6}" class="show-column-largar-1300" title="Índice Sharpe CDI {{filters.PeriodoTitle()}} &#10; Clique para ordenar.">Sharp CDI</th>
+										<th ng-click="setCurrentSort(6)" ng-class="{currentSortCol:currentSortCol==6}" class="show-column-largar-1300" title="Índice Sharpe CDI {{filters.PeriodoTitle()}} &#10;Quanto de retorno foi entregue acima do CDI em razão do risco assumido.&#10; Clique para ordenar.">Sharp CDI</th>
 										<th ng-click="setCurrentSort(7)" ng-class="{currentSortCol:currentSortCol==7}" class="hide-on-smaller-400" title="Taxa Administrativa.&#10;Clique para ordenar">Tx Adm</th>
 										<th ng-click="setCurrentSort(8)" ng-class="{currentSortCol:currentSortCol==8}" title="Rentabilidade acumulada nos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Rentabilidade período</th>
 										
@@ -579,20 +599,20 @@
 			<h5 ng-bind="currentRow.name"></h5>
 			<div class="row">
 				<div class="col m6 l6 xl6 lblResume">
-					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Meses positivos: </span><em ng-bind="' (' + currentRow.figures[selectedPeriod].positiveCount + ')'"></em> <em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Meses negativos: </span><em ng-bind="' (' +currentRow.figures[selectedPeriod].negativeCount + ')'"></em> <em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Meses acima do CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].monthAboveCDI|percentage:2"></em></label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Meses acima do IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].monthsAboveIBOV|percentage:2"></em></label>
-					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="currentRow.figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
-					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="currentRow.figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Meses positivos: </span> <em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;showHistItem=false;"><span class="spLabel">Meses negativos: </span> <em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Meses acima do CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].monthAboveCDI|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Meses acima do IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].monthsAboveIBOV|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="currentRow.figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
+					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;showHistItem=false;"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="currentRow.figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
 					
 				</div>
 				<div class="col m6 l6 xl6 lblResume">
-						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Índice Sharp IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpIbov"></em></label>
-						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Índice Sharp CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpCDI"></em></label>
-						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Volatilidade anual:</span> <em ng-bind="currentRow.figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
-						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;"><span class="spLabel">Desvio padrão mensal:</span> <em ng-bind="currentRow.figures[selectedPeriod].stdDev"></em></label>
-						<rd-histogram
+						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Índice Sharp IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpIbov"></em></label>
+						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Índice Sharp CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpCDI"></em></label>
+						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Volatilidade anual:</span> <em ng-bind="currentRow.figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
+						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Desvio padrão mensal:</span> <em ng-bind="currentRow.figures[selectedPeriod].stdDev"></em></label>
+						<rd-histogram ng-mouseover="showHistItem=true;"
 							histogram="currentRow.figures[selectedPeriod].histogram"
 							sufix="%">
 						</rd-histogram>
@@ -616,7 +636,7 @@
 							ng-class="{
 										highlightPos:(showMesesPositivos && item.value>=0),
 										highlightNeg:(showMesesNegativos && item.value<0),
-										histInfo:(item.value >= histogram_info.low && item.value <= histogram_info.high)
+										histInfo:(showHistItem && item.value >= histogram_info.low && item.value <= histogram_info.high)
 									}
 									"></td>
 						<tr>

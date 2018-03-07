@@ -640,6 +640,9 @@ footer{
 	margin-bottom: 4px;
 	margin-bottom: 4px;
 }
+.lblResume label:hover{
+	color: #3969ba;
+}
 .lblResume label:nth-child(odd){
 	background-color: rgb(242, 242, 243)
 }

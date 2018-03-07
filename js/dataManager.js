@@ -8,6 +8,7 @@ function dataManager($http, me){
 			ajaxConfig.params = {_t : new Date().getTime()};
 			$http(ajaxConfig).then(function (result, status) {
 				me.defaultLists[fileIndex]=result.data;
+				console.log('load file:',url )
                 if(typeof(after)=='function')
                     after();
 			});

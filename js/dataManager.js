@@ -42,8 +42,8 @@ function dataManager($http, me){
 			}else if(me.defaultFiles[i].name =='last24'){
 				me.getFile(url, index, fn);
 			}else{
-				//me.getFile(url, index, null);
-				me.defaultLists[index]=null;
+				me.getFile(url, index, null);
+				//me.defaultLists[index]=null;
 			}
 			
 		}

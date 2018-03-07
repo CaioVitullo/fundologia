@@ -37,6 +37,19 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			},500);
 		}, function(){
 			me.selectFirstRow();
+			var qs = queryString('camp');
+			if(typeof(qs) != 'undefined'){
+				if(window.googleChartHasFinished == true){
+					me.openCampaign(qs);
+				}else{
+					var _interval = $interval(function(){
+						if(window.googleChartHasFinished == true){
+							$interval.cancel(_interval);
+							me.openCampaign(qs);
+						}
+					},300);
+				}
+			}
 		});
 		me.lastHash = me.filterHash(me.getFilterStatus());
 		//me.loadHistograms(null);
@@ -917,19 +930,7 @@ mainApp.directive('rdHistogram', function(){
 
 google.charts.load('current', {'packages':['corechart', 'scatter']});
 google.charts.setOnLoadCallback(function(){
-	var qs = queryString('camp')
-	var tm = null;
-	var fn = function(){
-		if(window.introSkipped==true){
-			if(tm !=null){clearTimeout(tm);}
-			getMainScope().openCampaign(qs);
-		}
-			
-	};
-	
-	if(typeof(qs) != 'undefined')
-		tm = window.setInterval(function(){fn();},300);
-		
+	window.googleChartHasFinished = true;
 });
 
 $(document).ready(function(){

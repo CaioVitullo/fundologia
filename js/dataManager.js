@@ -37,9 +37,9 @@ function dataManager($http, me){
 			var index = me.defaultFiles[i].index;
 			var url = 'resultadoFundo/' + file + '.txt';
 			if(me.defaultFiles[i].name =='bigList'){
-				me.getFromSrc(file, index, afterBigList);
+				me.getFile(url, index, afterBigList);
 			}else if(me.defaultFiles[i].name =='last24'){
-				me.getFromSrc(file, index, fn);
+				me.getFile(url, index, fn);
 			}else{
 				//me.getFile(url, index, null);
 				me.defaultLists[index]=null;

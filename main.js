@@ -918,9 +918,18 @@ mainApp.directive('rdHistogram', function(){
 google.charts.load('current', {'packages':['corechart', 'scatter']});
 google.charts.setOnLoadCallback(function(){
 	var qs = queryString('camp')
-	if(typeof(qs) != 'undefined'){
-		getMainScope().openCampaign(qs);
-	}
+	var tm = null;
+	var fn = function(){
+		if(window.introSkipped==true){
+			if(tm !=null){clearTimeout(tm);}
+			getMainScope().openCampaign(qs);
+		}
+			
+	};
+	
+	if(typeof(qs) != 'undefined')
+		tm = window.setInterval(function(){fn();},300);
+		
 });
 
 $(document).ready(function(){

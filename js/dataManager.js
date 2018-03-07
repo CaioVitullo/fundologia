@@ -234,6 +234,24 @@ function dataManager($http, me){
 			me.ranktableColumns.push(i);
 		}
 	};
+	me.showExtraChartFooter = false;
+	me.openCampaign = function(camp){
+		if(camp == 'txadm'){
+			me.showExtraChartFooter = true;
+			me.openChart(
+				'Taxa Administrativa',
+				 'admTax',
+				 'Os fundos de investimento com maior taxa Administrativa tiveram rendimento melhor nos últimos meses? Este gráfico vai te ajudar a descobrir!')
+				if (!me.$$phase)
+            		me.$apply();
+		}
+	};
+	me.showChartIcons = function(){
+		$("i:contains('insert_chart')").removeClass('tiny').addClass('small')
+	};
+	me.hideChartIcons = function(){
+		$("i:contains('insert_chart')").removeClass('small').addClass('tiny')
+	}
 	me.blinkLock=false;
 	
 	me.sortColumns = [

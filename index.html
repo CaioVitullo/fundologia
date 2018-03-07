@@ -95,7 +95,7 @@
 <body class="noselect">
 	<div class="rotate" onclick="removeRotateGif()"></div>
 
-<div ng-controller="ctrl" class="mainContent">
+<div ng-controller="ctrl" id="mainCtrl" class="mainContent">
 	<div class="navbar-fixed" ng-init="loadCtrl()">
 		<nav class="nav-extended">
 		 <div class="nav-wrapper container">
@@ -219,7 +219,7 @@
 				<p class="range-field sliderP">
 					<input type="range" ng-model="admTx"  min="0" max="4" step="0.1" />
 				</p>
-				<label title="Fundo que cobra mais taxa Administrativa rende mais? Este gráfico vai te ajudar a descobrir!" ng-click="openChart('Taxa Administrativa', 'admTax', 'Fundo que cobra mais taxa Administrativa rende mais? Este gráfico vai te ajudar a descobrir!')">
+				<label title="Os fundos com maior taxa Administrativa tiveram rendimento melhor nos últimos meses? Este gráfico vai te ajudar a descobrir!" ng-click="openChart('Taxa Administrativa', 'admTax', 'Os fundos que cobram mais taxa Administrativa tiveram rendimento melhor nos últimos meses? Este gráfico vai te ajudar a descobrir!')">
 					<i class="material-icons tiny " >insert_chart</i>
 					Gráfico Taxa adm vs Rentabilidade
 				</label>
@@ -235,7 +235,7 @@
 				</p>
 				<label title="Risco vs Retorno. Até quanto estou disposto a me arriscar?" ng-click="openChart('Volatilidade', 'volatilidadeAnual', 'Risco vs Retorno. Até quanto estou disposto a me arriscar?')">
 					<i class="material-icons tiny " >insert_chart</i>
-					Gráfico Taxa adm vs Rentabilidade
+					Gráfico Volatilidade vs Rentabilidade
 				</label>
 
 				<div class="divider"></div>
@@ -595,6 +595,7 @@
 		  <h4>{{currentCharTitle}} <em ng-show="selectedPeriod <= 2">nos </em><em ng-bind="::filters.Periodo.first({id:selectedPeriod}).Title"></em></h4>
 		  <div id="chart_txdm_scatter" style="width:100%;"></div>
 		  <p class="chartFooter" ng-bind="currentChartText"></p>
+		  <p class="chartFooter" ng-show="showExtraChartFooter">Clique nos icones <i ng-mouseover="showChartIcons()" ng-mouseleave="hideChartIcons()" class="small material-icons"  >insert_chart</i> e confira as outras análises que existem no site.</p>
 		</div>	
 	</div>
 

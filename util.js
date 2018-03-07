@@ -998,3 +998,32 @@ function checkVisible(elm, evalType) {
     if (evalType === "visible") return ((y < (vpH + st)) && (y > (st - elementHeight)));
     if (evalType === "above") return ((y < (vpH + st)));
 }
+
+function queryString(name, _url) {
+     var url = _url != null ? _url : window.location.href;
+     if (url.indexOf('?') >= 0) {
+         var parte = url.split('?')[1].split('#')[0];
+         if (parte.indexOf('&') >= 0) {
+             var retorno = '';
+             $(parte.split('&')).each(function (index, item) {
+                 var chaveValor = item.split('=');
+                 if (chaveValor[0] == name) {
+                     retorno = chaveValor[1];
+                     return false;
+                 }
+             });
+             return retorno;
+         } else {
+             if (parte.indexOf('=') >= 0 && parte.split('=')[0] == name) {
+                 var str = parte.split('=')[1];
+                 return str.split('#')[0];
+             }
+         }
+     }
+ }
+ function getAngularScopeByElementId(elementId) {
+    return angular.element($('#' + elementId)).scope();
+}
+function getMainScope(){
+    return getAngularScopeByElementId('mainCtrl');
+}

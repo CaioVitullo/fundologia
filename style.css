@@ -520,8 +520,11 @@ footer{
 
 
 #modal1{
-	height: 65%;
-	overflow-y: hidden;
+	height: 83%;
+	max-height: 912px;
+	overflow-y: auto;
+	background-color: rgb(57, 73, 93);
+    color: rgb(245, 245, 245);
 }
 .modal h4{
 	font-size: 1.58rem;
@@ -973,6 +976,7 @@ i.tinySmall{
 
 .google-visualization-tooltip h5, .google-visualization-tooltip p{
 	padding-left: 5px;
+	color: #3969ba;
 }
 
 .minH:after{
@@ -1006,4 +1010,12 @@ i.tinySmall{
 .histLine ul{
 	margin: 0;
 	border-bottom: solid 1px silver;
+}
+div [dir="ltr"]{
+	position: inherit;
+	margin: auto;
+}
+div [dir="ltr"] text {
+	font-style: normal;
+	font-family: 'Raleway', sans-serif;
 }

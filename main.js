@@ -493,7 +493,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	};
 	
 	me.chartData = {}
-	me.getGenericData = function(propery, name){
+	me.getGenericData = function(propery, name, n=1){
 		if(me.chartData.hasOwnProperty(propery)){
 			if(me.chartData[propery].hasOwnProperty(me.selectedPeriod))
 				return me.chartData[propery][me.selectedPeriod];
@@ -511,12 +511,12 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 				if(fig != null){
 					
 					d.push([
-						item.info.hasOwnProperty(propery) ? item.info[propery] : fig[propery],
-						item.info.isAcao ? fig.performance : null,
+						item.info.hasOwnProperty(propery) ? item.info[propery]/n : fig[propery]/n,
+						item.info.isAcao ? fig.performance/100.0 : null,
 						fn(item, fig) ,
-						item.info.isMultimercado ? fig.performance : null,
+						item.info.isMultimercado ? fig.performance/100.0 : null,
 						fn(item, fig) ,
-						item.info.isRendaFixa ? fig.performance : null,
+						item.info.isRendaFixa ? fig.performance/100.0 : null,
 						fn(item, fig)
 					])
 				}		
@@ -530,20 +530,29 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	
 	me.currentCharTitle = '';
 	me.gerDefaultChartOptions = function(title){
-		var w =  $('#modal1').width()*0.95;
-		var h = Math.min(w / 1.61, $('#modal1').height()) * 0.85;
+		var w =  $('#modal1').width()*0.85;
+		var h = Math.min(w / 1.61, $('#modal1').height()) 
 		return {
-			width:w,
+			//width:w,
 			height: h,
 			chart: {
 			  //title: 'Students\' Final Grades',
 			  //subtitle: 'based on hours studied'
 			},
+			chartArea: {width: '80%', 'height': '70%', top:35},
 			colors: ['#E94D20', '#ECA403', '#63A74A'],
 			hAxis: {title: title},
-			vAxis: {title: 'Rentabilidade(%) acumulada no período'},
-			legend: 'none',
-			//aggregationTarget:'none',
+			vAxis: {
+				title: 'Rentabilidade(%) acumulada nos ' + me.filters.PeriodoTitle(),
+				textStyle : {
+					fontSize: 12,
+					'font-style':'normal',
+					'font-name':'sans-serif'
+				},
+				format: 'percent'
+			},
+			legend: {position:'top'},
+			
 			
 			tooltip:{isHtml: true}//{isHtml:true, textStyle: {color: 'black'}, showColorCode: true}
 			//bubble: {textStyle: {fontSize: 11}}
@@ -572,10 +581,12 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
 		
 		
-		data.addRows(me.getGenericData(propery, name));
+		data.addRows(me.getGenericData(propery, name, propery == 'admTax'?100.0:1));
 
         var options = me.gerDefaultChartOptions(name);
-		
+		if(propery == 'admTax')
+		  options.hAxis.format='percent';
+
 		//var chart = new google.charts.Scatter(document.getElementById('chart_txdm_scatter'));
 		var chart = new google.visualization.ScatterChart(document.getElementById('chart_txdm_scatter'));
 
@@ -905,7 +916,12 @@ mainApp.directive('rdHistogram', function(){
 });
 
 google.charts.load('current', {'packages':['corechart', 'scatter']});
-//google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(function(){
+	var qs = queryString('camp')
+	if(typeof(qs) != 'undefined'){
+		getMainScope().openCampaign(qs);
+	}
+});
 
 $(document).ready(function(){
 	//$('.tooltipped').tooltip({delay: 50, html:true});

@@ -15,7 +15,14 @@ function dataManager($http, me){
 			
 		}
 		 
-    };
+	};
+	me.getFromSrc = function(name, index, after){
+		if(window[name] != null){
+			me.defaultLists[index]=window[name];
+			if(typeof(after)=='function')
+                after();
+		}
+	};
     me.defaultFiles = [
 		{index:1, name:'last24'},
 		{index:2, name: 'last36'},
@@ -30,11 +37,12 @@ function dataManager($http, me){
 			var index = me.defaultFiles[i].index;
 			var url = 'resultadoFundo/' + file + '.txt';
 			if(me.defaultFiles[i].name =='bigList'){
-				me.getFile(url, index, afterBigList);
+				me.getFromSrc(file, index, afterBigList);
 			}else if(me.defaultFiles[i].name =='last24'){
-				me.getFile(url, index, fn);
+				me.getFromSrc(file, index, fn);
 			}else{
-				me.getFile(url, index, null);
+				//me.getFile(url, index, null);
+				me.defaultLists[index]=null;
 			}
 			
 		}

@@ -5,6 +5,8 @@ function dataManager($http, me){
 			var ajaxConfig = { url: url, cache: false };
 			ajaxConfig.method = 'GET';
 			ajaxConfig.cache = false;
+			ajaxConfig.data= '';
+			ajaxConfig.headers= {"Content-Type": "text/gzip"};
 			ajaxConfig.params = {_t : new Date().getTime()};
 			$http(ajaxConfig).then(function (result, status) {
 				me.defaultLists[fileIndex]=result.data;
@@ -53,6 +55,10 @@ function dataManager($http, me){
 			var ajaxConfig = { url: url, cache: false };
 			ajaxConfig.method = 'GET';
 			ajaxConfig.cache = false;
+			//ajaxConfig.data= '';
+			//ajaxConfig.headers= {
+			//	"Content-Type": "text/gzip"
+			//}
 			ajaxConfig.params = {_t : new Date().getTime()};
 			$http(ajaxConfig).then(function (result, status) {
 				after(result.data);
@@ -60,7 +66,27 @@ function dataManager($http, me){
 		} catch (error) {
 			
 		}
-    }
+	};
+	me.getGZip = function(url, after){
+		try {
+			var ajaxConfig = { url: url, cache: false };
+			ajaxConfig.method = 'GET';
+			ajaxConfig.cache = false;
+			ajaxConfig.data= '';
+			ajaxConfig.headers= {"Content-Type": "text/gzip"};
+			ajaxConfig.params = {_t : new Date().getTime()};
+			$http(ajaxConfig).then(function (result, status) {
+				console.log(result);
+			});
+		} catch (error) {
+			p=error
+		}
+	};
+	me.gettry = function(){
+		me.getGZip('resultadoFundo/last24.gz', function(result){
+			console.log(result);
+		})
+	};
     me.saveOnStorage = function(key, obj){
 		
 		if(typeof(localStorage) == 'object'){

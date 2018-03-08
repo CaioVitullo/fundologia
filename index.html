@@ -4,7 +4,7 @@
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115170636-1"></script>
 	<script>
-		if(window.location.href.indexOf('dev.') ==-1){
+		if(window.location.href.indexOf('dev.') ==-1 || window.location.href.indexOf('github.io')){
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
@@ -16,7 +16,7 @@
 	</script>
 
 	<script>
-		if(window.location.href.indexOf('dev.') ==-1){
+		if(window.location.href.indexOf('dev.') ==-1 || window.location.href.indexOf('github.io')){
 			window['_fs_debug'] = false;
 			window['_fs_host'] = 'fullstory.com';
 			window['_fs_org'] = 'AWRMP';
@@ -54,7 +54,7 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
 	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 	
     <!-- Favicons -->
     <link rel="icon" href="img/favicon-16.png" sizes="16x16">
@@ -99,7 +99,7 @@
 		 <div class="nav-wrapper container">
 		  
 		  <a data-activates="slide-out" id="mobileMenu" class="button-collapse"><i class="material-icons"  >menu</i></a>
-		  <label class="mainHeader">fundologia.</label> 
+		  <label class="mainHeader" ng-click="gettry()">fundologia.</label> 
 		  <span id="subtitle">o fim do achismo!</span>
 		  
 		  <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -966,10 +966,10 @@
 	
 	<script src="js/materialize.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="util.js"  charset="utf-8" ></script>
+	<script src="js/util.js"  charset="utf-8" ></script>
 	<script src="js/dataManager.js"  charset="utf-8" ></script>
 	<script src="js/histogram.js"  charset="utf-8" ></script>
-	<script src="main.js"  charset="utf-8" ></script>
+	<script src="js/main.js"  charset="utf-8" ></script>
 	<script src="js/init.js"></script>
 	<!-- <script src="json/last24.js"></script>
 	<script src="json/bigList.js"></script> -->

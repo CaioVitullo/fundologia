@@ -231,46 +231,7 @@ footer{
 /*outras seções*/
 /* ================ PÁGINA INICIAL ================ */
 /* ================ PÁGINA RESPOSTA ================ */
-.topo_resposta{
-	background: url('img/topo_resposta.png') 50% no-repeat;
-	background-size: cover;
-	height: 100vh;
-}
-.nota{
-	padding: 5% 0;
-	background: #719924; /* Old browsers */
-	background: -moz-linear-gradient(top, #719924 0%, #397928 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, #719924 0%,#397928 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, #719924 0%,#397928 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#719924', endColorstr='#397928',GradientType=0 ); /* IE6-9 */
-}
-.container-arvores{
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-}
-.arvores{
-	background:url('img/arvore.png') 50% no-repeat;
-	background-size: contain;
-	height: 90vh;
-	width: 70vw;
-	margin-top:5%; 
-	display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-}
-.box-nota{
-	background: #95ad21;
-	padding:0 1%;
-	text-align: center;
-    width: 45vw;
-	-ms-flex-item-align: end;
-        align-self: flex-end;
 
-}
 .line{
 	border:2px solid #769112;
 	margin: 2%;
@@ -564,7 +525,7 @@ footer{
     z-index: 999;
     margin: auto;
     text-align: center;
-    background: url(img/Z0e5O.gif) no-repeat center center;
+    background: url(/img/Z0e5O.gif) no-repeat center center;
     background-color: rgba(255,255,255,1);
   }
 
@@ -787,7 +748,7 @@ footer{
     z-index: 999;
     margin: auto;
     text-align: center;
-    background: url(img/mobile.gif) no-repeat center center;
+    background: url(/img/mobile.gif) no-repeat center center;
     background-color: rgba(255,255,255,.7);
   }
   

@@ -294,9 +294,9 @@ footer{
 
 
 .linkSeeMore, .linkHist{
-	font-size:12px;
+	font-size:11px;
 	cursor: pointer;
-	font-style: italic;
+	color: #909090;
 	margin-right: 5px;
 }
 .linkSeeMore:hover{
@@ -481,9 +481,9 @@ footer{
 
 
 #modal1{
-	height: 83%;
+	height: 93%;
 	max-height: 912px;
-	overflow-y: auto;
+	
 	background-color: rgb(57, 73, 93);
     color: rgb(245, 245, 245);
 }
@@ -979,4 +979,33 @@ div [dir="ltr"]{
 div [dir="ltr"] text {
 	font-style: normal;
 	font-family: 'Raleway', sans-serif;
+}
+
+.roundIcon{
+	background: white;
+    border-radius: 100px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+}
+
+.tar{
+	text-align: right;
+}
+
+.noscape{
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#modalRecuperacao p{
+	padding: 0 5%;
+    color: #423f3f;
+	text-align: justify;
+	font-size: 1.2rem;
+}
+#modalRecuperacao h5{
+	padding: 0 5%;
+    color: #423f3f;
+	text-align: justify;
+	font-size: 1.6rem;
 }

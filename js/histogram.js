@@ -10,6 +10,8 @@ function histogramManager(me){
 	me.histogramAvg=[];
 	me.histogramAboveCDI=[];
 	me.histogramAboveIBOV=[];
+	me.histDiasRecuperacao = [];
+
 	me.currentRowHistPosNegMonth = 0;
 	me.currentRowHistPosNegAvgMonth = 0;
 	me.currentRowHistCorrelIbov = 0;
@@ -22,6 +24,7 @@ function histogramManager(me){
 	me.currentRowTxAdm=0;
 	me.currentRowAboveCDI=0;
 	me.currentRowAboveIBOV=0;
+	me.currentRowDiasRecuperacao=0;
    
     me.histClick = function(hist,item, property, type){
         if(me.canShowFeature('toast_filtroPorHistograma'))
@@ -60,6 +63,7 @@ function histogramManager(me){
 		me.showGenereicHist(row, 'histogramStDev', 'volatilidadeAnual','currentRowHistStDev' ,'histogram_stDev_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramAvg', 'average','currentRowHistAvg' ,'histogram_avg_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramTxAdm', 'admTax','currentRowTxAdm' ,'histogram_txAdm', function(row){return row.info.admTax;});
+		me.showGenereicHist(row, 'histDiasRecuperacao', 'diasAteRecuperar','currentRowDiasRecuperacao' ,'histogram_diasRecuperacao', function(row){if(row.analiseTemer != null){return row.analiseTemer.diasAteRecuperar;}else{return 0;}});
 		
 		//$('.tooltipped').tooltip({delay: 50});
 	}

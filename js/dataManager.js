@@ -286,7 +286,8 @@ function dataManager($http, me){
 	};
 	me.hideChartIcons = function(){
 		$("i:contains('insert_chart')").removeClass('small').addClass('tiny')
-	}
+	};
+	
 	me.blinkLock=false;
 	
 	me.sortColumns = [
@@ -301,3 +302,7 @@ function dataManager($http, me){
 		'performance'		//8
 	];
 }
+
+function closeChartDialog(it){
+	$(it).parent().modal('close');
+};

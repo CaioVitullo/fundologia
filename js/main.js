@@ -54,7 +54,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		me.lastHash = me.filterHash(me.getFilterStatus());
 		//me.loadHistograms(null);
 			
-		$('.modal').modal();
+		//$('.modal').modal();
 		
 		me.width = $(window).width();
 		me.frases = ['o fim do achismo', 'pra quem gosta de resultado!', 'teste teste teste'];
@@ -387,7 +387,12 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			return me.currentRow.info[prop];
 		return 0;
 	}
-	
+	me.getDiasRecuperacao = function(){
+		if(me.currentRow != null && me.currentRow.analiseTemer != null)
+			return me.currentRow.analiseTemer.diasAteRecuperar;
+		
+		return 0;
+	}
 	me.getFromCurrentFigure = function(prop){
 		return me.getFromFigure(me.currentRow, prop);
 	}
@@ -475,6 +480,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.filters.InitialValue[i].checked=item.checked;
 		}
 		
+		me.showAllFilterInitValueOn = !me.filters.InitialValue.any({visible:true});
 		me.toggleFilter(true, me.filters.InitialValue);
 		//me.checkFilterTopShow(me.filters.InitialValue,me.showAllFilterInitValueOn);
 	}
@@ -506,30 +512,47 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	};
 	
 	me.chartData = {}
-	me.getGenericData = function(propery, name, n=1){
+	me.getGenericData = function(propery, name, n=1, fnValueX, fnValueY, fnTooltip, checkLine){
 		if(me.chartData.hasOwnProperty(propery)){
 			if(me.chartData[propery].hasOwnProperty(me.selectedPeriod))
 				return me.chartData[propery][me.selectedPeriod];
 		}
 		
 			var d= [];
-			var fn = function(item, fig){
-				html= '<h5 style="width:300px;font-size:1.3rem;">' + item.name + '</h5><p>' + name + ': ' + (item.info.hasOwnProperty(propery) ? item.info[propery] : fig[propery]) + '</p>';
-				html += '<p>Rendimento: ' + fig.performance + '% acumulado nos ' + me.filters.Periodo[me.selectedPeriod].Title.toLowerCase();
-				return html;
+			var fn=null;
+			if(typeof(fnTooltip)=='function'){
+				fn = fnTooltip;
+			}else{
+				fn = function(item, fig){
+					html= '<h5 style="width:300px;font-size:1.3rem;">' + item.name + '</h5><p>' + name + ': ' + (item.info.hasOwnProperty(propery) ? item.info[propery] : fig[propery]) + '</p>';
+					html += '<p>Rendimento: ' + fig.performance + '% acumulado nos ' + me.filters.Periodo[me.selectedPeriod].Title.toLowerCase();
+					return html;
+				}
 			}
+
+			var fnVal = function(val,item){return val;}
+			if(typeof(fnValueY) == 'function')
+				fnVal = fnValueY;
+			
+			var fnX = function(val,item){return val;}
+			if(typeof(fnValueX) == 'function')
+				fnX = fnValueX;
+			
+			if(checkLine==null)
+				checkLine = function(item){return true;}
+
 			for(var i=0;i<me.defaultLists[3].length;i++){
 				var item = me.defaultLists[3][i]
 				var fig = item.figures[me.selectedPeriod];
-				if(fig != null){
+				if(fig != null && checkLine(item)){
 					
 					d.push([
-						item.info.hasOwnProperty(propery) ? item.info[propery]/n : fig[propery]/n,
-						item.info.isAcao ? fig.performance/100.0 : null,
+						fnX(item.info.hasOwnProperty(propery) ? item.info[propery]/n : fig[propery]/n, item),
+						item.info.isAcao ? fnVal(fig.performance/100.0,item) : null,
 						fn(item, fig) ,
-						item.info.isMultimercado ? fig.performance/100.0 : null,
+						item.info.isMultimercado ? fnVal(fig.performance/100.0, item) : null,
 						fn(item, fig) ,
-						item.info.isRendaFixa ? fig.performance/100.0 : null,
+						item.info.isRendaFixa ? fnVal(fig.performance/100.0,item) : null,
 						fn(item, fig)
 					])
 				}		
@@ -557,6 +580,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			hAxis: {title: title},
 			vAxis: {
 				title: 'Rentabilidade(%) acumulada nos ' + me.filters.PeriodoTitle(),
+				minValue:-0.3,
 				textStyle : {
 					fontSize: 12,
 					'font-style':'normal',
@@ -571,16 +595,283 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			//bubble: {textStyle: {fontSize: 11}}
 		  };
 	}
+	me.analiseRecuperacao = {};
+	me.openAnaliseDiasRecuperacao = function(){
+		//
+		
+		me.analiseRecuperacao = {
+			qtdAbaixo1:me.defaultLists[3].count(function(item){item.analiseTemer != null && item.analiseTemer.difQuota<=-1}),
+			countAll:me.defaultLists[3].count(function(item){item.analiseTemer != null})
+		}
+		var dataHist = [['Fundo', 'Rentabilidade em 18-05-2017']];	
+		for(var i=0;i<me.defaultLists[3].length;i++){
+			var item = me.defaultLists[3][i];
+			if(item.analiseTemer != null && isBetween(item.analiseTemer.difQuota, -35, 0))
+				dataHist.push([item.name, item.analiseTemer.difQuota/100.0]);
+		}
+
+		var data = google.visualization.arrayToDataTable(dataHist);
+		//
+		var w =  $('#modalRecuperacao').width()*0.9;
+		var h = Math.min(w / 1.61, $('#modalRecuperacao').height()) 
+		var options = {
+			title: 'Análise dos fundos que tiveram prejuizo.',
+			legend: { position: 'none' },
+			hAxis:{format:'percent', title:'rendimento em 18-05-2017'},
+			vAxis:{title:'Quantidade de fundos'},
+			height:h,
+			width:w,
+			colors: ["#ff7100","#ff6300","#ff5500","#ff4700","#ff3900","#ff2b00","#ff1c00","#ff0e00","#ff0000"],//"#ffaa00","#ff9c00","#ff8e00","#ff8000",
+			histogram:{lastBucketPercentile:5}
+		  };
+
+  
+		  var chart = new google.visualization.Histogram(document.getElementById('chart_histogram_queda'));
+		  chart.draw(data, options);
+
+		//#####################################################
+		  //##			GRAFICO II
+		//#####################################################
+		var dataSt = new google.visualization.DataTable();
+		var name = 'Recuperação';
+		dataSt.addColumn({type:'number',label: name});
+		dataSt.addColumn('number', 'Ação');
+		dataSt.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		dataSt.addColumn('number', 'Multimercado');
+		dataSt.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		dataSt.addColumn('number', 'Renda Fixa');
+		dataSt.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		
+		
+		dataSt.addRows(me.getGenericData('recuperacao', name, 100.0,
+			 function(val, item){
+				 return item.analiseTemer != null ? item.analiseTemer.difQuota/100.0 : 0;
+			 }, function(val,item){
+				 return item.analiseTemer != null ? item.analiseTemer.diasAteRecuperar : 0;
+			 }, function(item, fig){
+				 if(item.analiseTemer == null)
+				 	return '';
+				html= '<h5 style="width:300px;font-size:1.3rem;">' + item.name + '</h5>';
+				html += '<p>Cota em 17-05-2017 : ' + item.analiseTemer.quota17 + '</p>';
+				html +='<p>Cota em 18-05-2017 : ' + item.analiseTemer.queto18 + ' ( <strong>'+  item.analiseTemer.difQuota +'%</strong> )</p>';
+				html += '<p>No dia ' + item.analiseTemer.diaRecuperacao + ' o fundo voltou ao patamar do dia 17-05-2017'; 
+				html += '<p>Total de dias(úteis) até recuperar: ' + item.analiseTemer.diasAteRecuperar + '</p>';
+				return html;
+			}, function(){
+				return item.analiseTemer != null;
+			}));
+
+	
+		var chartSt = new google.visualization.ScatterChart(document.getElementById('chart_scatter_queda'));
+		chartSt.draw(dataSt,  {
+			title: 'Rendimento um dia após a delação vs Tempo de recuperação.',
+			hAxis:{format:'percent', title:'rendimento em 18-05-2017'},
+			vAxis:{title:'Quantidade de dias úteis para voltar ao patamar anterior'},
+			height:h,
+			width:w,
+			tooltip:{isHtml: true},
+			colors: ['#E94D20', '#ECA403', '#63A74A']
+		  });
+
+		//#####################################################
+		//##			GRAFICO III
+		//#####################################################
+		var data3 = new google.visualization.DataTable();
+		var name = 'Recuperação';
+		data3.addColumn({type:'number',label: name});
+		data3.addColumn('number', 'Ação');
+		data3.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data3.addColumn('number', 'Multimercado');
+		data3.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data3.addColumn('number', 'Renda Fixa');
+		data3.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		
+		
+		data3.addRows(me.getGenericData('recuperacaoVolume', name, 1,
+			 function(val, item){
+				 return item.analiseTemer != null ? item.analiseTemer.volume17 : 0;
+			 }, function(val,item){
+				 return item.analiseTemer != null ? item.analiseTemer.diasAteRecuperar : 0;
+			 }, function(item, fig){
+				 if(item.analiseTemer == null)
+				 	return '';
+				html= '<h5 style="width:300px;font-size:1.3rem;">' + item.name + '</h5>';
+				html += '<p>Volume: <strong>' + item.analiseTemer.volume17 + '</strong></p>';
+				html += '<p>Cota em 17-05-2017 : ' + item.analiseTemer.quota17 + '</p>';
+				html +='<p>Cota em 18-05-2017 : ' + item.analiseTemer.queto18 + ' ( <strong>'+  item.analiseTemer.difQuota +'%</strong> )</p>';
+				html += '<p>No dia ' + item.analiseTemer.diaRecuperacao + ' o fundo voltou ao patamar do dia 17-05-2017'; 
+				html += '<p>Total de dias(úteis) até recuperar: ' + item.analiseTemer.diasAteRecuperar + '</p>';
+				
+				return html;
+			}, function(){
+				return item.analiseTemer != null;
+			}));
+
+		
+		var chart3 = new google.visualization.ScatterChart(document.getElementById('chart_scatter_queda_volume'));
+		chart3.draw(data3,  {
+			title: 'Tempo de recuperação vs Volume.',
+			hAxis:{ title:'Volume', logScale:true},
+			vAxis:{title:'Quantidade de dias úteis para voltar ao patamar anterior'},
+			height:h,
+			width:w,
+			tooltip:{isHtml: true},
+			colors: ['#E94D20', '#ECA403', '#63A74A']
+		  });
+
+		//#####################################################
+		//##			GRAFICO IV
+		//#####################################################
+		var data4 = new google.visualization.DataTable();
+		var name = 'Recuperação';
+		data4.addColumn({type:'number',label: name});
+		data4.addColumn('number', 'Ação');
+		data4.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data4.addColumn('number', 'Multimercado');
+		data4.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data4.addColumn('number', 'Renda Fixa');
+		data4.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		
+		
+		data4.addRows(me.getGenericData('recuperacao_correlacaoIbov', name, 1,
+			 function(val, item){
+				 return item.analiseTemer != null ? item.figures[0].correlationIbov : 0;
+			 }, function(val,item){
+				 return item.analiseTemer != null ? item.analiseTemer.difQuota/100.0 : 0;
+			 }, function(item, fig){
+				 if(item.analiseTemer == null)
+				 	return '';
+				html= '<h5 style="width:300px;font-size:1.3rem;">' + item.name + '</h5>';
+				html += '<p>Correlação IBOV: <strong>' + item.figures[0].correlationIbov + '</strong></p>';
+				html +='<p>Rentabilidade :<strong>'+  item.analiseTemer.difQuota +'%</strong></p>';
+				html += '<p>Total de dias(úteis) até recuperar: ' + item.analiseTemer.diasAteRecuperar + '</p>';
+				
+				return html;
+			}, function(){
+				return item.analiseTemer != null;
+			}));
+
+		
+		var chart4 = new google.visualization.ScatterChart(document.getElementById('chart_scatter_queda_correlIbov'));
+		chart4.draw(data4,  {
+			title: 'Correlação IBOV vs Queda.',
+			hAxis:{ title:'Correlação IBOVESPA'},
+			vAxis:{title:'Rentabilidade em 18-05-2017', format:'percent'},
+			height:h,
+			width:w,
+			tooltip:{isHtml: true},
+			colors: ['#E94D20', '#ECA403', '#63A74A']
+		  });
+
+		//#####################################################
+		//##			GRAFICO V
+		//#####################################################
+		var data5 = new google.visualization.DataTable();
+		var name = 'Recuperação';
+		data5.addColumn({type:'number',label: name});
+		data5.addColumn('number', 'Ação');
+		data5.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data5.addColumn('number', 'Multimercado');
+		data5.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data5.addColumn('number', 'Renda Fixa');
+		data5.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		
+		
+		data5.addRows(me.getGenericData('recuperacao_velocidade', name, 1,
+			 function(val, item){
+				 return item.analiseTemer != null ? item.figures[0].correlationIbov : 0;
+			 }, function(val,item){
+				 return item.analiseTemer  ?  item.analiseTemer.velocidade/100.0 : 0;
+			 }, function(item, fig){
+				 if(item.analiseTemer == null)
+				 	return '';
+				html= '<h5 style="width:300px;font-size:1.3rem;">' + item.name + '</h5>';
+				html += '<p>Correlação IBOV: <strong>' + item.figures[0].correlationIbov + '</strong></p>';
+				html +='<p>Velocidade :<strong>'+  Math.abs(item.analiseTemer.velocidade) +'%/dia</strong></p>';
+				html += '<p>Total de dias(úteis) até recuperar: ' + item.analiseTemer.diasAteRecuperar + '</p>';
+				
+				return html;
+			}, function(){
+				return item.analiseTemer != null && item.analiseTemer.diasAteRecuperar > 0;
+			}));
+
+		
+		var chart5 = new google.visualization.ScatterChart(document.getElementById('chart_scatter_queda_velocidade'));
+		chart5.draw(data5,  {
+			title: 'Correlação IBOV vs Velocidade de recuperação.',
+			hAxis:{ title:'Correlação IBOVESPA', minValue:-1, maxValue:1},
+			vAxis:{title:'Velocidade de recuperação', format:'percent'},
+			height:h,
+			width:w,
+			tooltip:{isHtml: true},
+			colors: ['#E94D20', '#ECA403', '#63A74A']
+		  });
+
+
+		//#####################################################
+		//##			GRAFICO VI
+		//#####################################################
+		var data6 = new google.visualization.DataTable();
+		var name = 'Recuperação';
+		data6.addColumn({type:'number',label: name});
+		data6.addColumn('number', 'Ação');
+		data6.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data6.addColumn('number', 'Multimercado');
+		data6.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data6.addColumn('number', 'Renda Fixa');
+		data6.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		
+		
+		data6.addRows(me.getGenericData('recuperacaoVolumeVelocidade', name, 1,
+			 function(val, item){
+				 return item.analiseTemer != null ? item.analiseTemer.volume17 : 0;
+			 }, function(val,item){
+				 return item.analiseTemer != null ? item.analiseTemer.velocidade/100.0 : 0;
+			 }, function(item, fig){
+				 if(item.analiseTemer == null)
+				 	return '';
+				html= '<h5 style="width:300px;font-size:1.3rem;">' + item.name + '</h5>';
+				html += '<p>Volume: <strong>' + item.analiseTemer.volume17 + '</strong></p>';
+				html += '<p>Cota em 17-05-2017 : ' + item.analiseTemer.quota17 + '</p>';
+				html +='<p>Cota em 18-05-2017 : ' + item.analiseTemer.queto18 + ' ( <strong>'+  item.analiseTemer.difQuota +'%</strong> )</p>';
+				html += '<p>No dia ' + item.analiseTemer.diaRecuperacao + ' o fundo voltou ao patamar do dia 17-05-2017'; 
+				html += '<p>Total de dias(úteis) até recuperar: ' + item.analiseTemer.diasAteRecuperar + '</p>';
+				
+				return html;
+			}, function(){
+				return item.analiseTemer != null;
+			}));
+
+		
+		var chart6 = new google.visualization.ScatterChart(document.getElementById('chart_scatter_queda_volume_velocidade'));
+		chart6.draw(data6,  {
+			title: 'Velocidade de recuperação vs Volume.',
+			hAxis:{ title:'Volume', logScale:true},
+			vAxis:{title:'Velicidade de recuparação'},
+			height:h,
+			width:w,
+			tooltip:{isHtml: true},
+			colors: ['#E94D20', '#ECA403', '#63A74A']
+		  });
+		$('#modalRecuperacao').modal('open');
+
+	};
 	me.openChart = function(name, propery, text){
 		ga('send', {
 			hitType: 'event',
 			eventCategory: name,
 			eventAction: 'chart'
 		  });
+		
+		  if(propery=='diasRecuperacao'){
+			  me.openAnaliseDiasRecuperacao();
+			  return;
+		  }
 
 		me.currentCharTitle = name + ' vs Rentabilidade';
 		if(text != null)
 			me.currentChartText = text.replace('Clique e confira!', '');
+		
 		$('#modal1').modal('open');
 
 		var data = new google.visualization.DataTable();
@@ -596,7 +887,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		
 		data.addRows(me.getGenericData(propery, name, propery == 'admTax'?100.0:1));
 
-        var options = me.gerDefaultChartOptions(name);
+		var options = me.gerDefaultChartOptions(name);
+		
 		if(propery == 'admTax')
 		  options.hAxis.format='percent';
 
@@ -773,17 +1065,17 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			{id:6, Title:'Exterior', checked:true, visible:false, default:false},
 		],
 		InitialValue : [
-			{id:0, Title:'500', checked:true, visible:false, default:false, filter:true},
-			{id:1, Title:'1k', checked:true, visible:true, default:true, filter:true},
-			{id:2, Title:'3k', checked:true, visible:false, default:false, filter:true},
-			{id:3, Title:'5k', checked:true, visible:true, default:true, filter:true},
-			{id:4, Title:'10k', checked:true, visible:false, default:false, filter:true},
-			{id:5, Title:'15k', checked:true, visible:false, default:false, filter:true},
-			{id:6, Title:'20k', checked:true, visible:false, default:false, filter:true},
-			{id:7, Title:'25k', checked:true, visible:true, default:true, filter:true},
-			{id:8, Title:'30k', checked:true, visible:false, default:false, filter:true},
-			{id:9, Title:'50k', checked:true, visible:false, default:false, filter:true},
-			{id:10, Title:'200k', checked:true, visible:false, default:false, filter:true}
+			{id:0, Title:'500', checked:true, visible:false, default:false, filter:true, disabled:true},
+			{id:1, Title:'1k', checked:true, visible:true, default:true, filter:true, disabled:false},
+			{id:2, Title:'3k', checked:true, visible:false, default:false, filter:true, disabled:false},
+			{id:3, Title:'5k', checked:true, visible:true, default:true, filter:true, disabled:false},
+			{id:4, Title:'10k', checked:true, visible:false, default:false, filter:true, disabled:false},
+			{id:5, Title:'15k', checked:true, visible:false, default:false, filter:true, disabled:false},
+			{id:6, Title:'20k', checked:true, visible:false, default:false, filter:true, disabled:false},
+			{id:7, Title:'25k', checked:true, visible:true, default:true, filter:true, disabled:false},
+			{id:8, Title:'30k', checked:true, visible:false, default:false, filter:true, disabled:false},
+			{id:9, Title:'50k', checked:true, visible:false, default:false, filter:true, disabled:false},
+			{id:10, Title:'200k', checked:true, visible:false, default:false, filter:true, disabled:false}
 			//{id:11, Title:'Qualificados', checked:true, visible:false, default:false, filter:false}
 		],
 		resgate : [
@@ -839,6 +1131,7 @@ mainApp.directive('myHistogram', function(){
 			correlation:'=',
 			sufix:'@',
 			reversecolor:'@',
+			titleTooltip:'@',
 			fn:'&'
 			
 			
@@ -935,7 +1228,13 @@ google.charts.setOnLoadCallback(function(){
 
 $(document).ready(function(){
 	//$('.tooltipped').tooltip({delay: 50, html:true});
-	$('.modal').modal();
+	$('.modal').modal({
+			'startingTop':'3%',
+			'endingTop': '4%'
+			//ready: function(modal, trigger) { 
+			//	$(modal).css('top','4%');
+			//}
+		});
 	resizeHorizontalScroll();
 });
 

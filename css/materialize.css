@@ -5644,10 +5644,11 @@ button.btn-floating {
   right: 0;
   background-color: #fafafa;
   padding: 0;
-  max-height: 85%;
+  max-height: 90%;
+  height: 90%;
   width: 55%;
   margin: auto;
-  overflow-y: auto;
+  
   border-radius: 2px;
   will-change: top, opacity;
 }
@@ -5664,6 +5665,8 @@ button.btn-floating {
 
 .modal .modal-content {
   padding: 24px;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .modal .modal-close {

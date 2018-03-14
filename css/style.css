@@ -7,7 +7,13 @@ body{
 	margin: auto;
 }
 nav{
-	background: #39495d;
+	/* background: #39495d; */
+	background: linear-gradient(to left, #597186 1%, #446079 100%) #5f71ab;
+	
+}
+nav:hover{
+	background: linear-gradient(to right, #597186 1%, #446079 100%) #5f71ab;
+
 }
 .row{
 	margin-bottom: 0 !important;
@@ -634,6 +640,47 @@ footer{
 .highlightNeg{
 	color:red;
 }
+.highLightComareDlg{
+	position: fixed;
+   
+	left: 20%;
+	bottom: 37%;
+    width: 50%;
+	height: 50%;
+	max-height: 500px;
+	max-width: 1000px;
+    border: 2px silver dashed;
+    padding: 20px;
+    z-index: 3;
+    background-color: rgba(57, 73, 93,0.95);
+}
+.highLightComareDlg .selectedFund{
+	width: 49%;
+    height: 75%;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    color: silver;
+    font-size: 1.2rem;
+    display: table;
+    float: left;
+    margin-left: auto;
+}
+.highLightComareDlg label{
+	font-size: 0.8rem;
+    color: #9e9e9e;
+    display: table-cell;
+    vertical-align: middle;
+}
+.highLightComareDlg button, .highLightComareDlg .lblTitle{
+	width: 100%;
+    display: inline;
+    height: 10%;
+	margin-top: 5px;
+}
+.highLightComareDlg .lblTitle{
+	color: #f5f5f5;
+}
 .floating{
 	position: fixed;
 	bottom: 3%;
@@ -644,6 +691,10 @@ footer{
 	padding: 10px;
 	z-index: 3;
 	background-color: rgba(57, 73, 93,0.9);
+	-webkit-transition: left 0.8s ease, bottom 0.8s ease;
+    -moz-transition: left 0.8s ease, bottom 0.8s ease;
+    -o-transition: left 0.8s ease, bottom 0.8s ease;
+    transition: left 0.8s ease, bottom 0.8s ease;
 }
 .floating .selectedFund{
 	width: 100px;
@@ -990,6 +1041,9 @@ div [dir="ltr"] text {
 .tar{
 	text-align: right;
 }
+.tal{
+	text-align: left;
+}
 
 .noscape{
 	white-space: nowrap;
@@ -1008,4 +1062,19 @@ div [dir="ltr"] text {
     color: #423f3f;
 	text-align: justify;
 	font-size: 1.6rem;
+}
+
+#modalRankingDialog section p{
+	margin-top: 3px;
+	margin-bottom: 3px;
+	text-align: justify;
+}
+
+.bg1{
+	background-color: #39495d;
+}
+
+.skiprightOn{
+	margin-right: 0px!important;
+	width: 40%!important;
 }

@@ -103,9 +103,10 @@
 		  <span id="subtitle">o fim do achismo!</span>
 		  
 		  <ul id="nav-mobile" class="right hide-on-med-and-down">
-			  <li></li>
-			<!-- <li><a href="#sobre">O que é?</a></li>
-			<li><a href="#comofunciona">Como funciona</a></li> -->
+			 <li></li>
+			 <li><a ng-click="openModalOQue()">Como funciona?</a></li>
+			 <li><a ng-click="showRankDialog()">Ranking</a></li>
+			 <li><a ng-click="showPreCompareDialog()">Compare fundos</a></li>
 		  </ul>
 		  <ul class="side-nav" id="slide-out" >
 			<!-- <li><a href="#sobre">O que é?</a></li>
@@ -279,7 +280,7 @@
 						<div class="row">
 							
 							<div class="input-field col m12 s12 l12 noPadding minTableHeight">
-							<table id="mainTable" class="highlight" ng-class="{comparandoFundo:fundsToCompare.length==1}">
+							<table id="mainTable" class="highlight" ng-class="{comparandoFundo:fundsToCompare.length==1 || highLightCompareDialog==true || compareDlgStillOpen == true}">
 								<thead >
 									<tr>
 										<th  class="hide-on-smaller-400 " ng-class="{currentSortCol:currentSortCol==0}" >
@@ -616,7 +617,7 @@
 	
 	
 	
-	<div id="modal1" class="modal"  >
+	<div id="modal1" class="modal modaTall"  >
 		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
 		<div class="modal-content">
 		  <h4>{{currentCharTitle}} <em ng-show="selectedPeriod <= 2">nos </em><em ng-bind="::filters.Periodo.first({id:selectedPeriod}).Title"></em></h4>
@@ -626,7 +627,7 @@
 		</div>	
 	</div>
 
-	<div id="modaltable" class="modal" >
+	<div id="modaltable" class="modal modaTall" >
 		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
 		<div class="modal-content">
 			<h5 ng-bind="currentRow.name"></h5>
@@ -678,7 +679,7 @@
 			</div>
 		</div>	
 	</div>
-	<div id="modalCustomText" class="modal " >
+	<div id="modalCustomText" class="modal modaTall" >
 		<div class="modal-content">
 			<h5 ng-bind="titleDialogHtml"></h5>
 			<div class="row" ng-bind-html="textDialogHtml|trusted">
@@ -686,18 +687,18 @@
 			</div>
 		</div>
 	</div>
-	<div id="modalRankingDialog" class="modal" >
+	<div id="modalRankingDialog" class="modal modaTall" >
 		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
 		<div class="modal-content">
 			<h5>Ranking</h5>
 			<div class="row">
 				<div class="content">
-					<section>
-						<p>Ranking dos fundos feito mês a mês. </p>
-						<p> Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade </p>
-						<p> O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1, o segundo 2 e assim sucessivamente... </p>
+					<section >
+						<p>Entenda melhor o Ranking: Comparação dos fundos feita mês a mês com o objetivo de enxergar qual fundo é constantemente melhor que os outros. </p>
+						<p> Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade fechada do mês </p>
+						<p> O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1 e o ultimo receberá nota 100.Todos os fundos que estão no meio vão receber uma interpolação proporcional à sua rentabilidade comparada à rentabilidade do melhor e do pior fundo.</p>
 						<p> No final, soma-se a nota de todos os meses para cada fundo </p>
-						<p> Ou seja, quanto menor a soma, melhor o fundo</p>
+						<p> Ou seja, quanto menor a soma, melhor o fundo em todo o período.</p>
 
 						<h5>Confira os primeiros 10 lugares no ranking dos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</h5>
 					</section>
@@ -732,13 +733,11 @@
 
 		</div>
 	</div>
-	<div id="modalInterval" class="modal" >
+	<div id="modalInterval" class="modal moda60" >
 		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
 		<div class="modal-content">
 			
-			<label ng-show="interval_hover != null" class="defaultColor" style="font-size:0.9rem;">
-					Quem permaneceu <strong>{{interval_hover.length}}</strong> meses no fundo, teve um rendimento <i>mensalizado</i><sup>*</sup> médio de <strong>{{interval_hover.montlyAvg}}%</strong>.Ficou acima do CDI {{interval_hover.aboveCdi|percentage:2}} das vezes e acima do IBOV {{interval_hover.aboveIbov|percentage:2}} das vezes. {{interval_hover.count}} análises feitas
-			</label>
+			<h5>Veja a analise de todas as possíveis combinações de permanência de {{currentRow.figures[selectedPeriod].intervalResumes.select('length').join(',')}} meses nos {{filters.PeriodoTitle()}}</h5>
 			<div class="row">
 				<div class="col s12 m12 l12 x12 lblResume">
 					<table class="highlight">
@@ -761,8 +760,10 @@
 							</tr>
 						</tbody>
 					</table>
-					
-					<label>Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</label>
+					<label ng-show="interval_hover != null" class="defaultColor" style="font-size:0.9rem;">
+						Quem permaneceu <strong>{{interval_hover.length}}</strong> meses no fundo, teve um rendimento <i>mensalizado</i><sup>*</sup> médio de <strong>{{interval_hover.montlyAvg}}%</strong>.Ficou acima do CDI {{interval_hover.aboveCdi|percentage:2}} das vezes e acima do IBOV {{interval_hover.aboveIbov|percentage:2}} das vezes. {{interval_hover.count}} análises feitas
+					</label>
+					<label class="tar">Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</label>
 					
 				</div>
 			</div>
@@ -772,8 +773,34 @@
 			</div>
 		</div>
 	</div>
+	<div id="modalOque" class="modal modal70" ng-class="{skiprightOn: skiprightOn}">
+		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
+		<div class="modal-content">
+			<div class="carousel carousel-slider center" data-indicators="true">
+				<div class="carousel-fixed-item center">
+				  <a class="btn waves-effect white grey-text darken-text-2" ng-click="skipRight()">button</a>
+				</div>
+				<div class="carousel-item blue white-text" href="#one!">
+				  <h2>fundologia</h2>
+				  <p class="white-text tal">Filtros:</p>
+				</div>
+				<div class="carousel-item amber white-text" href="#two!">
+				  <h2>Second Panel</h2>
+				  <p class="white-text">This is your second panel</p>
+				</div>
+				<div class="carousel-item blue white-text" href="#three!">
+				  <h2>Third Panel</h2>
+				  <p class="white-text">This is your third panel</p>
+				</div>
+				<div class="carousel-item green white-text" href="#four!">
+				  <h2>Fourth Panel</h2>
+				  <p class="white-text">This is your fourth panel</p>
+				</div>
+			  </div>
+		</div>
+	</div>
 
-	<div id="modalCompare" class="modal wideModal" >
+	<div id="modalCompare" class="modal wideModal modal70" >
 		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
 		<div class="modal-content">
 			<div class="row">
@@ -875,12 +902,16 @@
 		</div>
 	</div>
 	
-	<div class="floating" ng-show="fundsToCompare.length > 0">
+	<div class="floating" ng-class="{floating:highLightCompareDialog==false, highLightComareDlg:highLightCompareDialog}" ng-show="fundsToCompare.length > 0 || highLightCompareDialog==true || compareDlgStillOpen==true">
 		<i class="small material-icons closeFixedIcon roundIcon" ng-click="closeCompareDialog()"  title="Fechar" >cancel</i> 
+		<h5 class="lblTitle" ng-show="highLightCompareDialog==true">Selecione dois fundos clicando no icone <i class="medium material-icons " >compare_arrows</i></h5>
 		<div class="selectedFund" ng-class="{fullsquare:fundsToCompare.length >=1,emptysquare:fundsToCompare.length <=0 }" ng-click="compareFundItemClick(0)">
+			<label ng-show="highLightCompareDialog == true || (compareDlgStillOpen==true && fundsToCompare.length==0 )">
+				<i class="medium material-icons "  title="Selecione outro fundo" >compare_arrows</i>
+			</label>
 			<label ng-bind="::fundsToCompare[0].name" ></label>
 		</div>
-		<div class="selectedFund" style="margin-left:5px;" ng-class="{fullsquare:fundsToCompare.length >=2,emptysquare:fundsToCompare.length <=1 }">
+		<div class="selectedFund" style="margin-left:2%;"  ng-class="{fullsquare:fundsToCompare.length >=2,emptysquare:fundsToCompare.length <=1 }">
 			<label ng-show="fundsToCompare.length <= 1">
 				<i class="medium material-icons "  title="Selecione outro fundo" >compare_arrows</i>
 			</label>
@@ -888,7 +919,7 @@
 		</div>
 		<button ng-click="openCompareDialog()" ng-disabled="fundsToCompare.length <= 1" class="waves-effect waves-light btn">Comparar</button>
 	</div>
-	<div id="modalRecuperacao" class="modal wideModal">
+	<div id="modalRecuperacao" class="modal modaTall wideModal">
 		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
 		<div class="modal-content">
 			<div class="row">

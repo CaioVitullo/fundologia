@@ -106,4 +106,20 @@ function histogramManager(me){
 			}
 		});
 	};
+
+	me.openModalOQue = function(){
+		
+		$('#modalOque').modal('open');
+		window.setTimeout(function(){
+			$('.carousel.carousel-slider').carousel({fullWidth: true});
+			$('.carousel.carousel-slider').css('height','100%');
+		},500)
+	};
+
+	me.skiprightOn = false;
+	me.skipRight = function(){
+		me.skiprightOn = true;
+		$('.modal-overlay').css('opacity',0);
+	}
+
 }

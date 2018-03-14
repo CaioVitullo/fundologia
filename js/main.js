@@ -57,7 +57,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		//$('.modal').modal();
 		
 		me.width = $(window).width();
-		me.frases = ['o fim do achismo', 'pra quem gosta de resultado!', 'teste teste teste'];
+		me.frases = ['o fim do achismo', 'pra quem gosta de resultado!'];
 		me.currentFrasesID = 0;	
 		if(me.isMobile==false){
 			$interval(function(){
@@ -931,6 +931,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	}
 	me.closeCompareDialog = function(){
 		$('.toast').fadeOut();
+		me.highLightCompareDialog = false;
+		me.compareDlgStillOpen = false;
 		me.compareFundItemClick(0);
 		if(me.fundsToCompare.length > 0)
 			me.compareFundItemClick(0);
@@ -943,12 +945,15 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		  });
 
 		$('.toast').fadeOut();
-		$('#modalCompare').modal({complete:function(){
-			$("html, body").animate({ scrollTop: 0 }, "slow");
-			me.compareFundItemClick(0);
-			me.compareFundItemClick(0);
-			if (!me.$$phase)
-            	me.$apply();
+		$('#modalCompare').modal(
+			{
+				'startingTop':'3%',
+				'endingTop': '4%',
+				complete:function(){
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+					me.closeCompareDialog();
+					if (!me.$$phase)
+						me.$apply();
 		}});
 		$('#modalCompare').modal('open');
 
@@ -1024,6 +1029,17 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		//$('.tooltipped').tooltip({delay: 50, html:true});
 		$('#modaltable').modal('open');
 	}
+
+	me.highLightCompareDialog = false;
+	me.compareDlgStillOpen = false;
+	me.showPreCompareDialog = function(){
+		me.highLightCompareDialog = true;
+		
+		//$timeout(function(){
+		//	me.highLightCompareDialog = false;
+		//	me.compareDlgStillOpen = true;
+		//},2000);
+	};
 	me.getPeriodNames = function(){
 		var month = 2;
 		var year = 18;
@@ -1236,6 +1252,8 @@ $(document).ready(function(){
 			//}
 		});
 	resizeHorizontalScroll();
+	
+	
 });
 
 $(window).resize(function(){

@@ -487,11 +487,10 @@ footer{
 
 
 #modal1{
-	height: 93%;
-	max-height: 912px;
-	
 	background-color: rgb(57, 73, 93);
-    color: rgb(245, 245, 245);
+	color: rgb(245, 245, 245);
+	
+	max-height: 912px;
 }
 .modal h4{
 	font-size: 1.58rem;

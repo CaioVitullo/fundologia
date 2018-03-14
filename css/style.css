@@ -1086,3 +1086,22 @@ div [dir="ltr"] text {
 .showMore a{
 	color: silver;
 }
+
+#modalCompare table thead th{
+	text-align: center;
+}
+#modalCompare table tr td{
+	padding: 6px 5px;
+	text-align: center;
+}
+#modalCompare table tr:hover{
+	color: steelblue;
+}
+#modalCompare tr td:first-child {
+    white-space: nowrap;
+    text-align: left;
+}
+
+#modalCompare table tr:nth-child(odd){
+	background-color: rgb(242, 242, 243)
+}

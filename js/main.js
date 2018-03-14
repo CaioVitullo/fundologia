@@ -712,7 +712,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		var chart3 = new google.visualization.ScatterChart(document.getElementById('chart_scatter_queda_volume'));
 		chart3.draw(data3,  {
 			title: 'Tempo de recuperação vs Volume.',
-			hAxis:{ title:'Volume', logScale:true},
+			hAxis:{ title:'Patrimônio', logScale:true},
 			vAxis:{title:'Quantidade de dias úteis para voltar ao patamar anterior'},
 			height:h,
 			width:w,
@@ -892,6 +892,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		
 		if(propery == 'admTax')
 		  options.hAxis.format='percent';
+		if(propery == 'volume')
+		  options.hAxis.logScale = true;
 
 		//var chart = new google.charts.Scatter(document.getElementById('chart_txdm_scatter'));
 		var chart = new google.visualization.ScatterChart(document.getElementById('chart_txdm_scatter'));
@@ -1119,6 +1121,8 @@ mainApp.filter('percentage', ['$filter', function($filter) {
     return function(input, decimals) {
 		if(input=='')
 			return'';
+		if(decimals==-1)
+			return input;
 		return $filter('number')(input, decimals)+'%';
     };
 }]);

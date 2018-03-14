@@ -581,7 +581,7 @@
 						currentrow="currentRowHistAvg"></my-histogram>
 					
 					<my-histogram
-						ng-if="show_histDiasRecuperacao2 == true"
+						ng-if="show_histDiasRecuperacao == true"
 						chart-title="Recuperação"
 						histogram="histDiasRecuperacao"
 						value="getDiasRecuperacao()"
@@ -702,11 +702,12 @@
 						<p> No final, soma-se a nota de todos os meses para cada fundo </p>
 						<p> Ou seja, quanto menor a soma, melhor o fundo em todo o período.</p>
 
-						<h5>Confira os primeiros 10 lugares no ranking dos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</h5>
+						
 					</section>
 					<section >
 						
 						<table id="rankTable" class="centered">
+							<caption>Confira os primeiros 10 lugares no ranking dos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</caption>
 							<thead>
 								<th></th>
 								<th class="thNoPadding">
@@ -803,98 +804,54 @@
 		</div>
 	</div>
 
-	<div id="modalCompare" class="modal wideModal modal70" >
+	<div id="modalCompare" class="modal wideModal modaTall" >
 		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
 		<div class="modal-content">
-			<div class="row">
-				<p>Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</p>
-			</div>
+			
 			<div class="row">
 				<div class="col s12 m12 l8 x7 xl6 lblResume">
-					<label class="compareFundName">
-						<span class="spLabel">Fundos: </span>
-							<em ng-bind="fundsToCompare[0].name"></em>
-							<em ng-bind="fundsToCompare[1].name"></em>
-					</label>
-				
-					<label ng-class={compareHighlight:compareLineHover==-1} ng-mouseover="compareLineHover=-1">
-						<span class="spLabel">Rentabilidade no período: </span>
-							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].performance|percentage:2"></em>
-							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].performance|percentage:2"></em>
-					</label>
-					<label ng-class={compareHighlight:compareLineHover==-2} ng-mouseover="compareLineHover=-2">
-						<span class="spLabel">Soma de pontos no ranking: </span>
-							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].totalRank"></em>
-							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].totalRank"></em>
-					</label>
-					<label ng-class={compareHighlight:compareLineHover==0} ng-mouseover="compareLineHover=0">
-						<span class="spLabel">Meses positivos: </span>
-						<em ng-bind=" fundsToCompare[0].figures[selectedPeriod].posNegCountRate|percentage:2"  ></em>
-						<em ng-bind=" fundsToCompare[1].figures[selectedPeriod].posNegCountRate|percentage:2"  ></em>
-					  </label>
-					<label ng-class={compareHighlight:compareLineHover==1} ng-mouseover="compareLineHover=1">
-						<span class="spLabel">Meses negativos: </span>
-						 <em ng-bind="100 - fundsToCompare[0].figures[selectedPeriod].posNegCountRate|percentage:2"></em>
-						 <em ng-bind="100 - fundsToCompare[1].figures[selectedPeriod].posNegCountRate|percentage:2"></em>
-					</label>
-					<label ng-class={compareHighlight:compareLineHover==2} ng-mouseover="compareLineHover=2">
-						<span class="spLabel">Média rentabilidade positiva:</span> 
-							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].positiveAvg|percentage:2"></em>
-						 	<em ng-bind="fundsToCompare[1].figures[selectedPeriod].positiveAvg|percentage:2"></em>
-					</label>
-					<label ng-class={compareHighlight:compareLineHover==3} ng-mouseover="compareLineHover=3">
-						<span class="spLabel">Média rentabilidade negativa:</span>
-						 <em ng-bind="fundsToCompare[0].figures[selectedPeriod].negativeAvg|percentage:2"></em>
-						 <em ng-bind="fundsToCompare[1].figures[selectedPeriod].negativeAvg|percentage:2"></em>
-					</label>
-					<label ng-class={compareHighlight:compareLineHover==8} ng-mouseover="compareLineHover=8">
-						<span class="spLabel">Média rendimento:</span> 
-							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].average"></em>
-							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].average"></em>
-					</label>
-					<label ng-class={compareHighlight:compareLineHover==4} ng-mouseover="compareLineHover=4">
-						<span class="spLabel">Volatilidade:</span> 
-							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].volatilidadeAnual|percentage:2"></em>
-							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].volatilidadeAnual|percentage:2"></em>
-					</label>
-
-					<label ng-class={compareHighlight:compareLineHover==5} ng-mouseover="compareLineHover=5">
-						<span class="spLabel">Correlação CDI:</span> 
-							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationCDI"></em>
-							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationCDI"></em>
-					</label>
-					<label ng-class={compareHighlight:compareLineHover==6} ng-mouseover="compareLineHover=6">
-						<span class="spLabel">Correlação IBOV:</span> 
-							<em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationIbov"></em>
-							<em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationIbov"></em>
-					</label>
-					<label ng-class={compareHighlight:compareLineHover==7} ng-mouseover="compareLineHover=7">
-							<span class="spLabel">Correlação SP&500:</span> 
-								<em ng-bind="fundsToCompare[0].figures[selectedPeriod].correlationSP500"></em>
-								<em ng-bind="fundsToCompare[1].figures[selectedPeriod].correlationSP500"></em>
-							</label>
-					<label ng-class={compareHighlight:compareLineHover==9} ng-mouseover="compareLineHover=9">
-						<span class="spLabel">Investimento inicial:</span> 
-							<em ng-bind="fundsToCompare[0].info.initialValue|currency:'R$'"></em>
-							<em ng-bind="fundsToCompare[1].info.initialValue|currency:'R$'"></em>
-						</label>
-					<label ng-class={compareHighlight:compareLineHover==10} ng-mouseover="compareLineHover=10">
-						<span class="spLabel">Taxa de Administração:</span> 
-							<em ng-bind="fundsToCompare[0].info.admTax|percentage:2"></em>
-							<em ng-bind="fundsToCompare[1].info.admTax|percentage:2"></em>
-						</label>
-					<br/>
-					<label>
-						<span class="spLabel">Histograma:</span>
-						<rd-histogram class="histLine" style="float:right;"
-							histogram="fundsToCompare[0].figures[selectedPeriod].fixedHistogram"
-							sufix="%">
-						</rd-histogram>
-						<rd-histogram class="histLine"
-							histogram="fundsToCompare[1].figures[selectedPeriod].fixedHistogram"
-							sufix="%">
-						</rd-histogram>
-					</label>
+					<table>
+						<caption>Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</caption>
+						<thead>
+							<tr>
+								<th style="width:30%;"></th>
+								<th  style="width:35%;" ng-bind="fundsToCompare[0].name"></th>
+								<th  style="width:35%;" ng-bind="fundsToCompare[1].name"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="col in compareProp">
+								<td ng-bind="col.label"></td>
+								<td ng-bind="fundsToCompare[0].figures[selectedPeriod][col.prop]|percentage:col.d"></td>
+								<td ng-bind="fundsToCompare[1].figures[selectedPeriod][col.prop]|percentage:col.d"></td>
+							</tr>
+							<tr>
+								<td>Investimento inicial:</td>
+								<td ng-bind="fundsToCompare[0].info.initialValue|currency:'R$'"></td>
+								<td ng-bind="fundsToCompare[1].info.initialValue|currency:'R$'"></td>
+							</tr>
+							<tr>
+								<td>Taxa de Administração:</td>
+								<td ng-bind="fundsToCompare[0].info.admTax|percentage:2"></td>
+								<td ng-bind="fundsToCompare[1].info.admTax|percentage:2"></td>
+							</tr>
+							<tr>
+								<td>Histograma:</td>
+								<td>
+									<rd-histogram style="width:80%;"
+										histogram="fundsToCompare[0].figures[selectedPeriod].fixedHistogram"
+										sufix="%">
+									</rd-histogram>
+								</td>
+								<td>
+									<rd-histogram style="width:80%;"
+										histogram="fundsToCompare[1].figures[selectedPeriod].fixedHistogram"
+										sufix="%">
+									</rd-histogram>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 					
 				</div>
 				<div class="col s12 m12 l4 x5 xl6" id="chartCompareDiv">

@@ -289,7 +289,20 @@ function dataManager($http, me){
 	};
 	
 	me.blinkLock=false;
-	
+	me.compareProp = [
+		{label:'Rentabilidade no período', prop:'performance', d:2},
+		{label:'Soma de pontos no ranking', prop:'totalRank', d:-1},
+		{label:'Meses positivos', prop:'posNegCountRate', d:2},
+		{label:'Meses negativos', prop:'posNegCountRate', d:2},
+		{label:'Média rentabilidade positiva', prop:'positiveAvg', d:2},
+		{label:'Média rentabilidade negativa', prop:'negativeAvg', d:2},
+		{label:'Média rendimento', prop:'average', d:2},
+		{label:'Volatilidade', prop:'volatilidadeAnual', d:2},
+		{label:'Correlação CDI', prop:'correlationCDI', d:-1},
+		{label:'Correlação IBOV', prop:'correlationIbov', d:-1},
+		{label:'Correlação SP&500', prop:'correlationSP500', d:-1},
+		
+	];
 	me.sortColumns = [
 		'rank',
 		'name',	//1

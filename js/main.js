@@ -73,7 +73,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	}; 
 	
 
-	me.getRoot = function(file='index'){
+	me.getRoot = function(file){
+		if(file == null){file='index';}
 		return  window.location.href.substring(0, window.location.href.indexOf(file +'.html'));
 	};
 	me.lastResult = [];
@@ -985,7 +986,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		 
 	};
 	me.groupedRankList = [];
-	me.openRankDialog = function(row){
+	me.openRankDialog = function(row, fromList){
 		ga('send', {
 			hitType: 'event',
 			eventCategory: 'view detail',
@@ -993,7 +994,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			eventLabel: row.name
 		  });
 
-		if(me.isMobile == true){
+		if(me.isMobile == true && fromList == true){
 			me.selectRow(row);
 			return;
 		}
@@ -1003,32 +1004,49 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		var year = 18;
 		var list = [];
 		var len = me.filters.Periodo[me.selectedPeriod].len;
-		for(var i = 0;i<len;i++){
-			list.push({
-				label:me.getMonthName(month, year),
-				rank:me.currentRow.rank[i],
-				point:me.currentRow.points[i],
-				value:me.currentRow.values[i] });
-			month -=1;
-			if(month == 0 || i ==len-1){
-				if(list.length<12){
-					while(list.length<12){
-						if(first){
-							list.includeBefore({label:'', value:'', point:'', rank:''});
-						}else{
-							list.push({label:'', value:'', point:'', rank:''});
-						}
+		if(me.isMobile == true){
+			for(var i = 0;i<len;i++){
+				me.groupedRankList.push({
+					label:me.getMonthName(month, year),
+					rank:me.currentRow.rank[i],
+					point:me.currentRow.points[i],
+					value:me.currentRow.values[i] });
+
+					month -=1;
+					if(month == 0){
+						month = 12;
+						year-=1;
 					}
-					first=false;
 				}
-				
+		}else{
+			for(var i = 0;i<len;i++){
+				list.push({
+					label:me.getMonthName(month, year),
+					rank:me.currentRow.rank[i],
+					point:me.currentRow.points[i],
+					value:me.currentRow.values[i] });
+				month -=1;
+				if(month == 0 || i ==len-1){
+					if(list.length<12){
+						while(list.length<12){
+							if(first){
+								list.includeBefore({label:'', value:'', point:'', rank:''});
+							}else{
+								list.push({label:'', value:'', point:'', rank:''});
+							}
+						}
+						first=false;
+					}
 					
-				me.groupedRankList.push({year:year, data:list});
-				month = 12;
-				year-=1;
-				list = [];
+						
+					me.groupedRankList.push({year:year, data:list});
+					month = 12;
+					year-=1;
+					list = [];
+				}
 			}
 		}
+		
 		//$('.tooltipped').tooltip({delay: 50, html:true});
 		$('#modaltable').modal('open');
 	}

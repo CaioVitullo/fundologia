@@ -2813,7 +2813,22 @@ ul.staggered-list li {
     display: none !important;
   }
   .row .col.s12 {
-    padding: 0px 0.2rem
+    padding: 0px 0.2rem!important;
+  }
+  #mainCtrl div.modal {
+    width: 95%!important;
+  }
+  #mainCtrl div.modal h5{
+    font-size: 1.3rem;
+  }
+  #mainCtrl div.modaTall {
+    max-height: 500px;
+  }
+  .chart_interval{
+    width: 100%;
+  }
+  .section {
+    padding-left: 10px;
   }
   .fundName{
     width: 200px!important;
@@ -9018,3 +9033,4 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     margin-bottom: 5em;
   }
 }
+

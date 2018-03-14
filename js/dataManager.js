@@ -180,7 +180,7 @@ function dataManager($http, me){
 		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
 		data.addRows(d);
 		
-		var w =  $(window).width()*0.35;
+		var w =  $(window).width()* (me.isMobile ? 0.9 : 0.35);
 		console.log(w);
 		  var options = {
 			legend:'none',tooltip:{isHtml: true},

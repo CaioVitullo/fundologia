@@ -309,7 +309,7 @@
 										ng-mouseover="showRowDetail(row)">
 										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank">Rank</td>
 										<td class="cutText noselect" >
-											<span title="{{row.name}}" class="fundName" ng-click="openRankDialog(row)"  title="Tabela de rentabilidade completa!">{{row.name}}</span>
+											<span title="{{row.name}}" class="fundName" ng-click="openRankDialog(row, true)"  title="Tabela de rentabilidade completa!">{{row.name}}</span>
 											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict" ng-mouseover="$parent.blinkRestricao=true" ng-mouseleave="$parent.blinkRestricao=false"  title="Fundo destinado à investidores qualificados.&#10;Ative o filtro 'Sem restrição' no menu lateral esquerdo para ver apenas os fundos que não são restritos apenas à investidores qualificados.">monetization_on</i>
 											<!-- <i class="hide-on-small-and-down colorIcon tiny material-icons hidenIcon "  >info_outline</i>  -->
 											<i class="colorIcon tiny material-icons " ng-mouseover="$parent.blinkLock = true" data-ng-mouseleave="$parent.blinkLock = false" ng-show="row.info.isClosed"  title="Fundo fechado.&#10;Ative o filtro 'Abertos apenas' no menu lateral esquerdo para ver apenas os fundos que estão disponíveis para aplicação.">lock</i>
@@ -403,14 +403,14 @@
 					<h5 class="filterTitle " ng-bind="filters.Periodo[selectedPeriod].Title"></h5>
 					<div  ng-class="{invisible:currentRow.values==null}" id="horizontalScollParent">
 						<div class="horizontal-scroll-wrapper squares" id="rankHorizontal" ng-mouseover="valueHover()" >
-							<div ng-dblclick="openRankDialog()" ng-repeat="m in periodName.take(filters.Periodo[selectedPeriod].len) track by $index">
+							<div ng-repeat="m in periodName.take(filters.Periodo[selectedPeriod].len) track by $index">
 								{{m}}<br/> {{currentRow.rank[$index]}}<sup>ᵒ</sup><br/>{{currentRow.values[$index]|percentage:2}}
 							</div>
 						</div>
 					</div>
-					<p class="pUpper tar" >
-						<a class="linkSeeMore" ng-click="openRankDialog(currentRow)" >ver tabela completa</a>	
-						<i class="tiny material-icons" ng-click="openRankDialog(currentRow)">launch</i>
+					<p class="pUpper tar" ng-click="openRankDialog(currentRow, false)">
+						<a class="linkSeeMore"  >ver tabela completa</a>	
+						<i class="tiny material-icons" >launch</i>
 					</p>
 					<div class="divider"></div>
 
@@ -634,7 +634,7 @@
 		<div class="modal-content">
 			<h5 ng-bind="currentRow.name"></h5>
 			<div class="row">
-				<div class="col m6 l6 xl6 lblResume">
+				<div class="col s12 m6 l6 xl6 lblResume">
 					<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Meses positivos: </span> <em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
 					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;showHistItem=false;"><span class="spLabel">Meses negativos: </span> <em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
 					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Meses acima do CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].monthAboveCDI|percentage:2"></em></label>
@@ -643,7 +643,7 @@
 					<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;showHistItem=false;"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="currentRow.figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
 					
 				</div>
-				<div class="col m6 l6 xl6 lblResume">
+				<div class="col s12 m6 l6 xl6 lblResume">
 						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Índice Sharp IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpIbov"></em></label>
 						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Índice Sharp CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpCDI"></em></label>
 						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Volatilidade anual:</span> <em ng-bind="currentRow.figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
@@ -654,7 +654,7 @@
 						</rd-histogram>
 				</div>
 			</div>
-			<div class="row "ng-repeat="y in groupedRankList">
+			<div ng-if="isMobile==false" class="row "ng-repeat="y in groupedRankList">
 				<table id="tableRank">
 					<caption>20{{y.year}}</caption>
 					<thead>
@@ -668,7 +668,7 @@
 							
 						</tr>
 						<tr>
-							<td class="{{$parent.histogram_info.class}}" ng-repeat="item in y.data track by $index" ng-bind="::item.value|percentage:2" 
+							<td class="{{$parent.histogram_info.class}}" ng-repeat="item in y.data track by $index" ng-bind="item.value|percentage:2" 
 							ng-class="{
 										highlightPos:(showMesesPositivos && item.value>=0),
 										highlightNeg:(showMesesNegativos && item.value<0),
@@ -676,6 +676,26 @@
 									}
 									"></td>
 						<tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row" ng-if="isMobile==true">
+				<table>
+					<thead>
+						<tr>
+							<th>Mês</th>
+							<th>Rentabilidade</th>
+							<th>Rank</th>
+							<th>Pontos</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="row in groupedRankList">
+							<td ng-bind="row.label"></td>
+							<td ng-bind="row.value|percentage:2"></td>
+							<td ng-bind="row.rank"></td>
+							<td ng-bind="row.point"></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -746,7 +766,7 @@
 					<table class="highlight">
 						<thead>
 							<tr>
-								<th>Permanência(meses)</th>
+								<th>Permanência (meses)</th>
 								<th>Rendimento mensalizado<sup title="">*</sup> médio</th>
 								<th>Ficou acima do CDI</th>
 								<th>Ficou acima do IBOV</th>
@@ -771,8 +791,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<div id="chart_bestInterval" style="float:left;"></div>
-				<div id="chart_bestInterval_line" style="float:left;"></div>
+				<div style="chart_interval"  id="chart_bestInterval" ></div>
+				<div style="chart_interval" id="chart_bestInterval_line" ></div>
 			</div>
 			
 		</div>

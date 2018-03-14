@@ -734,7 +734,7 @@ footer{
 }
 
 .search-wrapper {
-    margin: 0 12px;
+    margin: 0 4px;
     -webkit-transition: margin .25s ease;
     transition: margin .25s ease;
 }
@@ -1103,4 +1103,8 @@ div [dir="ltr"] text {
 
 #modalCompare table tr:nth-child(odd){
 	background-color: rgb(242, 242, 243)
+}
+
+.chart_interval{
+	float: left;
 }

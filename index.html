@@ -104,7 +104,7 @@
 		  
 		  <ul id="nav-mobile" class="right hide-on-med-and-down">
 			 <li></li>
-			 <li><a ng-click="openModalOQue()">Como funciona?</a></li>
+			 <!-- <li><a ng-click="openModalOQue()">Como funciona?</a></li> -->
 			 <li><a ng-click="showRankDialog()">Ranking</a></li>
 			 <li><a ng-click="showPreCompareDialog()">Compare fundos</a></li>
 		  </ul>
@@ -579,7 +579,7 @@
 						currentrow="currentRowHistAvg"></my-histogram>
 					
 					<my-histogram
-						ng-if="show_histDiasRecuperacao == true"
+						ng-if="show_histDiasRecuperacao2 == true"
 						chart-title="Recuperação"
 						histogram="histDiasRecuperacao"
 						value="getDiasRecuperacao()"
@@ -744,7 +744,7 @@
 						<thead>
 							<tr>
 								<th>Permanência(meses)</th>
-								<th>Rendimento mensalizado médio</th>
+								<th>Rendimento mensalizado<sup title="">*</sup> médio</th>
 								<th>Ficou acima do CDI</th>
 								<th>Ficou acima do IBOV</th>
 								<th>Análises</th>

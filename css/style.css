@@ -1078,3 +1078,11 @@ div [dir="ltr"] text {
 	margin-right: 0px!important;
 	width: 40%!important;
 }
+.showMore{
+	text-align: center;
+    
+    font-weight: bold;
+}
+.showMore a{
+	color: silver;
+}

@@ -204,7 +204,7 @@
 				<p class="range-field sliderP">
 					<input type="range" ng-model="withdrawDays"  min="0" max="100" />
 				</p>
-				<label title="Pode existir alguma relação entre o tempo para resgate e a rentabilidade?" ng-click="openChart('Resgate', 'withdrawDays', 'Pode existir alguma relação entre o tempo para resgate e a rentabilidade?')">
+				<label title="Pode existir alguma relação entre o tempo para resgate e a rentabilidade?" ng-click="openChart('Resgate(dias)', 'withdrawDays', 'Pode existir alguma relação entre o tempo para resgate e a rentabilidade?')">
 					<i  class="material-icons tiny">insert_chart</i> 
 					Gráfico Resgate vs Rentabilidade
 				</label>
@@ -326,7 +326,7 @@
 									
 								</tbody>
 								</table>
-								<p ng-show="hasMoreLines==true">
+								<p ng-show="hasMoreLines==true" class="showMore">
 									<a class="pointer" ng-click="showMore()">ver mais</a>
 								</p>
 								<div ng-show="noResult == true && searchTxt.length > 0" class="tdNotFound">
@@ -340,6 +340,8 @@
 								<p class="tdNotFound" ng-show="noResult == true && searchTxt.length == 0"></p>
 							</div>
 						</div>
+						<br/>
+						<br/>
 						<div class="row"  ng-show="mobileSelectedPage =='main'" >
 							<p class="psmall">Os comentários são de responsabilidade exclusiva de seus autores e não representam a opinião deste site</p>
 							<div class="">
@@ -763,7 +765,7 @@
 					<label ng-show="interval_hover != null" class="defaultColor" style="font-size:0.9rem;">
 						Quem permaneceu <strong>{{interval_hover.length}}</strong> meses no fundo, teve um rendimento <i>mensalizado</i><sup>*</sup> médio de <strong>{{interval_hover.montlyAvg}}%</strong>.Ficou acima do CDI {{interval_hover.aboveCdi|percentage:2}} das vezes e acima do IBOV {{interval_hover.aboveIbov|percentage:2}} das vezes. {{interval_hover.count}} análises feitas
 					</label>
-					<label class="tar">Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</label>
+					
 					
 				</div>
 			</div>
@@ -771,6 +773,7 @@
 				<div id="chart_bestInterval" style="float:left;"></div>
 				<div id="chart_bestInterval_line" style="float:left;"></div>
 			</div>
+			
 		</div>
 	</div>
 	<div id="modalOque" class="modal modal70" ng-class="{skiprightOn: skiprightOn}">
@@ -903,19 +906,19 @@
 	</div>
 	
 	<div class="floating" ng-class="{floating:highLightCompareDialog==false, highLightComareDlg:highLightCompareDialog}" ng-show="fundsToCompare.length > 0 || highLightCompareDialog==true || compareDlgStillOpen==true">
-		<i class="small material-icons closeFixedIcon roundIcon" ng-click="closeCompareDialog()"  title="Fechar" >cancel</i> 
+		<i class="small material-icons closeFixedIcon roundIcon" ng-hide="highLightCompareDialog" ng-click="closeCompareDialog()"  title="Fechar" >cancel</i> 
 		<h5 class="lblTitle" ng-show="highLightCompareDialog==true">Selecione dois fundos clicando no icone <i class="medium material-icons " >compare_arrows</i></h5>
 		<div class="selectedFund" ng-class="{fullsquare:fundsToCompare.length >=1,emptysquare:fundsToCompare.length <=0 }" ng-click="compareFundItemClick(0)">
 			<label ng-show="highLightCompareDialog == true || (compareDlgStillOpen==true && fundsToCompare.length==0 )">
 				<i class="medium material-icons "  title="Selecione outro fundo" >compare_arrows</i>
 			</label>
-			<label ng-bind="::fundsToCompare[0].name" ></label>
+			<label ng-bind="fundsToCompare[0].name" ></label>
 		</div>
 		<div class="selectedFund" style="margin-left:2%;"  ng-class="{fullsquare:fundsToCompare.length >=2,emptysquare:fundsToCompare.length <=1 }">
 			<label ng-show="fundsToCompare.length <= 1">
 				<i class="medium material-icons "  title="Selecione outro fundo" >compare_arrows</i>
 			</label>
-			<label ng-show="fundsToCompare.length > 1" ng-click="compareFundItemClick(1)" ng-bind="::fundsToCompare[1].name">Selecione outro fundo</label>
+			<label ng-show="fundsToCompare.length > 1" ng-click="compareFundItemClick(1)" ng-bind="fundsToCompare[1].name">Selecione outro fundo</label>
 		</div>
 		<button ng-click="openCompareDialog()" ng-disabled="fundsToCompare.length <= 1" class="waves-effect waves-light btn">Comparar</button>
 	</div>

@@ -137,8 +137,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 						$timeout(function(){me.selectFirstRow();},50);
 						
 					me.lastSearchTxt = me.searchTxt;
-					me.hasMoreLines = count > list.length;
+					
 					list = list.take(me.defaultListSize);
+					me.hasMoreLines = count > list.length;
 					me.lastHash = currentHash;
 					me.lastResult = list;
 				}
@@ -1035,10 +1036,10 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.showPreCompareDialog = function(){
 		me.highLightCompareDialog = true;
 		
-		//$timeout(function(){
-		//	me.highLightCompareDialog = false;
-		//	me.compareDlgStillOpen = true;
-		//},2000);
+		$timeout(function(){
+			me.highLightCompareDialog = false;
+			me.compareDlgStillOpen = true;
+		},2000);
 	};
 	me.getPeriodNames = function(){
 		var month = 2;

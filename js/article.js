@@ -3,7 +3,8 @@ var mainApp = angular.module('mainApp', []);
 mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
     var me = $scope;
     dataManager($http, me);
-    me.loading = true;
+	me.loading = true;
+	me.charts = [];
     me.loadCtrl = function(){
         me.getDefaultLists(function(){}, function(){
 			
@@ -36,8 +37,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		  };
 
   
-		  var chart = new google.visualization.Histogram(document.getElementById('chart2'));
-		  chart.draw(data, options);
+		  var chart1 = new google.visualization.Histogram(document.getElementById('chart2'));
+		  chart1.draw(data, options);
+		  me.charts.push(chart1);
 	}
 	me.chart3 = function(){
 		var dataSt = new google.visualization.DataTable();
@@ -79,6 +81,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			tooltip:{isHtml: true},
 			colors: ['#E94D20', '#ECA403', '#63A74A']
 		  });
+		  me.charts.push(chartSt);
 	}
 	me.chart1 = function(){
 		
@@ -107,7 +110,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
   
 		  var chart = new google.visualization.Histogram(document.getElementById('chart1'));
 		  chart.draw(data, options);
-
+		  me.charts.push(chart);
 	};
 	me.chart4 = function(){
 		var data3 = new google.visualization.DataTable();
@@ -150,6 +153,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			tooltip:{isHtml: true},
 			colors: ['#E94D20', '#ECA403', '#63A74A']
 		  });
+		me.charts.push(chart3);
 	}
 	me.chart5 = function(){
 		var data4 = new google.visualization.DataTable();
@@ -190,6 +194,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			tooltip:{isHtml: true},
 			colors: ['#E94D20', '#ECA403', '#63A74A']
 		  });
+		  me.charts.push(chart4);
 	};
 	me.chart6 = function(){
 		var data5 = new google.visualization.DataTable();
@@ -230,6 +235,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			tooltip:{isHtml: true},
 			colors: ['#E94D20', '#ECA403', '#63A74A']
 		  });
+		  me.charts.push(chart5);
 	};
 	me.chart7 = function(){
 		var data6 = new google.visualization.DataTable();
@@ -272,6 +278,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			tooltip:{isHtml: true},
 			colors: ['#E94D20', '#ECA403', '#63A74A']
 		  });
+		  me.charts.push(chart6);
 	};
 	me.chart8 = function(){
 		var dataHist = [['Fundo', 'Rentabilidade em 18-05-2017']];	
@@ -297,20 +304,20 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
   
 		  var chart = new google.visualization.Histogram(document.getElementById('chart8'));
 		  chart.draw(data, options);
-
+		  me.charts.push(chart);
 	};
     me.openAnaliseDiasRecuperacao = function(){
 		//
-		me.analiseRecuperacao = {
-			qtdAbaixo1:me.defaultLists[3].count(function(item){return item.analiseTemer != null && item.analiseTemer.difQuota<=-1}),
-			qtd1mes:me.defaultLists[3].count(function(item){
-				return item.analiseTemer != null && 
-					isBetween(item.analiseTemer.difQuota, -35, 0) && 
-					item.analiseTemer.diasAteRecuperar>=22}),
-			countCaiu:me.defaultLists[3].count(function(item){return  item.analiseTemer != null && isBetween(item.analiseTemer.difQuota, -35, 0)}),
-			countAll:me.defaultLists[3].count(function(item){return  item.analiseTemer != null})
-		}
-		me.analiseRecuperacao.percAbaixo1 = (100 * me.analiseRecuperacao.qtdAbaixo1/me.analiseRecuperacao.countAll).toFixed(2);
+		// me.analiseRecuperacao = {
+		// 	qtdAbaixo1:me.defaultLists[3].count(function(item){return item.analiseTemer != null && item.analiseTemer.difQuota<=-1}),
+		// 	qtd1mes:me.defaultLists[3].count(function(item){
+		// 		return item.analiseTemer != null && 
+		// 			isBetween(item.analiseTemer.difQuota, -35, 0) && 
+		// 			item.analiseTemer.diasAteRecuperar>=22}),
+		// 	countCaiu:me.defaultLists[3].count(function(item){return  item.analiseTemer != null && isBetween(item.analiseTemer.difQuota, -35, 0)}),
+		// 	countAll:me.defaultLists[3].count(function(item){return  item.analiseTemer != null})
+		// }
+		// me.analiseRecuperacao.percAbaixo1 = (100 * me.analiseRecuperacao.qtdAbaixo1/me.analiseRecuperacao.countAll).toFixed(2);
 		me.selectedPeriod = 1;
 		
 		//#####################################################
@@ -333,4 +340,39 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		$('#modalRecuperacao').modal('open');
 
 	};
+	me.busy = false;
+	me.update = function(){
+		if(me.busy)
+			return
+		
+		me.loading=true;
+		me.busy = true;
+		me.openAnaliseDiasRecuperacao();
+		me.busy = false;
+	};
 });
+
+var rtime;
+var timeout = false;
+var delta = 100;
+
+$(window).resize(function(){
+	
+	rtime = new Date();
+	if (timeout === false) {
+		timeout = true;
+		setTimeout(resizeend, delta);
+	}
+		
+});
+
+function resizeend() {
+    if (new Date() - rtime < delta) {
+        setTimeout(resizeend, delta);
+    } else {
+		timeout = false;
+		try{
+			getMainScope().update();
+		}catch(e){	}
+    }               
+}

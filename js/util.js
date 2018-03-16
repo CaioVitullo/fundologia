@@ -242,9 +242,14 @@ Array.prototype.count = function (obj) {
         return this.length;
 
     var a = 0;
-    this.generalIf(function (item) { 
-        if(obj(item)){a++;}
-    }, );
+    if(typeof(obj)=='function'){
+        this.generalIf(function (item) { 
+            if(obj(item)){a++;}
+        }, );
+    }else{
+        this.generalIf(obj, function (item) { a++; });
+    }
+   
     return a;
 }
 Array.prototype.allSetTo = function(obj){

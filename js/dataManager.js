@@ -88,7 +88,7 @@ function dataManager($http, me){
 
 	me.defaultLists = [];
 	me.getDefaultLists = function(fn, afterBigList, pre){
-		pre = pre == null ? '' : '/';
+		pre = pre == null ? '' : '../';
 		for(i=0;i<me.defaultFiles.length;i++){
 			var file = me.defaultFiles[i].name;
 			var index = me.defaultFiles[i].index;

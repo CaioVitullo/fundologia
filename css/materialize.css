@@ -2812,6 +2812,9 @@ ul.staggered-list li {
   .hide-on-small-only, .hide-on-small-and-down {
     display: none !important;
   }
+article.article .row{
+    height:unset;
+ }
   .row .col.s12 {
     padding: 0px 0.2rem!important;
   }

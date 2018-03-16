@@ -1118,8 +1118,9 @@ div [dir="ltr"] text {
 	padding: 0px 1%
 }
 article .row{
-	height: 70vh;
+	 height: 70vh; 
 }
+
 article .row .col{
 	
 	height: 100%;
@@ -1142,3 +1143,5 @@ article p.flow-text{
     min-height: 16px;
     min-width: 16px;
 }
+
+article.article hr{display: none;}

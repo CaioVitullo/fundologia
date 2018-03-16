@@ -14,6 +14,25 @@
 			ga = function(p1, p2){console.log(p1, p2)};
 		}
 	</script>
+	<script>
+		if(window.location.href.indexOf('dev.') ==-1 && window.location.href.indexOf('github.io')==-1){
+			window['_fs_debug'] = false;
+			window['_fs_host'] = 'fullstory.com';
+			window['_fs_org'] = 'AWRMP';
+			window['_fs_namespace'] = 'FS';
+			(function(m,n,e,t,l,o,g,y){
+				if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;}
+				g=m[e]=function(a,b){g.q?g.q.push([a,b]):g._api(a,b);};g.q=[];
+				o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
+				y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
+				g.identify=function(i,v){g(l,{uid:i});if(v)g(l,v)};g.setUserVars=function(v){g(l,v)};
+				y="rec";g.shutdown=function(i,v){g(y,!1)};g.restart=function(i,v){g(y,!0)};
+				g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
+				g.clearUserCookie=function(){};
+			})(window,document,window['_fs_namespace'],'script','user');
+		}
+		
+	</script>
 
 
 	<title>fundologia</title>
@@ -87,15 +106,19 @@
 		</nav>
 	</div>
 	
-    <article>
+	<h3 class="articleHeader">
+		18-05-2017 - Delação da JBS, Circuit breaker e Euforia. Confira como os fundos de investimentos reagiram à essa tragédia.
+	</h3>
+	
+    <article class="article">
 	<div class="row ">
-		<div class="col s12 m12 l8 xl8">
+		<div class="col s12 m12 l8 xl8 " ng-class="{bgLoading:loading}">
 			<div id="chart1" style="width:100%;height:100%;"></div>
 					  
 		</div>
 		<div class="col s12 m12 l4 xl4">
 			<p class="flow-text valign-wrapper h100">
-					Dificilmente o investidor esquecerá este dia. x% dos fundos analisados pelo fundologia cairam ao menos y%, e z% dos fundos levaram ao menos w dias para se recuparar.Ao lado mostramos o impacto sofrido por cada fundo de investimento no dia seguinte.
+					<span>Dificilmente o investidor esquecerá este dia. <strong>60,45% dos fundos analisados pelo fundologia cairam ao menos 1% em apenas um dia</strong>. 80% deste fundos levaram mais de 1 mês para se recupararem.Ao lado mostramos o impacto sofrido por cada fundo de investimento no dia 18-05-2017.</span>
 			</p>	  
 		</div>
 	</div>
@@ -103,21 +126,36 @@
 	<div class="row ">
 		<div class="col s12 m12 l4 xl4">
 			<p class="flow-text valign-wrapper h100">
-				<span>Catastrófico! No gráfico ao lado mostramos quantas vezes os fundos variaram em relação à sua variação normal. Teve fundo que em <strong> apenas 1 dia variou 7 vezes o que costuma variar em 1 mês.</strong></span>
+				<span>Catastrófico! Veja ao lado quantas vezes os fundos variaram no dia em relação à sua variação mensal normal. Teve fundo que em <strong> apenas 1 dia variou 7 vezes o que costuma variar em 1 mês.</strong></span>
 			</p>	  
 		</div>
-		<div class="col s12 m12 l8 xl8">
+		<div class="col s12 m12 l8 xl8" ng-class="{bgLoading:loading}">
 			<div id="chart2" style="width:100%;height:100%;"></div>  
 		</div>
 	</div>
+	
+	<div class="row ">
+		<div class="col s12 m12 l8 xl8" ng-class="{bgLoading:loading}">
+			<div id="chart8" style="width:100%;height:100%;"></div>
+					  
+		</div>
+		<div class="col s12 m12 l4 xl4">
+			<p class="flow-text valign-wrapper h100">
+					<span>
+						Que o tombo foi feio a gente ja viu.Agora vamos ver o tempo que eles demoraram para se recuperar. No gráfico ao lado contamos a quantidade de dias úteis que os fundos demoraram para superar a cota do dia anterior.<strong>Teve fundo que levou 195 dias!</strong>
+					</span>	
+			</p>	  
+		</div>
+	</div>
+
 
 	<div class="row ">
-		<div class="col s12 m12 l8 xl8">
+		<div class="col s12 m12 l8 xl8" ng-class="{bgLoading:loading}">
 			<div id="chart3" style="width:100%;height:100%;"></div>				  
 		</div>
 		<div class="col s12 m12 l4 xl4">
 			<p class="flow-text valign-wrapper h100">
-				<span>Que o tombo foi feio a gente ja viu.Agora vamos ver o tempo que eles demoraram para se recuperar. No gráfico ao lado contamos a quantidade de dias úteis que os fundos demoraram para superar a cota do dia anterior vs o prejú que eles levaram.<strong>Teve fundo que levou 195 dias!</strong></span>
+				<span> Confira por outro ângulo! Veja o tempo que eles demoraram para se recuperar em relação ao buraco que eles se meteram. </span>
 			</p>	  
 		</div>
 	</div>
@@ -128,13 +166,13 @@
 				<span>Sempre ouvi o pessoal dizer <i>Um transatlântico demora muito mais para manobrar do que uma lancha</i> fazendo referência ao tempo que um fundo grande demora para se redirecionar. Mas o gráfico ao lado não concorda muito com essa afirmação não!! </span>
 			</p>	  
 		</div>
-		<div class="col s12 m12 l8 xl8">
+		<div class="col s12 m12 l8 xl8" ng-class="{bgLoading:loading}">
 			<div id="chart4" style="width:100%;height:100%;"></div>  
 		</div>
 	</div>
 
 	<div class="row ">
-		<div class="col s12 m12 l8 xl8">
+		<div class="col s12 m12 l8 xl8" ng-class="{bgLoading:loading}">
 			<div id="chart5" style="width:100%;height:100%;"></div>				  
 		</div>
 		<div class="col s12 m12 l4 xl4">
@@ -149,12 +187,12 @@
 				<span>Só vamos conferir se a mesma correlação que os fez cair ladeira abaixo, tambem ajudou na retomada. Fizemos um calculo de <i>Velocidade</i> que nada mais é do que <i>[Tombo]/[Tempo de retomanda]</i>. Exemplificando, um fundo que caiu 6% e demorou 60 dias para se recuperar ficaria com velocidade 0,1%/dia.(fonte:WikiMinhaCabeça)</span>
 			</p>	  
 		</div>
-		<div class="col s12 m12 l8 xl8">
+		<div class="col s12 m12 l8 xl8" ng-class="{bgLoading:loading}">
 			<div id="chart6" style="width:100%;height:100%;"></div>  
 		</div>
 	</div>
 	<div class="row ">
-		<div class="col s12 m12 l8 xl8">
+		<div class="col s12 m12 l8 xl8" ng-class="{bgLoading:loading}">
 			<div id="chart7" style="width:100%;height:100%;"></div>				  
 		</div>
 		<div class="col s12 m12 l4 xl4">
@@ -165,7 +203,7 @@
 	</div>
 	<div class="row ">
 		<div class="col s12 m12 l12 xl12">
-			<p class="flow-text valign-wrapper h100">
+			<p class="flow-text paragrafi2dedo">
 				<span>
 					<stong>Ta!</stong> ja chega de gráfico! <br/>
 					Com certeza todos que ja investiam na época se lembram desse dia e tiraram uma lição do acontecimento. Se a lição que você tirou foi a de analisar cautelosamente aonde esta colocando o seu dinheiro para render, o <a href="http://www/fundologia.com.br?camp=analisequeda">fundologia </a> está aqui para te ajudar.

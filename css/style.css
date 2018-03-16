@@ -1114,10 +1114,31 @@ div [dir="ltr"] text {
 .chart_interval{
 	float: left;
 }
+.article{
+	padding: 0px 1%
+}
 article .row{
-	height: 60vh;
+	height: 70vh;
 }
 article .row .col{
 	
 	height: 100%;
+}
+article p.flow-text{
+	text-align: justify;
+}
+.articleHeader{
+	color: rgba(69, 97, 122,0.9);
+	padding: 0 2%;
+}
+.paragrafi2dedo{
+	padding: 10px 2%;
+}
+
+.bgLoading {
+    background-image: url(../img/indicator.gif) !important;
+    background-position: center!important;
+    background-repeat: no-repeat!important;
+    min-height: 16px;
+    min-width: 16px;
 }

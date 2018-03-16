@@ -3,7 +3,7 @@ var mainApp = angular.module('mainApp', []);
 mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
     var me = $scope;
     dataManager($http, me);
-    me.txt = 'aaaa'
+    me.loading = true;
     me.loadCtrl = function(){
         me.getDefaultLists(function(){}, function(){
 			
@@ -81,10 +81,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		  });
 	}
 	me.chart1 = function(){
-		me.analiseRecuperacao = {
-			qtdAbaixo1:me.defaultLists[3].count(function(item){item.analiseTemer != null && item.analiseTemer.difQuota<=-1}),
-			countAll:me.defaultLists[3].count(function(item){item.analiseTemer != null})
-		}
+		
 		var dataHist = [['Fundo', 'Rentabilidade em 18-05-2017']];	
 		for(var i=0;i<me.defaultLists[3].length;i++){
 			var item = me.defaultLists[3][i];
@@ -276,8 +273,44 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			colors: ['#E94D20', '#ECA403', '#63A74A']
 		  });
 	};
+	me.chart8 = function(){
+		var dataHist = [['Fundo', 'Rentabilidade em 18-05-2017']];	
+		for(var i=0;i<me.defaultLists[3].length;i++){
+			var item = me.defaultLists[3][i];
+			if(item.analiseTemer != null && isBetween(item.analiseTemer.difQuota, -35, 0))
+				dataHist.push([item.name, item.analiseTemer.diasAteRecuperar]);
+		}
+
+		var data = google.visualization.arrayToDataTable(dataHist);
+		//
+		
+		var options = {
+			legend: { position: 'none' },
+			hAxis:{ title:'Dias para se recuperar'},
+			vAxis:{title:'Quantidade de fundos'},
+			//height:h,
+			//width:w,
+			colors: ["#ff584e","#ff6300","#ff5500","#ff4700","#ff3900","#ff2b00","#ff1c00","#ff0e00","#ff0000"],//"#ffaa00","#ff9c00","#ff8e00","#ff8000",
+			histogram:{lastBucketPercentile:5}
+		  };
+
+  
+		  var chart = new google.visualization.Histogram(document.getElementById('chart8'));
+		  chart.draw(data, options);
+
+	};
     me.openAnaliseDiasRecuperacao = function(){
 		//
+		me.analiseRecuperacao = {
+			qtdAbaixo1:me.defaultLists[3].count(function(item){return item.analiseTemer != null && item.analiseTemer.difQuota<=-1}),
+			qtd1mes:me.defaultLists[3].count(function(item){
+				return item.analiseTemer != null && 
+					isBetween(item.analiseTemer.difQuota, -35, 0) && 
+					item.analiseTemer.diasAteRecuperar>=22}),
+			countCaiu:me.defaultLists[3].count(function(item){return  item.analiseTemer != null && isBetween(item.analiseTemer.difQuota, -35, 0)}),
+			countAll:me.defaultLists[3].count(function(item){return  item.analiseTemer != null})
+		}
+		me.analiseRecuperacao.percAbaixo1 = (100 * me.analiseRecuperacao.qtdAbaixo1/me.analiseRecuperacao.countAll).toFixed(2);
 		me.selectedPeriod = 1;
 		
 		//#####################################################
@@ -285,11 +318,14 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		//#####################################################
 		me.chart1();
 		me.chart2();
+		me.chart8();
 		me.chart3();
 		me.chart4();
 		me.chart5();
 		me.chart6();
 		me.chart7();
+
+		me.loading = false;
 		//#####################################################
 		//##			GRAFICO III
 		//#####################################################

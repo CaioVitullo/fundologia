@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" ng-app="mainApp">
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115170636-1"></script>
+	<script>
+		if(window.location.href.indexOf('dev.') ==-1 && window.location.href.indexOf('github.io')==-1){
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-115170636-1');
+		}else{
+			ga = function(p1, p2){console.log(p1, p2)};
+		}
+	</script>
+
+
+	<title>fundologia</title>
+	<meta charset="utf-8">
+
+	
+	<meta name="description" content="Pesquise e Compare fundos de investimento. Todas as informações que você precisa para escolher seu fundo de investimento num lugar so.">
+  	<meta name="keywords" content="fundos, compare fundos, fundo, investimento, fundos de investimento, rentabilidade, rentabilidade fundos, melhor investimento, onde investir, qual melhor investimento, onde devo investir, dinheiro, bovespa, ibovespa, compare rentabilidade, CDI">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+
+	<meta property="og:title" content="Fundologia">
+	<meta property="og:description" content="Pesquise e Compare fundos de investimento. ">
+	<meta property="og:image" content="https://www.fundologia.com.br/img/img.jpg">
+	<meta property="og:url" content="http://www.fundologia.com.br">
+	<meta property="og:type" content="article" />
+	<meta property="og:locale" content="pt_BR" />
+	<meta name="twitter:card" content="summary_large_image">	
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+	<link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+	
+    <!-- Favicons -->
+    <link rel="icon" href="img/favicon-16.png" sizes="16x16">
+    <link rel="icon" href="img/favicon-24.png" sizes="24x24">
+	<link rel="icon" href="img/favicon-32.png" sizes="32x32">
+	<link rel="icon" href="img/favicon-72.png" sizes="72x72">
+	<link rel="icon" href="img/favicon-96.png" sizes="96x96">
+	<link rel="icon" href="img/favicon-114.png" sizes="114x114">
+	<link rel="icon" href="img/favicon-128.png" sizes="128x128">
+	<link rel="icon" href="img/favicon-144.png" sizes="144x144">
+	<link rel="icon" href="img/favicon-160.png" sizes="256x160">
+	
+    <!-- Favicons -->
+	
+</head>
+<body class="noselect">
+	
+<div ng-controller="ctrl" id="mainCtrl" class="mainContent">
+	<div class="navbar-fixed" ng-init="loadCtrl()">
+		<nav class="nav-extended">
+		 <div class="nav-wrapper container">
+		  
+		  <a data-activates="slide-out" id="mobileMenu" class="button-collapse"><i class="material-icons"  >menu</i></a>
+		  <label class="mainHeader" >fundologia.</label> 
+		  <span id="subtitle">o fim do achismo!</span>
+		  
+		  <ul id="nav-mobile" class="right hide-on-med-and-down">
+			 <li></li>
+			 <!-- <li><a ng-click="openModalOQue()">Como funciona?</a></li> -->
+			 <li><a ng-click="showRankDialog()">Ranking</a></li>
+			 <li><a ng-click="showPreCompareDialog()">Compare fundos</a></li>
+		  </ul>
+		  <ul class="side-nav" id="slide-out" >
+			<!-- <li><a href="#sobre">O que é?</a></li>
+			<li><a href="#comofunciona">Como funciona</a></li> -->
+			<li class="show-on-smaller-992"  ng-click="mobSelectPage('main')"><a>Lista</a></li>
+			<li class="show-on-smaller-992"  ng-click="mobSelectPage('filter')"><a>Filtro</a></li>
+			<li class="show-on-smaller-992" ng-click="mobSelectPage('histogram')"><a>Detalhe do fundo</a></li>
+			<li class="show-on-smaller-992"><a href='whatsapp://send?text=Pesquise e compare fundos de investimento: https://caiovitullo.github.io/fundologia/'>Compartilhar no WhatsApp</a></li>
+		  </ul>
+		 </div>
+		</nav>
+	</div>
+	<div class="navbar-fixed hide-on-med-and-down " style="display:none;" >
+		<nav class="nav-extended sub-menu">
+			<div class="nav-wrapper container">
+			
+			</div>
+		</nav>
+	</div>
+	
+    <article>
+	<div class="row ">
+		<div class="col s12 m12 l8 xl8">
+			<div id="chart1" style="width:100%;height:100%;"></div>
+					  
+		</div>
+		<div class="col s12 m12 l4 xl4">
+			<p class="flow-text valign-wrapper h100">
+					Dificilmente o investidor esquecerá este dia. x% dos fundos analisados pelo fundologia cairam ao menos y%, e z% dos fundos levaram ao menos w dias para se recuparar.Ao lado mostramos o impacto sofrido por cada fundo de investimento no dia seguinte.
+			</p>	  
+		</div>
+	</div>
+
+	<div class="row ">
+		<div class="col s12 m12 l4 xl4">
+			<p class="flow-text valign-wrapper h100">
+				<span>Catastrófico! No gráfico ao lado mostramos quantas vezes os fundos variaram em relação à sua variação normal. Teve fundo que em <strong> apenas 1 dia variou 7 vezes o que costuma variar em 1 mês.</strong></span>
+			</p>	  
+		</div>
+		<div class="col s12 m12 l8 xl8">
+			<div id="chart2" style="width:100%;height:100%;"></div>  
+		</div>
+	</div>
+
+	<div class="row ">
+		<div class="col s12 m12 l8 xl8">
+			<div id="chart3" style="width:100%;height:100%;"></div>				  
+		</div>
+		<div class="col s12 m12 l4 xl4">
+			<p class="flow-text valign-wrapper h100">
+				<span>Que o tombo foi feio a gente ja viu.Agora vamos ver o tempo que eles demoraram para se recuperar. No gráfico ao lado contamos a quantidade de dias úteis que os fundos demoraram para superar a cota do dia anterior vs o prejú que eles levaram.<strong>Teve fundo que levou 195 dias!</strong></span>
+			</p>	  
+		</div>
+	</div>
+
+	<div class="row ">
+		<div class="col s12 m12 l4 xl4">
+			<p class="flow-text valign-wrapper h100">
+				<span>Sempre ouvi o pessoal dizer <i>Um transatlântico demora muito mais para manobrar do que uma lancha</i> fazendo referência ao tempo que um fundo grande demora para se redirecionar. Mas o gráfico ao lado não concorda muito com essa afirmação não!! </span>
+			</p>	  
+		</div>
+		<div class="col s12 m12 l8 xl8">
+			<div id="chart4" style="width:100%;height:100%;"></div>  
+		</div>
+	</div>
+
+	<div class="row ">
+		<div class="col s12 m12 l8 xl8">
+			<div id="chart5" style="width:100%;height:100%;"></div>				  
+		</div>
+		<div class="col s12 m12 l4 xl4">
+			<p class="flow-text valign-wrapper h100">
+				<span>Bom, se não foi o volume, então quem foi? Será que os fundos que sofrem maior influência do Ibovespa cairam mais? <br/>Se quem despencou foi o Ibovespa, ja era de se esperar que essa correlação fosse verdadeira.</span>
+			</p>	  
+		</div>
+	</div>
+	<div class="row ">
+		<div class="col s12 m12 l4 xl4">
+			<p class="flow-text valign-wrapper h100">
+				<span>Só vamos conferir se a mesma correlação que os fez cair ladeira abaixo, tambem ajudou na retomada. Fizemos um calculo de <i>Velocidade</i> que nada mais é do que <i>[Tombo]/[Tempo de retomanda]</i>. Exemplificando, um fundo que caiu 6% e demorou 60 dias para se recuperar ficaria com velocidade 0,1%/dia.(fonte:WikiMinhaCabeça)</span>
+			</p>	  
+		</div>
+		<div class="col s12 m12 l8 xl8">
+			<div id="chart6" style="width:100%;height:100%;"></div>  
+		</div>
+	</div>
+	<div class="row ">
+		<div class="col s12 m12 l8 xl8">
+			<div id="chart7" style="width:100%;height:100%;"></div>				  
+		</div>
+		<div class="col s12 m12 l4 xl4">
+			<p class="flow-text valign-wrapper h100">
+				<span>Só pra gente tirar a dúvida se não foi o volume mesmo. Vamos ver o Patrimônio em relação à tal da Velocidade.<br/> Não é possível que não seja isso! rs</span>
+			</p>	  
+		</div>
+	</div>
+	<div class="row ">
+		<div class="col s12 m12 l12 xl12">
+			<p class="flow-text valign-wrapper h100">
+				<span>
+					<stong>Ta!</stong> ja chega de gráfico! <br/>
+					Com certeza todos que ja investiam na época se lembram desse dia e tiraram uma lição do acontecimento. Se a lição que você tirou foi a de analisar cautelosamente aonde esta colocando o seu dinheiro para render, o <a href="http://www/fundologia.com.br?camp=analisequeda">fundologia </a> está aqui para te ajudar.
+					<br/>
+					<br/>
+					Se curtiu compartilhe com os amigos, se não curtiu com os inimigos!! Abraço
+				</span>
+			</p>	  
+		</div>
+		
+	</div>
+
+
+    </article>
+	
+
+
+</div>
+<footer class="row ng-hide" >
+	<div class="container">
+		<p>
+			O Fundologia tem como objetivo auxiliar na pesquisa de fundos de investimento. O ranking, assim como todo o conteudo do site, NÃO são recomendação de compra e/ou investimento. A decisão é responsabilidade do investidor. 
+		</p>
+		<p>
+			A rentabilidade passada não representa garantia de resultados futuros. As informações deste site foram obtidas a partir de fontes disponíveis publicamente. O Fundologia não garante sua atualização, exatidão , precisão, integridade ou veracidade, tampouco se responsabiliza pela publicação acidental de dados incorretos.
+		</p>
+	</div>
+</footer>
+
+
+
+
+</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script>
+		google.charts.load('current', {'packages':['corechart', 'scatter']});
+		google.charts.setOnLoadCallback(function(){
+			window.googleChartHasFinished = true;
+		});
+	</script>
+	
+
+	<script src="/js/materialize.js"></script>	
+	<script src="/js/util.js"  charset="utf-8" ></script>
+	<script src="/js/dataManager.js"></script>
+	<script src="/js/article.js"></script>
+
+</body>
+
+</html>

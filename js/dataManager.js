@@ -1,5 +1,59 @@
 function dataManager($http, me){
-    me.getFile = function(url, fileIndex , after){
+	me.chartData = {}
+	me.getGenericData = function(propery, name, n=1, fnValueX, fnValueY, fnTooltip, checkLine){
+		if(me.chartData.hasOwnProperty(propery)){
+			if(me.chartData[propery].hasOwnProperty(me.selectedPeriod))
+				return me.chartData[propery][me.selectedPeriod];
+		}
+		
+			var d= [];
+			var fn=null;
+			if(typeof(fnTooltip)=='function'){
+				fn = fnTooltip;
+			}else{
+				fn = function(item, fig){
+					html= '<h5 style="width:300px;font-size:1.3rem;">' + item.name + '</h5><p>' + name + ': ' + (item.info.hasOwnProperty(propery) ? item.info[propery] : fig[propery]) + '</p>';
+					html += '<p>Rendimento: ' + fig.performance + '% acumulado nos ' + me.filters.Periodo[me.selectedPeriod].Title.toLowerCase();
+					return html;
+				}
+			}
+
+			var fnVal = function(val,item){return val;}
+			if(typeof(fnValueY) == 'function')
+				fnVal = fnValueY;
+			
+			var fnX = function(val,item){return val;}
+			if(typeof(fnValueX) == 'function')
+				fnX = fnValueX;
+			
+			if(checkLine==null)
+				checkLine = function(item){return true;}
+
+			for(var i=0;i<me.defaultLists[3].length;i++){
+				var item = me.defaultLists[3][i]
+				var fig = item.figures[me.selectedPeriod];
+				if(fig != null && checkLine(item)){
+					
+					d.push([
+						fnX(item.info.hasOwnProperty(propery) ? item.info[propery]/n : fig[propery]/n, item),
+						item.info.isAcao ? fnVal(fig.performance/100.0,item) : null,
+						fn(item, fig) ,
+						item.info.isMultimercado ? fnVal(fig.performance/100.0, item) : null,
+						fn(item, fig) ,
+						item.info.isRendaFixa ? fnVal(fig.performance/100.0,item) : null,
+						fn(item, fig),
+						item.name + '|' + item.uniqueID
+					])
+				}		
+			}
+
+			if(me.chartData.hasOwnProperty(propery) == false)
+				me.chartData[propery] = {};
+			me.chartData[propery][me.selectedPeriod]=d;
+			return d;
+	}
+	
+	me.getFile = function(url, fileIndex , after){
 		//var url = me.getRoot('resultado') + 'cursos/file_' + courses[index] + '.txt';
 		try {
 			var ajaxConfig = { url: url, cache: false };
@@ -33,12 +87,12 @@ function dataManager($http, me){
 		{index:0, name: 'last12'}];
 
 	me.defaultLists = [];
-	me.getDefaultLists = function(fn, afterBigList){
-		
+	me.getDefaultLists = function(fn, afterBigList, pre){
+		pre = pre == null ? '' : '/';
 		for(i=0;i<me.defaultFiles.length;i++){
 			var file = me.defaultFiles[i].name;
 			var index = me.defaultFiles[i].index;
-			var url = 'resultadoFundo/' + file + '.txt';
+			var url = pre +'resultadoFundo/' + file + '.txt';
 			if(me.defaultFiles[i].name =='bigList'){
 				me.getFile(url, index, afterBigList);
 			}else if(me.defaultFiles[i].name =='last24'){

@@ -507,64 +507,13 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		$timeout(function(){
 			if($('#rankHorizontal').is(':hover')){
 				if(me.canShowFeature('doubleClickRankScroll')){
-					me.toastOk('Duplo click para visualizar a lista completa!<a onclick="toastCallback()"> Entendi!</a>')
+					me.toastOk('Para ver a lista completa e outras informações clique no icone logo abaixo!<a onclick="toastCallback()"> Entendi!</a>')
 				}
 			}
 		},1500);
 	};
 	
-	me.chartData = {}
-	me.getGenericData = function(propery, name, n=1, fnValueX, fnValueY, fnTooltip, checkLine){
-		if(me.chartData.hasOwnProperty(propery)){
-			if(me.chartData[propery].hasOwnProperty(me.selectedPeriod))
-				return me.chartData[propery][me.selectedPeriod];
-		}
-		
-			var d= [];
-			var fn=null;
-			if(typeof(fnTooltip)=='function'){
-				fn = fnTooltip;
-			}else{
-				fn = function(item, fig){
-					html= '<h5 style="width:300px;font-size:1.3rem;">' + item.name + '</h5><p>' + name + ': ' + (item.info.hasOwnProperty(propery) ? item.info[propery] : fig[propery]) + '</p>';
-					html += '<p>Rendimento: ' + fig.performance + '% acumulado nos ' + me.filters.Periodo[me.selectedPeriod].Title.toLowerCase();
-					return html;
-				}
-			}
-
-			var fnVal = function(val,item){return val;}
-			if(typeof(fnValueY) == 'function')
-				fnVal = fnValueY;
-			
-			var fnX = function(val,item){return val;}
-			if(typeof(fnValueX) == 'function')
-				fnX = fnValueX;
-			
-			if(checkLine==null)
-				checkLine = function(item){return true;}
-
-			for(var i=0;i<me.defaultLists[3].length;i++){
-				var item = me.defaultLists[3][i]
-				var fig = item.figures[me.selectedPeriod];
-				if(fig != null && checkLine(item)){
-					
-					d.push([
-						fnX(item.info.hasOwnProperty(propery) ? item.info[propery]/n : fig[propery]/n, item),
-						item.info.isAcao ? fnVal(fig.performance/100.0,item) : null,
-						fn(item, fig) ,
-						item.info.isMultimercado ? fnVal(fig.performance/100.0, item) : null,
-						fn(item, fig) ,
-						item.info.isRendaFixa ? fnVal(fig.performance/100.0,item) : null,
-						fn(item, fig)
-					])
-				}		
-			}
-
-			if(me.chartData.hasOwnProperty(propery) == false)
-				me.chartData[propery] = {};
-			me.chartData[propery][me.selectedPeriod]=d;
-			return d;
-	}
+	
 	
 	me.currentCharTitle = '';
 	me.gerDefaultChartOptions = function(title){
@@ -885,6 +834,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
 		data.addColumn('number', 'Renda Fixa');
 		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data.addColumn({'type': 'string', 'role': 'annottion'});
 		
 		
 		data.addRows(me.getGenericData(propery, name, propery == 'admTax'?100.0:1));
@@ -898,9 +848,31 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 
 		//var chart = new google.charts.Scatter(document.getElementById('chart_txdm_scatter'));
 		var chart = new google.visualization.ScatterChart(document.getElementById('chart_txdm_scatter'));
-
+		var lastSelectedRow = -1;
+		var _me = me;
+		google.visualization.events.addListener(chart, 'select', function(){
+			var selectedItem = chart.getSelection()[0];
+			if (selectedItem && lastSelectedRow != selectedItem.row) {
+				lastSelectedRow = selectedItem.row;
+				var info = data.getValue(selectedItem.row, 7);
+				if(info != null){
+					var f = info.split('|');
+					_me.showSelectedFund(f);
+				}
+			}
+		});
 		//chart.draw(data, google.charts.Scatter.convertOptions(options));
 		chart.draw(data, options);
+	}
+	me.chartSelectedFunds = [];
+	me.showSelectedFund = function(data){
+		if(me.chartSelectedFunds.length == 0){
+			me.toastOk('Vamos deixar na listagem apenas os fundos que você selecionar aqui. Ok?<a onclick="toastCallback()"> Beleza</a><em>Melhor não.</em>');
+		}else{
+			
+		}
+		me.chartSelectedFunds.push({id:parseInt(data[1]), name:data[0]});
+		
 	}
 	me.mobSelectPage = function(page){
 		if(page=='histogram')

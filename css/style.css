@@ -534,11 +534,14 @@ footer{
     background-color: rgba(255,255,255,1);
   }
 
-  .toast a{
+  .toast a, .toast em{
 	cursor: pointer;
-    color: #72ea1a;
+    color: #618d41;
 	font-weight: 400;
-	
+	margin-left: 15px;
+  }
+  .toast em{
+	  color: rgb(194, 76, 76);
   }
 
   .tr{
@@ -1085,6 +1088,9 @@ div [dir="ltr"] text {
 .showMore a{
 	color: silver;
 }
+.h100{
+	height: 100%;
+}
 
 #modalCompare table thead th{
 	text-align: center;
@@ -1107,4 +1113,11 @@ div [dir="ltr"] text {
 
 .chart_interval{
 	float: left;
+}
+article .row{
+	height: 60vh;
+}
+article .row .col{
+	
+	height: 100%;
 }

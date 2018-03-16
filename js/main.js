@@ -852,12 +852,15 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		var _me = me;
 		google.visualization.events.addListener(chart, 'select', function(){
 			var selectedItem = chart.getSelection()[0];
+			
 			if (selectedItem && lastSelectedRow != selectedItem.row) {
 				lastSelectedRow = selectedItem.row;
 				var info = data.getValue(selectedItem.row, 7);
 				if(info != null){
 					var f = info.split('|');
 					_me.showSelectedFund(f);
+					if (!me.$$phase)
+            		me.$apply();
 				}
 			}
 		});
@@ -867,7 +870,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.chartSelectedFunds = [];
 	me.showSelectedFund = function(data){
 		if(me.chartSelectedFunds.length == 0){
-			me.toastOk('Vamos deixar na listagem apenas os fundos que você selecionar aqui. Ok?<a onclick="toastCallback()"> Beleza</a><em>Melhor não.</em>');
+			me.showChartToast=true;
 		}else{
 			
 		}

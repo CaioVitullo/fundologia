@@ -536,12 +536,16 @@ footer{
 
   .toast a, .toast em{
 	cursor: pointer;
-    color: #618d41;
+    color: #92ce66;
 	font-weight: 400;
 	margin-left: 15px;
   }
   .toast em{
-	  color: rgb(194, 76, 76);
+	  color: rgb(220, 108, 108);
+  }
+  .toast ul i.material-icons{
+	  color: rgb(220, 108, 108);
+	  margin-left: 10px;
   }
 
   .tr{
@@ -1145,3 +1149,5 @@ article p.flow-text{
 }
 
 article.article hr{display: none;}
+
+.toast ul li{list-style-type:disc;}

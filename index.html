@@ -899,29 +899,17 @@
 		</div>
 		<button ng-click="openCompareDialog()" ng-disabled="fundsToCompare.length <= 1" class="waves-effect waves-light btn">Comparar</button>
 	</div>
-	<div id="modalRecuperacao" class="modal modaTall wideModal">
-		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
-		<div class="modal-content">
-			<div class="row">
-				<h5>
-					18-05-2017 - Com delação da JBS Bolsa aciona <i>circuit breaker</i> após queda atingir 10%. 
-				</h5>
-				<p>
-					Dificilmente o investidor esquecerá este dia. x% dos fundos analisados pelo fundologia cairam ao menos y%, e z% dos fundos levaram ao menos w dias para se recuparar.Abaixmo mostramos o impacto sofrido por cada fundo de investimento no dia seguinte.
-				</p>
-			</div>
-			<div id="chart_histogram_queda" style="width:100%;"></div>
-			<div class="divider"></div>
-			<p>Neste gráfico mostramos quanto os fundos tiveram de rentabilidade no dia seguinte ao dia da delação e a quantidade de dias que eles levaram para se recuperar do tombo.</p>
-			<div id="chart_scatter_queda" style="width:100%;"></div>
-			<p>Será que quanto maior o fundo, mais tempo ele demorou para se recuperar?</p>
-			<div id="chart_scatter_queda_volume" style="width:100%;"></div>
-			<p>Talvez devessemos analisar a velocidade de recuperação e não o tempo de recuperação. Para este calculo dividimos o prejizo do dia 18-05 pela quantidade de dias que o fundo demorou para se recuperar.</p>
-			<div id="chart_scatter_queda_volume_velocidade" style="width:100%;"></div>
-			<p>Ou será que quanto mais correlacionados ao IBOV. Bom primeiro temos que ver se a correlaçõa ao IBOV os fizeram cair mais:</p>
-			<div id="chart_scatter_queda_correlIbov" style="width:100%;"></div>
-			<p>Não que seja uma regra, mas sim! Os fundos com maior correlação ao Ibovespa cairam mais. Mas sera que esta mesma correlação os ajudou a se recuperar mais rapido? </p>
-			<div id="chart_scatter_queda_velocidade" style="width:100%;"></div>
+	
+
+	<div id="toast-container" ng-show="showChartToast"
+		<div class="toast" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 1; transform: translateY(-35px);">
+			<label style="font-size:1.1rem;" ng-hide="hideChartToastHeader">
+					Vamos deixar na listagem apenas os fundos que você selecionar aqui. Ok?<a ng-click="hideChartToastHeader=true"> Beleza</a><em ng-click="showChartToast=false">Melhor não.</em>
+			</label>
+			<ul>
+				<li ng-repeat="item in chartSelectedFunds" >{{item.name}}<i ng-click="chartSelectedFunds.remove(item)" class="small material-icons">delete_forever</i></li>
+			</ul>
+			<a ng-show="hideChartToastHeader" ng-click="filterByChart()">Aplicar Filtro</a>
 		</div>
 	</div>
 

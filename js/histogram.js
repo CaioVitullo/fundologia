@@ -122,4 +122,8 @@ function histogramManager(me){
 		$('.modal-overlay').css('opacity',0);
 	}
 
+	me.showChartToast=false;
+	me.filterByChart = function(){
+		
+	}
 }

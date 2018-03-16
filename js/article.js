@@ -18,7 +18,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
         }, true);
 	};
 	me.chart2 = function(){
-		var dataHist = [['Fundo', 'Rentabilidade em 18-05-2017']];	
+		var dataHist = [['Fundo', 'rendimento em 18-05-2017 dividido pela Volatilidade mensal']];	
 		for(var i=0;i<me.defaultLists[3].length;i++){
 			var item = me.defaultLists[3][i];
 			if(item.analiseTemer != null && isBetween(item.analiseTemer.difQuota, -35, 0) && item.figures[1] != null)
@@ -85,24 +85,23 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	}
 	me.chart1 = function(){
 		
-		var dataHist = [['Fundo', 'Rentabilidade em 18-05-2017']];	
+		var dataHist = [['Fundo', 'Rentabilidade em 18-05-2017 (%)']];	
+		
+
 		for(var i=0;i<me.defaultLists[3].length;i++){
 			var item = me.defaultLists[3][i];
 			if(item.analiseTemer != null && isBetween(item.analiseTemer.difQuota, -35, 0))
-				dataHist.push([item.name, item.analiseTemer.difQuota/100.0]);
+				dataHist.push([item.name, item.analiseTemer.difQuota/1.0]);
 		}
-
+		
 		var data = google.visualization.arrayToDataTable(dataHist);
+		
 		//
-		var w =  $('#modalRecuperacao').width()*0.9;
-		var h = Math.min(w / 1.61, $('#modalRecuperacao').height()) 
+		
 		var options = {
-			title: 'Análise dos fundos que tiveram prejuizo.',
 			legend: { position: 'none' },
-			hAxis:{format:'percent', title:'rendimento em 18-05-2017'},
+			hAxis:{ title:'rendimento em 18-05-2017'},
 			vAxis:{title:'Quantidade de fundos'},
-			//height:h,
-			//width:w,
 			colors: ["#ff7100","#ff6300","#ff5500","#ff4700","#ff3900","#ff2b00","#ff1c00","#ff0e00","#ff0000"],//"#ffaa00","#ff9c00","#ff8e00","#ff8000",
 			histogram:{lastBucketPercentile:5}
 		  };
@@ -281,7 +280,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		  me.charts.push(chart6);
 	};
 	me.chart8 = function(){
-		var dataHist = [['Fundo', 'Rentabilidade em 18-05-2017']];	
+		var dataHist = [['Fundo', 'Dias para se recuperar']];	
 		for(var i=0;i<me.defaultLists[3].length;i++){
 			var item = me.defaultLists[3][i];
 			if(item.analiseTemer != null && isBetween(item.analiseTemer.difQuota, -35, 0))

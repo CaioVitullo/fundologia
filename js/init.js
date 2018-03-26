@@ -20,7 +20,7 @@
 				onClose: function(el) { /* Do Stuff */ }, // A function to be called when sideNav is closed
 			  }
 		);
-    $('select').material_select();
+    //$('select').material_select();
 
     // ========== SCROLL TO ========== //
 	$(function() {

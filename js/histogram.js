@@ -43,6 +43,16 @@ function histogramManager(me){
             item.isFiltering = true;
 		}	
 	};
+	me.histupate = function(zscore, prop, text){
+		
+		if(me.currentRow != null){
+			if(me.currentRow.hasOwnProperty('zscores')==false){
+				me.currentRow.zscores={};
+			}
+			
+			me.currentRow.zscores[prop]={p:zscore, z:text};
+		}
+	}
 	me.histogram_info={low:0, high:0, class:''};
 	me.histHover = function(histogram,item){
 		me.showMesesPositivos = false;
@@ -121,6 +131,20 @@ function histogramManager(me){
 		me.skiprightOn = true;
 		$('.modal-overlay').css('opacity',0);
 	}
+
+	me.carouselInstance = null;
+	me.getCarousel = function(){
+		if(me.carouselInstance == null){
+			me.carouselInstance = $('#carouselDetail');
+		}
+		return me.carouselInstance;
+	};
+	me.carouselRight = function(){
+		me.getCarousel().carousel('next');
+	};
+	me.carouselLeft = function(){
+		me.getCarousel().carousel('prev');
+	};
 
 	me.showChartToast=false;
 	me.filterByChart = function(){

@@ -181,6 +181,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	}
 	me.getFilterStatus = function(){
 		return {
+			period:[me.selectedPeriod],
 			Tipo:me.filters.Tipo.selectToArray('checked'),
 			resgate:[me.withdrawDays],
 			admTx:[me.admTx],
@@ -198,7 +199,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	};
 	
 	me.checkFilterList = function(){
-		return me.filters.Tipo.allSetTo({checked:true}) &&
+		return me.selectedPeriod==1 &&
+			me.filters.Tipo.allSetTo({checked:true}) &&
 			me.filters.volume.allSetTo({checked:true}) &&
 			me.filters.InitialValue.allSetTo({checked:true}) &&
 			me.withdrawDays == 100 &&
@@ -294,17 +296,18 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		  });
 		me.loadHistograms(null);
 	}
-	me.drawLineChart = function(row, recalcWidth){
+	me.drawLineChart = function(row, recalcWidth, element, extraOptions){
 			
 		
 		if(isSafeToUse(google, 'visualization.arrayToDataTable') == false || 
 			isSafeToUse(google, 'visualization.LineChart') == false)
 			return
 			
+			var months = me.getPeriodNames();
 			var values = row.figures[me.selectedPeriod].sequencePerformance;
-			var d = [['Mês', 'Rentabilidade(%)']];
+			var d = [['Mês', 'Rentabilidade acumulada(%)']];
 			for(var i=0;i<values.length;i++){
-				d.push([i,values[i]])
+				d.push([months[i],values[i]])
 			}
 			var data = google.visualization.arrayToDataTable(d);
 			
@@ -329,9 +332,16 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 				}
 			};
 			if(recalcWidth == true)
-				options.width = $('#rightmenu').width();
+				options.width = $('#rightMenu').width();
+			if(extraOptions != null){
+				for(i in extraOptions){
+					options[i]=extraOptions[i];
+				}
+			}
 	
-			var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+			if(element==null)
+				element='curve_chart';
+			var chart = new google.visualization.LineChart(document.getElementById(element));
 	
 			chart.draw(data, options);
 			
@@ -908,6 +918,21 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			});
 		}
 	}
+	me.getAndSaveFileMany = function(files,after){
+		var results = [];
+		for(var i=0;i<files.length;i++){
+			me.getAndSaveFile(files[i], function(result){
+				results.push(result);
+				if(results.length==files.length){
+					if(typeof(after)=='function'){
+						after(results);
+					}else{
+						return results;
+					}
+				}
+			});
+		}
+	};
 	me.closeCompareDialog = function(){
 		$('.toast').fadeOut();
 		me.highLightCompareDialog = false;
@@ -960,71 +985,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		  
 		 
 	};
-	me.groupedRankList = [];
-	me.openRankDialog = function(row, fromList){
-		ga('send', {
-			hitType: 'event',
-			eventCategory: 'view detail',
-			eventAction: 'open dialog',
-			eventLabel: row.name
-		  });
-
-		if(me.isMobile == true && fromList == true){
-			me.selectRow(row);
-			return;
-		}
-		var first = true;
-		me.groupedRankList = [];
-		var month = 2;
-		var year = 18;
-		var list = [];
-		var len = me.filters.Periodo[me.selectedPeriod].len;
-		if(me.isMobile == true){
-			for(var i = 0;i<len;i++){
-				me.groupedRankList.push({
-					label:me.getMonthName(month, year),
-					rank:me.currentRow.rank[i],
-					point:me.currentRow.points[i],
-					value:me.currentRow.values[i] });
-
-					month -=1;
-					if(month == 0){
-						month = 12;
-						year-=1;
-					}
-				}
-		}else{
-			for(var i = 0;i<len;i++){
-				list.push({
-					label:me.getMonthName(month, year),
-					rank:me.currentRow.rank[i],
-					point:me.currentRow.points[i],
-					value:me.currentRow.values[i] });
-				month -=1;
-				if(month == 0 || i ==len-1){
-					if(list.length<12){
-						while(list.length<12){
-							if(first){
-								list.includeBefore({label:'', value:'', point:'', rank:''});
-							}else{
-								list.push({label:'', value:'', point:'', rank:''});
-							}
-						}
-						first=false;
-					}
-					
-						
-					me.groupedRankList.push({year:year, data:list});
-					month = 12;
-					year-=1;
-					list = [];
-				}
-			}
-		}
-		
-		//$('.tooltipped').tooltip({delay: 50, html:true});
-		$('#modaltable').modal('open');
-	}
+	
 
 	me.highLightCompareDialog = false;
 	me.compareDlgStillOpen = false;
@@ -1036,12 +997,17 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.compareDlgStillOpen = true;
 		},2000);
 	};
-	me.getPeriodNames = function(){
+	me.getCurrentPeriodNames = function(alwaysFull){
+		return me.getPeriodNames(me.filters.Periodo[me.selectedPeriod].len,alwaysFull);
+	}
+	me.getPeriodNames = function(m, alwaysFull){
+		alwaysFull=alwaysFull==null?true:alwaysFull;
+		m=m==null?36:m;
 		var month = 2;
 		var year = 18;
 		var list = [];
-		for(var i = 0;i<36;i++){
-			list.push(me.getMonthName(month, year));
+		for(var i = 0;i<m;i++){
+			list.push(me.getMonthName(month, year, alwaysFull || (i==m-1||month==1)));
 			month -=1;
 			if(month == 0){
 				month = 12;
@@ -1051,8 +1017,10 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		return list;
 	};
 	me._monthNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
-	me.getMonthName = function(monthIndex, year){
-		return me._monthNames[monthIndex-1] + '/' + year
+	me.getMonthName = function(monthIndex, year, full){
+		if(full==true || full==null)
+			return me._monthNames[monthIndex-1] + '/' + year
+		return me._monthNames[monthIndex-1];
 	}
 	me.periodName = me.getPeriodNames();
 	me.filterHideClosed = false;
@@ -1146,9 +1114,8 @@ mainApp.directive('myHistogram', function(){
 			sufix:'@',
 			reversecolor:'@',
 			titleTooltip:'@',
-			fn:'&'
-			
-			
+			fn:'&',
+			update:'&'
 		},
 		replace:true,
 		templateUrl:'templates/histogram.html',
@@ -1180,7 +1147,11 @@ mainApp.directive('myHistogram', function(){
 					$scope.extraTxtClass = 'zc' + Math.min(4, v);
 					$scope._zscore = Math.min(100, 100*m/4.0);
 				}
-				
+				$scope.update({
+					zscore:$scope._zscore,
+					prop:$scope.property,
+					text:v
+				})
 				return v;
 
 			};
@@ -1250,7 +1221,7 @@ $(document).ready(function(){
 			//}
 		});
 	resizeHorizontalScroll();
-	
+	$('#toast-container').removeAttr('style')
 	
 });
 

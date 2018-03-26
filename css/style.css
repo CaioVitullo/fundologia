@@ -518,6 +518,13 @@ footer{
   @keyframes blinker {  
 	50% {  opacity: 0.7;}
   }
+.blinkHard{
+	animation: blinker2 1s linear infinite;
+}
+@keyframes blinker2 {  
+	50% {  opacity: 0.2;}
+  }
+
 
   #preloading{
 	position: fixed;
@@ -1151,3 +1158,52 @@ article p.flow-text{
 article.article hr{display: none;}
 
 .toast ul li{list-style-type:disc;}
+
+.modal .carousel{
+	width: 100%;
+	height: 100%;
+}
+
+
+.btoNext{    
+	box-shadow: 0 1px 1.5px 0 rgba(0,0,0,.12), 0 1px 1px 0 rgba(0,0,0,.24);
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    background-color: rgba(255,255,255,.35);
+    border: 0;
+    border-radius: 50%;
+    color: #999;
+    display: inline-block;
+    font-weight: 400;
+    height: 65px;
+    line-height: normal;
+    padding: 0;
+	position: absolute;
+	top: calc((100% - 32px)/2);
+    text-align: center;
+    text-decoration: none;
+    transition: background-color .2s cubic-bezier(.4,0,.2,1),box-shadow .2s cubic-bezier(.4,0,.2,1);
+    width: 65px;
+    will-change: background-color,box-shadow;
+	transition: opacity .2s cubic-bezier(.4,0,.2,1),background-color .2s cubic-bezier(.4,0,.2,1),box-shadow .2s cubic-bezier(.4,0,.2,1);
+	z-index: 999;
+}
+
+.btoNext:hover{
+    background-color: rgba(255,255,255,.9);
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,.19), 0 6px 3px 0 rgba(0,0,0,.23);
+    background-color: rgba(255,255,255,.9);
+    cursor: pointer;
+}
+.carousel-item .btoNext{
+    padding-top: 0.5%;
+}
+.rZero{
+	right: 0px;
+}
+
+.subtitle{
+	margin-left: 10px;
+    color: silver;
+    font-size: 1.2rem
+}

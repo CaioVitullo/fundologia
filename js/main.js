@@ -1,6 +1,9 @@
 
-var mainApp = angular.module('mainApp', []);
-
+var mainApp = angular.module('mainApp', ['rw.moneymask']);
+mainApp.run(["$locale", function ($locale) {
+    $locale.NUMBER_FORMATS.GROUP_SEP = ".";
+    $locale.NUMBER_FORMATS.DECIMAL_SEP = ",";
+}]);
 mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	var me = $scope;
 	dataManager($http, me);
@@ -37,12 +40,14 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			},500);
 		}, function(){
 			me.selectFirstRow();
+			me.setWalletSearchList();
 			var qs = queryString('camp');
 			if(typeof(qs) != 'undefined'){
 				if(window.googleChartHasFinished == true){
 					me.openCampaign(qs);
 				}else{
 					var _interval = $interval(function(){
+						
 						if(window.googleChartHasFinished == true){
 							$interval.cancel(_interval);
 							me.openCampaign(qs);
@@ -51,6 +56,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 				}
 			}
 		});
+		me.getWalletList();
 		me.lastHash = me.filterHash(me.getFilterStatus());
 		//me.loadHistograms(null);
 			
@@ -81,6 +87,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.lastHash = null;
 	me.hasMoreLines = true;
 	me.noResult = false;
+	me.podeSerQueTenhaCom12 = [];
 	me.defaultListSize = 30;
 	me.getMainList = function(){
 		if(me.checkFilterList()){
@@ -89,6 +96,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			var filterStatus = me.getFilterStatus();
 			var currentHash = me.filterHash(filterStatus);
 			if(me.lastHash != null && me.lastHash.hasSameValuesAs(currentHash) == false){
+				
 				var fullList = me.defaultLists[3];
 				var list = [];
 				var count = 0;
@@ -143,6 +151,16 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 					me.hasMoreLines = count > list.length;
 					me.lastHash = currentHash;
 					me.lastResult = list;
+					me.noResult = false;
+					me.podeSerQueTenhaCom12=[];
+				}else{
+					me.noResult = true;
+					if(me.selectedPeriod>=1){
+						me.podeSerQueTenhaCom12 =me.defaultLists[3].equals(function(item){return item.figures[0] != null}).hasText({name:me.searchTxt}).select('name');
+						if(me.podeSerQueTenhaCom12.length > 0){
+							me.noResult = false;
+						}
+					}
 				}
 					
 				
@@ -960,10 +978,11 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 						me.$apply();
 		}});
 		$('#modalCompare').modal('open');
-
+		var months = me.getCurrentPeriodNames().reverse();
 		var d = [['Mês', me.fundsToCompare[0].name, me.fundsToCompare[1].name]];
 		for(var i =0;i<me.fundsToCompare[0].figures[me.selectedPeriod].sequencePerformance.length;i++){
-			d.push([i,
+			d.push([
+					months[i],
 					me.fundsToCompare[0].figures[me.selectedPeriod].sequencePerformance[i],
 					me.fundsToCompare[1].figures[me.selectedPeriod].sequencePerformance[i]
 				]);
@@ -1003,7 +1022,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.getPeriodNames = function(m, alwaysFull){
 		alwaysFull=alwaysFull==null?true:alwaysFull;
 		m=m==null?36:m;
-		var month = 2;
+		var month = 3;
 		var year = 18;
 		var list = [];
 		for(var i = 0;i<m;i++){
@@ -1206,7 +1225,38 @@ mainApp.directive('rdHistogram', function(){
 	};
 });
 
-google.charts.load('current', {'packages':['corechart', 'scatter']});
+mainApp.directive('autocomplete', function(){
+	return {
+		restrict:'E',
+		replace:true,
+		templateUrl:'templates/autocomplete.html',
+		scope:{
+			list:'=',
+			fn:'&'
+		},
+		link: function($scope, $element, attr, parentDirectCtrl){
+			var rnd = (9999 + Math.random() * 999999999).toFixed(0).toString()
+			$($element).find('input').autocomplete({
+				data: $scope.list,
+				onAutocomplete:function(name){
+					$scope.onSelectItem(name);
+				}
+			  }).attr('id',rnd );
+			$($element).find('label').attr('for',rnd );
+		},controller:function($scope){
+			$scope.txt='';
+			$scope.onSelectItem = function(name){
+				$scope.fn({name:name});
+				$scope.txt='';
+				if (!$scope.$$phase)
+					$scope.$apply();
+			}
+		}
+
+	};
+});
+
+google.charts.load('current', {'packages':['corechart', 'scatter', 'bar']});
 google.charts.setOnLoadCallback(function(){
 	window.googleChartHasFinished = true;
 });
@@ -1222,7 +1272,7 @@ $(document).ready(function(){
 		});
 	resizeHorizontalScroll();
 	$('#toast-container').removeAttr('style')
-	
+	$(".dropdown-trigger").dropdown();
 });
 
 $(window).resize(function(){

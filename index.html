@@ -57,15 +57,23 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 	
     <!-- Favicons -->
-    <link rel="icon" href="img/favicon-16.png" sizes="16x16">
-    <link rel="icon" href="img/favicon-24.png" sizes="24x24">
-	<link rel="icon" href="img/favicon-32.png" sizes="32x32">
-	<link rel="icon" href="img/favicon-72.png" sizes="72x72">
-	<link rel="icon" href="img/favicon-96.png" sizes="96x96">
-	<link rel="icon" href="img/favicon-114.png" sizes="114x114">
-	<link rel="icon" href="img/favicon-128.png" sizes="128x128">
-	<link rel="icon" href="img/favicon-144.png" sizes="144x144">
-	<link rel="icon" href="img/favicon-160.png" sizes="256x160">
+	<link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="img/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="img/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
 	<style>
 		.txtRotateh1{
 		font-family: 'Raleway', sans-serif;
@@ -92,14 +100,20 @@
 </head>
 <body class="noselect">
 	<div class="rotate" onclick="removeRotateGif()"></div>
-
+	
 <div ng-controller="ctrl" id="mainCtrl" class="mainContent">
+	
 	<div class="navbar-fixed" ng-init="loadCtrl()">
+		<ul id="dropdown1" class="dropdown-content" style="margin-top:70px;">
+			<li ng-repeat="item in walletNamesList"><a ng-click="loadWallet(item)" ng-bind="item"></a></li>
+			<li class="divider"></li>
+			<li><a ng-click="showMyWalletDlg(true)">Criar Nova</a></li>
+		  </ul>
 		<nav class="nav-extended">
 		 <div class="nav-wrapper container">
 		  
 		  <a data-activates="slide-out" id="mobileMenu" class="button-collapse"><i class="material-icons"  >menu</i></a>
-		  <label class="mainHeader" >fundologia.</label> 
+		  <label class="mainHeader" >&nbsp;</label> 
 		  <span id="subtitle">o fim do achismo!</span>
 		  
 		  <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -107,6 +121,8 @@
 			 <!-- <li><a ng-click="openModalOQue()">Como funciona?</a></li> -->
 			 <li><a ng-click="showRankDialog()">Ranking</a></li>
 			 <li><a ng-click="showPreCompareDialog()">Compare fundos</a></li>
+			 <!-- <li ng-show="walletNamesList.length==0"><a ng-click="showMyWalletDlg()">Minha carteira</a></li>
+			 <li ng-show="walletNamesList.length>0"><a class="dropdown-trigger" href="#!" data-activates="dropdown1">Minha carteira<i class="material-icons right">arrow_drop_down</i></a></li> -->
 		  </ul>
 		  <ul class="side-nav" id="slide-out" >
 			<!-- <li><a href="#sobre">O que é?</a></li>
@@ -137,7 +153,7 @@
 					<div class="tsHeight" >
 							<p ng-repeat="filterItem in filters.Periodo.equals({visible:true}) track by filterItem.id" >
 								<input class="with-gap" type="radio" name="filterPeriodo" ng-class="{'filled-in':filterItem.checked}" id="filterPeriodo_{{::filterItem.id}}" ng-value="filterItem.id" ng-change="$parent.changePeriodo()" ng-model="$parent.selectedPeriod"  />
-								<label for="filterPeriodo_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+								<label for="filterPeriodo_{{::filterItem.id}}" ng-class="{'blinkMe cOrange':$index==0 && $parent.blinkPeriod12==true}" ng-bind="::filterItem.Title">Renda Fixa</label>
 							</p>
 							<!-- <p class="pUpper">
 								<a class="linkSeeMore" ng-click="showAllFilterPeriodoOn = toggleFilter(showAllFilterPeriodoOn, filters.Periodo)" ng-class="{seeMore:showAllFilterPeriodoOn, seeLess:!showAllFilterPeriodoOn}"></a>
@@ -313,7 +329,10 @@
 											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict" ng-mouseover="$parent.blinkRestricao=true" ng-mouseleave="$parent.blinkRestricao=false"  title="Fundo destinado à investidores qualificados.&#10;Ative o filtro 'Sem restrição' no menu lateral esquerdo para ver apenas os fundos que não são restritos apenas à investidores qualificados.">monetization_on</i>
 											<!-- <i class="hide-on-small-and-down colorIcon tiny material-icons hidenIcon "  >info_outline</i>  -->
 											<i class="colorIcon tiny material-icons " ng-mouseover="$parent.blinkLock = true" data-ng-mouseleave="$parent.blinkLock = false" ng-show="row.info.isClosed"  title="Fundo fechado.&#10;Ative o filtro 'Abertos apenas' no menu lateral esquerdo para ver apenas os fundos que estão disponíveis para aplicação.">lock</i>
+											<em class="hidenIcon pipeSep" >|</em>
 											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon compareIcon " ng-class="{blinkHard:compareDlgStillOpen==true && fundsToCompare.length==0}" ng-click="rowClick(row, this)"   title="Comparare este fundos com outros!">compare_arrows</i>
+											<!-- <em class="hidenIcon pipeSep" >|</em>
+											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon"  ng-click="addToWallet(row)"   title="Adicione esse fundo à sua carteira">playlist_add</i> -->
 										</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
@@ -336,8 +355,15 @@
 									</p>
 									<p>Use a hashtag <i>#faltouEsseFundo</i> nos comentários abaixo que nos vamos atras dele para você! </p>
 									<p><i>Obs: So incluímos fundos com no mínimo 12 meses.</i></p>
-								</div>	
-								<p class="tdNotFound" ng-show="noResult == true && searchTxt.length == 0"></p>
+								</div>
+								<div class="tdFoundPeroNoMucho" ng-show="noResult==false && podeSerQueTenhaCom12.length > 0" ng-mouseover="blinkPeriod12=true" ng-mouseleave="blinkPeriod12=false;">
+									<p ng-show="podeSerQueTenhaCom12.length==1"><strong>Encontramos 1</strong> fundo na análise de 12 meses. Este fundo não está aparecendo nesta listagem por possuir menos que 24 meses de histórico. Para alterar para a análise de 12 meses clique <a class="pointer fwb" ng-click="selectedPeriod=0">aqui</a> ou altere o filtro <i>Período</i> no canto superior esquerdo (ali, onde esta piscando de laranja agora!).</p>
+									<p ng-show="podeSerQueTenhaCom12.length> 1"><strong>Encontramos {{podeSerQueTenhaCom12.length}}</strong> fundos na análise de 12 meses. Estes fundos não estão aparecendo nesta listagem por possuirem menos que 24 meses de histórico. Para alterar para a análise de 12 meses clique <a class="fwb pointer" ng-click="selectedPeriod=0">aqui</a> ou altere o filtro <i>Período</i> no canto superior esquerdo(ali, onde esta piscando de laranja agora!).</p>
+									<ul>
+										<li ng-repeat="item in podeSerQueTenhaCom12" ng-bind="item"></li>
+									</ul>
+								</div>
+								<p class="tdNotFound" ng-show="noResult == true && searchTxt.length == 0">Nenhum fundo encontrado.</p>
 							</div>
 						</div>
 						<br/>
@@ -599,21 +625,7 @@
 						title-tooltip="Rendimento médio no período - Soma da rentabilidade mensal dividido pelo número de meses."
 						currentrow="currentRowHistAvg"></my-histogram>
 					
-					<my-histogram
-						ng-if="show_histDiasRecuperacao2 == true"
-						chart-title="Recuperação"
-						histogram="histDiasRecuperacao"
-						value="getDiasRecuperacao()"
-						classification="getFromCurrentRow('classificationType')"
-						show-chart="true"
-						property="diasRecuperacao"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						type="analiseTemer"
-						sufix=" dias"
-						title-tooltip="Quantidade de dias(úteis) que os fundos demoraram para retornar ao valor da cota antes do circuit-break em 17-05-2017. Confira o gráfico para entender melhor."
-						tooltip="Velocidade de recuperação após o circuit break(17-05-2017) - Clique no gráfico para entender melhor."
-						currentrow="currentRowDiasRecuperacao"></my-histogram>
+					
 
 					<div class="divider"></div>
 					
@@ -843,6 +855,92 @@
 		</div>
 	</div>
 
+	<div id="modalWallet" class="modal modal-fixed-footer modal85 wideModal" >
+		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
+		 <div class="modal-content ">
+			<div >
+				<h5>Miha carteira <span class="subtitle">Insira os fundos que já possui ou que gostaria de ter na sua carteira.Se preferir, clique no icone <i class="material-icons small">playlist_add</i> na listagem.</span></h5>
+				<div class="row">
+					
+				</div>
+				<br/>
+				<div class="row" >
+					<div class="col m12 l12 xl12">
+						<div ng-if="canInitAutoComplete==true">
+							<autocomplete fn="onSelectFund(name)" list="walletAutoCompleteList"></autocomplete>
+						</div>
+						<table id="walletTable" >
+							<thead>
+							   <tr ng-class="{invisible:walletFunds.length==0}">
+								   <th style="width:30%;">Fundo</th>
+								   <th style="width:10%;" class="tar">tx Adm</th>
+								   <th style="width:25%;" class="tac">Tipo</th>
+								   <th style="width:15%;" class="tac">Resgate</th>
+								   <th style="width:20%;" class="tar">Valor investido</th>
+							   </tr>
+						   </thead> 
+						   <tbody >
+							   <tr ng-repeat="item in walletFunds" class="showOnHoverTrigger">
+								  <td class="align-wrapper" ng-class="{walletFundMultimercado: (item.info.isMultimercado && item.showWalletWeight==true),walletFundRendaFixa: (item.info.isRendaFixa && item.showWalletWeight==true),walletFundAcoes: (item.info.isAcao && item.showWalletWeight==true)}" style="background-size: {{item.walletWeight}}% 100%;"  >
+									   <div class="input-field wsnw">
+										   <span class="pointer" ng-click="openRankDialog(item, true)">{{item.name}}</span>
+										   <i title="remover" class="tiny material-icons fwb highlightNeg showOnHover" ng-click="walletRemove(item)">clear</i>
+									   </div>
+								  </td>
+								  
+								  <td class="align-wrapper tar">
+									  {{item.info.admTax}}
+								  </td>
+								  <td class="align-wrapper tac">
+									{{item.info.classification}}
+								 </td>
+								 <td class="align-wrapper tac">
+									{{item.info.withdrawDays}}
+								 </td>
+								 <td class="align-wrapper tar" >
+									<input money-mask money-mask-prepend="R$" ng-class="{fOrange:(item.hasOwnProperty('alocado')==false || item.alocado==0)}" class="inputNUmber fnone" type="text" ng-change="walletUpdateLine(item)" ng-model="item.alocado" placeholder="R$0.00"/>
+								</td>
+							   </tr>
+						   </tbody>
+						   <tfoot ng-class="{invisible:walletFunds.length==0}">
+							   <tr>
+								   <th>
+									   <div class="barOutside" ng-show="showWalletPerc==true">
+										   <div ng-class="{leftCorner:walletRendaFixaPorc>0, rightCorner:(walletMultimercadoPorc==0 && walletAcaoPorc==0 )}" style="width:{{walletRendaFixaPorc}}%" title="{{walletRendaFixaPorc}}% Renda fixa" ng-show="walletRendaFixaPorc>0"><em>{{walletRendaFixaPorc}}% Renda fixa</em></div>
+										   <div ng-class="{leftCorner:walletRendaFixaPorc==0, rightCorner:( walletAcaoPorc==0 )}" style="width:{{walletMultimercadoPorc}}%" title="{{walletMultimercadoPorc}}% Multimercado" ng-show="walletMultimercadoPorc>0"><em>{{walletMultimercadoPorc}}% Multimercado</em></div>
+										   <div ng-class="{leftCorner:(walletRendaFixaPorc==0 && walletMultimercadoPorc==0), rightCorner:( walletAcaoPorc>0 )}" style="width:{{walletAcaoPorc}}%" title="{{walletAcaoPorc}}% Ações" ng-show="walletAcaoPorc>0"><em>{{walletAcaoPorc}}% Ações</em></div>
+									   </div>
+								   </th>
+								   <th></th>
+								   <th></th>
+								   <th class="tar">
+									<div id="resgateChart"></div>
+								   </th>
+								   <th class="tar">
+									   Total: R$ {{walletFunds.sum('alocado')|currency:'R$'}}
+								   </th>
+							   </tr>
+						   </tfoot>
+						</table>
+					</div>
+
+				</div>
+			</div>
+			
+		</div> 
+		<div class="modal-footer">
+			<a ng-click="openSavename()" ng-class="{disabled:walletFunds.length==0}" class="modal-action modal-close waves-effect waves-blue  btn">Salvar</a>
+		  </div>
+	</div>
+	<div id="modalPrompt" class="modal modal-fixed-footer modalTiny">
+		<span class="modalHeader">Salvar como: </span>
+		<div class="modal-content">
+			<input type="text" ng-model="walletSaveName"/>
+		</div>
+		<div class="modal-footer">
+			<a ng-click="saveWallet()" class="modal-action modal-close waves-effect waves-blue btn">Salvar</a>
+		</div>
+	</div>
 
 	<div id="modalCompare" class="modal wideModal modaTall" >
 		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
@@ -1043,6 +1141,8 @@
 	<script src="js/histogram.js"  charset="utf-8" ></script>
 	<script src="js/main.js"  charset="utf-8" ></script>
 	<script src="js/init.js"></script>
+	
+	
 	<!-- <script src="json/last24.js"></script>
 	<script src="json/bigList.js"></script> -->
 	   

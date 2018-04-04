@@ -73,7 +73,7 @@ function histogramManager(me){
 		me.showGenereicHist(row, 'histogramStDev', 'volatilidadeAnual','currentRowHistStDev' ,'histogram_stDev_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramAvg', 'average','currentRowHistAvg' ,'histogram_avg_'+ me.selectedPeriod);
 		me.showGenereicHist(row, 'histogramTxAdm', 'admTax','currentRowTxAdm' ,'histogram_txAdm', function(row){return row.info.admTax;});
-		me.showGenereicHist(row, 'histDiasRecuperacao', 'diasAteRecuperar','currentRowDiasRecuperacao' ,'histogram_diasRecuperacao', function(row){if(row.analiseTemer != null){return row.analiseTemer.diasAteRecuperar;}else{return 0;}});
+		//me.showGenereicHist(row, 'histDiasRecuperacao', 'diasAteRecuperar','currentRowDiasRecuperacao' ,'histogram_diasRecuperacao', function(row){if(row.analiseTemer != null){return row.analiseTemer.diasAteRecuperar;}else{return 0;}});
 		
 		//$('.tooltipped').tooltip({delay: 50});
 	}

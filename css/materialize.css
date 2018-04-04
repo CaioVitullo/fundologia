@@ -2873,7 +2873,7 @@ article.article .row{
   }
 }
 @media only screen and (max-width: 1600px) {
-  .modal:not(.wideModal) {
+  .modal:not(.wideModal):not(.modalTiny) {
     width:80% !important;
   }
 }
@@ -5246,7 +5246,7 @@ small {
 .btn, .btn-large {
   text-decoration: none;
   color: #fff;
-  background-color: #26a69a;
+  background-color: #268ca6;
   text-align: center;
   letter-spacing: .5px;
   transition: .2s ease-out;
@@ -5254,7 +5254,7 @@ small {
 }
 
 .btn:hover, .btn-large:hover {
-  background-color: #2bbbad;
+  background-color: #2b92bb;
 }
 
 .btn-floating {
@@ -5668,6 +5668,11 @@ button.btn-floating {
   will-change: top, opacity;
   
 }
+.modalTiny{
+  
+  height: 200px;
+  width:520px;
+}
 .modaTall{
   max-height: 950px;
   height: 90%;
@@ -5679,6 +5684,10 @@ button.btn-floating {
 .modal80{
   max-height: 80%;
   height: 80%;
+}
+.modal85{
+  max-height: 85%;
+  height: 85%;
 }
 .modal60{
   max-height: 60%;
@@ -5734,7 +5743,7 @@ button.btn-floating {
 
 .modal.modal-fixed-footer {
   padding: 0;
-  height: 50%;
+  /* height: 50%; */
 }
 
 .modal.modal-fixed-footer .modal-content {
@@ -6429,7 +6438,7 @@ textarea.materialize-textarea {
 
 /* Autocomplete */
 .autocomplete-content {
-  margin-top: -20px;
+  /* margin-top: -20px; */
   display: block;
   opacity: 1;
   position: static;

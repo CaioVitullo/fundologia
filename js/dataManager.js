@@ -278,7 +278,7 @@ function dataManager($http, me){
 		}
 		var first = true;
 		me.groupedRankList = [];
-		var month = 2;
+		var month = 3;
 		var year = 18;
 		var list = [];
 		var len = me.filters.Periodo[me.selectedPeriod].len;
@@ -344,8 +344,9 @@ function dataManager($http, me){
 										ticks: [0,5,10,15,20] 
 									}
 								});
-
-				me.radarChart = new Chart(
+				
+				
+				var radarChart = new Chart(
 					$('#radarChart'),
 						{type:"radar",
 						data:{
@@ -396,7 +397,7 @@ function dataManager($http, me){
 									label: function(tooltipItem, data, a,b, c, d) {
 										//var label = data.datasets[tooltipItem.datasetIndex].label || '';
 										if(tooltipItem.datasetIndex >0)
-											return null;
+											return '' ;
 										
 										var title = data.labels[tooltipItem.index];
 										var val = 0;
@@ -427,40 +428,50 @@ function dataManager($http, me){
 												n = me.currentRow.figures[me.selectedPeriod].posNegCountRate + '%';
 												break;
 										}
-										var label='';
+										var lbl='';
 										if(val <=-4){
-											label='Extremamente abaixo da média'
+											lbl='Extremamente abaixo da média'
 										}else if(val == -3){
-											label='Muito abaixo da média'
+											lbl='Muito abaixo da média'
 										}else if(val == -2){
-											label='Abaixo da média '
+											lbl='Abaixo da média '
 										}else if(val == -1){
-											label='Levemente abaixo da média'
+											lbl='Levemente abaixo da média'
 										}else if(val == 0){
-											label='Na média'
+											lbl='Na média'
 										}else if(val ==1){
-											label='Levemente acima da média'
+											lbl='Levemente acima da média'
 										}else if(val ==2){
-											label='Acima da média'
+											lbl='Acima da média'
 										}else if(val ==3){
-											label='Muito acima da média'
+											lbl='Muito acima da média'
 										}else if(val >= 4){
-											label='Extremamente acima da média'
+											lbl='Extremamente acima da média'
 										}
-										
-										return  n + ' - ' + label;
+										console.log([
+											me.currentRow.zscores.performance,
+											me.currentRow.zscores.volatilidadeAnual,
+											me.currentRow.zscores.monthAboveCDI,
+											me.currentRow.zscores.monthsAboveIBOV,
+											me.currentRow.zscores.posNegAvgRate,
+											me.currentRow.zscores.posNegCountRate ]);
+										return me.currentRow.name + ': ' + n + ' - ' + lbl;
 
 									}
 								}
 							},
 							responsive: true,
-							scales: {
+							scale: {
 								pointLabels: {
 									fontSize: 18	
 								},
+								xAxes: [{
+									display: false
+								  }],
 								yAxes: [{
 									display: false,
 									ticks: {
+										display: false,
 										beginAtZero: true,
 										max: 100,
 										min: 0
@@ -655,12 +666,189 @@ function dataManager($http, me){
 		$("i:contains('insert_chart')").removeClass('small').addClass('tiny')
 	};
 	
+
+	//######################
+	//	WALLET
+	//######################
+	me.walletFunds = [
+		//{name:'Fundo 1', info:{isMultimercado:true, withdrawDays:1},alocado:50000 },
+		//{name:'Fundo 2', info:{isAcao:true, withdrawDays:5},alocado:50000 },
+		//{name:'Fundo 3', info:{isRendaFixa:true, withdrawDays:30},alocado:35000 },
+		//{name:'Fundo 4', info:{isMultimercado:true, withdrawDays:7},alocado:15000 },
+		//{name:'Fundo 5', info:{isAcao:true, withdrawDays:31},alocado:5000 }
+	];
+	me.walletAutoCompleteList = {};
+	me.canInitAutoComplete = false;
+	me.showMyWalletDlg = function(erase){
+		if(erase==true){
+			me.walletSaveName = 'Minha Carteira';
+			me.walletFunds=[];
+		}
+		$('#modalWallet').modal({
+				complete:function(){
+					if(me.walletFunds.length > 0){
+						me.walletNamesList.push('Não salvo');
+						if (!me.$$phase)
+            				me.$apply();
+							
+					}
+			}});
+		$('#modalWallet').modal('open');
+		me.updatePieChart();
+		$('#modalWallet').find('input[type="text"]').focus()
+	};
+	me.setWalletSearchList = function(){
+		var k = me.defaultLists[3].selectToArray('name');
+		
+		k.forEach(i => {
+			me.walletAutoCompleteList[i]=0;
+		});
+		me.canInitAutoComplete = true;
+	};
+	me.walletRendaFixaPorc =0;
+	me.walletMultimercadoPorc=0;
+	me.walletAcaoPorc=0;
+	me.walletUpdateLine = function(row){
+		if(row != null)
+			row.showWalletWeight = row.alocado != null;
+		
+			var s = me.walletFunds.sum('alocado')
+		for(var i=0;i<me.walletFunds.length;i++){
+			me.walletFunds[i].walletWeight = (100*me.walletFunds[i].alocado/s).toFixed(2);
+		}
+		
+		me.walletRendaFixaPorc = ((100 * me.walletFunds.equals(function(i){return i.info.isRendaFixa;}).sum('alocado'))/s).toFixed(2);
+		me.walletMultimercadoPorc = ((100 * me.walletFunds.equals(function(i){return i.info.isMultimercado;}).sum('alocado'))/s).toFixed(2);
+		me.walletAcaoPorc = ((100 * me.walletFunds.equals(function(i){return i.info.isAcao;}).sum('alocado'))/s).toFixed(2);
+		me.showWalletPerc=me.walletFunds.any(function(i){return i.alocado>0;})
+		me.updatePieChart();
+	}
+	me.addToWallet = function(fund){
+		if(me.walletFunds.any({uniqueID:fund.uniqueID})==false){
+			me.walletFunds.push(fund);
+		}
+		me.showMyWalletDlg();
+	}
+	me.onSelectFund = function(name){
+		
+		var fund = me.defaultLists[3].first({name:name});
+		if(fund != null && me.walletFunds.any({uniqueID:fund.uniqueID})==false){
+			me.walletFunds.push(fund);
+			
+			if (!me.$$phase)
+            	me.$apply();
+		}
+	}
+	me.walletRemove = function(item){
+		me.walletFunds.remove({uniqueID:item.uniqueID});
+		me.updatePieChart();
+		me.walletUpdateLine();
+	}
+	me.firstTimeWalletCarouse = true;
+	
+	me.updatePieChart = function(){
+		if(me.walletFunds.length==0 || me.walletFunds.sum('alocado')==0)
+			return
+
+		// var data = google.visualization.arrayToDataTable([
+		// 	['Tipo', 'Renda Fixa', 'Multimercado', 'Ações', { role: 'annotation' } ],
+		// 	['', me.walletFunds.equals(function(i){return i.info.isRendaFixa;}).sum('alocado'), 
+		// 		 me.walletFunds.equals(function(i){return i.info.isMultimercado;}).sum('alocado'), 
+		// 		 me.walletFunds.equals(function(i){return i.info.isAcao;}).sum('alocado'),  '']
+		//   ]);
+		//   var view = new google.visualization.DataView(data);
+		  
+		//   var chart = new google.visualization.BarChart(document.getElementById('walletPieChart'));
+		//   var _width = $('#walletPieChart').parent().width()*0.85;
+		//   chart.draw(data, {
+		// 	colors: ['#63A74A', '#ECA403','#E94D20' ],
+		// 	bar: { groupWidth: '75%' },
+		// 	isStacked: 'percent',
+		// 	animation:{
+		// 		duration: 1000,
+		// 		easing: 'out',
+		// 	 },
+		// 	legend:{position:'top'},
+		// 	width:_width,
+		// 	backgroundColor:'#fafafa',
+		// 	chartArea:{float:'right', backgroundColor:'#fafafa'}
+		//   });
+
+		  //withdrawDays	walletWithdrawChart
+		  var d =[['Dias', 'LiquidezTotal']] ;
+		  _ticks=[];
+
+		  var m = 10;
+		  me.walletFunds.forEach(i =>{
+			if(i.info.withdrawDays > m){m = i.info.withdrawDays;}
+		  })
+		  var tb = 0;
+		  for(var i=0;i<m+1;i++){
+			t = me.walletFunds.equals(function(item){return item.info.withdrawDays <= i}).sum('alocado');
+			if(t != tb){
+				_ticks.push(t);
+				tb = t;
+			}
+			d.push([i.toString(),t]);
+		  }
+
+		  var dataWD = google.visualization.arrayToDataTable(d);
+		  var chartWD = new google.visualization.ColumnChart(document.getElementById('resgateChart'));
+  
+		  chartWD.draw(dataWD, {
+			animation:{
+				duration: 1000,
+				easing: 'out',
+			 },
+			 chartArea:{ backgroundColor:{fill:'#fafafa', opacity:100}},
+			 legend: { position: 'none' },
+			 height:60,
+			 hAxis:{ textPosition: 'none',minorGridlines:{color:'none'}, ticks:[]},
+			 vAxis:{textPosition: 'none',gridlines:{color:'none'}, minorGridlines:{color:'none'}},
+			 //backgroundColor:'#fafafa',
+			 backgroundColor: {
+				fill: '#fafafa',
+				fillOpacity: 0.8
+			  }
+		  });
+
+		 
+	}
+	me.walletSaveName = 'Minha Carteira';
+	me.openSavename = function(){
+		$('#modalPrompt').modal('open');
+		$('#modalPrompt').find('input').focus();
+	};
+	me.saveWallet = function(){
+		me.saveWalletName();
+		me.saveOnStorage(me.walletSaveName, me.walletFunds.select(['uniqueID', 'name','alocado']));
+		me.getWalletList();
+	};
+	me.getWalletList = function(){
+		me.walletNamesList = me.getFromStorage('walletNames')||[];
+	};
+	me.walletNamesList = [];
+	me.saveWalletName = function(){
+		var key = 'walletNames';
+		var walletNames = me.getFromStorage(key);
+		if(walletNames == null ){
+			walletNames=[me.walletSaveName];
+		}else{
+			if(walletNames.indexOf(me.walletSaveName) == -1){
+				walletNames.push(me.walletSaveName);
+			}else{
+				return
+			}
+		}
+		me.saveOnStorage(key, walletNames);
+	};
+	
 	me.blinkLock=false;
 	me.compareProp = [
 		{label:'Rentabilidade no período', prop:'performance', d:2},
 		{label:'Soma de pontos no ranking', prop:'totalRank', d:-1},
 		{label:'Meses positivos', prop:'posNegCountRate', d:2},
-		{label:'Meses negativos', prop:'posNegCountRate', d:2},
+		//{label:'Meses negativos', prop:'posNegCountRate', d:2},
 		{label:'Média rentabilidade positiva', prop:'positiveAvg', d:2},
 		{label:'Média rentabilidade negativa', prop:'negativeAvg', d:2},
 		{label:'Média rendimento', prop:'average', d:2},
@@ -668,6 +856,8 @@ function dataManager($http, me){
 		{label:'Correlação CDI', prop:'correlationCDI', d:-1},
 		{label:'Correlação IBOV', prop:'correlationIbov', d:-1},
 		{label:'Correlação S&P500', prop:'correlationSP500', d:-1},
+		{label:'Sharp CDI', prop:'sharpCDI'},
+		{label:'Sharp IBOV', prop:'sharpIbov'}
 		
 	];
 	me.sortColumns = [

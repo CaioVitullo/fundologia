@@ -66,7 +66,16 @@ Array.prototype.any = function (obj) {
 };
 Array.prototype.equals = function (obj) {
     var a = [];
-    this.generalIf(obj, function (item) { a.push(item); });
+    if(typeof(obj)=='function'){
+        this.generalIf(obj, function (b, item) { 
+            a.push(item); 
+        });
+    }else{
+        this.generalIf(obj, function (item, b) { 
+            a.push(item); 
+        });
+    }
+    
     return a;
 };
 Array.prototype.generalIf = function (obj, fn, result) {
@@ -75,7 +84,7 @@ Array.prototype.generalIf = function (obj, fn, result) {
         for (var i = 0; i < this.length; i++) {
             var aaa=obj(this[i]);
             if (aaa)
-                fn(aaa);
+                fn(aaa, this[i]);
         }
     }else if (typeof (obj) == 'number' || typeof (obj) == 'string') {
         for (var i = 0; i < this.length; i++) {

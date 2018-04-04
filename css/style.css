@@ -763,7 +763,7 @@ footer{
 .mainHeader{
     font-size: 2rem;
     font-family: 'Raleway', sans-serif;
-    background: url(/img/fundologia.svg) no-repeat bottom center;
+    background: url(../img/fundologia.svg) no-repeat bottom center;
     background-size: contain;
     height: 100%;
     width: 162px;

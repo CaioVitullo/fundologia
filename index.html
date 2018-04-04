@@ -112,9 +112,9 @@
 		<nav class="nav-extended">
 		 <div class="nav-wrapper container">
 		  
-		  <a data-activates="slide-out" id="mobileMenu" class="button-collapse"><i class="material-icons"  >menu</i></a>
+		  <a data-activates="slide-out" id="mobileMenu" class="button-collapse"><i class="material-icons cWhite"  >menu</i></a>
 		  <label class="mainHeader" >&nbsp;</label> 
-		  <span id="subtitle">o fim do achismo!</span>
+		  <span id="subtitle" class="hide-on-small-and-down">o fim do achismo!</span>
 		  
 		  <ul id="nav-mobile" class="right hide-on-med-and-down">
 			 <li></li>
@@ -127,10 +127,10 @@
 		  <ul class="side-nav" id="slide-out" >
 			<!-- <li><a href="#sobre">O que é?</a></li>
 			<li><a href="#comofunciona">Como funciona</a></li> -->
-			<li class="show-on-smaller-992"  ng-click="mobSelectPage('main')"><a>Lista</a></li>
+			<li class="show-on-smaller-992"  ng-click="mobSelectPage('main')"><a><i class="material-icons">arrow_back</i></a></li>
 			<li class="show-on-smaller-992"  ng-click="mobSelectPage('filter')"><a>Filtro</a></li>
-			<li class="show-on-smaller-992" ng-click="mobSelectPage('histogram')"><a>Detalhe do fundo</a></li>
-			<li class="show-on-smaller-992"><a href='whatsapp://send?text=Pesquise e compare fundos de investimento: https://caiovitullo.github.io/fundologia/'>Compartilhar no WhatsApp</a></li>
+			<!-- <li class="show-on-smaller-992" ng-click="mobSelectPage('histogram')"><a>Detalhe do fundo</a></li>
+			<li class="show-on-smaller-992"><a href='whatsapp://send?text=Pesquise e compare fundos de investimento: https://caiovitullo.github.io/fundologia/'>Compartilhar no WhatsApp</a></li> -->
 		  </ul>
 		 </div>
 		</nav>
@@ -148,7 +148,7 @@
 	<div class="row">
 		<div class="col xl2 l2 s12 " id="leftMenu" ng-class="{'hide-on-med-and-down':mobileSelectedPage!='filter'}">
 			<div class="section fixed ">
-				
+					<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='filter'" class="show-on-small"><i class="material-icons">arrow_back</i></a>
 					<h5 class="filterTitle">Período </h5>
 					<div class="tsHeight" >
 							<p ng-repeat="filterItem in filters.Periodo.equals({visible:true}) track by filterItem.id" >
@@ -323,16 +323,26 @@
 										ng-repeat="row in getMainList()" 
 										ng-click="selectRow(row)"
 										ng-mouseover="showRowDetail(row)">
-										<td ng-class="{'acao':row.info.isAcao, 'rendaFixa':row.info.isRendaFixa, 'multiMercado':row.info.isMultimercado, 'cambial':row.info.isCambial, 'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados" ng-bind="row.figures[selectedPeriod].rank">Rank</td>
+										<td 
+											ng-class="{
+												'acao':row.info.isAcao, 
+												'rendaFixa':row.info.isRendaFixa, 
+												'multiMercado':row.info.isMultimercado, 
+												'cambial':row.info.isCambial, 
+												'exterior':row.info.isExterior,
+												'notset':row.info.isNotSet}" 
+											class="noselect hide-on-smaller-400" 
+											title="{{row.figures[selectedPeriod].totalRank}} pontos somados" 
+											ng-bind="row.figures[selectedPeriod].rank">Rank</td>
+
 										<td class="cutText noselect" >
 											<span title="{{row.name}}" class="fundName" ng-click="openRankDialog(row, true)"  title="Tabela de rentabilidade completa!">{{row.name}}</span>
 											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict" ng-mouseover="$parent.blinkRestricao=true" ng-mouseleave="$parent.blinkRestricao=false"  title="Fundo destinado à investidores qualificados.&#10;Ative o filtro 'Sem restrição' no menu lateral esquerdo para ver apenas os fundos que não são restritos apenas à investidores qualificados.">monetization_on</i>
-											<!-- <i class="hide-on-small-and-down colorIcon tiny material-icons hidenIcon "  >info_outline</i>  -->
 											<i class="colorIcon tiny material-icons " ng-mouseover="$parent.blinkLock = true" data-ng-mouseleave="$parent.blinkLock = false" ng-show="row.info.isClosed"  title="Fundo fechado.&#10;Ative o filtro 'Abertos apenas' no menu lateral esquerdo para ver apenas os fundos que estão disponíveis para aplicação.">lock</i>
-											<em class="hidenIcon pipeSep" >|</em>
+											<em class="hidenIcon pipeSep hide-on-med-and-down" >|</em>
 											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon compareIcon " ng-class="{blinkHard:compareDlgStillOpen==true && fundsToCompare.length==0}" ng-click="rowClick(row, this)"   title="Comparare este fundos com outros!">compare_arrows</i>
-											<!-- <em class="hidenIcon pipeSep" >|</em>
-											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon"  ng-click="addToWallet(row)"   title="Adicione esse fundo à sua carteira">playlist_add</i> -->
+											<!-- <em class="hidenIcon pipeSep hide-on-med-and-down" >|</em>
+											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon "  ng-click="addToWallet(row)"   title="Adicione esse fundo à sua carteira">playlist_add</i> -->
 										</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
@@ -401,7 +411,7 @@
 		</div>
 		<div class="col xl2 l2 s12 rightColor fixedColumn r0" ng-class="{'hide-on-med-and-down':mobileSelectedPage!='histogram'}" id="rightMenu">
 				<div class="section fixed " id=rightmenu>
-					
+					<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='histogram'" class="show-on-small" ><i class="material-icons">arrow_back</i></a>
 					<label title="{{currentRow.name}}" class="currentName">{{currentRow.name}}</label>
 					
 
@@ -933,12 +943,15 @@
 		  </div>
 	</div>
 	<div id="modalPrompt" class="modal modal-fixed-footer modalTiny">
-		<span class="modalHeader">Salvar como: </span>
+		
 		<div class="modal-content">
+			<span class="modalHeader">Salvar como: </span>
+			<span class="promptLabel">Insira um nome para a sua carteira de investimentos:</span>
 			<input type="text" ng-model="walletSaveName"/>
 		</div>
 		<div class="modal-footer">
 			<a ng-click="saveWallet()" class="modal-action modal-close waves-effect waves-blue btn">Salvar</a>
+			<a ng-click="saveWallet()" class="modal-action modal-close waves-effect waves-blue btn-flat">Cancelar</a>
 		</div>
 	</div>
 

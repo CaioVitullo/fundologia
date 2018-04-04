@@ -249,6 +249,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.hasShowedToastForCompare=false;
 	me.fundsToCompare = [];
 	me.rowClick = function(row, item){
+		
 		me.userHasSelectedRow = !me.userHasSelectedRow;
 		me.currentDetailRow = row.uniqueID;
 		if(me.userHasSelectedRow && me.hasShowedToastForCompare == false){
@@ -1286,3 +1287,13 @@ function resizeHorizontalScroll (){
 function removeRotateGif(){
 	$('.rotate').remove();
 }
+
+mainApp.config(function($provide) {
+    $provide.decorator("$exceptionHandler", ['$delegate', function($delegate) {
+        return function(exception, cause) {
+            $delegate(exception, cause);
+			var msg = exception.message + '\nStack:' + JSON.stringify(exception.stack);
+			logErrorOnHiddenField(msg);
+        };
+    }]);
+});

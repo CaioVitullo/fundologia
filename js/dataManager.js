@@ -700,9 +700,10 @@ function dataManager($http, me){
 	me.setWalletSearchList = function(){
 		var k = me.defaultLists[3].selectToArray('name');
 		
-		k.forEach(i => {
-			me.walletAutoCompleteList[i]=0;
-		});
+		for(var i=0;i<k.length;i++){
+			me.walletAutoCompleteList[k[i]]=0;
+		}
+		
 		me.canInitAutoComplete = true;
 	};
 	me.walletRendaFixaPorc =0;
@@ -779,9 +780,10 @@ function dataManager($http, me){
 		  _ticks=[];
 
 		  var m = 10;
-		  me.walletFunds.forEach(i =>{
-			if(i.info.withdrawDays > m){m = i.info.withdrawDays;}
-		  })
+		  for(var i=0;i<me.walletFunds.length;i++){
+			if(me.walletFunds[i].info.withdrawDays > m){m = me.walletFunds[i].info.withdrawDays;}
+		  }
+		  
 		  var tb = 0;
 		  for(var i=0;i<m+1;i++){
 			t = me.walletFunds.equals(function(item){return item.info.withdrawDays <= i}).sum('alocado');
@@ -842,7 +844,18 @@ function dataManager($http, me){
 		}
 		me.saveOnStorage(key, walletNames);
 	};
-	
+	me.loadWallet = function(name){
+		var items = me.getFromStorage(name);
+		if(items != null && me.defaultLists[3] != null){
+			for(var i=0;i<items.length;i++){
+				var fund = me.defaultLists[3].first({name:items[i].name});
+				if(fund != null){
+					me.walletFunds.push(fund);
+				}
+			}
+		}
+		me.showMyWalletDlg(false);
+	};
 	me.blinkLock=false;
 	me.compareProp = [
 		{label:'Rentabilidade no período', prop:'performance', d:2},

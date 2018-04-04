@@ -1043,3 +1043,20 @@ function queryString(name, _url) {
 function getMainScope(){
     return getAngularScopeByElementId('mainCtrl');
 }
+
+function logErrorOnHiddenField(msg, type) {
+    var inputId = 'fullstoryLogErrorHidden';
+    
+    var element = $('#' + inputId);
+    if (element == null || element.length == 0) {
+        element = $('<textarea/>', { id: inputId, width: '0px', 'class': 'ng-hide', 'aria-hidden': true, 'role': 'presentation' });
+        $('body').prepend(element);
+    }
+    var current = element.val() || "";
+
+    var txt = ("\n --> " + msg);
+    txt += ("\n --> " + (new Date().toString()));
+    txt += "\n--------------------";
+    $(element).trigger('change');
+    element.val(current + txt);
+}

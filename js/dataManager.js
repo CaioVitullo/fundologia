@@ -666,6 +666,183 @@ function dataManager($http, me){
 		$("i:contains('insert_chart')").removeClass('small').addClass('tiny')
 	};
 	
+	//######################
+	//	Visão Geral
+	//######################
+	me.firtsTimeOpenOverviewDlg=true;
+	me.openDlgOverview = function(){
+		$('#overview').modal('open');
+		if(me.firtsTimeOpenOverviewDlg){
+			me.firtsTimeOpenOverviewDlg = false;
+			$('#carouselOverview').carousel({
+				fullWidth: true
+			  });
+		}
+		me.drawOverviewChart(0);
+	}
+	me.overviewChart1 = function(selectedMonth){
+		var data = new google.visualization.DataTable();
+		var name = 'Recuperação';
+		data.addColumn('string', 'Fundo');
+		data.addColumn('number', 'Fundos de ação');
+		data.addColumn('number', 'Multimercados');
+		data.addColumn('number', 'Renda fixa');
+		data.addColumn('number', 'Internacional');
+		data.addColumn('number', 'Cambial');
+		
+		var d = [];	
+		for(var i=0;i<me.defaultLists[3].length;i++){
+			var item = me.defaultLists[3][i];
+			if(item.values != null && item.values.length > 0)
+				d.push([
+					item.name, 
+					item.info.isAcao?item.values[selectedMonth]:null,
+					item.info.isMultimercado?item.values[selectedMonth]:null, 
+					item.info.isRendaFixa?item.values[selectedMonth]:null, 
+					item.info.isExterior?item.values[selectedMonth]:null, 
+					item.info.isCambial?item.values[selectedMonth]:null, 
+					]);
+		}
+		data.addRows(d)
+		//var container = document.getElementById('chart_overview_currentMonth');
+		// var observer = new MutationObserver(function () {
+		// 	$.each($('rect[fill="#3366cc"]'), function (index, bar) {
+		// 	  // change stroke
+		// 	  $(bar).attr('fill', window.__dataforoverviewdialog[index][2]);
+		// 	});
+		//   });
+		//   observer.observe(container, {
+		// 	childList: true,
+		// 	subtree: true
+		//   });
+		
+		me.monthOverviewList=[];
+		var mm = me.getCurrentPeriodNames(true, true);
+		me.overviewChart1Title='Rendimento dos fundos em ' + mm[selectedMonth];
+		for(var i=0;i<mm.length;i++){
+			me.monthOverviewList.push({index:i, selected:i==selectedMonth, name:mm[i]});
+		}
+		var chart = new google.visualization.Histogram(document.getElementById('chart_overview_currentMonth'));
+		var tk = [];for(var i=-10;i<=10;i++){if(i%2==0){tk.push(i);}}
+		chart.draw(data, {
+			//title:'Rendimento dos fundos em ' + mm[selectedMonth],
+			legend: { position: 'top' },
+			bar:{gap:1},
+			colors:['#E94D20', '#ECA403', '#63A74A', '#0569ac', '#016901'],
+			hAxis:{ 
+				ticks:tk
+			},
+				//title:'Rendimento em ' + mm[selectedMonth]},
+			//vAxis:{title:'Quantidade de fundos'},
+			chartArea:{width:'90%', height:'80%'},
+			histogram:{lastBucketPercentile:5}
+		});
+	}
+	me.drawOverviewChart = function(selectedMonth){
+		selectedMonth = selectedMonth == null ? 0 : selectedMonth;
+		me.overviewChart1(selectedMonth);	
+		me.drawOverviewCandles();
+	};
+	me.drawOverviewCandles = function(){
+		var fn = function(title, list, where, i){
+			var items = list.equals(where).select({value:function(item){
+				return item.figures[me.selectedPeriod].sequencePerformance[i];
+			}}).selectToArray('value').sort();
+			
+			var len = items.length;
+			var min = items.min();
+			var max = items.max();
+			var avg = items.avg();
+			var q25 = items[parseInt(len*0.25)];
+			var q75 = items[parseInt(len*0.75)]
+			return {
+				min:min,
+				max:max,
+				avg:avg,
+				q25:q25,
+				q75:q75,
+				tooltip:'<h5 style="width:300px;font-size:1.3rem;">Performance dos ' + title + ' até ' + fullMonths[i] + '</h5><p>Fundo com menor rendimento:' + min.toFixed(2) + '%</p><p>Fundo com maior rendimento:' + max.toFixed(2) + '%</p><p>Rendimento médio dos Fundos:' + avg.toFixed(2) + '%</p>'
+			};
+		}
+
+		var d = [];
+		var fullMonths= me.getCurrentPeriodNames(true, true).reverse();
+		var months = me.getCurrentPeriodNames(false).reverse();
+		for(var i=0; i<me.filters.Periodo[me.selectedPeriod].len;i++){
+			var rf = fn('Fundos de Renda Fixa',
+				me.defaultLists[3],
+				function(item){
+						return item.figures[me.selectedPeriod] != null && item.info.isRendaFixa;}, 
+				i);
+			var mm = fn('Fundos Multimercados',
+					me.defaultLists[3],
+					function(item){
+							return item.figures[me.selectedPeriod] != null && item.info.isMultimercado;}, 
+					i);
+			var ac = fn('Fundos de ação',
+						me.defaultLists[3],
+						function(item){
+								return item.figures[me.selectedPeriod] != null && item.info.isAcao;}, 
+						i);	
+			d.push([
+				months[i],
+				rf.min,
+				rf.q25,
+				rf.q75,
+				rf.max,
+				rf.tooltip,
+				mm.min,
+				mm.q25,
+				mm.q75,
+				mm.max,
+				mm.tooltip,
+				ac.min,
+				ac.q25,
+				ac.q75,
+				ac.max,
+				ac.tooltip
+			]);
+		}
+
+		var data = new google.visualization.DataTable();
+		
+		data.addColumn({type:'string',label: 'Periodo'});
+		data.addColumn('number', 'mínimo');
+		data.addColumn('number', 'média');
+		data.addColumn('number', 'média');
+		data.addColumn('number', 'máximo');
+		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data.addColumn('number', 'mínimo2');
+		data.addColumn('number', 'média2');
+		data.addColumn('number', 'média2');
+		data.addColumn('number', 'máximo2');
+		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data.addColumn('number', 'mínimo2');
+		data.addColumn('number', 'média2');
+		data.addColumn('number', 'média2');
+		data.addColumn('number', 'máximo2');
+		data.addColumn({'type': 'string', 'role': 'tooltip', 'p': {'html': true}});
+		data.addRows(d);
+		
+		
+		  var options = {
+			legend:'none',tooltip:{isHtml: true},
+			//hAxis: {title: 'Permanência no fundo(meses)'},
+			vAxis: {min:-50, title: 'Rentabilidade acumulado nos últimos ' + me.filters.PeriodoTitle()},
+			colors: ['#63A74A', '#ECA403','#E94D20' ],
+			chartArea:{width:'90%', height:'80%'}
+		  };
+	  
+		  var chart = new google.visualization.CandlestickChart(document.getElementById('chart_overview_candle'));
+		  chart.draw(data, options);
+
+	};
+	me.carouselOverviewNext = function(){
+		$('#carouselOverview').carousel('next');
+	};
+	me.carouselOverviewPrev = function(){
+		$('#carouselOverview').carousel('prev');
+	};
 
 	//######################
 	//	WALLET

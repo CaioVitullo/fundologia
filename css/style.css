@@ -372,7 +372,7 @@ footer{
     overflow: hidden;
 }
 .exterior{
-	border-left: solid 3px rgb(2, 109, 100);
+	border-left: solid 3px rgb(5, 105, 172);
 }
 .cambial{
 	border-left: solid 3px rgb(1, 105, 1);
@@ -405,6 +405,7 @@ footer{
 	position: absolute;
 	right: -15px;
 	top: -15px;
+	z-index: 99999;
 }
 .histUl{
 	width: 100%;
@@ -838,12 +839,17 @@ footer{
 	margin: 0 12px;
   }
   .tdFoundPeroNoMucho ul li{
-	float: left;
     margin-top: 20px;
     list-style-type: disc;
     margin-left: 33px;
   }
-
+  .tdFoundPeroNoMucho ul li em{
+	  font-size: 13px;
+	  color: silver;
+  }
+  .tdFoundPeroNoMucho ul li a{
+	  cursor: pointer;
+  }
   .tac{
 	  text-align: center;
   }
@@ -1347,8 +1353,7 @@ input.inputNUmber{
 	font-size: 0.8rem;
     margin-top: 10px;
     display: block;
-    margin-bottom: 16px;
-}
+    margin-bottom: 16px;}
 .modalTiny input{
 	height: 30%;
     border: solid 1px #333;
@@ -1369,4 +1374,37 @@ input.inputNUmber{
 }
 #dropdown1.dropdown-content li.divider{
 	margin: 0;
+}
+
+.monthsBar{
+	display: block;
+	width: 100%;
+	padding: 5px;
+	text-align: center;
+}
+.monthsBar ul{
+	list-style-type: none;
+    margin: 0;
+	padding: 0;
+	display: inline-block;
+}
+.monthsBar li {
+    float: left;
+}
+.monthsBar li:nth-child(2){
+	width: 300px;
+}
+
+.monthsBar li a {
+    display: block;
+    text-align: center;
+    padding: 16px;
+	text-decoration: none;
+	cursor: pointer;
+	color: #3969ba;
+	font-size: 1.5rem;
+}
+.monthsBar li a.selected{
+	color: black;
+	font-weight: 400;
 }

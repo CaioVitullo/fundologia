@@ -9,6 +9,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	dataManager($http, me);
 	histogramManager(me);
 	classUtil(me);
+	me.isDev = window.location.href.indexOf('dev.') >= 0;
 	me.disqusOn = false;
 	me.searchTxt = "";
 	me.lastSearchTxt = "";
@@ -20,7 +21,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.selectedPeriod = 1;
 	me.defaultSelectedPeriod =me.selectedPeriod;
 	me.withdrawDays = 100;
+	me.maxWithdrawDays = 100;
 	me.admTx = 4;
+	me.maxAdmTx = 4;
 	me.volatilidade=30;
 	me.maxVolatilidade=30;
 	me.mobileSelectedPage = 'main';
@@ -87,7 +90,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.lastHash = null;
 	me.hasMoreLines = true;
 	me.noResult = false;
-	me.podeSerQueTenhaCom12 = [];
+	me.podeSerQueTenha12 = [];
+	me.podeSerQueTenha=[];
 	me.defaultListSize = 30;
 	me.getMainList = function(){
 		if(me.checkFilterList()){
@@ -97,6 +101,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			var currentHash = me.filterHash(filterStatus);
 			if(me.lastHash != null && me.lastHash.hasSameValuesAs(currentHash) == false){
 				
+				me.podeSerQueTenha12 = [];
+				me.podeSerQueTenha=[];
 				var fullList = me.defaultLists[3];
 				var list = [];
 				var count = 0;
@@ -105,7 +111,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 					if( 
 						item.figures[me.selectedPeriod] != null &&
 						item.info.TypeFilter.hasAnyTrueOnSameIndex(filterStatus.Tipo) &&
-						(me.withdrawDays == 100 || item.info.withdrawDays <= me.withdrawDays )&&
+						(me.withdrawDays == me.maxWithdrawDays || item.info.withdrawDays <= me.withdrawDays )&&
 						(me.admTx == 4 || item.info.admTax <= me.admTx) &&
 						(me.volatilidade==me.maxVolatilidade || item.figures[me.selectedPeriod].volatilidadeAnual <= me.volatilidade) &&
 						(me.histogramItemFilter==null || me.verifyHistogramFilter(item) ) &&
@@ -152,20 +158,61 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 					me.lastHash = currentHash;
 					me.lastResult = list;
 					me.noResult = false;
-					me.podeSerQueTenhaCom12=[];
+					
+					me.podeSerQueTenha=[];
+					me.podeSerQueTenha12=[];
 				}else{
 					me.noResult = true;
-					if(me.selectedPeriod>=1){
-						me.podeSerQueTenhaCom12 =me.defaultLists[3].equals(function(item){return item.figures[0] != null}).hasText({name:me.searchTxt}).select('name');
-						if(me.podeSerQueTenhaCom12.length > 0){
-							me.noResult = false;
+					if(me.searchTxt.length > 0){
+						var left = me.checkLeftFilters()==false;
+						if(left == true){
+							me.podeSerQueTenha=me.defaultLists[3].equals(function(item){return item.figures[me.selectedPeriod] != null}).hasText({name:me.searchTxt});
+							if(me.podeSerQueTenha != null && me.podeSerQueTenha.length > 0){
+								me.noResult = false;
+								for(var i=0;i<me.podeSerQueTenha.length;i++){
+									var f = me.podeSerQueTenha[i];
+									f.notFoundDueTo = [];
+									if(f.info.TypeFilter.hasAnyFalseOnSameIndex(filterStatus.Tipo)){
+										f.notFoundDueTo.push('Filtro de Classificação');
+									}
+									if(f.info.VolumeFilter.hasAnyFalseOnSameIndex(filterStatus.volume)){
+										f.notFoundDueTo.push('Filtro de Volume');
+									}
+									if(me.volatilidade!=me.maxVolatilidade && f.figures[me.selectedPeriod].volatilidadeAnual > me.volatilidade){
+										f.notFoundDueTo.push('Filtro de Volatilidade');
+									}
+									if(f.info.admTax > me.admTx){
+										f.notFoundDueTo.push('Filtro de Volatilidade');
+									}
+									if(me.withdrawDays != me.maxWithdrawDays && f.info.withdrawDays > me.withdrawDays){
+										f.notFoundDueTo.push('Filtro de Resgate');
+									}
+									if(me.filterHideClosed == true && f.info.isClosed == true){
+										f.notFoundDueTo.push('Filtro de Status(fundo fechado)');
+									}
+									if(me.filterHideRestrict == true && f.info.restrict == true){
+										f.notFoundDueTo.push('Filtro de Status(fundo restrito)');
+									}
+									if(f.info.InitialValueFilter.hasAnyFalseOnSameIndex(filterStatus.Initialvalue)){
+										f.notFoundDueTo.push('Filtro de aplicação inicial');
+									}
+									if(f.notFoundDueTo.length > 0)
+									f.notFoundDueTo = f.notFoundDueTo.join(", ") + (f.notFoundDueTo.length==1 ? ' está' : ' estão') + ' ativo' + (f.notFoundDueTo.length==1 ? '' : 's'); 
+								}
+							}
+						}else if(me.selectedPeriod >= 1 ){
+							me.podeSerQueTenha12 =me.defaultLists[3].equals(function(item){return item.figures[0] != null}).hasText({name:me.searchTxt}).select('name');
+							if(me.podeSerQueTenha12.length > 0){
+								me.noResult = false;
+							}
 						}
 					}
 				}
 					
-				
 				return list;
 			}else{
+				me.podeSerQueTenha12 = [];
+				me.podeSerQueTenha=[];
 				return me.lastResult;
 			}
 		}
@@ -215,14 +262,24 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			volatilidade:[me.volatilidade]
 		};
 	};
-	
+	me.cleanAllFiltersButSearch = function(){
+			me.filters.Tipo.set({checked:true});
+			me.filters.volume.set({checked:true});
+			me.filters.InitialValue.set({checked:true});
+			me.withdrawDays = me.maxWithdrawDays;
+			me.admTx = me.maxAdmTx;
+			me.histogramItemFilter == null;
+			me.volatilidade = me.maxVolatilidade;
+
+			me.podeSerQueTenha=[];
+	};
 	me.checkFilterList = function(){
 		return me.selectedPeriod==1 &&
 			me.filters.Tipo.allSetTo({checked:true}) &&
 			me.filters.volume.allSetTo({checked:true}) &&
 			me.filters.InitialValue.allSetTo({checked:true}) &&
-			me.withdrawDays == 100 &&
-			me.admTx == 4 &&
+			me.withdrawDays == me.maxWithdrawDays &&
+			me.admTx == me.maxAdmTx &&
 			me.histogramItemFilter == null && 
 			me.searchTxt == "" &&
 			me.filterHideClosed==false &&
@@ -233,6 +290,15 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.volatilidade == me.maxVolatilidade;
 			//me.filters.resgate.allSetTo({checked:true}) &&
 
+	}
+	me.checkLeftFilters = function(){
+		return me.filters.Tipo.allSetTo({checked:true}) &&
+			me.filters.volume.allSetTo({checked:true}) &&
+			me.filters.InitialValue.allSetTo({checked:true}) &&
+			me.withdrawDays == me.maxWithdrawDays &&
+			me.admTx == me.maxAdmTx &&
+			me.histogramItemFilter == null && 
+			me.volatilidade == me.maxVolatilidade;
 	}
 	me.userHasSelectedRow=false;
 	me.showMore = function(){
@@ -524,6 +590,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			eventCategory: name,
 			eventAction: 'filter'
 		  });
+
+		if(prop==false)
+			return;
 
 		for(var i=0;i<filter.length;i++){
 			var item = filter[i];
@@ -979,6 +1048,10 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 						me.$apply();
 		}});
 		$('#modalCompare').modal('open');
+		//CORRELATION
+		var min = [me.fundsToCompare[0].values.length, me.fundsToCompare[1].values.length, me.filters.Periodo[me.selectedPeriod].len].min();
+		me.compare_correlationF2f = me.fundsToCompare[0].values.take(min).correlation(me.fundsToCompare[1].values.take(min));
+
 		var months = me.getCurrentPeriodNames().reverse();
 		var d = [['Mês', me.fundsToCompare[0].name, me.fundsToCompare[1].name]];
 		for(var i =0;i<me.fundsToCompare[0].figures[me.selectedPeriod].sequencePerformance.length;i++){
@@ -1017,17 +1090,18 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.compareDlgStillOpen = true;
 		},2000);
 	};
-	me.getCurrentPeriodNames = function(alwaysFull){
-		return me.getPeriodNames(me.filters.Periodo[me.selectedPeriod].len,alwaysFull);
+	me.getCurrentPeriodNames = function(alwaysFull, fullname){
+		return me.getPeriodNames(me.filters.Periodo[me.selectedPeriod].len,alwaysFull, fullname);
 	}
-	me.getPeriodNames = function(m, alwaysFull){
+	
+	me.getPeriodNames = function(m, alwaysFull, fullname){
 		alwaysFull=alwaysFull==null?true:alwaysFull;
 		m=m==null?36:m;
 		var month = 3;
 		var year = 18;
 		var list = [];
 		for(var i = 0;i<m;i++){
-			list.push(me.getMonthName(month, year, alwaysFull || (i==m-1||month==1)));
+			list.push(me.getMonthName(month, year, alwaysFull || (i==m-1||month==1), fullname));
 			month -=1;
 			if(month == 0){
 				month = 12;
@@ -1037,10 +1111,18 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		return list;
 	};
 	me._monthNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
-	me.getMonthName = function(monthIndex, year, full){
-		if(full==true || full==null)
-			return me._monthNames[monthIndex-1] + '/' + year
-		return me._monthNames[monthIndex-1];
+	me._fullMonthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+	me.getMonthName = function(monthIndex, year, full, fullname){
+		if(fullname==true){
+			if(full==true || full==null)
+				return me._fullMonthNames[monthIndex-1] + ' de 20' + year
+			return me._fullMonthNames[monthIndex-1];
+		}else{
+			if(full==true || full==null)
+				return me._monthNames[monthIndex-1] + '/' + year
+			return me._monthNames[monthIndex-1];
+		}
+		
 	}
 	me.periodName = me.getPeriodNames();
 	me.filterHideClosed = false;
@@ -1297,3 +1379,5 @@ mainApp.config(function($provide) {
         };
     }]);
 });
+
+

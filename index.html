@@ -120,9 +120,10 @@
 			 <li></li>
 			 <!-- <li><a ng-click="openModalOQue()">Como funciona?</a></li> -->
 			 <li><a ng-click="showRankDialog()">Ranking</a></li>
+			 <li><a ng-click="openDlgOverview()">Visão geral</a></li>
 			 <li><a ng-click="showPreCompareDialog()">Compare fundos</a></li>
-			 <!-- <li ng-show="walletNamesList.length==0"><a ng-click="showMyWalletDlg()">Minha carteira</a></li>
-			 <li ng-show="walletNamesList.length>0"><a class="dropdown-trigger" href="#!" data-activates="dropdown1">Minha carteira<i class="material-icons right">arrow_drop_down</i></a></li> -->
+			 <li ng-show="me.isDev" ng-show="walletNamesList.length==0"><a ng-click="showMyWalletDlg()">Minha carteira</a></li>
+			 <li ng-show="me.isDev" ng-show="walletNamesList.length>0"><a class="dropdown-trigger" data-activates="dropdown1">Minha carteira<i class="material-icons right">arrow_drop_down</i></a></li>
 		  </ul>
 		  <ul class="side-nav" id="slide-out" >
 			<!-- <li><a href="#sobre">O que é?</a></li>
@@ -341,8 +342,8 @@
 											<i class="colorIcon tiny material-icons " ng-mouseover="$parent.blinkLock = true" data-ng-mouseleave="$parent.blinkLock = false" ng-show="row.info.isClosed"  title="Fundo fechado.&#10;Ative o filtro 'Abertos apenas' no menu lateral esquerdo para ver apenas os fundos que estão disponíveis para aplicação.">lock</i>
 											<em class="hidenIcon pipeSep hide-on-med-and-down" >|</em>
 											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon compareIcon " ng-class="{blinkHard:compareDlgStillOpen==true && fundsToCompare.length==0}" ng-click="rowClick(row, this)"   title="Comparare este fundos com outros!">compare_arrows</i>
-											<!-- <em class="hidenIcon pipeSep hide-on-med-and-down" >|</em>
-											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon "  ng-click="addToWallet(row)"   title="Adicione esse fundo à sua carteira">playlist_add</i> -->
+											<em class="hidenIcon pipeSep hide-on-med-and-down" >|</em>
+											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon "  ng-click="addToWallet(row)"   title="Adicione esse fundo à sua carteira">playlist_add</i>
 										</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
@@ -366,11 +367,21 @@
 									<p>Use a hashtag <i>#faltouEsseFundo</i> nos comentários abaixo que nos vamos atras dele para você! </p>
 									<p><i>Obs: So incluímos fundos com no mínimo 12 meses.</i></p>
 								</div>
-								<div class="tdFoundPeroNoMucho" ng-show="noResult==false && podeSerQueTenhaCom12.length > 0" ng-mouseover="blinkPeriod12=true" ng-mouseleave="blinkPeriod12=false;">
-									<p ng-show="podeSerQueTenhaCom12.length==1"><strong>Encontramos 1</strong> fundo na análise de 12 meses. Este fundo não está aparecendo nesta listagem por possuir menos que 24 meses de histórico. Para alterar para a análise de 12 meses clique <a class="pointer fwb" ng-click="selectedPeriod=0">aqui</a> ou altere o filtro <i>Período</i> no canto superior esquerdo (ali, onde esta piscando de laranja agora!).</p>
-									<p ng-show="podeSerQueTenhaCom12.length> 1"><strong>Encontramos {{podeSerQueTenhaCom12.length}}</strong> fundos na análise de 12 meses. Estes fundos não estão aparecendo nesta listagem por possuirem menos que 24 meses de histórico. Para alterar para a análise de 12 meses clique <a class="fwb pointer" ng-click="selectedPeriod=0">aqui</a> ou altere o filtro <i>Período</i> no canto superior esquerdo(ali, onde esta piscando de laranja agora!).</p>
+								<div class="tdFoundPeroNoMucho" ng-show="noResult==false && podeSerQueTenha.length > 0" ng-mouseover="blinkPeriod12=true" ng-mouseleave="blinkPeriod12=false;">
+									<p ng-show="podeSerQueTenha.length==1"><strong>Encontramos 1</strong> fundo com nome parecido com esse mas que não esta sendo exibido: </p>
+									<p ng-show="podeSerQueTenha.length> 1"><strong>Encontramos {{podeSerQueTenha.length}}</strong> fundos com nome parecido com esse mas que não estão sendo exibidos:</p>
 									<ul>
-										<li ng-repeat="item in podeSerQueTenhaCom12" ng-bind="item"></li>
+										<li ng-repeat="item in podeSerQueTenha" >{{item.name}} - <em ng-bind-html="item.notFoundDueTo|trusted"></em></li>
+									</ul>
+									<p>
+										<a class="pointer" ng-click="cleanAllFiltersButSearch()">clique aqui</a> que a gente desmarca esse(s) filtro(s) para você.
+									</p>
+								</div>
+								<div class="tdFoundPeroNoMucho" ng-show="noResult==false && podeSerQueTenha12.length > 0" ng-mouseover="blinkPeriod12=true" ng-mouseleave="blinkPeriod12=false;">
+									<p ng-show="podeSerQueTenha12.length==1"><strong>Encontramos 1</strong> fundo na análise de 12 meses. Este fundo não está aparecendo nesta listagem por possuir menos que 24 meses de histórico. Para alterar para a análise de 12 meses clique <a class="pointer fwb" ng-click="selectedPeriod=0">aqui</a> ou altere o filtro <i>Período</i> no canto superior esquerdo (ali, onde esta piscando de laranja agora!).</p>
+									<p ng-show="podeSerQueTenha12.length> 1"><strong>Encontramos {{podeSerQueTenha12.length}}</strong> fundos na análise de 12 meses. Estes fundos não estão aparecendo nesta listagem por possuirem menos que 24 meses de histórico. Para alterar para a análise de 12 meses clique <a class="fwb pointer" ng-click="selectedPeriod=0">aqui</a> ou altere o filtro <i>Período</i> no canto superior esquerdo(ali, onde esta piscando de laranja agora!).</p>
+									<ul>
+										<li ng-repeat="item in podeSerQueTenha12" ng-bind="item"></li>
 									</ul>
 								</div>
 								<p class="tdNotFound" ng-show="noResult == true && searchTxt.length == 0">Nenhum fundo encontrado.</p>
@@ -864,6 +875,37 @@
 			
 		</div>
 	</div>
+	<div id="overview" class="modal modaTall wideModal">
+			<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
+			<div class="modal-content carousel carousel-slider" id="carouselOverview">
+				<div class="carousel-item " id="carouselChart" href="#two!">
+					<i class="btoNext medium material-icons rZero" ng-click="carouselOverviewNext()">keyboard_arrow_right</i>
+					<i class="btoNext medium material-icons" ng-click="carouselOverviewPrev()">keyboard_arrow_left</i>
+					<h5>{{overviewChart1Title}} <span class="subtitle"> </span></h5>
+					<div style="width:100%;height:90%;" id="chart_overview_currentMonth"></div>
+					<div class="monthsBar">
+						<ul ng-init="monthOverviewListIndex=0;">
+							<li ng-class="{invisible:monthOverviewListIndex==0}">
+								<i class="material-icons medium" ng-click="monthOverviewListIndex=monthOverviewListIndex - 1;drawOverviewChart(monthOverviewListIndex)">chevron_left</i>
+							</li>
+							<li>
+								<a ng-click=$parent.drawOverviewChart(m.index) ng-class="{selected:m.selected}" >{{monthOverviewList[monthOverviewListIndex].name}}</a>
+							</li>
+							<li ng-class="{invisible:monthOverviewListIndex==monthOverviewList.length-1}">
+								<i class="material-icons medium" ng-click="monthOverviewListIndex=monthOverviewListIndex + 1;drawOverviewChart(monthOverviewListIndex)">chevron_right</i>
+							</li>
+						</ul>
+					</div>
+				  </div>
+				  <div class="carousel-item " id="carouselChart" href="#two!">
+					<i class="btoNext medium material-icons rZero" ng-click="carouselOverviewNext()">keyboard_arrow_right</i>
+					<i class="btoNext medium material-icons" ng-click="carouselOverviewPrev()">keyboard_arrow_left</i>
+					<h5>Visão geral dos fundos nos {{filters.PeriodoTitle()}} <span class="subtitle">Rentabilidade acumulada(mínima, média e máxima) dos fundos de Renda Fixa, Multimercado e Ação </span></h5>
+					<div style="width:100%;height:90%;" id="chart_overview_candle"></div>
+				  </div>
+				
+			</div>
+	</div>
 
 	<div id="modalWallet" class="modal modal-fixed-footer modal85 wideModal" >
 		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
@@ -985,6 +1027,10 @@
 								<td>Taxa de Administração:</td>
 								<td ng-bind="fundsToCompare[0].info.admTax|percentage:2"></td>
 								<td ng-bind="fundsToCompare[1].info.admTax|percentage:2"></td>
+							</tr>
+							<tr>
+								<td>Correlação entre os fundos: </td>
+								<td colspan="2" ng-bind="compare_correlationF2f"></td>
 							</tr>
 							<tr>
 								<td>Histograma:</td>
@@ -1143,6 +1189,20 @@
 		fn();
 	  
 	//};
+	</script>
+	
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyBQcjKXDN4nwrFBuj7DKgsMfudJCOKopPY",
+			authDomain: "fundologia.firebaseapp.com",
+			databaseURL: "https://fundologia.firebaseio.com",
+			projectId: "fundologia",
+			storageBucket: "fundologia.appspot.com",
+			messagingSenderId: "224493059414"
+		};
+		firebase.initializeApp(config);
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>

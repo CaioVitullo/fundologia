@@ -649,6 +649,37 @@ Array.prototype.hasAnyTrueOnSameIndex = function(array){
     return false;
 
 }
+Array.prototype.hasAnyFalseOnSameIndex = function(array){
+    if(Array.isArray(array) == false || array == null || array.length != this.length)
+    return false;
+
+
+    for(var i =0, len = this.length;i<len;i++){
+        if(this[i] == true && array[i] == false)
+            return true;
+    }
+
+    return false;
+
+}
+Array.prototype.correlation = function(y){
+    var xAvg = this.avg();
+    var yAvg = y.avg();
+    var n = this.length;
+   
+    var sumX = this.sum();
+    var sumY = y.sum();
+
+    var xy = this.sumProduct(y);
+    var nxy = n * xAvg * yAvg;
+    var up = n * xy - (sumX * sumY);
+
+    var p1 = (this.sumProduct(this) * n) - Math.pow(sumX, 2);
+    var p2 = (y.sumProduct(y) * n) - Math.pow(sumY, 2);
+
+    var down = Math.sqrt(p1 * p2);
+    return (up / down).toFixed(2);
+}
 Array.prototype.compare = function (array) {
     // if the other array is a falsy value, return
     if (!array)

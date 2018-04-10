@@ -342,7 +342,7 @@
 											<i class="colorIcon tiny material-icons " ng-mouseover="$parent.blinkLock = true" data-ng-mouseleave="$parent.blinkLock = false" ng-show="row.info.isClosed"  title="Fundo fechado.&#10;Ative o filtro 'Abertos apenas' no menu lateral esquerdo para ver apenas os fundos que estão disponíveis para aplicação.">lock</i>
 											<em class="hidenIcon pipeSep hide-on-med-and-down" >|</em>
 											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon compareIcon " ng-class="{blinkHard:compareDlgStillOpen==true && fundsToCompare.length==0}" ng-click="rowClick(row, this)"   title="Comparare este fundos com outros!">compare_arrows</i>
-											<em class="hidenIcon pipeSep hide-on-med-and-down" >|</em>
+											<em class="hidenIcon pipeSep hide-on-med-and-down" ng-show="isDev">|</em>
 											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon " ng-show="isDev" ng-click="addToWallet(row)"   title="Adicione esse fundo à sua carteira">playlist_add</i>
 										</td>
 										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>

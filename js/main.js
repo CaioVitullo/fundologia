@@ -66,17 +66,17 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		//$('.modal').modal();
 		
 		me.width = $(window).width();
-		me.frases = ['o fim do achismo', 'pra quem gosta de resultado!'];
-		me.currentFrasesID = 0;	
-		if(me.isMobile==false){
-			$interval(function(){
-				me.currentFrasesID++;
-				if(me.currentFrasesID==me.frases.length)
-					me.currentFrasesID = 0;
-				var frase = me.frases[me.currentFrasesID];
-				$('#subtitle').fadeOut('slow').text(frase).fadeIn('slow');
-			}, 10 * 1000, 3);
-		}
+		// me.frases = ['o fim do achismo', 'pra quem gosta de resultado!'];
+		// me.currentFrasesID = 0;	
+		// if(me.isMobile==false){
+		// 	$interval(function(){
+		// 		me.currentFrasesID++;
+		// 		if(me.currentFrasesID==me.frases.length)
+		// 			me.currentFrasesID = 0;
+		// 		var frase = me.frases[me.currentFrasesID];
+		// 		$('#subtitle').fadeOut('slow').text(frase).fadeIn('slow');
+		// 	}, 10 * 1000, 3);
+		// }
 		
 		resizeHorizontalScroll();
 	}; 
@@ -1179,7 +1179,14 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 });
 
 
+mainApp.filter('highlight', function($sce) {
+    return function(text, phrase) {
+      if (phrase) text = text.replace(new RegExp('('+phrase+')', 'gi'),
+        '<span class="highlighted">$1</span>')
 
+      return $sce.trustAsHtml(text)
+    }
+});
 mainApp.filter('percentage', ['$filter', function($filter) {
     return function(input, decimals) {
 		if(input=='')

@@ -36,7 +36,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			window.finishedLoading=true;
 			$timeout(function(){
 				if(me.canShowFeature('abertura')){
+					$('#loadingFP').hide();
 					$('#linkBoraProSite').fadeIn();
+					
 				}else{
 					skipIntroduction();
 				}
@@ -44,25 +46,16 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		}, function(){
 			me.selectFirstRow();
 			me.setWalletSearchList();
-			var qs = queryString('camp');
-			if(typeof(qs) != 'undefined'){
-				if(window.googleChartHasFinished == true){
-					me.openCampaign(qs);
-				}else{
-					var _interval = $interval(function(){
-						
-						if(window.googleChartHasFinished == true){
-							$interval.cancel(_interval);
-							me.openCampaign(qs);
-						}
-					},300);
-				}
-			}
+			var list = me.defaultLists[3];
+			me.calcFilterHistogramTxAdm(list);
+			me.calcFilterHistogramResgate(list);
+			me.calcFilterHistogramVolatilidade(list);
+			
 		});
 		me.getWalletList();
 		me.lastHash = me.filterHash(me.getFilterStatus());
 		//me.loadHistograms(null);
-			
+		$('#chart-toast-container').removeAttr('style');
 		//$('.modal').modal();
 		
 		me.width = $(window).width();
@@ -119,6 +112,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 						(me.searchTxt == "" || (item.name.toLowerCase().indexOf(me.searchTxt.toLowerCase()) >= 0 || item.nameNoAccent.indexOf(me.searchTxt.toLowerCase()) >= 0 ))  &&
 						(me.filterHideClosed == false || item.info.isClosed == false) &&
 						(me.filterHideRestrict == false || item.info.restrict==false) &&
+						(me.selectedChartID.length == 0 || me.selectedChartID.indexOf(item.uniqueID) >= 0) &&
 						item.info.InitialValueFilter.hasAnyTrueOnSameIndex(filterStatus.Initialvalue)){
 							list.push(item);
 							count++;
@@ -152,6 +146,11 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 						$timeout(function(){me.selectFirstRow();},50);
 						
 					me.lastSearchTxt = me.searchTxt;
+					if(me.isMobile==false){
+						me.calcFilterHistogramTxAdm(list);
+						me.calcFilterHistogramResgate(list);
+						me.calcFilterHistogramVolatilidade(list);
+					}
 					
 					list = list.take(me.defaultListSize);
 					me.hasMoreLines = count > list.length;
@@ -200,7 +199,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 									f.notFoundDueTo = f.notFoundDueTo.join(", ") + (f.notFoundDueTo.length==1 ? ' está' : ' estão') + ' ativo' + (f.notFoundDueTo.length==1 ? '' : 's'); 
 								}
 							}
-						}else if(me.selectedPeriod >= 1 ){
+						}
+						if(me.selectedPeriod >= 1 && me.podeSerQueTenha.length==0){
 							me.podeSerQueTenha12 =me.defaultLists[3].equals(function(item){return item.figures[0] != null}).hasText({name:me.searchTxt}).select('name');
 							if(me.podeSerQueTenha12.length > 0){
 								me.noResult = false;
@@ -259,7 +259,8 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			sort:[me.currentSortCol],
 			sortReverse:[me.sortReverse?1:0],
 			size:[me.defaultListSize],
-			volatilidade:[me.volatilidade]
+			volatilidade:[me.volatilidade],
+			selectedChartID:me.selectedChartID
 		};
 	};
 	me.cleanAllFiltersButSearch = function(){
@@ -270,7 +271,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.admTx = me.maxAdmTx;
 			me.histogramItemFilter == null;
 			me.volatilidade = me.maxVolatilidade;
-
+			me.selectedChartID=[];
 			me.podeSerQueTenha=[];
 	};
 	me.checkFilterList = function(){
@@ -287,6 +288,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.currentSortCol==0 &&
 			me.sortReverse==true &&
 			me.defaultListSize == 30 &&
+			me.selectedChartID.length==0 &&
 			me.volatilidade == me.maxVolatilidade;
 			//me.filters.resgate.allSetTo({checked:true}) &&
 
@@ -948,25 +950,32 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		var chart = new google.visualization.ScatterChart(document.getElementById('chart_txdm_scatter'));
 		var lastSelectedRow = -1;
 		var _me = me;
-		google.visualization.events.addListener(chart, 'select', function(){
-			var selectedItem = chart.getSelection()[0];
-			
-			if (selectedItem && lastSelectedRow != selectedItem.row) {
-				lastSelectedRow = selectedItem.row;
-				var info = data.getValue(selectedItem.row, 7);
-				if(info != null){
-					var f = info.split('|');
-					_me.showSelectedFund(f);
-					if (!me.$$phase)
-            		me.$apply();
+		me.selectedChartID=[];
+		me.chartSelectedFunds = [];
+		me.hideChartToastHeader = false;
+		if(me.isMobile==false){
+			google.visualization.events.addListener(chart, 'select', function(){
+				var selectedItem = chart.getSelection()[0];
+				
+				if (selectedItem && lastSelectedRow != selectedItem.row) {
+					lastSelectedRow = selectedItem.row;
+					var info = data.getValue(selectedItem.row, 7);
+					if(info != null){
+						var f = info.split('|');
+						_me.showSelectedFund(f);
+						if (!me.$$phase)
+						me.$apply();
+					}
 				}
-			}
-		});
+			});
+		}
+		
 		//chart.draw(data, google.charts.Scatter.convertOptions(options));
 		chart.draw(data, options);
 	}
 	me.chartSelectedFunds = [];
 	me.showSelectedFund = function(data){
+		console.log(data);
 		if(me.chartSelectedFunds.length == 0){
 			me.showChartToast=true;
 		}else{
@@ -975,6 +984,21 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		me.chartSelectedFunds.push({id:parseInt(data[1]), name:data[0]});
 		
 	}
+	me.hideChartToast = function(){
+		me.chartSelectedFunds = [];
+		me.showChartToast = false;
+	};
+	me.selectedChartID = [];
+	me.filterByChart = function(){
+		me.selectedChartID = me.chartSelectedFunds.select('id');
+		me.chartSelectedFunds = [];
+		me.showChartToast=false;
+		$('#modal1').modal('close');
+	};
+	me.cleanChartFilter = function(){
+		
+		me.selectedChartID=[];
+	};
 	me.mobSelectPage = function(page){
 		if(page=='histogram')
 			$timeout(function(){
@@ -1025,6 +1049,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 		$('.toast').fadeOut();
 		me.highLightCompareDialog = false;
 		me.compareDlgStillOpen = false;
+		me.forceIconeCompareBlinkHard = false;
 		me.compareFundItemClick(0);
 		if(me.fundsToCompare.length > 0)
 			me.compareFundItemClick(0);
@@ -1082,6 +1107,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 
 	me.highLightCompareDialog = false;
 	me.compareDlgStillOpen = false;
+	me.forceIconeCompareBlinkHard = false;
 	me.showPreCompareDialog = function(){
 		me.highLightCompareDialog = true;
 		
@@ -1090,6 +1116,13 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 			me.compareDlgStillOpen = true;
 		},2000);
 	};
+	me.showCompareArrowTip = function(){
+		if(true || me.canShowFeature('showCompareArrowTip')){
+			me.forceIconeCompareBlinkHard=true;
+			me.toastOk('Selecione outro fundo clicando no icone que esta piscando do lado do nome dos fundos.<a onclick="toastCallback()"> Entendi!</a>')
+		}
+	};
+
 	me.getCurrentPeriodNames = function(alwaysFull, fullname){
 		return me.getPeriodNames(me.filters.Periodo[me.selectedPeriod].len,alwaysFull, fullname);
 	}
@@ -1097,7 +1130,7 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.getPeriodNames = function(m, alwaysFull, fullname){
 		alwaysFull=alwaysFull==null?true:alwaysFull;
 		m=m==null?36:m;
-		var month = 3;
+		var month = 9;
 		var year = 18;
 		var list = [];
 		for(var i = 0;i<m;i++){
@@ -1130,6 +1163,9 @@ mainApp.controller('ctrl', function ($http, $scope, $timeout, $interval) {
 	me.filters = {
 		PeriodoTitle:function(){
 			return me.filters.Periodo[me.selectedPeriod].Title.toLowerCase();},
+		PeriodoLen:function(){
+			return me.filters.Periodo[me.selectedPeriod].len;
+		},
 		Periodo : [
 			{id:0,len:12, Title:'Últimos 12 meses', visible:true, default:true},
 			{id:1,len:24, Title:'Últimos 24 meses', visible:true, default:true},

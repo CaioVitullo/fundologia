@@ -1,47 +1,48 @@
 <!DOCTYPE html>
-<html  xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" ng-app="mainApp">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" ng-app="mainApp">
+
 <head>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115170636-1"></script>
 	<script>
-		if(window.location.href.indexOf('dev.') ==-1 && window.location.href.indexOf('github.io')==-1){
+		if (window.location.href.indexOf('dev.') == -1 && window.location.href.indexOf('github.io') == -1) {
 			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
+			function gtag() { dataLayer.push(arguments); }
 			gtag('js', new Date());
 
 			gtag('config', 'UA-115170636-1');
-		}else{
-			ga = function(p1, p2){console.log(p1, p2)};
+		} else {
+			ga = function (p1, p2) { console.log(p1, p2) };
 		}
 	</script>
 
 	<script>
-		if(window.location.href.indexOf('dev.') ==-1 && window.location.href.indexOf('github.io')==-1){
+		if (window.location.href.indexOf('dev.') == -1 && window.location.href.indexOf('github.io') == -1) {
 			window['_fs_debug'] = false;
 			window['_fs_host'] = 'fullstory.com';
 			window['_fs_org'] = 'AWRMP';
 			window['_fs_namespace'] = 'FS';
-			(function(m,n,e,t,l,o,g,y){
-				if (e in m) {if(m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].');} return;}
-				g=m[e]=function(a,b){g.q?g.q.push([a,b]):g._api(a,b);};g.q=[];
-				o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
-				y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
-				g.identify=function(i,v){g(l,{uid:i});if(v)g(l,v)};g.setUserVars=function(v){g(l,v)};
-				y="rec";g.shutdown=function(i,v){g(y,!1)};g.restart=function(i,v){g(y,!0)};
-				g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
-				g.clearUserCookie=function(){};
-			})(window,document,window['_fs_namespace'],'script','user');
+			(function (m, n, e, t, l, o, g, y) {
+				if (e in m) { if (m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].'); } return; }
+				g = m[e] = function (a, b) { g.q ? g.q.push([a, b]) : g._api(a, b); }; g.q = [];
+				o = n.createElement(t); o.async = 1; o.src = 'https://' + _fs_host + '/s/fs.js';
+				y = n.getElementsByTagName(t)[0]; y.parentNode.insertBefore(o, y);
+				g.identify = function (i, v) { g(l, { uid: i }); if (v) g(l, v) }; g.setUserVars = function (v) { g(l, v) };
+				y = "rec"; g.shutdown = function (i, v) { g(y, !1) }; g.restart = function (i, v) { g(y, !0) };
+				g.identifyAccount = function (i, v) { o = 'account'; v = v || {}; v.acctId = i; g(o, v) };
+				g.clearUserCookie = function () { };
+			})(window, document, window['_fs_namespace'], 'script', 'user');
 		}
-		
+
 	</script>
 
 	<title>fundologia</title>
 	<meta charset="utf-8">
 
-	
+
 	<meta name="description" content="Pesquise e Compare fundos de investimento. Todas as informações que você precisa para escolher seu fundo de investimento num lugar so.">
-  	<meta name="keywords" content="fundos, compare fundos, fundo, investimento, fundos de investimento, rentabilidade, rentabilidade fundos, melhor investimento, onde investir, qual melhor investimento, onde devo investir, dinheiro, bovespa, ibovespa, compare rentabilidade, CDI">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<meta name="keywords" content="fundos, compare fundos, fundo, investimento, fundos de investimento, rentabilidade, rentabilidade fundos, melhor investimento, onde investir, qual melhor investimento, onde devo investir, dinheiro, bovespa, ibovespa, compare rentabilidade, CDI">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
 
 	<meta property="og:title" content="Fundologia">
 	<meta property="og:description" content="Pesquise e Compare fundos de investimento. ">
@@ -49,14 +50,14 @@
 	<meta property="og:url" content="http://www.fundologia.com.br">
 	<meta property="og:type" content="article" />
 	<meta property="og:locale" content="pt_BR" />
-	<meta name="twitter:card" content="summary_large_image">	
+	<meta name="twitter:card" content="summary_large_image">
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
-	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-	
-    <!-- Favicons -->
+	<link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Favicons -->
 	<link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
@@ -66,7 +67,7 @@
 	<link rel="apple-touch-icon" sizes="144x144" href="img/apple-icon-144x144.png">
 	<link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152x152.png">
 	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="img/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="img/android-icon-192x192.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
@@ -75,549 +76,552 @@
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 	<style>
-		.txtRotateh1{
-		font-family: 'Raleway', sans-serif;
-		padding: 1em 2em;
-		font-size: 2rem;
-		background: #222;
-		color: #30ad1b;
-		font-weight: 200;
-		margin: 0.4em 0;
-		position: fixed;
-		bottom: 0px;
-		width: 100%;
-		
-	  }
-	  .pularintro{
-		color:#878788;
-		font-size: 24px;
-		margin-top: 10px;
-		cursor: pointer;
-	  }
+		.txtRotateh1 {
+			font-family: 'Raleway', sans-serif;
+			padding: 1em 2em;
+			font-size: 2rem;
+			background: #222;
+			color: #30ad1b;
+			font-weight: 200;
+			margin: 0.4em 0;
+			position: fixed;
+			bottom: 0px;
+			width: 100%;
+
+		}
+
+		.pularintro {
+			color: #878788;
+			font-size: 24px;
+			margin-top: 10px;
+			cursor: pointer;
+		}
 	</style>
-    <!-- Favicons -->
-	
+	<!-- Favicons -->
+
 </head>
+
 <body class="noselect">
 	<div class="rotate" onclick="removeRotateGif()"></div>
-	
-<div ng-controller="ctrl" id="mainCtrl" class="mainContent">
-	
-	<div class="navbar-fixed" ng-init="loadCtrl()">
-		<ul id="dropdown1" class="dropdown-content" style="margin-top:70px;">
-			<li ng-repeat="item in walletNamesList"><a ng-click="loadWallet(item)" ng-bind="item"></a></li>
-			<li class="divider"></li>
-			<li><a ng-click="showMyWalletDlg(true)">Criar Nova</a></li>
-		  </ul>
-		<nav class="nav-extended">
-		 <div class="nav-wrapper container">
-		  
-		  <a data-activates="slide-out" id="mobileMenu" class="button-collapse"><i class="material-icons cWhite"  >menu</i></a>
-		  <label class="mainHeader" >&nbsp;</label> 
-		  <span id="subtitle" class="hide-on-small-and-down">o fim do achismo!</span>
-		  
-		  <ul id="nav-mobile" class="right hide-on-med-and-down">
-			 <li></li>
-			 <!-- <li><a ng-click="openModalOQue()">Como funciona?</a></li> -->
-			 <li><a ng-click="showRankDialog()">Ranking</a></li>
-			 <li><a ng-click="openDlgOverview()">Visão geral</a></li>
-			 <li><a ng-click="showPreCompareDialog()">Compare fundos</a></li>
-			 <li ng-show="isDev && walletNamesList.length==0"><a ng-click="showMyWalletDlg()">Minha carteira</a></li>
-			 <li ng-show="isDev && walletNamesList.length>0"><a class="dropdown-trigger" data-activates="dropdown1">Minha carteira<i class="material-icons right">arrow_drop_down</i></a></li>
-		  </ul>
-		  <ul class="side-nav" id="slide-out" >
-			<!-- <li><a href="#sobre">O que é?</a></li>
+
+	<div ng-controller="ctrl" id="mainCtrl" class="mainContent">
+
+		<div class="navbar-fixed" ng-init="loadCtrl()">
+			<ul id="dropdown1" class="dropdown-content" style="margin-top:70px;">
+				<li ng-repeat="item in walletNamesList">
+					<a ng-click="loadWallet(item)" ng-bind="item"></a>
+				</li>
+				<li class="divider"></li>
+				<li>
+					<a ng-click="showMyWalletDlg(true)">Criar Nova</a>
+				</li>
+			</ul>
+			<nav class="nav-extended">
+				<div class="nav-wrapper container">
+
+					<a data-activates="slide-out" id="mobileMenu" class="button-collapse">
+						<i class="material-icons cWhite">menu</i>
+					</a>
+					<label class="mainHeader">&nbsp;</label>
+					<span id="subtitle" class="hide-on-small-and-down">o fim do achismo!</span>
+
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li></li>
+						<!-- <li><a ng-click="openModalOQue()">Como funciona?</a></li> -->
+						<li>
+							<a ng-click="showRankDialog()">Ranking</a>
+						</li>
+						<li>
+							<a ng-click="openDlgOverview()">Visão geral</a>
+						</li>
+						<li>
+							<a ng-click="showPreCompareDialog()">Compare fundos</a>
+						</li>
+						<li ng-show="isDev && walletNamesList.length==0">
+							<a ng-click="showMyWalletDlg()">Minha carteira</a>
+						</li>
+						<li ng-show="isDev && walletNamesList.length>0">
+							<a class="dropdown-trigger" data-activates="dropdown1">Minha carteira
+								<i class="material-icons right">arrow_drop_down</i>
+							</a>
+						</li>
+					</ul>
+					<ul class="side-nav" id="slide-out">
+						<!-- <li><a href="#sobre">O que é?</a></li>
 			<li><a href="#comofunciona">Como funciona</a></li> -->
-			<li class="show-on-smaller-992"  ng-click="mobSelectPage('main')"><a><i class="material-icons">arrow_back</i></a></li>
-			<li class="show-on-smaller-992"  ng-click="mobSelectPage('filter')"><a>Filtro</a></li>
-			<!-- <li class="show-on-smaller-992" ng-click="mobSelectPage('histogram')"><a>Detalhe do fundo</a></li>
+						<li class="show-on-smaller-992" ng-click="mobSelectPage('main')">
+							<a>
+								<i class="material-icons">arrow_back</i>
+							</a>
+						</li>
+						<li class="show-on-smaller-992" ng-click="mobSelectPage('filter')">
+							<a>Filtro</a>
+						</li>
+						<!-- <li class="show-on-smaller-992" ng-click="mobSelectPage('histogram')"><a>Detalhe do fundo</a></li>
 			<li class="show-on-smaller-992"><a href='whatsapp://send?text=Pesquise e compare fundos de investimento: https://caiovitullo.github.io/fundologia/'>Compartilhar no WhatsApp</a></li> -->
-		  </ul>
-		 </div>
-		</nav>
-	</div>
-	<div class="navbar-fixed hide-on-med-and-down " style="display:none;" >
-		<nav class="nav-extended sub-menu">
-			<div class="nav-wrapper container">
-			
-			</div>
-		</nav>
-	</div>
-	<div class="row">
-		
-	</div>
-	<div class="row">
-		<div class="col xl2 l2 s12 " id="leftMenu" ng-class="{'hide-on-med-and-down':mobileSelectedPage!='filter'}">
-			<div class="section fixed ">
-					<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='filter'" class="show-on-small"><i class="material-icons">arrow_back</i></a>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="navbar-fixed hide-on-med-and-down " style="display:none;">
+			<nav class="nav-extended sub-menu">
+				<div class="nav-wrapper container">
+
+				</div>
+			</nav>
+		</div>
+
+		<div class="row">
+			<div class="col xl2 l2 s12  m12 " id="leftMenu" ng-class="{'hide-on-med-and-down':mobileSelectedPage!='filter'}">
+				<div class="section fixed ">
+					<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='filter'" class="show-on-small">
+						<i class="material-icons">arrow_back</i>
+					</a>
 					<h5 class="filterTitle">Período </h5>
-					<div class="tsHeight" >
-							<p ng-repeat="filterItem in filters.Periodo.equals({visible:true}) track by filterItem.id" >
-								<input class="with-gap" type="radio" name="filterPeriodo" ng-class="{'filled-in':filterItem.checked}" id="filterPeriodo_{{::filterItem.id}}" ng-value="filterItem.id" ng-change="$parent.changePeriodo()" ng-model="$parent.selectedPeriod"  />
-								<label for="filterPeriodo_{{::filterItem.id}}" ng-class="{'blinkMe cOrange':$index==0 && $parent.blinkPeriod12==true}" ng-bind="::filterItem.Title">Renda Fixa</label>
-							</p>
-							<!-- <p class="pUpper">
+					<div class="tsHeight">
+						<p ng-repeat="filterItem in filters.Periodo.equals({visible:true}) track by filterItem.id">
+							<input class="with-gap" type="radio" name="filterPeriodo" ng-class="{'filled-in':filterItem.checked}" id="filterPeriodo_{{::filterItem.id}}"
+							 ng-value="filterItem.id" ng-change="$parent.changePeriodo()" ng-model="$parent.selectedPeriod" />
+							<label for="filterPeriodo_{{::filterItem.id}}" ng-class="{'blinkMe cOrange':$index==0 && $parent.blinkPeriod12==true}" ng-bind="::filterItem.Title">Renda Fixa</label>
+						</p>
+						<!-- <p class="pUpper">
 								<a class="linkSeeMore" ng-click="showAllFilterPeriodoOn = toggleFilter(showAllFilterPeriodoOn, filters.Periodo)" ng-class="{seeMore:showAllFilterPeriodoOn, seeLess:!showAllFilterPeriodoOn}"></a>
 							</p> -->
 					</div>
-				
-				<div class="divider"></div>
-				<h5 class="filterTitle">Status:</h5>
-				<div class="switch" ng-class="{blinkSwith:blinkLock, blinkMe:blinkLock}">
-					<label>
-					  <input type="checkbox" ng-model="filterHideClosed" ng-checked="filterHideClosed">
-					  <span class="lever"></span>
-					  <em  title="Mostrar apenas os fundos que estão liberados para aplicação." >Abertos apenas</em>
-					</label>
-				</div>
-				<div class="switch" ng-class="{blinkSwith:blinkRestricao, blinkMe:blinkRestricao}">
-					<label>
-					  <input type="checkbox" ng-model="filterHideRestrict" ng-checked="filterHideRestrict">
-					  <span class="lever"></span>
-					  <em title="Mostrar apenas aqueles fundos que não são destinados à investidores qualificados">Sem restrição</em>
-					</label>
-				</div>
 
-				
-				
+					<div class="divider"></div>
+					<h5 class="filterTitle">Status:</h5>
+					<div class="switch" ng-class="{blinkSwith:blinkLock, blinkMe:blinkLock}">
+						<label>
+							<input type="checkbox" ng-model="filterHideClosed" ng-checked="filterHideClosed">
+							<span class="lever"></span>
+							<em title="Mostrar apenas os fundos que estão liberados para aplicação.">Abertos apenas</em>
+						</label>
+					</div>
+					<div class="switch" ng-class="{blinkSwith:blinkRestricao, blinkMe:blinkRestricao}">
+						<label>
+							<input type="checkbox" ng-model="filterHideRestrict" ng-checked="filterHideRestrict">
+							<span class="lever"></span>
+							<em title="Mostrar apenas aqueles fundos que não são destinados à investidores qualificados">Sem restrição</em>
+						</label>
+					</div>
 
-				<div class="divider"></div>
-				<h5 class="filterTitle">Classificação</h5>
-				<div class="tsHeight" ng-class="{tsOpened:showAllFilterTypeOn}">
-					<p ng-repeat="filterItem in filters.Tipo.equals({visible:true})" >
-						<input  type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterTipo_{{::filterItem.id}}" ng-model="filterItem.checked" ng-click="$parent.checkFilterTopShow(filters.Tipo,showAllFilterTypeOn, 'Classificacao')" ng-checked="filterItem.checked" />
-						<label for="filterTipo_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+
+
+
+					<div class="divider"></div>
+					<h5 class="filterTitle">Classificação</h5>
+					<div class="tsHeight" ng-class="{tsOpened:showAllFilterTypeOn}">
+						<p ng-repeat="filterItem in filters.Tipo.equals({visible:true})">
+							<input type="checkbox" ng-class="{'filled-in':filterItem.checked}" id="filterTipo_{{::filterItem.id}}" ng-model="filterItem.checked"
+							 ng-click="$parent.checkFilterTopShow(filters.Tipo,showAllFilterTypeOn, 'Classificacao')" ng-checked="filterItem.checked"
+							/>
+							<label for="filterTipo_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+						</p>
+						<p class="pUpper">
+							<a class="linkSeeMore" ng-click="showAllFilterTypeOn = toggleFilter(showAllFilterTypeOn, filters.Tipo)" ng-class="{seeMore:showAllFilterTypeOn, seeLess:!showAllFilterTypeOn}"></a>
+						</p>
+					</div>
+
+
+					<div class="divider"></div>
+
+					<h5 class="filterTitle">
+						Aplicação inicial(R$):
+					</h5>
+					<p class="checkList" ng-repeat="filterItem in filters.InitialValue.equals({visible:true})">
+						<input type="checkbox" ng-click="$parent.changeInitialValue(filterItem)" ng-disabled="filterItem.disabled" ng-class="{'filled-in':filterItem.checked}"
+						 id="filterInitValue_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
+						<label for="filterInitValue_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
 					</p>
 					<p class="pUpper">
-						<a class="linkSeeMore" ng-click="showAllFilterTypeOn = toggleFilter(showAllFilterTypeOn, filters.Tipo)" ng-class="{seeMore:showAllFilterTypeOn, seeLess:!showAllFilterTypeOn}"></a>
+						<a class="linkSeeMore" ng-click="showAllFilterInitValueOn = toggleFilter(showAllFilterInitValueOn, filters.InitialValue)"
+						 ng-class="{seeMore:showAllFilterInitValueOn, seeLess:!showAllFilterInitValueOn}"></a>
+						<a class="linkSeeMore" ng-show="filters.InitialValue.any({checked:false})" ng-click="filters.InitialValue.set({checked:true})"
+						 style="margin-left:5px;"> | marcar todos</a>
 					</p>
-				</div>
-				
+					<label title="veja mais informaçoes sobre Aplicação inicial." ng-click="openChart('Aplicação inicial', 'initialValue', 'Será que um fundo de investimento que tem uma aplicação inicial maior tambêm terá um retorno maior?')">
+						<i class="material-icons tiny ">insert_chart</i>
+						Gráfico Aplic. Inicial vs Rentabilidade
+					</label>
 
-				<div class="divider"></div>
+					<div class="divider"></div>
 
-				<h5 class="filterTitle">
-					Aplicação inicial(R$):
-				</h5>
-				<p class="checkList" ng-repeat="filterItem in filters.InitialValue.equals({visible:true})" >
-						<input type="checkbox" ng-click="$parent.changeInitialValue(filterItem)" ng-disabled="filterItem.disabled"  ng-class="{'filled-in':filterItem.checked}"  id="filterInitValue_{{filterItem.id}}" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
-						<label for="filterInitValue_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
-				</p>
-				<p class="pUpper">
-					<a class="linkSeeMore" ng-click="showAllFilterInitValueOn = toggleFilter(showAllFilterInitValueOn, filters.InitialValue)" ng-class="{seeMore:showAllFilterInitValueOn, seeLess:!showAllFilterInitValueOn}"></a>	
-					<a class="linkSeeMore" ng-show="filters.InitialValue.any({checked:false})" ng-click="filters.InitialValue.set({checked:true})" style="margin-left:5px;" >  |  marcar todos</a>
-				</p>
-				<label title="veja mais informaçoes sobre Aplicação inicial." ng-click="openChart('Aplicação inicial', 'initialValue', 'Será que um fundo de investimento que tem uma aplicação inicial maior tambêm terá um retorno maior?')">
-					<i  class="material-icons tiny " >insert_chart</i>
-					Gráfico Aplic. Inicial vs Rentabilidade
-				</label>
-
-				<div class="divider"></div>
-
-				<h5 class="filterTitle">
-					Resgate em até: 
-				</h5>
-				<p class="sliderTitle sliderColor"><em ng-show="withdrawDays<100">em até </em>{{withdrawDays}} dia{{withdrawDays!=1?'s':''}} <em ng-show="withdrawDays==100"> ou mais</em></p>
-				<p class="range-field sliderP">
-					<input type="range" ng-model="withdrawDays"  min="0" max="100" />
-				</p>
-				<label title="Pode existir alguma relação entre o tempo para resgate e a rentabilidade?" ng-click="openChart('Resgate(dias)', 'withdrawDays', 'Pode existir alguma relação entre o tempo para resgate e a rentabilidade?')">
-					<i  class="material-icons tiny">insert_chart</i> 
-					Gráfico Resgate vs Rentabilidade
-				</label>
-				
-
-				<div class="divider"></div>
-
-				<h5 class="filterTitle">
-					Taxa de Adm até: 
-				</h5>
-				<p class="sliderTitle sliderColor"><em ng-show="admTx<4">até </em> {{admTx}}% <em ng-show="admTx==4"> ou mais</em></p>
-				<p class="range-field sliderP">
-					<input type="range" ng-model="admTx"  min="0" max="4" step="0.1" />
-				</p>
-				<label title="Os fundos com maior taxa Administrativa tiveram rendimento melhor nos últimos meses? Este gráfico vai te ajudar a descobrir!" ng-click="openChart('Taxa Administrativa', 'admTax', 'Os fundos que cobram mais taxa Administrativa tiveram rendimento melhor nos últimos meses? Este gráfico vai te ajudar a descobrir!')">
-					<i class="material-icons tiny " >insert_chart</i>
-					Gráfico Taxa adm vs Rentabilidade
-				</label>
-
-				<div class="divider"></div>
-
-				<h5 class="filterTitle">
-					Volatilidade: 
-				</h5>
-				<p class="sliderTitle sliderColor"><em ng-show="volatilidade<maxVolatilidade">até </em> {{volatilidade}}% <em ng-show="volatilidade==maxVolatilidade"> ou mais</em></p>
-				<p class="range-field sliderP">
-					<input type="range" ng-model="volatilidade"  min="0" max="{{maxVolatilidade}}" step="0.5" />
-				</p>
-				<label title="Risco vs Retorno. Até quanto estou disposto a me arriscar?" ng-click="openChart('Volatilidade', 'volatilidadeAnual', 'Risco vs Retorno. Até quanto estou disposto a me arriscar?')">
-					<i class="material-icons tiny " >insert_chart</i>
-					Gráfico Volatilidade vs Rentabilidade
-				</label>
-
-				<div class="divider"></div>
-
-				<h5 class="filterTitle">
-					Patrimônio até:
-				</h5>
-				<p class="checkList" ng-repeat="filterItem in filters.volume.equals({visible:true})" >
-						<input type="checkbox"  ng-class="{'filled-in':filterItem.checked}" id="filterVolume_{{::filterItem.id}}" ng-click="checkFilterTopShow(filters.volume,showAllFilterVolumeOn, 'Volume')" ng-model="filterItem.checked" ng-checked="filterItem.checked" />
-						<label for="filterVolume_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
-				</p>
-				<p class="pUpper">
-					<a class="linkSeeMore" ng-click="showAllFilterVolumeOn = toggleFilter(showAllFilterVolumeOn, filters.volume)" ng-class="{seeMore:showAllFilterVolumeOn, seeLess:!showAllFilterVolumeOn}"></a>	
-				</p>
-				<label title="Este gráfico lhe ajudará a entender se o volume de um fundo pode impactar no seu rendimento." ng-click="openChart('Patrimônio', 'volume', 'Fundo que cobra mais taxa Administrativa rende mais?')">
-					<i class="material-icons tiny " >insert_chart</i>
-					Gráfico Patrimônio vs Rentabilidade
-				</label>
-				
-				<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='filter'" class="waves-effect waves-light btn-large w100">Aplicar filtros</a>
-					
-			</div>
-			
-		</div>
-		<div class="col xl8 l8 m12 s12 " ng-hide="mobileSelectedPage != 'main'">
-			<section class="row" id="tables">
-				<div >
-					<div class="col s12  head-form ">
-						<div class="input-field ">
-							<div class="search-wrapper card">
-								<input class="bbn" type="text" ng-model="searchTxt" id="icon_prefix">
-								<i class="iconInside material-icons" ng-show="searchTxt.length==0">search</i>
-								<i class="iconInside material-icons" ng-show="searchTxt.length>0" title="limpar" ng-click="searchTxt=''">clear</i>
-								<label for="icon_prefix" style="left:10px;" >Pesquise e compare fundos de investimento</label>  
-							</div>
-							<!-- <input id="icon_prefix" type="text" ng-model="searchTxt" class="validate"><i class="material-icons ">search</i>
-							<label for="icon_prefix" ng-bind="::searchFieldTxt">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>  -->
-						</div>
-					
+					<h5 class="filterTitle">
+						Resgate em até:
+					</h5>
+					<p class="sliderTitle sliderColor">
+						<em ng-show="withdrawDays<100">em até </em>{{withdrawDays}} dia{{withdrawDays!=1?'s':''}}
+						<em ng-show="withdrawDays==100"> ou mais</em>
+					</p>
+					<div class="histFilter">
+						<ul>
+							<li style="height:{{i.h}}%" class="{{i.c}}" ng-repeat="i in resgateFilterHist"></li>
+						</ul>
 					</div>
-					<div class="col s12 noPadding">
-						<div class="row">
-							
-							<div class="input-field col m12 s12 l12 noPadding minTableHeight">
-							<table id="mainTable" class="highlight" ng-class="{comparandoFundo:fundsToCompare.length==1 || highLightCompareDialog==true || compareDlgStillOpen == true}">
-								<thead >
-									<tr>
-										<th  class="hide-on-smaller-400 " ng-class="{currentSortCol:currentSortCol==0}" >
-											<span ng-click="setCurrentSort(0)">Rank</span>
-											<i class="tiny material-icons"  title="Quer entender melhor nosso ranking? Clique aqui." ng-click="showRankDialog()" >info_outline</i> 
-										</th>
-										<th style="text-align:left;"  ng-class="{currentSortCol:currentSortCol==1}" >Fundo</th>
-										<th ng-click="setCurrentSort(2)" ng-class="{currentSortCol:currentSortCol==2}" class="hide-on-small-and-down "  title="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo.&#10;Clique para ordenar">
-											Meses positivo
-										</th>
-										<th ng-click="setCurrentSort(3)" ng-class="{currentSortCol:currentSortCol==3}" class=" hide-on-small-and-down "  title="Média dos resultados positivos dividida pela média dos resultados negativos.&#10;Clique para ordenar" >Rel. Ganho/ Perda</th>
-										<th ng-click="setCurrentSort(4)" ng-class="{currentSortCol:currentSortCol==4}" class="show-column-largar-1200" title="Quantidade de meses(em porcetagem) que o fundo teve rendimento superior ao CDI .&#10;Clique para ordenar ">Meses acima CDI</th>
-										<th ng-click="setCurrentSort(5)" ng-class="{currentSortCol:currentSortCol==5}" class="hide-on-small-and-down" title="Volatilidade anualizada referente aos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Volatilidade</th>
-										<th ng-click="setCurrentSort(6)" ng-class="{currentSortCol:currentSortCol==6}" class="show-column-largar-1300" title="Índice Sharpe CDI {{filters.PeriodoTitle()}} &#10;Quanto de retorno foi entregue acima do CDI em razão do risco assumido.&#10; Clique para ordenar.">Sharp CDI</th>
-										<th ng-click="setCurrentSort(7)" ng-class="{currentSortCol:currentSortCol==7}" class="hide-on-smaller-400" title="Taxa Administrativa.&#10;Clique para ordenar">Tx Adm</th>
-										<th ng-click="setCurrentSort(8)" ng-class="{currentSortCol:currentSortCol==8}" title="Rentabilidade acumulada nos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Rentabilidade período</th>
-										
-									</tr>
-								</thead>
-		
-								<tbody>
-									<tr class="tableRow"
-										ng-class="{hoverRow:row.uniqueID==$parent.currentDetailRow, fullsquare:row.selectedToCompare}" 
-										ng-repeat="row in getMainList()" 
-										ng-click="selectRow(row)"
-										ng-mouseover="showRowDetail(row)">
-										<td 
-											ng-class="{
+					<p class="range-field sliderP">
+						<input type="range" ng-model="withdrawDays" min="0" max="100" />
+					</p>
+					<label title="Pode existir alguma relação entre o tempo para resgate e a rentabilidade?" ng-click="openChart('Resgate(dias)', 'withdrawDays', 'Pode existir alguma relação entre o tempo para resgate e a rentabilidade?')">
+						<i class="material-icons tiny">insert_chart</i>
+						Gráfico Resgate vs Rentabilidade
+					</label>
+
+
+					<div class="divider"></div>
+
+					<h5 class="filterTitle">
+						Taxa de Adm até:
+					</h5>
+					<p class="sliderTitle sliderColor">
+						<em ng-show="admTx<4">até </em> {{admTx}}%
+						<em ng-show="admTx==4"> ou mais</em>
+					</p>
+					<div class="histFilter">
+						<ul>
+							<li style="height:{{i.h}}%" class="{{i.c}}" ng-repeat="i in txAdmFilterHist"></li>
+						</ul>
+					</div>
+					<p class="range-field sliderP">
+						<input type="range" ng-model="admTx" min="0" max="4" step="0.1" />
+					</p>
+					<label title="Os fundos com maior taxa Administrativa tiveram rendimento melhor nos últimos meses? Este gráfico vai te ajudar a descobrir!"
+					 ng-click="openChart('Taxa Administrativa', 'admTax', 'Os fundos que cobram mais taxa Administrativa tiveram rendimento melhor nos últimos meses? Este gráfico vai te ajudar a descobrir!')">
+						<i class="material-icons tiny ">insert_chart</i>
+						Gráfico Taxa adm vs Rentabilidade
+					</label>
+
+					<div class="divider"></div>
+
+					<h5 class="filterTitle">
+						Volatilidade:
+					</h5>
+					<p class="sliderTitle sliderColor">
+						<em ng-show="volatilidade<maxVolatilidade">até </em> {{volatilidade}}%
+						<em ng-show="volatilidade==maxVolatilidade"> ou mais</em>
+					</p>
+					<div class="histFilter">
+						<ul>
+							<li style="height:{{i.h}}%" class="{{i.c}}" ng-repeat="i in volatilidadeFilterHist"></li>
+						</ul>
+					</div>
+					<p class="range-field sliderP">
+						<input type="range" ng-model="volatilidade" min="0" max="{{maxVolatilidade}}" step="0.5" />
+					</p>
+					<label title="Risco vs Retorno. Até quanto estou disposto a me arriscar?" ng-click="openChart('Volatilidade', 'volatilidadeAnual', 'Risco vs Retorno. Até quanto estou disposto a me arriscar?')">
+						<i class="material-icons tiny ">insert_chart</i>
+						Gráfico Volatilidade vs Rentabilidade
+					</label>
+
+					<div class="divider"></div>
+
+					<h5 class="filterTitle">
+						Patrimônio até:
+					</h5>
+					<p class="checkList" ng-repeat="filterItem in filters.volume.equals({visible:true})">
+						<input type="checkbox" ng-class="{'filled-in':filterItem.checked}" id="filterVolume_{{::filterItem.id}}" ng-click="checkFilterTopShow(filters.volume,showAllFilterVolumeOn, 'Volume')"
+						 ng-model="filterItem.checked" ng-checked="filterItem.checked" />
+						<label for="filterVolume_{{::filterItem.id}}" ng-bind="::filterItem.Title">Renda Fixa</label>
+					</p>
+					<p class="pUpper">
+						<a class="linkSeeMore" ng-click="showAllFilterVolumeOn = toggleFilter(showAllFilterVolumeOn, filters.volume)" ng-class="{seeMore:showAllFilterVolumeOn, seeLess:!showAllFilterVolumeOn}"></a>
+					</p>
+					<label title="Este gráfico lhe ajudará a entender se o volume de um fundo pode impactar no seu rendimento." ng-click="openChart('Patrimônio', 'volume', 'Fundo que cobra mais taxa Administrativa rende mais?')">
+						<i class="material-icons tiny ">insert_chart</i>
+						Gráfico Patrimônio vs Rentabilidade
+					</label>
+
+					<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='filter'" class="waves-effect waves-light btn-large w100">Aplicar filtros</a>
+
+				</div>
+
+			</div>
+			<div class="col xl8 l8 m12 s12 " ng-hide="mobileSelectedPage != 'main'">
+				<section class="row" id="tables">
+					<div>
+						<div class="col s12  head-form ">
+							<div class="input-field ">
+								<div class="search-wrapper card">
+									<input class="bbn" type="text" ng-model="searchTxt" id="icon_prefix">
+									<i class="iconInside material-icons" ng-show="searchTxt.length==0">search</i>
+									<i class="iconInside material-icons" ng-show="searchTxt.length>0" title="limpar" ng-click="searchTxt=''">clear</i>
+									<label for="icon_prefix" style="left:10px;">Pesquise e compare fundos de investimento</label>
+								</div>
+								<!-- <input id="icon_prefix" type="text" ng-model="searchTxt" class="validate"><i class="material-icons ">search</i>
+							<label for="icon_prefix" ng-bind="::searchFieldTxt">Pesquise e compare os melhores fundos de investimento para o seu perfil</label>  -->
+							</div>
+
+						</div>
+						<div class="col s12 noPadding">
+							<div class="row pRel">
+								<div class="pAbs filterChipWrapper">
+									<div class="tag" ng-show="selectedChartID.length > 0">
+										Items selecionados no gráfico
+										<i class="close material-icons" ng-click="cleanChartFilter()">close</i>
+									</div>
+									<div class="tag" ng-show="histogramItemFilter != null">
+										Filtro Histograma
+										<i class="close material-icons" ng-click="cleanHistFilter()">close</i>
+									</div>
+								</div>
+
+								<div class="input-field col m12 s12 l12 noPadding minTableHeight">
+									<table id="mainTable" class="highlight" ng-class="{comparandoFundo:fundsToCompare.length==1 || highLightCompareDialog==true || compareDlgStillOpen == true}">
+										<thead>
+											<tr>
+												<th class="hide-on-smaller-400 " ng-class="{currentSortCol:currentSortCol==0}">
+													<span ng-click="setCurrentSort(0)" title="Quer entender melhor nosso ranking? Clique no botão Ranking no menu superior">Rank</span>
+												</th>
+												<th style="text-align:left;" ng-class="{currentSortCol:currentSortCol==1}">Fundo</th>
+												<th ng-click="setCurrentSort(2)" ng-class="{currentSortCol:currentSortCol==2}" class="hide-on-small-and-down " title="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo.&#10;Clique para ordenar">
+													Meses positivo
+												</th>
+												<th ng-click="setCurrentSort(3)" ng-class="{currentSortCol:currentSortCol==3}" class=" hide-on-small-and-down " title="Média dos resultados positivos dividida pela média dos resultados negativos.&#10;Clique para ordenar">Rel. Ganho/ Perda</th>
+												<th ng-click="setCurrentSort(4)" ng-class="{currentSortCol:currentSortCol==4}" class="show-column-largar-1200" title="Quantidade de meses(em porcetagem) que o fundo teve rendimento superior ao CDI .&#10;Clique para ordenar ">Meses acima CDI</th>
+												<th ng-click="setCurrentSort(5)" ng-class="{currentSortCol:currentSortCol==5}" class="hide-on-small-and-down" title="Volatilidade anualizada referente aos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Volatilidade</th>
+												<th ng-click="setCurrentSort(6)" ng-class="{currentSortCol:currentSortCol==6}" class="show-column-largar-1300" title="Índice Sharpe CDI {{filters.PeriodoTitle()}} &#10;Quanto de retorno foi entregue acima do CDI em razão do risco assumido.&#10; Clique para ordenar.">Sharp CDI</th>
+												<th ng-click="setCurrentSort(7)" ng-class="{currentSortCol:currentSortCol==7}" class="hide-on-smaller-400" title="Taxa Administrativa.&#10;Clique para ordenar">Tx Adm</th>
+												<th ng-click="setCurrentSort(8)" ng-class="{currentSortCol:currentSortCol==8}" title="Rentabilidade acumulada nos {{filters.PeriodoTitle()}}.&#10;Clique para ordenar">Rentabilidade período</th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr class="tableRow" ng-class="{hoverRow:row.uniqueID==$parent.currentDetailRow, fullsquare:row.selectedToCompare}" ng-repeat="row in getMainList()"
+											 ng-click="selectRow(row)" ng-mouseover="showRowDetail(row)">
+												<td ng-class="{
 												'acao':row.info.isAcao, 
 												'rendaFixa':row.info.isRendaFixa, 
 												'multiMercado':row.info.isMultimercado, 
 												'cambial':row.info.isCambial, 
 												'exterior':row.info.isExterior,
-												'notset':row.info.isNotSet}" 
-											class="noselect hide-on-smaller-400" 
-											title="{{row.figures[selectedPeriod].totalRank}} pontos somados" 
-											ng-bind="row.figures[selectedPeriod].rank">Rank</td>
+												'notset':row.info.isNotSet}" class="noselect hide-on-smaller-400" title="{{row.figures[selectedPeriod].totalRank}} pontos somados"
+												 ng-bind="row.figures[selectedPeriod].rank">Rank</td>
 
-										<td class="cutText noselect" >
-											<span title="{{row.name}}" class="fundName" ng-click="openRankDialog(row, true)"  title="Tabela de rentabilidade completa!" ng-bind-html="row.name|highlight:searchTxt">{{row.name}}</span>
-											<i class="colorIcon tiny material-icons " ng-show="row.info.restrict" ng-mouseover="$parent.blinkRestricao=true" ng-mouseleave="$parent.blinkRestricao=false"  title="Fundo destinado à investidores qualificados.&#10;Ative o filtro 'Sem restrição' no menu lateral esquerdo para ver apenas os fundos que não são restritos apenas à investidores qualificados.">monetization_on</i>
-											<i class="colorIcon tiny material-icons " ng-mouseover="$parent.blinkLock = true" data-ng-mouseleave="$parent.blinkLock = false" ng-show="row.info.isClosed"  title="Fundo fechado.&#10;Ative o filtro 'Abertos apenas' no menu lateral esquerdo para ver apenas os fundos que estão disponíveis para aplicação.">lock</i>
-											<em class="hidenIcon pipeSep hide-on-med-and-down" >|</em>
-											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon compareIcon " ng-class="{blinkHard:compareDlgStillOpen==true && fundsToCompare.length==0}" ng-click="rowClick(row, this)"   title="Comparare este fundos com outros!">compare_arrows</i>
-											<em class="hidenIcon pipeSep hide-on-med-and-down" ng-show="isDev">|</em>
-											<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon " ng-show="isDev" ng-click="addToWallet(row)"   title="Adicione esse fundo à sua carteira">playlist_add</i>
-										</td>
-										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
-										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
-										<td class="noselect show-column-largar-1200" ng-bind="row.figures[selectedPeriod].monthAboveCDI|percentage:2"></td>
-										<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].volatilidadeAnual|percentage:2"></td>
-										<td class="noselect show-column-largar-1300" ng-bind="row.figures[selectedPeriod].sharpCDI"></td>
-										<td class="noselect hide-on-smaller-400" ng-bind="row.info.admTax| percentage:2"></td>
-										<td class="noselect" ng-bind="row.figures[selectedPeriod].performance|percentage:2"></td>
-									</tr>
-									
-								</tbody>
-								</table>
-								<p ng-show="hasMoreLines==true" class="showMore">
-									<a class="pointer" ng-click="showMore()">ver mais</a>
-								</p>
-								<div ng-show="noResult == true && searchTxt.length > 0" class="tdNotFound">
-									<p>Não encontrou o fundo que gostaria?</p>
-									<p>
-										<img src="img/shame.png"/>
+												<td class="cutText noselect">
+													<span title="{{row.name}}" class="fundName" ng-click="openRankDialog(row, true)" title="Tabela de rentabilidade completa!"
+													 ng-bind-html="row.name|highlight:searchTxt">{{row.name}}</span>
+													<i class="colorIcon tiny material-icons " ng-show="row.info.restrict" ng-mouseover="$parent.blinkRestricao=true" ng-mouseleave="$parent.blinkRestricao=false"
+													 title="Fundo destinado à investidores qualificados.&#10;Ative o filtro 'Sem restrição' no menu lateral esquerdo para ver apenas os fundos que não são restritos apenas à investidores qualificados.">monetization_on</i>
+													<i class="colorIcon tiny material-icons " ng-mouseover="$parent.blinkLock = true" data-ng-mouseleave="$parent.blinkLock = false"
+													 ng-show="row.info.isClosed" title="Fundo fechado.&#10;Ative o filtro 'Abertos apenas' no menu lateral esquerdo para ver apenas os fundos que estão disponíveis para aplicação.">lock</i>
+													<em class="hidenIcon pipeSep hide-on-med-and-down">|</em>
+													<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon compareIcon " ng-class="{blinkHard:(compareDlgStillOpen==true && fundsToCompare.length==0)||forceIconeCompareBlinkHard==true}"
+													 ng-click="rowClick(row, this)" title="Comparare este fundos com outros!">compare_arrows</i>
+													<em class="hidenIcon pipeSep hide-on-med-and-down" ng-show="isDev">|</em>
+													<i class="hide-on-small-and-down colorIcon small material-icons hidenIcon " ng-show="isDev" ng-click="addToWallet(row)" title="Adicione esse fundo à sua carteira">playlist_add</i>
+												</td>
+												<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegCountRate | percentage:2">Eclair</td>
+												<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].posNegAvgRate"></td>
+												<td class="noselect show-column-largar-1200" ng-bind="row.figures[selectedPeriod].monthAboveCDI|percentage:2"></td>
+												<td class="noselect hide-on-small-and-down" ng-bind="row.figures[selectedPeriod].volatilidadeAnual|percentage:2"></td>
+												<td class="noselect show-column-largar-1300" ng-bind="row.figures[selectedPeriod].sharpCDI"></td>
+												<td class="noselect hide-on-smaller-400" ng-bind="row.info.admTax| percentage:2"></td>
+												<td class="noselect" ng-bind="row.figures[selectedPeriod].performance|percentage:2"></td>
+											</tr>
+
+										</tbody>
+									</table>
+									<p ng-show="hasMoreLines==true" class="showMore">
+										<a class="pointer" ng-click="showMore()">ver mais</a>
 									</p>
-									<p>Use a hashtag <i>#faltouEsseFundo</i> nos comentários abaixo que nos vamos atras dele para você! </p>
-									<p><i>Obs: So incluímos fundos com no mínimo 12 meses.</i></p>
+									<div ng-show="noResult == true && searchTxt.length > 0" class="tdNotFound">
+										<p>Não encontrou o fundo que gostaria?</p>
+										<p>
+											<img src="img/shame.png" />
+										</p>
+										<p>Use a hashtag
+											<i>#faltouEsseFundo</i> nos comentários abaixo que nos vamos atras dele para você! </p>
+										<p>
+											<i>Obs: So incluímos fundos com no mínimo 12 meses.</i>
+										</p>
+									</div>
+									<div class="tdFoundPeroNoMucho" ng-show="noResult==false && podeSerQueTenha.length > 0" ng-mouseover="blinkPeriod12=true"
+									 ng-mouseleave="blinkPeriod12=false;">
+										<p ng-show="podeSerQueTenha.length==1">
+											<strong>Encontramos 1</strong> fundo com nome parecido com esse mas que não esta sendo exibido: </p>
+										<p ng-show="podeSerQueTenha.length> 1">
+											<strong>Encontramos {{podeSerQueTenha.length}}</strong> fundos com nome parecido com esse mas que não estão sendo exibidos:</p>
+										<ul>
+											<li ng-repeat="item in podeSerQueTenha">
+												<span ng-bind-html="item.name|highlight:searchTxt"></span> -
+												<em ng-bind-html="item.notFoundDueTo|trusted"></em>
+											</li>
+										</ul>
+										<p>
+											<a class="pointer" ng-click="cleanAllFiltersButSearch()">clique aqui</a> que a gente desmarca esse(s) filtro(s) para você.
+										</p>
+									</div>
+									<div class="tdFoundPeroNoMucho" ng-show="noResult==false && podeSerQueTenha12.length > 0" ng-mouseover="blinkPeriod12=true"
+									 ng-mouseleave="blinkPeriod12=false;">
+										<p ng-show="podeSerQueTenha12.length==1">
+											<strong>Encontramos 1</strong> fundo na análise de 12 meses. Este fundo não está aparecendo nesta listagem por possuir
+											menos que 24 meses de histórico. Para alterar para a análise de 12 meses clique
+											<a class="pointer fwb" ng-click="selectedPeriod=0">aqui</a> ou altere o filtro
+											<i>Período</i> no canto superior esquerdo (ali, onde esta piscando de laranja agora!).</p>
+										<p ng-show="podeSerQueTenha12.length> 1">
+											<strong>Encontramos {{podeSerQueTenha12.length}}</strong> fundos na análise de 12 meses. Estes fundos não estão aparecendo
+											nesta listagem por possuirem menos que 24 meses de histórico. Para alterar para a análise de 12 meses clique
+											<a class="fwb pointer" ng-click="selectedPeriod=0">aqui</a> ou altere o filtro
+											<i>Período</i> no canto superior esquerdo(ali, onde esta piscando de laranja agora!).</p>
+										<ul>
+											<li ng-repeat="item in podeSerQueTenha12" ng-bind-html="item|highlight:searchTxt"></li>
+										</ul>
+									</div>
+									<p class="tdNotFound" ng-show="noResult == true && searchTxt.length == 0">Nenhum fundo encontrado.</p>
 								</div>
-								<div class="tdFoundPeroNoMucho" ng-show="noResult==false && podeSerQueTenha.length > 0" ng-mouseover="blinkPeriod12=true" ng-mouseleave="blinkPeriod12=false;">
-									<p ng-show="podeSerQueTenha.length==1"><strong>Encontramos 1</strong> fundo com nome parecido com esse mas que não esta sendo exibido: </p>
-									<p ng-show="podeSerQueTenha.length> 1"><strong>Encontramos {{podeSerQueTenha.length}}</strong> fundos com nome parecido com esse mas que não estão sendo exibidos:</p>
-									<ul>
-										<li ng-repeat="item in podeSerQueTenha" >{{item.name}} - <em ng-bind-html="item.notFoundDueTo|trusted"></em></li>
-									</ul>
-									<p>
-										<a class="pointer" ng-click="cleanAllFiltersButSearch()">clique aqui</a> que a gente desmarca esse(s) filtro(s) para você.
-									</p>
-								</div>
-								<div class="tdFoundPeroNoMucho" ng-show="noResult==false && podeSerQueTenha12.length > 0" ng-mouseover="blinkPeriod12=true" ng-mouseleave="blinkPeriod12=false;">
-									<p ng-show="podeSerQueTenha12.length==1"><strong>Encontramos 1</strong> fundo na análise de 12 meses. Este fundo não está aparecendo nesta listagem por possuir menos que 24 meses de histórico. Para alterar para a análise de 12 meses clique <a class="pointer fwb" ng-click="selectedPeriod=0">aqui</a> ou altere o filtro <i>Período</i> no canto superior esquerdo (ali, onde esta piscando de laranja agora!).</p>
-									<p ng-show="podeSerQueTenha12.length> 1"><strong>Encontramos {{podeSerQueTenha12.length}}</strong> fundos na análise de 12 meses. Estes fundos não estão aparecendo nesta listagem por possuirem menos que 24 meses de histórico. Para alterar para a análise de 12 meses clique <a class="fwb pointer" ng-click="selectedPeriod=0">aqui</a> ou altere o filtro <i>Período</i> no canto superior esquerdo(ali, onde esta piscando de laranja agora!).</p>
-									<ul>
-										<li ng-repeat="item in podeSerQueTenha12" ng-bind="item"></li>
-									</ul>
-								</div>
-								<p class="tdNotFound" ng-show="noResult == true && searchTxt.length == 0">Nenhum fundo encontrado.</p>
 							</div>
-						</div>
-						<br/>
-						<br/>
-						<div class="row"  ng-show="mobileSelectedPage =='main'" >
-							<p class="psmall">Os comentários são de responsabilidade exclusiva de seus autores e não representam a opinião deste site</p>
-							<div class="">
+							<br/>
+							<br/>
+							<div class="row" ng-show="mobileSelectedPage =='main'">
+								<p class="psmall">Os comentários são de responsabilidade exclusiva de seus autores e não representam a opinião deste site</p>
+								<div class="">
 									<div id="disqus_thread"></div>
 									<script>
-									
-									/**
-									*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-									*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-									/*
-									var disqus_config = function () {
-									this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-									this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-									};
-									*/
-									(function() { // DON'T EDIT BELOW THIS LINE
-									var d = document, s = d.createElement('script');
-									s.src = 'https://fundologia.disqus.com/embed.js';
-									s.setAttribute('data-timestamp', +new Date());
-									(d.head || d.body).appendChild(s);
-									})();
+
+										/**
+										*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+										*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+										/*
+										var disqus_config = function () {
+										this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+										this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+										};
+										*/
+										(function () { // DON'T EDIT BELOW THIS LINE
+											var d = document, s = d.createElement('script');
+											s.src = 'https://fundologia.disqus.com/embed.js';
+											s.setAttribute('data-timestamp', +new Date());
+											(d.head || d.body).appendChild(s);
+										})();
 									</script>
-									<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-																
+									<noscript>Please enable JavaScript to view the
+										<a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+									</noscript>
+
+								</div>
 							</div>
+
 						</div>
-					
+				</section>
+
 				</div>
-			</section>	
-			
-		</div>
-		<div class="col xl2 l2 s12 rightColor fixedColumn r0" ng-class="{'hide-on-med-and-down':mobileSelectedPage!='histogram'}" id="rightMenu">
-				<div class="section fixed " id=rightmenu>
-					<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='histogram'" class="show-on-small" ><i class="material-icons">arrow_back</i></a>
-					<label title="{{currentRow.name}}" class="currentName">{{currentRow.name}}</label>
-					
+				<div class="col xl2 l2 s12 rightColor fixedColumn r0" ng-class="{'hide-on-med-and-down':mobileSelectedPage!='histogram'}"
+				 id="rightMenu">
+					<div class="section fixed " id="rightmenu">
+						<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='histogram'" class="show-on-small">
+							<i class="material-icons">arrow_back</i>
+						</a>
+						<label title="{{currentRow.name}}" class="currentName">{{currentRow.name}}</label>
 
-					<h5 class="filterTitle ">
-						Aplicação inicial: 
-					</h5>
-					<label class="labelTitle minH" ng-bind="currentRow.info.initialValue|currency:'R$'"></label>
-					<h5 class="filterTitle ">
-						Taxa Adm: 
-					</h5>
-					<label class="labelTitle minH" ng-bind="currentRow.info.admTax|percentage"></label>
-					<h5 class="filterTitle ">
-						Cotização: 
-					</h5>
-					<label class="labelTitle minH noscape" title="{{currentRow.info.cotizacaoTime}}" ng-bind="currentRow.info.cotizacaoTime"></label>
-					<h5 class="filterTitle ">
-						Permanência: 
-					</h5>
-					<label class="labelTitle minH" title="Clique aqui para entender melhor">
-						{{getFromCurrentFigure('bestInterval')}} meses
-						<i class="tinySmall material-icons" ng-click="showIntervalDialog()">launch</i>
-					</label>
-					
-					<div class="divider"></div>
-					<h5 class="filterTitle " ng-bind="filters.Periodo[selectedPeriod].Title"></h5>
-					<div  ng-class="{invisible:currentRow.values==null}" id="horizontalScollParent">
-						<div class="horizontal-scroll-wrapper squares" id="rankHorizontal" ng-mouseover="valueHover()" >
-							<div ng-repeat="m in periodName.take(filters.Periodo[selectedPeriod].len) track by $index">
-								{{m}}<br/> {{currentRow.rank[$index]}}<sup>ᵒ</sup><br/>{{currentRow.values[$index]|percentage:2}}
+
+						<h5 class="filterTitle ">
+							Aplicação inicial:
+						</h5>
+						<label class="labelTitle minH" ng-bind="currentRow.info.initialValue|currency:'R$'"></label>
+						<h5 class="filterTitle ">
+							Taxa Adm:
+						</h5>
+						<label class="labelTitle minH" ng-bind="currentRow.info.admTax|percentage"></label>
+						<h5 class="filterTitle ">
+							Cotização:
+						</h5>
+						<label class="labelTitle minH noscape" title="{{currentRow.info.cotizacaoTime}}" ng-bind="currentRow.info.cotizacaoTime"></label>
+						<h5 class="filterTitle ">
+							Permanência:
+						</h5>
+						<label class="labelTitle minH" title="Clique aqui para entender melhor">
+							{{getFromCurrentFigure('bestInterval')}} meses
+							<i class="tinySmall material-icons" ng-click="showIntervalDialog()">launch</i>
+						</label>
+
+						<div class="divider"></div>
+						<h5 class="filterTitle " ng-bind="filters.Periodo[selectedPeriod].Title"></h5>
+						<div ng-class="{invisible:currentRow.values==null}" id="horizontalScollParent">
+							<div class="horizontal-scroll-wrapper squares" id="rankHorizontal" ng-mouseover="valueHover()">
+								<div ng-repeat="m in periodName.take(filters.Periodo[selectedPeriod].len) track by $index">
+									{{m}}
+									<br/> {{currentRow.rank[$index]}}
+									<sup>ᵒ</sup>
+									<br/>{{currentRow.values[$index]|percentage:2}}
+								</div>
 							</div>
 						</div>
-					</div>
-					<p class="pUpper tar" ng-click="openRankDialog(currentRow, false)">
-						<a class="linkSeeMore"  >ver tabela completa</a>	
-						<i class="tiny material-icons" >launch</i>
-					</p>
-					<div class="divider"></div>
+						<p class="pUpper tar" ng-click="openRankDialog(currentRow, false)">
+							<a class="linkSeeMore">ver tabela completa</a>
+							<i class="tiny material-icons">launch</i>
+						</p>
+						<div class="divider"></div>
 
-					
-				
-					<label>Veja este fundo comparado aos outros fundos 
-						<em class="isRendaFixa" ng-show="currentRow.info.classificationType==0">de Renda Fixa </em>	
-						<em class="isMultimercado" ng-show="currentRow.info.classificationType==1">Multimercado </em>	
-						<em class="isAcao" ng-show="currentRow.info.classificationType==2">de Ação </em>
-						nos <em ng-bind="filters.Periodo[selectedPeriod].Title.toLowerCase()"></em>:
-					</label>
-					
 
-					<my-histogram
-						ng-if="show_histogramPerformance == true"
-						chart-title="Rendimento"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						histogram="histogramPerformance"
-						value="getFromCurrentFigure('performance')"
-						zscore = "getZScore('performance', histogramPerformance)"
-						classification="getFromCurrentRow('classificationType')"
-						property="performance"
-						show-chart="false"
-						type="figure"
-						sufix="%"
-						currentrow="currentRowHistPerformance"></my-histogram>
-			
-					<my-histogram
-						ng-if="show_histogramStDev == true"
-						chart-title="Volatilidade"
-						histogram="histogramStDev"
-						value="getFromCurrentFigure('volatilidadeAnual')"
-						classification="getFromCurrentRow('classificationType')"
-						show-chart="true"
-						property="volatilidadeAnual"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						type="figure"
-						sufix="%"
-						title-tooltip="Volatilidade, na área financeira, é uma medida de dispersão dos retornos de um título ou índice de mercado. Quanto mais o preço de uma ação varia num período curto de tempo, maior o risco de se ganhar ou perder dinheiro negociando esta ação, e, por isso, a volatilidade é uma medida de risco(fonte:Wikipedia)"
-						tooltip="Quanto mais a rentabilidade de um fundo varia em um determinado período, maior o risco desse fundo.Mas, vale a pena correr esse risco?Clique e confira!"
-						currentrow="currentRowHistStDev"></my-histogram>
-					
-					<my-histogram
-						ng-if="show_histogramPosNegAvgRate == true"
-						chart-title="Rel. Ganho/Perda"
-						show-chart="true"
-						value="getFromCurrentFigure('posNegAvgRate')"
-						classification="getFromCurrentRow('classificationType')"
-						tooltip="Média dos resultados positivos dividida pela média dos resultados negativos. Clique e confira!"
-						histogram="histogramPosNegAvgRate"
-						property="posNegAvgRate"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						type="figure"
-						title-tooltip = "Calculo: Média dos resultados positivos dividida pela média dos resultados negativos."
-						currentrow="currentRowHistPosNegAvgMonth"></my-histogram>
-					
 
-					<my-histogram
-						ng-if="show_histogramCorrelIbov == true"
-						chart-title="Correlação IBOV"
-						histogram="histogramCorrelIbov"
-						correlation="current_correlationIbov"
-						value="getFromCurrentFigure('correlationIbov')"
-						classification="getFromCurrentRow('classificationType')"
-						show-chart="true"
-						property="correlationIbov"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						type="figure"
-						tooltip="Quanto maior a correlação com o IBOV, maior influência o índice exerce sobre o fundo. A questão é, quanto maior a correlação, maior a rentabilidade? Clique e confira!"
-						title-tooltip="correlação, dependência ou associação é qualquer relação estatística (causal ou não causal) entre duas variáveis(Wikipedia). Aqui mostramos a correlação entre o fundo e o IBOVESPA."
-						currentrow="currentRowHistCorrelIbov"></my-histogram>
-						
-					
-					<my-histogram
-						ng-if="show_histogramCorrelSP500 == true"
-						chart-title="Correlação S&P500"
-						histogram="histogramCorrelSP500"
-						correlation="current_correlationSP500"
-						value="getFromCurrentFigure('correlationSP500')"
-						classification="getFromCurrentRow('classificationType')"
-						show-chart="true"
-						property="correlationSP500"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						type="figure"
-						tooltip="Quanto maior a correlação com o S&P500, maior influência o índice exerce sobre o fundo. Essa correlação influencia proporciomalmente na rentabilidade? Clique e confira!"
-						title-tooltip="correlação, dependência ou associação é qualquer relação estatística (causal ou não causal) entre duas variáveis(Wikipedia). Aqui mostramos a correlação entre o fundo e o S&P500."
-						currentrow="currentRowHistCorrelSP500"></my-histogram>
-						
-					<my-histogram
-						ng-if="show_histogramCorrelCDI == true"
-						chart-title="Correlação CDI"
-						value="current_correlationCDI/100.0"
-						classification="getFromCurrentRow('classificationType')"
-						show-chart="false"
-						correlation="current_correlationCDI"
-						histogram="histogramCorrelCDI"
-						property="correlationCDI"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						type="figure"
-						tooltip="Quanto maior a correlação com o CDI, maior influência o índice exerce sobre o fundo. Como se comportam os fundos com maior correlação? Clique e confira!"
-						title-tooltip="correlação, dependência ou associação é qualquer relação estatística (causal ou não causal) entre duas variáveis(Wikipedia). Aqui mostramos a correlação entre o fundo e o CDI."
-						currentrow="currentRowHistCorrelCDI"></my-histogram>
-					
-					
-					<my-histogram
-						ng-if="show_histogramAboveCDI == true"
-						histogram="histogramAboveCDI"
-						chart-title="Meses acima CDI"
-						show-chart="true"
-						value="getFromCurrentFigure('monthAboveCDI')"
-						classification="getFromCurrentRow('classificationType')"
-						property="monthAboveCDI"
-						type="figure"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						sufix="%"
-						tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado superior ao CDI. Clique e confira!"
-						title-tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado superior ao CDI"
-						currentrow="currentRowAboveCDI"></my-histogram>
+						<label>Veja este fundo comparado aos outros fundos
+							<em class="isRendaFixa" ng-show="currentRow.info.classificationType==0">de Renda Fixa </em>
+							<em class="isMultimercado" ng-show="currentRow.info.classificationType==1">Multimercado </em>
+							<em class="isAcao" ng-show="currentRow.info.classificationType==2">de Ação </em>
+							nos
+							<em ng-bind="filters.Periodo[selectedPeriod].Title.toLowerCase()"></em>:
+						</label>
 
-					<my-histogram
-						ng-if="show_histogramAboveIBOV == true"
-						histogram="histogramAboveIBOV"
-						chart-title="Meses acima IBOV"
-						show-chart="true"
-						value="getFromCurrentFigure('monthsAboveIBOV')"
-						classification="getFromCurrentRow('classificationType')"
-						property="monthsAboveIBOV"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						type="figure"
-						sufix="%"
-						tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado superior ao Ibovespa. Clique e confira!"
-						title-tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado superior ao Ibovespa"
-						currentrow="currentRowAboveIBOV"></my-histogram>
-					
 
-					<my-histogram
-						ng-if="show_histogramPosNegRate == true"
-						histogram="histogramPosNegRate"
-						chart-title="Meses positivos"
-						show-chart="true"
-						value="getFromCurrentFigure('posNegCountRate')"
-						classification="getFromCurrentRow('classificationType')"
-						property="posNegCountRate"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						type="figure"
-						sufix="%"
-						tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo. Clique e confira!"
-						title-tooltip="Quantidade de meses que o fundo teve resultado positivo dividivo pela quantidade de meses que teve resultado negativo."
-						currentrow="currentRowHistPosNegMonth"></my-histogram>
-				
-					<!-- <my-histogram
+						<my-histogram ng-if="show_histogramPerformance == true" chart-title="Rendimento" fn="histClick(hist,item, property, type)"
+						 update="histupate(zscore, prop, text)" histogram="histogramPerformance" value="getFromCurrentFigure('performance')"
+						 zscore="getZScore('performance', histogramPerformance)" classification="getFromCurrentRow('classificationType')" property="performance"
+						 show-chart="false" type="figure" sufix="%" currentrow="currentRowHistPerformance"></my-histogram>
+
+						<my-histogram ng-if="show_histogramStDev == true" chart-title="Volatilidade" histogram="histogramStDev" value="getFromCurrentFigure('volatilidadeAnual')"
+						 classification="getFromCurrentRow('classificationType')" show-chart="true" property="volatilidadeAnual" fn="histClick(hist,item, property, type)"
+						 update="histupate(zscore, prop, text)" type="figure" sufix="%" title-tooltip="Volatilidade, na área financeira, é uma medida de dispersão dos retornos de um título ou índice de mercado. Quanto mais o preço de uma ação varia num período curto de tempo, maior o risco de se ganhar ou perder dinheiro negociando esta ação, e, por isso, a volatilidade é uma medida de risco(fonte:Wikipedia)"
+						 tooltip="Quanto mais a rentabilidade de um fundo varia em um determinado período, maior o risco desse fundo.Mas, vale a pena correr esse risco?Clique e confira!"
+						 currentrow="currentRowHistStDev"></my-histogram>
+
+						<my-histogram ng-if="show_histogramPosNegAvgRate == true" chart-title="Rel. Ganho/Perda" show-chart="true" value="getFromCurrentFigure('posNegAvgRate')"
+						 classification="getFromCurrentRow('classificationType')" tooltip="Média dos resultados positivos dividida pela média dos resultados negativos. Clique e confira!"
+						 histogram="histogramPosNegAvgRate" property="posNegAvgRate" fn="histClick(hist,item, property, type)" update="histupate(zscore, prop, text)"
+						 type="figure" title-tooltip="Calculo: Média dos resultados positivos dividida pela média dos resultados negativos."
+						 currentrow="currentRowHistPosNegAvgMonth"></my-histogram>
+
+
+						<my-histogram ng-if="show_histogramCorrelIbov == true" chart-title="Correlação IBOV" histogram="histogramCorrelIbov" correlation="current_correlationIbov"
+						 value="getFromCurrentFigure('correlationIbov')" classification="getFromCurrentRow('classificationType')" show-chart="true"
+						 property="correlationIbov" fn="histClick(hist,item, property, type)" update="histupate(zscore, prop, text)" type="figure"
+						 tooltip="Quanto maior a correlação com o IBOV, maior influência o índice exerce sobre o fundo. A questão é, quanto maior a correlação, maior a rentabilidade? Clique e confira!"
+						 title-tooltip="correlação, dependência ou associação é qualquer relação estatística (causal ou não causal) entre duas variáveis(Wikipedia). Aqui mostramos a correlação entre o fundo e o IBOVESPA."
+						 currentrow="currentRowHistCorrelIbov"></my-histogram>
+
+
+						<my-histogram ng-if="show_histogramCorrelSP500 == true" chart-title="Correlação S&P500" histogram="histogramCorrelSP500"
+						 correlation="current_correlationSP500" value="getFromCurrentFigure('correlationSP500')" classification="getFromCurrentRow('classificationType')"
+						 show-chart="true" property="correlationSP500" fn="histClick(hist,item, property, type)" update="histupate(zscore, prop, text)"
+						 type="figure" tooltip="Quanto maior a correlação com o S&P500, maior influência o índice exerce sobre o fundo. Essa correlação influencia proporciomalmente na rentabilidade? Clique e confira!"
+						 title-tooltip="correlação, dependência ou associação é qualquer relação estatística (causal ou não causal) entre duas variáveis(Wikipedia). Aqui mostramos a correlação entre o fundo e o S&P500."
+						 currentrow="currentRowHistCorrelSP500"></my-histogram>
+
+						<my-histogram ng-if="show_histogramCorrelCDI == true" chart-title="Correlação CDI" value="current_correlationCDI/100.0" classification="getFromCurrentRow('classificationType')"
+						 show-chart="false" correlation="current_correlationCDI" histogram="histogramCorrelCDI" property="correlationCDI" fn="histClick(hist,item, property, type)"
+						 update="histupate(zscore, prop, text)" type="figure" tooltip="Quanto maior a correlação com o CDI, maior influência o índice exerce sobre o fundo. Como se comportam os fundos com maior correlação? Clique e confira!"
+						 title-tooltip="correlação, dependência ou associação é qualquer relação estatística (causal ou não causal) entre duas variáveis(Wikipedia). Aqui mostramos a correlação entre o fundo e o CDI."
+						 currentrow="currentRowHistCorrelCDI"></my-histogram>
+
+
+						<my-histogram ng-if="show_histogramAboveCDI == true" histogram="histogramAboveCDI" chart-title="Meses acima CDI" show-chart="true"
+						 value="getFromCurrentFigure('monthAboveCDI')" classification="getFromCurrentRow('classificationType')" property="monthAboveCDI"
+						 type="figure" fn="histClick(hist,item, property, type)" update="histupate(zscore, prop, text)" sufix="%" tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado superior ao CDI. Clique e confira!"
+						 title-tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado superior ao CDI" currentrow="currentRowAboveCDI"></my-histogram>
+
+						<my-histogram ng-if="show_histogramAboveIBOV == true" histogram="histogramAboveIBOV" chart-title="Meses acima IBOV" show-chart="true"
+						 value="getFromCurrentFigure('monthsAboveIBOV')" classification="getFromCurrentRow('classificationType')" property="monthsAboveIBOV"
+						 fn="histClick(hist,item, property, type)" update="histupate(zscore, prop, text)" type="figure" sufix="%" tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado superior ao Ibovespa. Clique e confira!"
+						 title-tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado superior ao Ibovespa" currentrow="currentRowAboveIBOV"></my-histogram>
+
+
+						<my-histogram ng-if="show_histogramPosNegRate == true" histogram="histogramPosNegRate" chart-title="Meses positivos" show-chart="true"
+						 value="getFromCurrentFigure('posNegCountRate')" classification="getFromCurrentRow('classificationType')" property="posNegCountRate"
+						 fn="histClick(hist,item, property, type)" update="histupate(zscore, prop, text)" type="figure" sufix="%" tooltip="Quantidade de meses (em porcentagem) que o fundo teve resultado positivo. Clique e confira!"
+						 title-tooltip="Quantidade de meses que o fundo teve resultado positivo dividivo pela quantidade de meses que teve resultado negativo."
+						 currentrow="currentRowHistPosNegMonth"></my-histogram>
+
+						<!-- <my-histogram
 						ng-if="show_histogramTxAdm == true"
 						chart-title="Taxa Administrativa"
 						show-chart="true"
@@ -629,596 +633,655 @@
 						sufix="%"
 						tooltip="Fundo que cobra mais taxa Administrativa rende mais? Este gráfico vai te ajudar a descobrir!"
 						currentrow="currentRowTxAdm"></my-histogram> -->
-					
-					<my-histogram
-						ng-if="show_histogramAvg == true"
-						chart-title="Média Rendimento"
-						histogram="histogramAvg"
-						value="getFromCurrentFigure('average')"
-						classification="getFromCurrentRow('classificationType')"
-						show-chart="true"
-						property="average"
-						fn="histClick(hist,item, property, type)"
-						update="histupate(zscore, prop, text)"
-						type="figure"
-						sufix="%"
-						tooltip="Rendimento médio no período"
-						title-tooltip="Rendimento médio no período - Soma da rentabilidade mensal dividido pelo número de meses."
-						currentrow="currentRowHistAvg"></my-histogram>
-					
-					
 
-					<div class="divider"></div>
-					
-					<h5 class="filterTitle ">Rentabilidade acumulada:</h5>
-					<div id="curve_chart" style="min-height:120px;" ></div>
-					
-					<div class="divider"></div>
-					
-					<h5 class="filterTitle ">Rank mês a mês:</h5>
-					<div id="ranking_chart" style="min-height:120px;" ></div>
-					<label class="histFooteLabel mt5" ng-click="showRankDialog()">
-						<i class="tiny material-icons"  >info_outline</i> Entenda nosso ranking.
-					</label>
-					
-					
-					
-
-					<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='histogram'"  class="waves-effect waves-light btn-large w100">Voltar</a>
-				</div>
-		</div>
-	</div>
+						<my-histogram ng-if="show_histogramAvg == true" chart-title="Média Rendimento" histogram="histogramAvg" value="getFromCurrentFigure('average')"
+						 classification="getFromCurrentRow('classificationType')" show-chart="true" property="average" fn="histClick(hist,item, property, type)"
+						 update="histupate(zscore, prop, text)" type="figure" sufix="%" tooltip="Rendimento médio no período" title-tooltip="Rendimento médio no período - Soma da rentabilidade mensal dividido pelo número de meses."
+						 currentrow="currentRowHistAvg"></my-histogram>
 
 
-	
-	
-	
-	<div id="modal1" class="modal modaTall"  >
-		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
-		<div class="modal-content">
-		  <h4>{{currentCharTitle}} <em ng-show="selectedPeriod <= 2">nos </em><em ng-bind="::filters.Periodo.first({id:selectedPeriod}).Title"></em></h4>
-		  <div id="chart_txdm_scatter" style="width:100%;"></div>
-		  <p class="chartFooter" ng-bind="currentChartText"></p>
-		  <p class="chartFooter" ng-show="showExtraChartFooter">Clique nos icones <i ng-mouseover="showChartIcons()" ng-mouseleave="hideChartIcons()" class="small material-icons"  >insert_chart</i> e confira os outros gráficos que existem no site.</p>
-		</div>	
-	</div>
 
-	<div id="modaltable" class="modal modaTall" >
-		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
-		<div class="modal-content carousel carousel-slider" id="carouselDetail">
-			<div class="carousel-item" href="#one!">
-				<i class="btoNext medium material-icons rZero" ng-click="carouselRight()">keyboard_arrow_right</i>
-				<i class="btoNext medium material-icons" ng-click="carouselLeft()">keyboard_arrow_left</i>
-				<h5>{{currentRow.name}} <span class="subtitle">Análise dos {{filters.PeriodoTitle()}}</span></h5>
-				<div class="row">
-					<div class="col s12 m6 l6 xl6 lblResume">
-						<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Meses positivos: </span> <em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
-						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;showHistItem=false;"><span class="spLabel">Meses negativos: </span> <em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em></label>
-						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Meses acima do CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].monthAboveCDI|percentage:2"></em></label>
-						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Meses acima do IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].monthsAboveIBOV|percentage:2"></em></label>
-						<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Média rentabilidade positiva:</span> <em ng-bind="currentRow.figures[selectedPeriod].positiveAvg|percentage:2"></em></label>
-						<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;showHistItem=false;"><span class="spLabel">Média rentabilidade negativa:</span> <em ng-bind="currentRow.figures[selectedPeriod].negativeAvg|percentage:2"></em></label>
-						
-					</div>
-					<div class="col s12 m6 l6 xl6 lblResume">
-							<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Índice Sharp IBOV:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpIbov"></em></label>
-							<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Índice Sharp CDI:</span> <em ng-bind="currentRow.figures[selectedPeriod].sharpCDI"></em></label>
-							<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Volatilidade anual:</span> <em ng-bind="currentRow.figures[selectedPeriod].volatilidadeAnual|percentage:2"></em></label>
-							<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Desvio padrão mensal:</span> <em ng-bind="currentRow.figures[selectedPeriod].stdDev"></em></label>
-							<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;"><span class="spLabel">Histograma:</span></label>
-							<rd-histogram ng-mouseover="showHistItem=true;"
-								histogram="currentRow.figures[selectedPeriod].histogram"
-								sufix="%">
-							</rd-histogram>
+						<div class="divider"></div>
+
+						<h5 class="filterTitle ">Rentabilidade acumulada:</h5>
+						<div id="curve_chart" style="min-height:120px;"></div>
+
+						<div class="divider"></div>
+
+						<h5 class="filterTitle ">Rank mês a mês:</h5>
+						<div id="ranking_chart" style="min-height:120px;"></div>
+						<label class="histFooteLabel mt5" ng-click="showRankDialog()">
+							<i class="tiny material-icons">info_outline</i> Entenda nosso ranking.
+						</label>
+
+
+
+
+						<a ng-click="mobApplyFilter()" ng-show="mobileSelectedPage=='histogram'" class="waves-effect waves-light btn-large w100">Voltar</a>
 					</div>
 				</div>
-				<div ng-if="isMobile==false" class="row "ng-repeat="y in groupedRankList">
-					<table id="tableRank">
-						<caption>20{{y.year}}</caption>
-						<thead>
-							<tr>
-								<th style="width:8%;" ng-repeat="item in y.data" ng-bind="::item.label"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td ng-repeat="item in y.data track by $index" class=""  title="Posição no ranking (pontos)" ><span ng-show="item.value!=''">{{item.rank}}<sup>ᵒ</sup>({{item.point}})</span></td>
-								
-							</tr>
-							<tr>
-								<td class="{{$parent.histogram_info.class}}" ng-repeat="item in y.data track by $index" ng-bind="item.value|percentage:2" 
-								ng-class="{
-											highlightPos:(showMesesPositivos && item.value>=0),
-											highlightNeg:(showMesesNegativos && item.value<0),
-											histInfo:(showHistItem && item.value >= histogram_info.low && item.value <= histogram_info.high)
-										}
-										"></td>
-							<tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="row" ng-if="isMobile==true">
-					<table>
-						<thead>
-							<tr>
-								<th>Mês</th>
-								<th>Rentabilidade</th>
-								<th>Rank</th>
-								<th>Pontos</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="row in groupedRankList">
-								<td ng-bind="row.label"></td>
-								<td ng-bind="row.value|percentage:2"></td>
-								<td ng-bind="row.rank"></td>
-								<td ng-bind="row.point"></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			  </div>
-			  <div class="carousel-item " id="carouselChart" href="#two!">
-				<i class="btoNext medium material-icons rZero" ng-click="carouselRight()">keyboard_arrow_right</i>
-				<i class="btoNext medium material-icons" ng-click="carouselLeft()">keyboard_arrow_left</i>
-				<h5>{{currentRow.name}} <span class="subtitle">Rentabilidade dos {{filters.PeriodoTitle()}}</span></h5>
-				<div id="chartLine"></div>
-			  </div>
-			  <div class="carousel-item " id="carouselChartRadar" href="#three!">
-				<i class="btoNext medium material-icons rZero" ng-click="carouselRight()">keyboard_arrow_right</i>
-				<i class="btoNext medium material-icons" ng-click="carouselLeft()">keyboard_arrow_left</i>
-				<h5>{{currentRow.name}} <span class="subtitle">Comparado aos demais fundos nos {{filters.PeriodoTitle()}}</span></h5>
-				<canvas id="radarChart"></canvas>
-			  </div>
-			  <div class="carousel-item " id="carouselChartRadar" href="#three!">
-				<i class="btoNext medium material-icons rZero" ng-click="carouselRight()">keyboard_arrow_right</i>
-				<i class="btoNext medium material-icons" ng-click="carouselLeft()">keyboard_arrow_left</i>
-				<h5>{{currentRow.name}} <span class="subtitle">Distribuição da rentabilidade nos {{filters.PeriodoTitle()}}</span></h5>
-				<div id="histDetailChart" style="width:100%;height:100%;"></div>
-			  </div>
-			
-		</div>	
-	</div>
-	<div id="modalCustomText" class="modal modaTall" >
-		<div class="modal-content">
-			<h5 ng-bind="titleDialogHtml"></h5>
-			<div class="row" ng-bind-html="textDialogHtml|trusted">
-
-			</div>
-		</div>
-	</div>
-	<div id="modalRankingDialog" class="modal modaTall" >
-		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
-		<div class="modal-content">
-			<h5>Ranking</h5>
-			<div class="row">
-				<div class="content">
-					<section >
-						<p>Entenda melhor o Ranking: Comparação dos fundos feita mês a mês com o objetivo de enxergar qual fundo é constantemente melhor que os outros. </p>
-						<p> Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade fechada do mês </p>
-						<p> O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1 e o ultimo receberá nota 100.Todos os fundos que estão no meio vão receber uma interpolação proporcional à sua rentabilidade comparada à rentabilidade do melhor e do pior fundo.</p>
-						<p> No final, soma-se a nota de todos os meses para cada fundo </p>
-						<p> Ou seja, quanto menor a soma, melhor o fundo em todo o período.</p>
-
-						
-					</section>
-					<section >
-						
-						<table id="rankTable" class="centered">
-							<caption>Confira os primeiros 10 lugares no ranking dos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</caption>
-							<thead>
-								<th></th>
-								<th class="thNoPadding">
-									<i class="material-icons tinySmall" ng-class="{iconOn:showPrevtRankTableColumns, iconOff:showPrevtRankTableColumns==false}"  ng-click="prevRankTableColumns()" >chevron_left</i>
-								</th>
-								<th class="thWidth" ng-repeat="c in ranktableColumns" >{{c+1}}<sup>ᵒ</sup>lugar</th>
-								<th class="thNoPadding">
-									<i class="material-icons tinySmall" ng-class="{iconOn:showNextRankTableColumns, iconOff:showNextRankTableColumns==false}" ng-click="nextRankTableColumns()" >chevron_right</i>
-								</th>
-							</thead>
-							<tbody>
-								<tr ng-repeat="h in rankingFullList.take(12)">
-									<td ng-bind="_monthNames[h.month-1] + '/' + h.year"></td>
-									<td></td>
-									<td ng-repeat="c in ranktableColumns" ng-class="{highlightCell:$parent.$parent.rankingTableCell==h.list[c].uniqueID}" ng-mouseover="$parent.$parent.rankingTableCell=h.list[c].uniqueID">
-										<label ng-bind="h.list[c].name"></label>
-										<label class="fwb" ng-bind="h.list[c].performance|percentage"></label>
-									</td>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-					</section>
-				</div>
 			</div>
 
-		</div>
-	</div>
-	<div id="modalInterval" class="modal modaTall" >
-		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
-		<div class="modal-content">
-			
-			<h5>Veja a analise de todas as possíveis combinações de permanência de {{currentRow.figures[selectedPeriod].intervalResumes.select('length').join(',')}} meses nos {{filters.PeriodoTitle()}}</h5>
-			<div class="row">
-				<div class="col s12 m12 l12 x12 lblResume">
-					<table class="highlight">
-						<thead>
-							<tr>
-								<th>Permanência (meses)</th>
-								<th>Rendimento mensalizado<sup title="">*</sup> médio</th>
-								<th>Ficou acima do CDI</th>
-								<th>Ficou acima do IBOV</th>
-								<th>Análises</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="item in currentRow.figures[selectedPeriod].intervalResumes" ng-mouseover="$parent.interval_hover=item">
-								<td ng-bind="item.length"></td>
-								<td ng-bind="item.montlyAvg"></td>
-								<td>{{item.aboveCdi|percentage:2}} das vezes</td>
-								<td ng-show="item.aboveIbov > 0">{{item.aboveIbov|percentage:2}} das vezes</td> <td ng-show="item.aboveIbov==0" >nunca</td>
-								<td ng-bind="item.count"></td>
-							</tr>
-						</tbody>
-					</table>
-					<label ng-show="interval_hover != null" class="defaultColor" style="font-size:0.9rem;">
-						Quem permaneceu <strong>{{interval_hover.length}}</strong> meses no fundo, teve um rendimento <i>mensalizado</i><sup>*</sup> médio de <strong>{{interval_hover.montlyAvg}}%</strong>.Ficou acima do CDI {{interval_hover.aboveCdi|percentage:2}} das vezes e acima do IBOV {{interval_hover.aboveIbov|percentage:2}} das vezes. {{interval_hover.count}} análises feitas
-					</label>
-					
-					
-				</div>
-			</div>
-			<div class="row">
-				<div class="chart_interval"  id="chart_bestInterval" ></div>
-				<div class="chart_interval" id="chart_bestInterval_line" ></div>
-			</div>
-			
-		</div>
-	</div>
-	<div id="overview" class="modal modaTall wideModal">
-			<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
-			<div class="modal-content carousel carousel-slider" id="carouselOverview">
-				<div class="carousel-item " id="carouselChart" href="#two!">
-					<i class="btoNext medium material-icons rZero" ng-click="carouselOverviewNext()">keyboard_arrow_right</i>
-					<i class="btoNext medium material-icons" ng-click="carouselOverviewPrev()">keyboard_arrow_left</i>
-					<h5>{{overviewChart1Title}} <span class="subtitle"> </span></h5>
-					<div style="width:100%;height:90%;" id="chart_overview_currentMonth"></div>
-					<div class="monthsBar">
-						<ul ng-init="monthOverviewListIndex=0;">
-							<li ng-class="{invisible:monthOverviewListIndex==0}">
-								<i class="material-icons medium" ng-click="monthOverviewListIndex=monthOverviewListIndex - 1;drawOverviewChart(monthOverviewListIndex)">chevron_left</i>
-							</li>
-							<li>
-								<a ng-click=$parent.drawOverviewChart(m.index) ng-class="{selected:m.selected}" >{{monthOverviewList[monthOverviewListIndex].name}}</a>
-							</li>
-							<li ng-class="{invisible:monthOverviewListIndex==monthOverviewList.length-1}">
-								<i class="material-icons medium" ng-click="monthOverviewListIndex=monthOverviewListIndex + 1;drawOverviewChart(monthOverviewListIndex)">chevron_right</i>
-							</li>
-						</ul>
-					</div>
-				  </div>
-				  <div class="carousel-item " id="carouselChart" href="#two!">
-					<i class="btoNext medium material-icons rZero" ng-click="carouselOverviewNext()">keyboard_arrow_right</i>
-					<i class="btoNext medium material-icons" ng-click="carouselOverviewPrev()">keyboard_arrow_left</i>
-					<h5>Visão geral dos fundos nos {{filters.PeriodoTitle()}} <span class="subtitle">Rentabilidade acumulada(mínima, média e máxima) dos fundos de Renda Fixa, Multimercado e Ação </span></h5>
-					<div style="width:100%;height:90%;" id="chart_overview_candle"></div>
-				  </div>
-				
-			</div>
-	</div>
 
-	<div id="modalWallet" class="modal modal-fixed-footer modal85 wideModal" >
-		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
-		 <div class="modal-content ">
-			<div >
-				<h5>Miha carteira <span class="subtitle">Insira os fundos que já possui ou que gostaria de ter na sua carteira.Se preferir, clique no icone <i class="material-icons small">playlist_add</i> na listagem.</span></h5>
-				<div class="row">
-					
+
+
+
+			<div id="modal1" class="modal modaTall">
+				<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)" title="Fechar">cancel</i>
+				<div class="modal-content">
+					<h4>{{currentCharTitle}}
+						<em ng-show="selectedPeriod <= 2">nos </em>
+						<em ng-bind="::filters.Periodo.first({id:selectedPeriod}).Title"></em>
+					</h4>
+					<div id="chart_txdm_scatter" style="width:100%;"></div>
+					<p class="chartFooter" ng-bind="currentChartText"></p>
+					<p class="chartFooter" ng-show="showExtraChartFooter">Clique nos icones
+						<i ng-mouseover="showChartIcons()" ng-mouseleave="hideChartIcons()" class="small material-icons">insert_chart</i> e confira os outros gráficos que existem no site.</p>
 				</div>
-				<br/>
-				<div class="row" >
-					<div class="col m12 l12 xl12">
-						<div ng-if="canInitAutoComplete==true">
-							<autocomplete fn="onSelectFund(name)" list="walletAutoCompleteList"></autocomplete>
+			</div>
+			<div id="modaltable" class="modal modaTall">
+				<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)" title="Fechar">cancel</i>
+				<i class="btoNext medium material-icons rightBto" ng-click="carouselRight()">keyboard_arrow_right</i>
+				<i class="btoNext medium material-icons leftBto" ng-click="carouselLeft()">keyboard_arrow_left</i>
+				<div class="modal-content carousel carousel-slider" id="carouselDetail">
+					<div class="carousel-item" href="#one!">
+						<h5>{{currentRow.name}}
+							<span class="subtitle">Análise dos {{filters.PeriodoTitle()}}</span>
+						</h5>
+						<div class="row">
+							<div class="col s12 m6 l6 xl6 lblResume">
+								<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;showHistItem=false;">
+									<span class="spLabel">Meses positivos: </span>
+									<em ng-bind="currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em>
+								</label>
+								<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;showHistItem=false;">
+									<span class="spLabel">Meses negativos: </span>
+									<em ng-bind="100 - currentRow.figures[selectedPeriod].posNegCountRate|percentage:2"></em>
+								</label>
+								<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;">
+									<span class="spLabel">Meses acima do CDI:</span>
+									<em ng-bind="currentRow.figures[selectedPeriod].monthAboveCDI|percentage:2"></em>
+								</label>
+								<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;">
+									<span class="spLabel">Meses acima do IBOV:</span>
+									<em ng-bind="currentRow.figures[selectedPeriod].monthsAboveIBOV|percentage:2"></em>
+								</label>
+								<label ng-mouseover="showMesesPositivos=true;showMesesNegativos=false;showHistItem=false;">
+									<span class="spLabel">Média rentabilidade positiva:</span>
+									<em ng-bind="currentRow.figures[selectedPeriod].positiveAvg|percentage:2"></em>
+								</label>
+								<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=true;showHistItem=false;">
+									<span class="spLabel">Média rentabilidade negativa:</span>
+									<em ng-bind="currentRow.figures[selectedPeriod].negativeAvg|percentage:2"></em>
+								</label>
+
+							</div>
+							<div class="col s12 m6 l6 xl6 lblResume">
+								<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;">
+									<span class="spLabel">Índice Sharp IBOV:</span>
+									<em ng-bind="currentRow.figures[selectedPeriod].sharpIbov"></em>
+								</label>
+								<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;">
+									<span class="spLabel">Índice Sharp CDI:</span>
+									<em ng-bind="currentRow.figures[selectedPeriod].sharpCDI"></em>
+								</label>
+								<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;">
+									<span class="spLabel">Volatilidade anual:</span>
+									<em ng-bind="currentRow.figures[selectedPeriod].volatilidadeAnual|percentage:2"></em>
+								</label>
+								<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;">
+									<span class="spLabel">Desvio padrão mensal:</span>
+									<em ng-bind="currentRow.figures[selectedPeriod].stdDev"></em>
+								</label>
+								<label ng-mouseover="showMesesPositivos=false;showMesesNegativos=false;showHistItem=false;">
+									<span class="spLabel">Histograma:</span>
+								</label>
+								<rd-histogram ng-mouseover="showHistItem=true;" histogram="currentRow.figures[selectedPeriod].histogram" sufix="%">
+								</rd-histogram>
+							</div>
 						</div>
-						<table id="walletTable" >
-							<thead>
-							   <tr ng-class="{invisible:walletFunds.length==0}">
-								   <th style="width:30%;">Fundo</th>
-								   <th style="width:10%;" class="tar">tx Adm</th>
-								   <th style="width:25%;" class="tac">Tipo</th>
-								   <th style="width:15%;" class="tac">Resgate</th>
-								   <th style="width:20%;" class="tar">Valor investido</th>
-							   </tr>
-						   </thead> 
-						   <tbody >
-							   <tr ng-repeat="item in walletFunds" class="showOnHoverTrigger">
-								  <td class="align-wrapper" ng-class="{walletFundMultimercado: (item.info.isMultimercado && item.showWalletWeight==true),walletFundRendaFixa: (item.info.isRendaFixa && item.showWalletWeight==true),walletFundAcoes: (item.info.isAcao && item.showWalletWeight==true)}" style="background-size: {{item.walletWeight}}% 100%;"  >
-									   <div class="input-field wsnw">
-										   <span class="pointer" ng-click="openRankDialog(item, true)">{{item.name}}</span>
-										   <i title="remover" class="tiny material-icons fwb highlightNeg showOnHover" ng-click="walletRemove(item)">clear</i>
-									   </div>
-								  </td>
-								  
-								  <td class="align-wrapper tar">
-									  {{item.info.admTax}}
-								  </td>
-								  <td class="align-wrapper tac">
-									{{item.info.classification}}
-								 </td>
-								 <td class="align-wrapper tac">
-									{{item.info.withdrawDays}}
-								 </td>
-								 <td class="align-wrapper tar" >
-									<input money-mask money-mask-prepend="R$" ng-class="{fOrange:(item.hasOwnProperty('alocado')==false || item.alocado==0)}" class="inputNUmber fnone" type="text" ng-change="walletUpdateLine(item)" ng-model="item.alocado" placeholder="R$0.00"/>
-								</td>
-							   </tr>
-						   </tbody>
-						   <tfoot ng-class="{invisible:walletFunds.length==0}">
-							   <tr>
-								   <th>
-									   <div class="barOutside" ng-show="showWalletPerc==true">
-										   <div ng-class="{leftCorner:walletRendaFixaPorc>0, rightCorner:(walletMultimercadoPorc==0 && walletAcaoPorc==0 )}" style="width:{{walletRendaFixaPorc}}%" title="{{walletRendaFixaPorc}}% Renda fixa" ng-show="walletRendaFixaPorc>0"><em>{{walletRendaFixaPorc}}% Renda fixa</em></div>
-										   <div ng-class="{leftCorner:walletRendaFixaPorc==0, rightCorner:( walletAcaoPorc==0 )}" style="width:{{walletMultimercadoPorc}}%" title="{{walletMultimercadoPorc}}% Multimercado" ng-show="walletMultimercadoPorc>0"><em>{{walletMultimercadoPorc}}% Multimercado</em></div>
-										   <div ng-class="{leftCorner:(walletRendaFixaPorc==0 && walletMultimercadoPorc==0), rightCorner:( walletAcaoPorc>0 )}" style="width:{{walletAcaoPorc}}%" title="{{walletAcaoPorc}}% Ações" ng-show="walletAcaoPorc>0"><em>{{walletAcaoPorc}}% Ações</em></div>
-									   </div>
-								   </th>
-								   <th></th>
-								   <th></th>
-								   <th class="tar">
-									<div id="resgateChart"></div>
-								   </th>
-								   <th class="tar">
-									   Total: R$ {{walletFunds.sum('alocado')|currency:'R$'}}
-								   </th>
-							   </tr>
-						   </tfoot>
-						</table>
+						<div ng-if="isMobile==false" class="row " ng-repeat="y in groupedRankList">
+							<table id="tableRank">
+								<caption>20{{y.year}}</caption>
+								<thead>
+									<tr>
+										<th style="width:8%;" ng-repeat="item in y.data" ng-bind="::item.label"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="{{$parent.histogram_info.class}} fwb" ng-repeat="item in y.data track by $index" ng-bind="item.value|percentage:2"
+										 ng-class="{
+													highlightPos:(showMesesPositivos && item.value>=0),
+													highlightNeg:(showMesesNegativos && item.value<0),
+													histInfo:(showHistItem && item.value >= histogram_info.low && item.value <= histogram_info.high)
+												}
+												"></td>
+									</tr>
+									<tr>
+										<td ng-repeat="item in y.data track by $index" class="fs12" title="Posição no ranking (pontos)">
+											<span ng-show="item.value!=''">{{item.rank}}
+												<sup>ᵒ</sup>({{item.point}})</span>
+										</td>
+
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<div class="row" ng-if="isMobile==true">
+							<table>
+								<thead>
+									<tr>
+										<th>Mês</th>
+										<th>Rentabilidade</th>
+										<th>Rank</th>
+										<th>Pontos</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in groupedRankList">
+										<td ng-bind="row.label"></td>
+										<td ng-bind="row.value|percentage:2"></td>
+										<td ng-bind="row.rank"></td>
+										<td ng-bind="row.point"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="carousel-item " id="carouselChart">
+						<h5>{{currentRow.name}}
+							<span class="subtitle">Rentabilidade dos {{filters.PeriodoTitle()}}</span>
+						</h5>
+						<div id="chartLine"></div>
+					</div>
+					<div class="carousel-item " id="carouselChartRadar">
+						<h5>{{currentRow.name}}
+							<span class="subtitle">Comparado aos demais fundos nos {{filters.PeriodoTitle()}}</span>
+						</h5>
+						<canvas id="radarChart"></canvas>
+					</div>
+					<div class="carousel-item " id="carouselChartRadar2">
+						<h5>{{currentRow.name}}
+							<span class="subtitle">Distribuição da rentabilidade nos {{filters.PeriodoTitle()}}</span>
+						</h5>
+						<div id="histDetailChart" style="width:100%;height:100%;"></div>
+					</div>
+					<div class="carousel-item ">
+						<h5>{{currentRow.name}}
+							<span class="subtitle">Visão mensal da rentabilidade, número de cotistas e volume nos {{filters.PeriodoTitle()}}</span>
+						</h5>
+						<div id="chart_quote_candle" style="width:100%;height:100%;"></div>
 					</div>
 
 				</div>
 			</div>
-			
-		</div> 
-		<div class="modal-footer">
-			<a ng-click="openSavename()" ng-class="{disabled:walletFunds.length==0}" class="modal-action modal-close waves-effect waves-blue  btn">Salvar</a>
-		  </div>
-	</div>
-	<div id="modalPrompt" class="modal modal-fixed-footer modalTiny">
-		
-		<div class="modal-content">
-			<span class="modalHeader">Salvar como: </span>
-			<span class="promptLabel">Insira um nome para a sua carteira de investimentos:</span>
-			<input type="text" ng-model="walletSaveName"/>
-		</div>
-		<div class="modal-footer">
-			<a ng-click="saveWallet()" class="modal-action modal-close waves-effect waves-blue btn">Salvar</a>
-			<a ng-click="saveWallet()" class="modal-action modal-close waves-effect waves-blue btn-flat">Cancelar</a>
-		</div>
-	</div>
+			<div id="modalCustomText" class="modal modaTall">
+				<div class="modal-content">
+					<h5 ng-bind="titleDialogHtml"></h5>
+					<div class="row" ng-bind-html="textDialogHtml|trusted">
 
-	<div id="modalCompare" class="modal wideModal modaTall" >
-		<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)"  title="Fechar" >cancel</i> 
-		<div class="modal-content">
-			
-			<div class="row">
-				<div class="col s12 m12 l8 x7 xl6 lblResume">
-					<table>
-						<caption>Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</caption>
-						<thead>
-							<tr>
-								<th style="width:30%;"></th>
-								<th  style="width:35%;" ng-bind="fundsToCompare[0].name"></th>
-								<th  style="width:35%;" ng-bind="fundsToCompare[1].name"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="col in compareProp">
-								<td ng-bind="col.label"></td>
-								<td ng-bind="fundsToCompare[0].figures[selectedPeriod][col.prop]|percentage:col.d"></td>
-								<td ng-bind="fundsToCompare[1].figures[selectedPeriod][col.prop]|percentage:col.d"></td>
-							</tr>
-							<tr>
-								<td>Investimento inicial:</td>
-								<td ng-bind="fundsToCompare[0].info.initialValue|currency:'R$'"></td>
-								<td ng-bind="fundsToCompare[1].info.initialValue|currency:'R$'"></td>
-							</tr>
-							<tr>
-								<td>Taxa de Administração:</td>
-								<td ng-bind="fundsToCompare[0].info.admTax|percentage:2"></td>
-								<td ng-bind="fundsToCompare[1].info.admTax|percentage:2"></td>
-							</tr>
-							<tr>
-								<td>Correlação entre os fundos: </td>
-								<td colspan="2" ng-bind="compare_correlationF2f"></td>
-							</tr>
-							<tr>
-								<td>Histograma:</td>
-								<td>
-									<rd-histogram style="width:80%;"
-										histogram="fundsToCompare[0].figures[selectedPeriod].fixedHistogram"
-										sufix="%">
-									</rd-histogram>
-								</td>
-								<td>
-									<rd-histogram style="width:80%;"
-										histogram="fundsToCompare[1].figures[selectedPeriod].fixedHistogram"
-										sufix="%">
-									</rd-histogram>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					
+					</div>
 				</div>
-				<div class="col s12 m12 l4 x5 xl6" id="chartCompareDiv">
-					<div id="chart_compare"></div>
-				</div>
-				
 			</div>
+			<div id="modalRankingDialog" class="modal modaTall">
+				<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)" title="Fechar">cancel</i>
+				<div class="modal-content">
+					<h5>Ranking</h5>
+					<div class="row">
+						<div class="content">
+							<section>
+								<p>Entenda melhor o Ranking: Comparação dos fundos feita mês a mês com o objetivo de enxergar qual fundo é constantemente
+									melhor que os outros. </p>
+								<p> Para cada mês lista-se os fundos de forma decrescente de acordo com a rentabilidade fechada do mês </p>
+								<p> O primeiro fundo da lista será aquele com melhor rentabilidade no período e receberá nota 1 e o ultimo receberá nota
+									100.Todos os fundos que estão no meio vão receber uma interpolação proporcional à sua rentabilidade comparada à
+									rentabilidade do melhor e do pior fundo.</p>
+								<p> No final, soma-se a nota de todos os meses para cada fundo </p>
+								<p> Ou seja, quanto menor a soma, melhor o fundo em todo o período.</p>
+
+
+							</section>
+							<section>
+
+								<table id="rankTable" class="centered">
+									<caption>Confira os primeiros 10 lugares no ranking dos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</caption>
+									<thead>
+										<th></th>
+										<th class="thNoPadding">
+											<i class="material-icons tinySmall" ng-class="{iconOn:showPrevtRankTableColumns, iconOff:showPrevtRankTableColumns==false}"
+											 ng-click="prevRankTableColumns()">chevron_left</i>
+										</th>
+										<th class="thWidth" ng-repeat="c in ranktableColumns">{{c+1}}
+											<sup>ᵒ</sup>lugar</th>
+										<th class="thNoPadding">
+											<i class="material-icons tinySmall" ng-class="{iconOn:showNextRankTableColumns, iconOff:showNextRankTableColumns==false}"
+											 ng-click="nextRankTableColumns()">chevron_right</i>
+										</th>
+									</thead>
+									<tbody>
+										<tr ng-repeat="h in rankingFullList.take(12)">
+											<td ng-bind="_monthNames[h.month-1] + '/' + h.year"></td>
+											<td></td>
+											<td ng-repeat="c in ranktableColumns" ng-class="{highlightCell:$parent.$parent.rankingTableCell==h.list[c].uniqueID}" ng-mouseover="$parent.$parent.rankingTableCell=h.list[c].uniqueID">
+												<label ng-bind="h.list[c].name"></label>
+												<label class="fwb" ng-bind="h.list[c].performance|percentage"></label>
+											</td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+							</section>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div id="modalInterval" class="modal modaTall">
+				<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)" title="Fechar">cancel</i>
+				<div class="modal-content">
+
+					<h5>Veja a analise de todas as possíveis combinações de permanência de {{currentRow.figures[selectedPeriod].intervalResumes.select('length').join(',')}}
+						meses nos {{filters.PeriodoTitle()}}</h5>
+					<div class="row">
+						<div class="col s12 m12 l12 x12 lblResume">
+							<table class="highlight">
+								<thead>
+									<tr>
+										<th>Permanência (meses)</th>
+										<th>Rendimento mensalizado
+											<sup title="">*</sup> médio</th>
+										<th>Ficou acima do CDI</th>
+										<th>Ficou acima do IBOV</th>
+										<th>Análises</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in currentRow.figures[selectedPeriod].intervalResumes" ng-mouseover="$parent.interval_hover=item">
+										<td ng-bind="item.length"></td>
+										<td ng-bind="item.montlyAvg"></td>
+										<td>{{item.aboveCdi|percentage:2}} das vezes</td>
+										<td ng-show="item.aboveIbov > 0">{{item.aboveIbov|percentage:2}} das vezes</td>
+										<td ng-show="item.aboveIbov==0">nunca</td>
+										<td ng-bind="item.count"></td>
+									</tr>
+								</tbody>
+							</table>
+							<label ng-show="interval_hover != null" class="defaultColor" style="font-size:0.9rem;">
+								Quem permaneceu
+								<strong>{{interval_hover.length}}</strong> meses no fundo, teve um rendimento
+								<i>mensalizado</i>
+								<sup>*</sup> médio de
+								<strong>{{interval_hover.montlyAvg}}%</strong>.Ficou acima do CDI {{interval_hover.aboveCdi|percentage:2}} das vezes e acima
+								do IBOV {{interval_hover.aboveIbov|percentage:2}} das vezes. {{interval_hover.count}} análises feitas
+							</label>
+
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="chart_interval" id="chart_bestInterval"></div>
+						<div class="chart_interval" id="chart_bestInterval_line"></div>
+					</div>
+
+				</div>
+			</div>
+			<div id="overview" class="modal modaTall wideModal">
+				<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)" title="Fechar">cancel</i>
+				<i class="btoNext medium material-icons rightBto" ng-click="carouselOverviewNext()">keyboard_arrow_right</i>
+				<i class="btoNext medium material-icons leftBto" ng-click="carouselOverviewPrev()">keyboard_arrow_left</i>
+				<div class="modal-content carousel carousel-slider" id="carouselOverview">
+					<div class="carousel-item " id="carouselChart" href="#two!">
+
+						<h5>{{overviewChart1Title}}
+							<span class="subtitle"> </span>
+						</h5>
+						<div style="width:100%;height:80%;" id="chart_overview_currentMonth"></div>
+						<div class="monthsBar">
+							<ul ng-init="monthOverviewListIndex=0;">
+								<li ng-class="{invisible:monthOverviewListIndex==0}">
+									<i class="material-icons medium" ng-click="monthOverviewListIndex=monthOverviewListIndex - 1;drawOverviewChart(monthOverviewListIndex)">chevron_left</i>
+								</li>
+								<li>
+									<a ng-click=$parent.drawOverviewChart(m.index) ng-class="{selected:m.selected}">{{monthOverviewList[monthOverviewListIndex].name}}</a>
+								</li>
+								<li ng-class="{invisible:monthOverviewListIndex==monthOverviewList.length-1}">
+									<i class="material-icons medium" ng-click="monthOverviewListIndex=monthOverviewListIndex + 1;drawOverviewChart(monthOverviewListIndex)">chevron_right</i>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="carousel-item " id="carouselChart" href="#two!">
+						<h5>Visão geral dos fundos nos {{filters.PeriodoTitle()}}
+							<span class="subtitle">Rentabilidade acumulada(mínima, média e máxima) dos fundos de Renda Fixa, Multimercado e Ação </span>
+						</h5>
+						<div style="width:100%;height:90%;" id="chart_overview_candle"></div>
+					</div>
+
+				</div>
+			</div>
+			<div id="modalWallet" class="modal modal-fixed-footer modal85 wideModal">
+				<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)" title="Fechar">cancel</i>
+				<div class="modal-content ">
+					<div>
+						<h5>Miha carteira
+							<span class="subtitle">Insira os fundos que já possui ou que gostaria de ter na sua carteira.Se preferir, clique no icone
+								<i class="material-icons small">playlist_add</i> na listagem.</span>
+						</h5>
+						<div class="row">
+
+						</div>
+						<br/>
+						<div class="row">
+							<div class="col m12 l12 xl12">
+								<div ng-if="canInitAutoComplete==true">
+									<autocomplete fn="onSelectFund(name)" list="walletAutoCompleteList"></autocomplete>
+								</div>
+								<table id="walletTable">
+									<thead>
+										<tr ng-class="{invisible:walletFunds.length==0}">
+											<th style="width:30%;">Fundo</th>
+											<th style="width:10%;" class="tar">tx Adm</th>
+											<th style="width:25%;" class="tac">Tipo</th>
+											<th style="width:15%;" class="tac">Resgate</th>
+											<th style="width:20%;" class="tar">Valor investido</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="item in walletFunds" class="showOnHoverTrigger">
+											<td class="align-wrapper" ng-class="{walletFundMultimercado: (item.info.isMultimercado && item.showWalletWeight==true),walletFundRendaFixa: (item.info.isRendaFixa && item.showWalletWeight==true),walletFundAcoes: (item.info.isAcao && item.showWalletWeight==true)}"
+											 style="background-size: {{item.walletWeight}}% 100%;">
+												<div class="input-field wsnw">
+													<span class="pointer" ng-click="openRankDialog(item, true)">{{item.name}}</span>
+													<i title="remover" class="tiny material-icons fwb highlightNeg showOnHover" ng-click="walletRemove(item)">clear</i>
+												</div>
+											</td>
+
+											<td class="align-wrapper tar">
+												{{item.info.admTax}}
+											</td>
+											<td class="align-wrapper tac">
+												{{item.info.classification}}
+											</td>
+											<td class="align-wrapper tac">
+												{{item.info.withdrawDays}}
+											</td>
+											<td class="align-wrapper tar">
+												<input money-mask money-mask-prepend="R$" ng-class="{fOrange:(item.hasOwnProperty('alocado')==false || item.alocado==0)}"
+												 class="inputNUmber fnone" type="text" ng-change="walletUpdateLine(item)" ng-model="item.alocado" placeholder="R$0.00"
+												/>
+											</td>
+										</tr>
+									</tbody>
+									<tfoot ng-class="{invisible:walletFunds.length==0}">
+										<tr>
+											<th>
+												<div class="barOutside" ng-show="showWalletPerc==true">
+													<div ng-class="{leftCorner:walletRendaFixaPorc>0, rightCorner:(walletMultimercadoPorc==0 && walletAcaoPorc==0 )}" style="width:{{walletRendaFixaPorc}}%"
+													 title="{{walletRendaFixaPorc}}% Renda fixa" ng-show="walletRendaFixaPorc>0">
+														<em>{{walletRendaFixaPorc}}% Renda fixa</em>
+													</div>
+													<div ng-class="{leftCorner:walletRendaFixaPorc==0, rightCorner:( walletAcaoPorc==0 )}" style="width:{{walletMultimercadoPorc}}%"
+													 title="{{walletMultimercadoPorc}}% Multimercado" ng-show="walletMultimercadoPorc>0">
+														<em>{{walletMultimercadoPorc}}% Multimercado</em>
+													</div>
+													<div ng-class="{leftCorner:(walletRendaFixaPorc==0 && walletMultimercadoPorc==0), rightCorner:( walletAcaoPorc>0 )}" style="width:{{walletAcaoPorc}}%"
+													 title="{{walletAcaoPorc}}% Ações" ng-show="walletAcaoPorc>0">
+														<em>{{walletAcaoPorc}}% Ações</em>
+													</div>
+												</div>
+											</th>
+											<th></th>
+											<th></th>
+											<th class="tar">
+												<div id="resgateChart"></div>
+											</th>
+											<th class="tar">
+												Total: R$ {{walletFunds.sum('alocado')|currency:'R$'}}
+											</th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<a ng-click="openSavename()" ng-class="{disabled:walletFunds.length==0}" class="modal-action modal-close waves-effect waves-blue  btn">Salvar</a>
+				</div>
+			</div>
+			<div id="modalPrompt" class="modal modal-fixed-footer modalTiny">
+
+				<div class="modal-content">
+					<span class="modalHeader">Salvar como: </span>
+					<span class="promptLabel">Insira um nome para a sua carteira de investimentos:</span>
+					<input type="text" ng-model="walletSaveName" />
+				</div>
+				<div class="modal-footer">
+					<a ng-click="saveWallet()" class="modal-action modal-close waves-effect waves-blue btn">Salvar</a>
+					<a ng-click="saveWallet()" class="modal-action modal-close waves-effect waves-blue btn-flat">Cancelar</a>
+				</div>
+			</div>
+			<div id="modalCompare" class="modal wideModal modaTall">
+				<i class="small material-icons closeFixedIcon roundIcon" onclick="closeChartDialog(this)" title="Fechar">cancel</i>
+				<div class="modal-content">
+
+					<div class="row">
+						<div class="col s12 m12 l8 x7 xl6 lblResume">
+							<table>
+								<caption>Comparação referente aos {{filters.Periodo[selectedPeriod].Title.toLowerCase()}}</caption>
+								<thead>
+									<tr>
+										<th style="width:30%;"></th>
+										<th style="width:35%;" ng-bind="fundsToCompare[0].name"></th>
+										<th style="width:35%;" ng-bind="fundsToCompare[1].name"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="col in compareProp">
+										<td ng-bind="col.label"></td>
+										<td ng-bind="fundsToCompare[0].figures[selectedPeriod][col.prop]|percentage:col.d"></td>
+										<td ng-bind="fundsToCompare[1].figures[selectedPeriod][col.prop]|percentage:col.d"></td>
+									</tr>
+									<tr>
+										<td>Investimento inicial:</td>
+										<td ng-bind="fundsToCompare[0].info.initialValue|currency:'R$'"></td>
+										<td ng-bind="fundsToCompare[1].info.initialValue|currency:'R$'"></td>
+									</tr>
+									<tr>
+										<td>Taxa de Administração:</td>
+										<td ng-bind="fundsToCompare[0].info.admTax|percentage:2"></td>
+										<td ng-bind="fundsToCompare[1].info.admTax|percentage:2"></td>
+									</tr>
+									<tr>
+										<td>Correlação entre os fundos: </td>
+										<td colspan="2" ng-bind="compare_correlationF2f"></td>
+									</tr>
+									<tr>
+										<td>Histograma:</td>
+										<td>
+											<rd-histogram style="width:80%;" histogram="fundsToCompare[0].figures[selectedPeriod].histogram" sufix="%">
+											</rd-histogram>
+										</td>
+										<td>
+											<rd-histogram style="width:80%;" histogram="fundsToCompare[1].figures[selectedPeriod].histogram" sufix="%">
+											</rd-histogram>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+						<div class="col s12 m12 l4 x5 xl6" id="chartCompareDiv">
+							<div id="chart_compare"></div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="floating" ng-class="{floating:highLightCompareDialog==false, highLightComareDlg:highLightCompareDialog}" ng-show="fundsToCompare.length > 0 || highLightCompareDialog==true || compareDlgStillOpen==true">
+				<i class="small material-icons closeFixedIcon roundIcon" ng-hide="highLightCompareDialog" ng-click="closeCompareDialog()"
+				 title="Fechar">cancel</i>
+				<h5 class="lblTitle" ng-show="highLightCompareDialog==true">Selecione dois fundos clicando no icone
+					<i class="medium material-icons ">compare_arrows</i> nas lista</h5>
+				<div class="selectedFund" ng-class="{fullsquare:fundsToCompare.length >=1,emptysquare:fundsToCompare.length <=0 }" ng-click="compareFundItemClick(0)">
+					<label ng-show="highLightCompareDialog == true || (compareDlgStillOpen==true && fundsToCompare.length==0 )">
+						<i class="medium material-icons " title="Selecione outro fundo">compare_arrows</i>
+					</label>
+					<label>
+						<span class="filledSquare" ng-bind="fundsToCompare[0].name"></span>
+					</label>
+				</div>
+				<div class="selectedFund" style="margin-left:2%;" ng-class="{fullsquare:fundsToCompare.length >=2,emptysquare:fundsToCompare.length <=1 }">
+					<label ng-show="fundsToCompare.length <= 1" ng-click="showCompareArrowTip()">
+						<i class="medium material-icons " title="Selecione outro fundo">compare_arrows</i>
+					</label>
+					<label ng-show="fundsToCompare.length > 1" ng-click="compareFundItemClick(1)">
+						<span class="filledSquare" ng-bind="fundsToCompare[1].name"></span>
+					</label>
+				</div>
+				<button ng-click="openCompareDialog()" ng-disabled="fundsToCompare.length <= 1" class="waves-effect waves-light btn">Comparar</button>
+			</div>
+
+			<div id="toast-container" ng-show="showChartToast" style="display: none;" class="toast ng-hide">
+				<label style="font-size:1.1rem;" ng-hide="hideChartToastHeader">
+					Vamos deixar na listagem apenas os fundos que você selecionar aqui. Ok?
+					<a ng-click="hideChartToastHeader=true"> Beleza</a>
+					<em ng-click="showChartToast=false">Melhor não.</em>
+				</label>
+				<ul>
+					<li ng-repeat="item in chartSelectedFunds">
+						{{item.name}}
+						<i ng-click="chartSelectedFunds.remove(item)" title="Remover" class="tiny material-icons">remove</i>
+					</li>
+				</ul>
+				<a ng-show="hideChartToastHeader && selectedChartID.length==0" style="margin-left: 0px;" ng-click="filterByChart()">Aplicar Filtro</a>
+				<a ng-show="hideChartToastHeader && selectedChartID.length==0" class="cSmoke" ng-click="hideChartToast()">cancelar</a>
+
+			</div>
+
+
 		</div>
-	</div>
-	
-	<div class="floating" ng-class="{floating:highLightCompareDialog==false, highLightComareDlg:highLightCompareDialog}" ng-show="fundsToCompare.length > 0 || highLightCompareDialog==true || compareDlgStillOpen==true">
-		<i class="small material-icons closeFixedIcon roundIcon" ng-hide="highLightCompareDialog" ng-click="closeCompareDialog()"  title="Fechar" >cancel</i> 
-		<h5 class="lblTitle" ng-show="highLightCompareDialog==true">Selecione dois fundos clicando no icone <i class="medium material-icons " >compare_arrows</i> nas lista</h5>
-		<div class="selectedFund" ng-class="{fullsquare:fundsToCompare.length >=1,emptysquare:fundsToCompare.length <=0 }" ng-click="compareFundItemClick(0)">
-			<label ng-show="highLightCompareDialog == true || (compareDlgStillOpen==true && fundsToCompare.length==0 )">
-				<i class="medium material-icons "  title="Selecione outro fundo" >compare_arrows</i>
-			</label>
-			<label ng-bind="fundsToCompare[0].name" ></label>
+		<footer class="row">
+			<div class="container">
+				<p>
+					O Fundologia tem como único objetivo auxiliar na pesquisa e comparação de fundos de investimento. O ranking, assim como todo
+					o conteudo do site, NÃO são recomendação de compra e/ou investimento. A decisão é responsabilidade do investidor.
+				</p>
+				<p>
+					A rentabilidade passada não representa garantia de resultados futuros. As informações deste site foram obtidas a partir de
+					fontes disponíveis publicamente. O Fundologia não garante sua atualização, exatidão , precisão, integridade ou veracidade,
+					tampouco se responsabiliza pela publicação acidental de dados incorretos.
+				</p>
+			</div>
+		</footer>
+
+
+		<div id="preloading" onclick="skipIntroduction()">
+
+			<h1 class="txtRotateh1"> Nome:
+				<span class="txt-rotate" data-period="800" data-rotate='[ "investopédia", "investolando", "investlandia", "fundomania", "fundometria", "FUNDOLOGIA!"]'></span>
+			</h1>
+			<a class="pularintro" id="linkBoraProSite" style="display:none;">Pular introdução</a>
+			<a class="pularintro" id="loadingFP">Caregando dados...</a>
+
 		</div>
-		<div class="selectedFund" style="margin-left:2%;"  ng-class="{fullsquare:fundsToCompare.length >=2,emptysquare:fundsToCompare.length <=1 }">
-			<label ng-show="fundsToCompare.length <= 1">
-				<i class="medium material-icons "  title="Selecione outro fundo" >compare_arrows</i>
-			</label>
-			<label ng-show="fundsToCompare.length > 1" ng-click="compareFundItemClick(1)" ng-bind="fundsToCompare[1].name">Selecione outro fundo</label>
-		</div>
-		<button ng-click="openCompareDialog()" ng-disabled="fundsToCompare.length <= 1" class="waves-effect waves-light btn">Comparar</button>
-	</div>
-	
+		<script>
 
-	<div id="toast-container" style="display:none;" ng-show="showChartToast"
-		<div class="toast" style="touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 1; transform: translateY(-35px);">
-			<label style="font-size:1.1rem;" ng-hide="hideChartToastHeader">
-					Vamos deixar na listagem apenas os fundos que você selecionar aqui. Ok?<a ng-click="hideChartToastHeader=true"> Beleza</a><em ng-click="showChartToast=false">Melhor não.</em>
-			</label>
-			<ul>
-				<li ng-repeat="item in chartSelectedFunds" >{{item.name}}<i ng-click="chartSelectedFunds.remove(item)" class="small material-icons">delete_forever</i></li>
-			</ul>
-			<a ng-show="hideChartToastHeader" ng-click="filterByChart()">Aplicar Filtro</a>
-		</div>
-	</div>
-
-</div>
-<footer class="row">
-	<div class="container">
-		<p>
-			O Fundologia tem como objetivo auxiliar na pesquisa de fundos de investimento. O ranking, assim como todo o conteudo do site, NÃO são recomendação de compra e/ou investimento. A decisão é responsabilidade do investidor. 
-		</p>
-		<p>
-			A rentabilidade passada não representa garantia de resultados futuros. As informações deste site foram obtidas a partir de fontes disponíveis publicamente. O Fundologia não garante sua atualização, exatidão , precisão, integridade ou veracidade, tampouco se responsabiliza pela publicação acidental de dados incorretos.
-		</p>
-	</div>
-</footer>
-
-
-<div id="preloading" onclick="skipIntroduction()">
-	
-<h1 class="txtRotateh1"> Nome: 
-  <span
-     class="txt-rotate"
-     data-period="800"
-     data-rotate='[ "investopédia", "investolando", "investlandia", "fundomania", "fundometria", "FUNDOLOGIA!"]'></span>
-</h1>
-<a class="pularintro" id="linkBoraProSite" style="display:none;">Pular introdução</a>
-
-</div>
-<script>
-	
-	var TxtRotate = function(el, toRotate, period) {
-	  this.toRotate = toRotate;
-	  this.el = el;
-	  this.loopNum = 0;
-	  this.period = parseInt(period, 10) || 300;
-	  this.txt = '';
-	  this.tick();
-	  this.isDeleting = false;
-	  this.stop = false;
-	};
-	function skipIntroduction(){
-		if(typeof(window.finishedLoading) != 'undefined' && window.finishedLoading == true){
-			window.introSkipped = true;
-			window._rotate.stop = true;
-			$('#preloading').hide();
-		}
-			
-	}
-	TxtRotate.prototype.tick = function() {
-	  var i = this.loopNum % this.toRotate.length;
-	  var fullTxt = this.toRotate[i];
-	
-	  if (this.isDeleting) {
-		this.txt = fullTxt.substring(0, this.txt.length - 1);
-	  } else {
-		this.txt = fullTxt.substring(0, this.txt.length + 1);
-	  }
-	
-	  this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
-	
-	  var that = this;
-	  var delta = 150 - Math.random() * 100;
-	
-	  if (this.isDeleting) { delta /= 2; }
-	
-	  if (!this.isDeleting && this.txt === fullTxt) {
-		delta = this.period;
-		this.isDeleting = true;
-	  } else if (this.isDeleting && this.txt === '') {
-		this.isDeleting = false;
-		this.loopNum++;
-		delta = 200;
-	  }
-		
-	  if(this.stop == true || (i == this.toRotate.length-1 && this.txt.length==fullTxt.length)){
-		skipIntroduction();
-	  }else{
-		setTimeout(function() {
-			that.tick();
-		  }, delta);
-	  }
-	  
-	};
-	
-	//window.onload = function() {
-		var fn = function(){
-			var elements = document.getElementsByClassName('txt-rotate');
-			for (var i=0; i<elements.length; i++) {
-				var toRotate = elements[i].getAttribute('data-rotate');
-				var period = elements[i].getAttribute('data-period');
-				if (toRotate) {
-					window._rotate =  new TxtRotate(elements[i], JSON.parse(toRotate), period);
+			var TxtRotate = function (el, toRotate, period) {
+				this.toRotate = toRotate;
+				this.el = el;
+				this.loopNum = 0;
+				this.period = parseInt(period, 10) || 300;
+				this.txt = '';
+				this.tick();
+				this.isDeleting = false;
+				this.stop = false;
+			};
+			function skipIntroduction() {
+				if (typeof (window.finishedLoading) != 'undefined' && window.finishedLoading == true) {
+					window.introSkipped = true;
+					window._rotate.stop = true;
+					$('#preloading').hide();
 				}
+
 			}
-			// INJECT CSS
-			var css = document.createElement("style");
-			css.type = "text/css";
-			css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
-			document.body.appendChild(css);
-		}
-		fn();
-	  
+			TxtRotate.prototype.tick = function () {
+				var i = this.loopNum % this.toRotate.length;
+				var fullTxt = this.toRotate[i];
+
+				if (this.isDeleting) {
+					this.txt = fullTxt.substring(0, this.txt.length - 1);
+				} else {
+					this.txt = fullTxt.substring(0, this.txt.length + 1);
+				}
+
+				this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+				var that = this;
+				var delta = 150 - Math.random() * 100;
+
+				if (this.isDeleting) { delta /= 2; }
+
+				if (!this.isDeleting && this.txt === fullTxt) {
+					delta = this.period;
+					this.isDeleting = true;
+				} else if (this.isDeleting && this.txt === '') {
+					this.isDeleting = false;
+					this.loopNum++;
+					delta = 200;
+				}
+
+				if (this.stop == true || (i == this.toRotate.length - 1 && this.txt.length == fullTxt.length)) {
+					skipIntroduction();
+				} else {
+					setTimeout(function () {
+						that.tick();
+					}, delta);
+				}
+
+			};
+
+			//window.onload = function() {
+			var fn = function () {
+				var elements = document.getElementsByClassName('txt-rotate');
+				for (var i = 0; i < elements.length; i++) {
+					var toRotate = elements[i].getAttribute('data-rotate');
+					var period = elements[i].getAttribute('data-period');
+					if (toRotate) {
+						window._rotate = new TxtRotate(elements[i], JSON.parse(toRotate), period);
+					}
+				}
+				// INJECT CSS
+				var css = document.createElement("style");
+				css.type = "text/css";
+				css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+				document.body.appendChild(css);
+			}
+			fn();
+
 	//};
-	</script>
-	
-	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-	<script>
-		// Initialize Firebase
-		var config = {
-			apiKey: "AIzaSyBQcjKXDN4nwrFBuj7DKgsMfudJCOKopPY",
-			authDomain: "fundologia.firebaseapp.com",
-			databaseURL: "https://fundologia.firebaseio.com",
-			projectId: "fundologia",
-			storageBucket: "fundologia.appspot.com",
-			messagingSenderId: "224493059414"
-		};
-		firebase.initializeApp(config);
-	</script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-	<script src="js/materialize.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	<script src="js/util.js"  charset="utf-8" ></script>
-	<script src="js/dataManager.js"  charset="utf-8" ></script>
-	<script src="js/histogram.js"  charset="utf-8" ></script>
-	<script src="js/main.js"  charset="utf-8" ></script>
-	<script src="js/init.js"></script>
-	
-	
-	<!-- <script src="json/last24.js"></script>
-	<script src="json/bigList.js"></script> -->
-	   
+		</script>
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+		<script src="js/materialize.js"></script>
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script src="js/util.js" charset="utf-8"></script>
+		<script src="js/dataManager.js" charset="utf-8"></script>
+		<script src="js/histogram.js" charset="utf-8"></script>
+		<script src="js/main.js" charset="utf-8"></script>
+		<script src="js/init.js"></script>
+
+
+
+
 </body>
 <script id="dsq-count-scr" src="//fundologia.disqus.com/count.js" async></script>
+
 </html>

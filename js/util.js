@@ -266,6 +266,21 @@ Array.prototype.allSetTo = function(obj){
         return false;
     return this.count(obj) == this.length;
 }
+Array.prototype.insertAt = function(index, item){
+    this.splice(index, 0, item);
+};
+Array.prototype.copy = function(){
+    var k = [];
+    for(var i=0;i<this.length;i++){
+        k.push(this[i]);
+    }
+    return k;
+}
+Array.prototype.parseInt = function(col){
+  for(var i=0;i<this.length;i++)  {
+      this[col] = parseInt(this[col]);
+  }
+};
 Array.prototype.remove = function (obj) {
     if (typeof (obj) == 'object') {
         while (this.any(obj)) {
@@ -774,6 +789,13 @@ if (Object.getOwnPropertyDescriptor(Object.prototype, 'every') == undefined) {
             }
         }
     });
+}
+function range(init, end){
+    var a=[];    
+    for(var i=init;i<=end;i++){
+        a.push(i);
+    }
+    return a;
 }
 //####################################################
 //               String ->

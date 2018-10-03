@@ -43,6 +43,9 @@ function histogramManager(me){
             item.isFiltering = true;
 		}	
 	};
+	me.cleanHistFilter = function(){
+		me.histogramItemFilter = null;
+	};
 	me.histupate = function(zscore, prop, text){
 		
 		if(me.currentRow != null){
